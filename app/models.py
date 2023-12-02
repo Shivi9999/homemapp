@@ -69,29 +69,28 @@ class User(AbstractBaseUser, PermissionsMixin):
         # User permission to view the ap modules
         return True
 
-
-
 class HotelOwner(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     address = models.TextField()
     mobile = models.CharField(max_length=12, default="")
 
     def __str__(self):
-        return self.username
+        return self.user.full_name
 
 class Hotel(models.Model):
     owner = models.ForeignKey(HotelOwner, on_delete=models.CASCADE)
     hotel_name = models.CharField(max_length=100)
     address = models.TextField()
-
-
+    Number_of_rooms = models.CharField(max_length=100,default="")
+  
     def __str__(self):
-        return self.name
+        return self.owner.user.full_name
 
 class Branch(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     location = models.CharField(max_length=100)
-
     def __str__(self):
         return self.name
+
+
