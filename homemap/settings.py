@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-2o@bs1!3+_m#^1$n#j(#1_ddjgkkqd2r3oo)y3!v58h1j4$+cp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -54,6 +54,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'homemap.urls'
+
+# settings.py
+
+
+SECURE_SSL_REDIRECT = False
 
 TEMPLATES = [
     {
