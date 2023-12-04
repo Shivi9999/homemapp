@@ -58,7 +58,7 @@ ROOT_URLCONF = 'homemap.urls'
 # settings.py
 
 
-SECURE_SSL_REDIRECT = False
+
 
 TEMPLATES = [
     {
