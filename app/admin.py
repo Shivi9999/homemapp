@@ -4,4 +4,4 @@ from .models import *
 admin.site.register(User)
 admin.site.register(HotelOwner)
 admin.site.register(Hotel)
-admin.site.register(Branch)
+admin.site.register(Branch) 
