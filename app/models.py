@@ -84,7 +84,7 @@ class Hotel(models.Model):
     Number_of_rooms = models.CharField(max_length=100,default="")
   
     def __str__(self):
-        return self.owner.user.full_name
+        return self.hotel_name
 
 class Branch(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)

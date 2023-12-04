@@ -12,16 +12,16 @@ class Ownerform(forms.ModelForm):
         fields=['address','mobile']
 
 
-
-
-
 class Hotelform(forms.ModelForm):
     class Meta:
         model=Hotel
         fields=['owner','hotel_name','address','Number_of_rooms']
 
 
-
+class Branchform(forms.ModelForm):
+    class Meta:
+        model=Branch
+        fields=['hotel','name','location']
 
 
 

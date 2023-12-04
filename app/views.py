@@ -77,3 +77,18 @@ def add_hotel(request):
         hotelform = Hotelform()
 
     return render(request, 'add_hotel.html', {'hotelform': hotelform})
+
+
+
+def add_branch(request):
+    if request.method == "POST":
+        branchform = Branchform(request.POST)
+        if branchform.is_valid():
+            branchform.save()
+            return redirect('add_branch')
+        else:
+            print("Form is not valid. Errors:", branchform.errors)
+    else:
+        branchform = Branchform()
+
+    return render(request, 'add_branch.html', {'branchform': branchform})
