@@ -1,28 +1,30 @@
 from django import forms
-from .models import *
+from .models import * 
+
 class Userform(forms.ModelForm):
-    class Meta:
-        model=User
-        fields=['email','full_name','password']
-
-class Ownerform(forms.ModelForm):
-
-    class Meta:
-        model=HotelOwner
-        fields=['address','mobile']
-
-
-class Hotelform(forms.ModelForm):
-    class Meta:
-        model=Hotel
-        fields=['owner','hotel_name','address','Number_of_rooms']
-
-
-class Branchform(forms.ModelForm):
-    class Meta:
-        model=Branch
-        fields=['hotel','name','location']
-
-
-
-
+  class Meta:
+    model=User
+    fields=['username','email','password']
+    
+    widgets = {
+            
+              #'user_id': ModelSelect2Widget(model=Add_user, search_fields=['User_Id__icontains']),
+              'username': forms.TextInput(attrs={'class': 'form-control'}),
+              'email': forms.TextInput(attrs={'class': 'form-control'}),
+              'password': forms.TextInput(attrs={'class': 'form-control'}),
+              
+    
+          }
+  
+class PropertyForm(forms.ModelForm):
+  class Meta:
+    model=PropertyOwner
+    fields=['property_name','address','mobile']
+    widgets = {
+           
+            #'user_id': ModelSelect2Widget(model=Add_user, search_fields=['User_Id__icontains']),
+            'property_name': forms.TextInput(attrs={'class': 'form-control', }),
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'mobile': forms.TextInput(attrs={'class': 'form-control'}),
+            
+        }

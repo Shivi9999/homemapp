@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+           <title>USER MANAGEMENT ADMIN HOME PAGE </title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+          <link rel="icon" href="images/fevicon.png" type="image/png" />
+     
+      <link rel="stylesheet" href="css/bootstrap.min.css" />
+         <link rel="stylesheet" href="style.css" />
+      
+      <link rel="stylesheet" href="css/responsive.css" />
+          <link rel="stylesheet" href="css/colors.css" />
+       
+      <link rel="stylesheet" href="css/bootstrap-select.css" />
+      
+      <link rel="stylesheet" href="css/perfect-scrollbar.css" />
+           <link rel="stylesheet" href="css/custom.css" />
+
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+          <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+
+   </head>
+   <body class="dashboard dashboard_1">
+      <div class="full_container">
+         <div class="inner_container">
+            <!-- Sidebar  -->
+            <nav id="sidebar">
+               <div class="sidebar_blog_1">
+                  <div class="sidebar-header">
+                     <div class="logo_section">
+                        <a href="index.html"><img class="logo_icon img-responsive" src="images/logo/logo_icon.png" alt="#" /></a>
+                     </div>
+                  </div>
+                  <div class="sidebar_user_info">
+                     <div class="icon_setting"></div>
+                     <div class="user_profle_side">
+                        <div class="user_img">
+                           <a href="index.html"><img class="img-responsive" src="images/logo/logo.png" alt="#"></a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- Sidebar -->
+               <div class="sidebar_blog_2">
+                  <ul class="list-unstyled components">
+                     <li>
+                        <a href="#dashboard">
+                           <i class="fa fa-dashboard yellow_color"></i> 
+                           <span>Dashboard</span>
+                        </a>
+                    </li> 
+                   
+                     <li class="active">
+                        <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>User Management</span></a>
+                        <ul class="collapse list-unstyled" id="element">
+                           <li><a href="user_management_add.html">> <span>Add User Management</span></a></li>
+                           <li><a href="user_management_view.html">> <span>View User Managemen</span></a></li>
+                        </ul>
+                     </li>
+
+                        <li>
+                        <a href="#additional_page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-clone yellow_color"></i> <span>Room Management</span></a>
+                        <ul class="collapse list-unstyled" id="additional_page">
+                           <li><a href="rooms_add_room.html">> <span> Add Rooms </span></a></li>
+                           <li><a href="rooms_view_room.html">> <span> View Rooms </span></a></li>
+                        </ul>
+                     </li>
+                    
+                      <li><a href="faq.html.html"><i class="fa fa-clock-o orange_color"></i> <span>Faq</span></a></li>
+                     <li>
+                        <a href="Notification.html">
+                        <i class="fa fa-paper-plane red_color"></i> <span>Notification</span></a>
+                     </li>
+                     <li><a href="terms_condition.html"><i class="fa fa-map purple_color2"></i> <span>Terms and Condition </span></a></li>
+                     <li><a href="privacy_policy.html"><i class="fa fa-bar-chart-o green_color"></i> <span>Privacy Policy</span></a></li>
+                  </ul>
+               </div>
+               <!-- Sidebar -->
+            </nav>
+            <!-- end sidebar -->
+            <!-- right content -->
+            <div id="content">
+               <!-- topbar -->
+               <div class="topbar">
+                  <nav class="navbar navbar-expand-lg navbar-light">
+                     <div class="full">
+                        <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
+                        <div class="right_topbar">
+                           <div class="icon_info">
+                              <ul class="user_profile_dd">
+                                 <li>
+                                    <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="images/layout_img/user_img.jpg" alt="#" /><span class="name_user">John</span></a>
+                                    <div class="dropdown-menu">
+                                       <a class="dropdown-item" href="profile.html">My Profile</a>
+                                       <a class="dropdown-item" href="login.html"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
+                                    </div>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </nav>
+               </div>
+               <!-- end topbar -->
+               <!-- dashboard inner -->
+               <div class="midde_cont">
+                  <div class="container-fluid">
+                     <div class="row column_title">
+                        <div class="col-md-12">
+                           <div class="page_title">
+                              <h2>Dashboard</h2>
+                           </div>
+                        </div>
+                     </div>
+                <!--  -->
+                     <div class="row">
+                       <div class="white_shd full">
+                              <div class="full graph_head">
+                                 <div class="heading1 margin_0">
+                                    <h2>Extra Area Chart</h2>
+                                 </div>
+                              </div>
+                            <div class="users-forms">
+                            <div class="row">
+                               <div class="col-md-12">
+                                    <div class="user-table">
+                               <div class="datatables">
+                                    <table id="example" class="display" style="width:100%;    border: 2px solid #20214f;">
+                                        <thead>
+                                            <tr>
+                                                <th>S no</th>
+                                                <th>Username</th>
+                                                <th>Full Name</th>
+                                                <th>Email </th>
+                                                <th>Number</th>
+                                                <th>Password</th>
+                                                <th>Address</th>
+                                                <th>Gender</th>
+                                                 <th>Action</th> 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="even">
+                                                <td>1</td>
+                                                <td>Tiger Nixon</td>
+                                                <td>Nick john Nixon</td>
+                                                 <td>abc@gmail.com</td>
+                                                <td>9876543210</td> 
+                                                <td>**************</td>
+                                                <td>new jersey london</td>
+                                                <td>Male</td>
+                                             <td>
+                                        <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Edit</a></button>
+                                         <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Delete</a></button>
+                                     </td>
+                                            </tr>
+                                             <tr class="odd">
+                                                <td>2</td>
+                                                <td>Tiger Nixon</td>
+                                                <td>Nick john Nixon</td>
+                                                 <td>abc@gmail.com</td>
+                                                <td>9876543210</td> 
+                                                <td>**************</td>
+                                                <td>new jersey london</td>
+                                                <td>Male</td>
+                                             <td>
+                                        <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Edit</a></button>
+                                         <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Delete</a></button>
+                                     </td>
+                                            </tr>
+                                             <tr class="even">
+                                                <td>1</td>
+                                                <td>Tiger Nixon</td>
+                                                <td>Nick john Nixon</td>
+                                                 <td>abc@gmail.com</td>
+                                                <td>9876543210</td> 
+                                                <td>**************</td>
+                                                <td>new jersey london</td>
+                                                <td>Male</td>
+                                             <td>
+                                        <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Edit</a></button>
+                                         <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Delete</a></button>
+                                     </td>
+                                            </tr>
+                                             <tr class="odd">
+                                                <td>2</td>
+                                                <td>Tiger Nixon</td>
+                                                <td>Nick john Nixon</td>
+                                                 <td>abc@gmail.com</td>
+                                                <td>9876543210</td> 
+                                                <td>**************</td>
+                                                <td>new jersey london</td>
+                                                <td>Male</td>
+                                             <td>
+                                        <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Edit</a></button>
+                                         <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Delete</a></button>
+                                     </td>
+                                            </tr>
+                                          
+                                           <tr class="even">
+                                                <td>1</td>
+                                                <td>Tiger Nixon</td>
+                                                <td>Nick john Nixon</td>
+                                                 <td>abc@gmail.com</td>
+                                                <td>9876543210</td> 
+                                                <td>**************</td>
+                                                <td>new jersey london</td>
+                                                <td>Male</td>
+                                             <td>
+                                        <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Edit</a></button>
+                                         <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Delete</a></button>
+                                     </td>
+                                            </tr>
+                                             <tr class="odd">
+                                                <td>2</td>
+                                                <td>Tiger Nixon</td>
+                                                <td>Nick john Nixon</td>
+                                                 <td>abc@gmail.com</td>
+                                                <td>9876543210</td> 
+                                                <td>**************</td>
+                                                <td>new jersey london</td>
+                                                <td>Male</td>
+                                             <td>
+                                        <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Edit</a></button>
+                                         <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Delete</a></button>
+                                     </td>
+                                            </tr>
+                                          
+                                           <tr class="even">
+                                                <td>1</td>
+                                                <td>Tiger Nixon</td>
+                                                <td>Nick john Nixon</td>
+                                                 <td>abc@gmail.com</td>
+                                                <td>9876543210</td> 
+                                                <td>**************</td>
+                                                <td>new jersey london</td>
+                                                <td>Male</td>
+                                             <td>
+                                        <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Edit</a></button>
+                                         <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Delete</a></button>
+                                     </td>
+                                            </tr>
+                                             <tr class="odd">
+                                                <td>2</td>
+                                                <td>Tiger Nixon</td>
+                                                <td>Nick john Nixon</td>
+                                                 <td>abc@gmail.com</td>
+                                                <td>9876543210</td> 
+                                                <td>**************</td>
+                                                <td>new jersey london</td>
+                                                <td>Male</td>
+                                             <td>
+                                        <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Edit</a></button>
+                                         <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Delete</a></button>
+                                     </td>
+                                            </tr>
+                                          
+                                          
+                                           
+                                        </tbody>
+                                        </table>
+                                   </div>
+                     </div>
+                               </div>
+                            </div>
+                            </div>
+                           </div>
+                     </div>
+            <!--  -->
+                  </div>
+                  <!-- footer -->
+                     <div class="footer">
+                                 <div class="container-fluid">
+                        <p>Copyright ©2023 All rights reserved | Design & Develop by
+                           <a href="https://cyberimpulses.com/"> CISS</a>
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <!-- end dashboard inner -->
+            </div>
+         </div>
+      </div>
+
+
+      <!--DATATABLES SCRIPT START -->
+<!--         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script>
+            new DataTable('#example');
+        </script> -->
+
+      <script src="js/jquery.min.js"></script>
+      <script src="js/popper.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      
+      <script src="js/animate.js"></script>
+     
+      <script src="js/bootstrap-select.js"></script>
+            <script src="js/owl.carousel.js"></script> 
+        <script src="js/Chart.min.js"></script>
+      <script src="js/Chart.bundle.min.js"></script>
+      <script src="js/utils.js"></script>
+      <script src="js/analyser.js"></script>
+     
+      <script src="js/perfect-scrollbar.min.js"></script>
+      <script>
+         var ps = new PerfectScrollbar('#sidebar');
+      </script>
+         <script src="js/custom.js"></script>
+      <script src="js/chart_custom_style1.js"></script>
+            <!--DATATABLES SCRIPT START DATATABLES SCRIPT START DATATABLES SCRIPT START DATATABLES SCRIPT START -->
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+         <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+          <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+           <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+             <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+              <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+               <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+        <script>
+            $(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
+        </script>
+   </body>
+</html>

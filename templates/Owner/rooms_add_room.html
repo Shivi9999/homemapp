@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+           <title>ADD ROOMS HOMEMAPP PAGE</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+          <link rel="icon" href="images/fevicon.png" type="image/png" />
+     
+      <link rel="stylesheet" href="css/bootstrap.min.css" />
+         <link rel="stylesheet" href="style.css" />
+      
+      <link rel="stylesheet" href="css/responsive.css" />
+          <link rel="stylesheet" href="css/colors.css" />
+       
+      <link rel="stylesheet" href="css/bootstrap-select.css" />
+      
+      <link rel="stylesheet" href="css/perfect-scrollbar.css" />
+           <link rel="stylesheet" href="css/custom.css" />
+
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+   </head>
+   <body class="dashboard dashboard_1">
+      <div class="full_container">
+         <div class="inner_container">
+            <!-- Sidebar  -->
+            <nav id="sidebar">
+               <div class="sidebar_blog_1">
+                  <div class="sidebar-header">
+                     <div class="logo_section">
+                        <a href="index.html"><img class="logo_icon img-responsive" src="images/logo/logo_icon.png" alt="#" /></a>
+                     </div>
+                  </div>
+                  <div class="sidebar_user_info">
+                     <div class="icon_setting"></div>
+                     <div class="user_profle_side">
+                        <div class="user_img">
+                           <a href="index.html"><img class="img-responsive" src="images/logo/logo.png" alt="#"></a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- Sidebar -->
+               <div class="sidebar_blog_2">
+                  <ul class="list-unstyled components">
+                     <li >
+                        <a href="index.html">
+                           <i class="fa fa-dashboard yellow_color"></i> 
+                           <span>Dashboard</span>
+                        </a>
+                    </li> 
+                   
+                     <li >
+                        <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>User Management</span></a>
+                        <ul class="collapse list-unstyled" id="element">
+                           <li><a href="user_management_add.html">> <span>Add User Management</span></a></li>
+                           <li><a href="user_management_view.html">> <span>View User Managemen</span></a></li>
+                        </ul>
+                     </li>
+
+                        <li class="active">
+                        <a href="#additional_page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-clone yellow_color"></i> <span>Room Management</span></a>
+                        <ul class="collapse list-unstyled" id="additional_page">
+                           <li><a href="rooms_add_room.html">> <span> Add Rooms </span></a></li>
+                           <li><a href="rooms_view_room.html">> <span> View Rooms </span></a></li>
+                        </ul>
+                     </li>
+                    
+                      <li><a href="faq.html"><i class="fa fa-clock-o orange_color"></i> <span>Faq</span></a></li>
+                     <li>
+                        <a href="Notification.html">
+                        <i class="fa fa-paper-plane red_color"></i> <span>Notification</span></a>
+                     </li>
+                     <li><a href="terms_condition.html"><i class="fa fa-map purple_color2"></i> <span>Terms and Condition </span></a></li>
+                     <li><a href="privacy_policy.html"><i class="fa fa-bar-chart-o green_color"></i> <span>Privacy Policy</span></a></li>
+                  </ul>
+               </div>
+               <!-- Sidebar -->
+            </nav>
+            <!-- end sidebar -->
+            <!-- right content -->
+            <div id="content">
+               <!-- topbar -->
+               <div class="topbar">
+                  <nav class="navbar navbar-expand-lg navbar-light">
+                     <div class="full">
+                        <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
+                        <div class="right_topbar">
+                           <div class="icon_info">
+                              <ul class="user_profile_dd">
+                                 <li>
+                                    <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="images/layout_img/user_img.jpg" alt="#" /><span class="name_user">John</span></a>
+                                    <div class="dropdown-menu">
+                                       <a class="dropdown-item" href="profile.html">My Profile</a>
+                                       <a class="dropdown-item" href="login.html"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
+                                    </div>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </nav>
+               </div>
+               <!-- end topbar -->
+               <!-- dashboard inner -->
+               <div class="midde_cont">
+                  <div class="container-fluid">
+                     <div class="row column_title">
+                        <div class="col-md-12">
+                           <div class="page_title">
+                              <h2>Rooms Add Rooms</h2>
+                           </div>
+                        </div>
+                     </div>
+                <!--  -->
+                     <div class="row">
+                       <div class="white_shd full">
+                              <div class="full graph_head">
+                                 <div class="heading1 margin_0">
+                                    <h2> Add Rooms</h2>
+                                 </div>
+                              </div>
+                            <div class="users-forms">
+                            <div class="row">
+                               <div class="col-md-7">
+                                    <form action="#" method="post">
+                                 <div class="form-group row add-user">
+                                    <div class="form-group col-md-12">
+                                        <i class="fa fa-user icon-user"></i>
+                                     <label for="exampleInputPassword1">Select Rooms</label>
+                                     <select id="roomnames" name="room" class="form-control user-fill">
+                                       <option value="rooms">Room Items</option>
+                                       <option value="rooms">Room Items</option>
+                                       <option value="rooms">Room Items</option>
+                                       <option value="rooms">Room Items</option>
+                                       <option value="rooms">Room Items</option>
+                                       <option value="rooms">Room Items</option>
+                                       <option value="rooms">Room Items</option>
+                                    </select>
+                                   </div>
+                                  <div class="form-group col-md-12">
+                                        <i class="fa fa-user icon-user"></i>
+                                     <label for="exampleInputPassword1"> Items Name</label>
+                                     <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Items Name">
+                                   </div>
+
+
+                                    <div class="form-group col-md-6">
+                                        <i class="fa fa-mobile icon-user"></i>
+                                     <label for="exampleInputPassword1">Items Mobile</label>
+                                     <input type="number" class="form-control  user-fill" id="user-add-form" placeholder="Items Mobile">
+                                   </div>
+                                    <div class="form-group col-md-6">
+                                        <i class="fa fa-envelope icon-user"></i>
+                                     <label for="exampleInputPassword1">Items Email</label>
+                                     <input type="text" class="form-control  user-fill" id="user-add-form" placeholder="Items Email">
+                                   </div>
+                                    <div class="form-group col-md-12">
+                                        <i class="fa fa-envelope icon-user"></i>
+                                     <label for="exampleInputPassword1">Items Image</label>
+                                     <input type="file" class="form-control  user-fill" id="user-add-form" placeholder="Items Image">
+                                   </div>
+                                     <div class="form-group col-md-12">
+                                        <i class="fa fa-envelope icon-user"></i>
+                                     <label for="exampleInputPassword1">Items Address</label>
+                                     <textarea type="text" class="form-control  user-fill" id="user-add-form" placeholder="Enter Your Address"></textarea>
+                                   </div>
+                                <div class="form-group col-md-12">
+                                   <button type="submit" class="btn btn-primary">Submit</button>
+                                 </div>
+                              </div>
+                              </form>
+                               </div>
+                               <div class="col-md-4">
+                                  <div class="full-img">
+                                     <img src="images/customer-img.png">
+                                  </div>
+                               </div>
+                            </div>
+                            </div>
+                           </div>
+                     </div>
+            <!--  -->
+                  </div>
+                  <!-- footer -->
+                     <div class="footer">
+                                 <div class="container-fluid">
+                        <p>Copyright ©2023 All rights reserved | Design & Develop by
+                           <a href="https://cyberimpulses.com/"> CISS</a>
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <!-- end dashboard inner -->
+            </div>
+         </div>
+      </div>
+      <script src="js/jquery.min.js"></script>
+      <script src="js/popper.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      
+      <script src="js/animate.js"></script>
+     
+      <script src="js/bootstrap-select.js"></script>
+            <script src="js/owl.carousel.js"></script> 
+        <script src="js/Chart.min.js"></script>
+      <script src="js/Chart.bundle.min.js"></script>
+      <script src="js/utils.js"></script>
+      <script src="js/analyser.js"></script>
+     
+      <script src="js/perfect-scrollbar.min.js"></script>
+      <script>
+         var ps = new PerfectScrollbar('#sidebar');
+      </script>
+         <script src="js/custom.js"></script>
+      <script src="js/chart_custom_style1.js"></script>
+   </body>
+</html>

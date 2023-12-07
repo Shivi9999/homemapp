@@ -1,37 +1,45 @@
-{% extends "base.html" %}
-{% load static %}
+{% extends 'base.html'%}
 {% block content %}
-   <body>
-      <div class="full_container">
-         <div class="inner_container">
-           
-            <!-- right content -->
-            <div id="content">
-               <!-- topbar -->
-              
-               <!-- dashboard inner -->
-               <div class="midde_cont">
-                  <div class="container-fluid">
-                     <div class="row column_title">
-                        <div class="col-md-12">
-                           <div class="page_title">
-                              <h2>Dashboard</h2>
-                           </div>
-                        </div>
-                     </div>
-                <!--  -->
-                     <div class="row">
+	
+	
+	<!-- Main Wrapper -->
+	<div class="main-wrapper">
+		<div class="page-wrapper">
+			
+                <div class="content container-fluid">
+					
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row">
+							<div class="col-md-8">
+								<h3 class="page-title">Welcome To HomeMapp  Admin!</h3>
+							</div>
+							<div class="col-md-4">
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+									<li class="breadcrumb-item active">Dashboard</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /Page Header -->
+
+					
+                   
+                    <div class="row">
                         <div class="col-lg-3 col-6">
 
                         <div class="small-box bg-info">
                         <div class="inner">
-                        <h3>150</h3>
-                        <p>New Orders</p>
+                        <h3> Property Owner </h3>
+                        <p>{{property_owner_count}}</p>
                         </div>
                         <div class="icon">
-                        <i class="ion ion-bag"></i>
+                        <i class="fa fa-shopping-bag"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                       <div class="progress progress-sm">
+											<div class="progress-bar w-50"></div>
+										</div>
                         </div>
                         </div>
 
@@ -39,13 +47,15 @@
 
                         <div class="small-box bg-success">
                         <div class="inner">
-                        <h3>53<sup style="font-size: 20px">%</sup></h3>
-                        <p>Bounce Rate</p>
+                        <h3>Total Property</h3>
+                        <p>53</p>
                         </div>
                         <div class="icon">
-                        <i class="ion ion-stats-bars"></i>
+                        <i class="fa fa-bars"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                       <div class="progress progress-sm">
+											<div class="progress-bar w-50"></div>
+										</div>
                         </div>
                         </div>
 
@@ -53,182 +63,58 @@
 
                         <div class="small-box bg-warning">
                         <div class="inner">
-                        <h3>44</h3>
-                        <p>User Registrations</p>
+                        <h3>Total Guest</h3>
+                        <p>1233</p>
                         </div>
                         <div class="icon">
-                        <i class="ion ion-person-add"></i>
+                        <i class="fa fa-user-plus"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                       <div class="progress progress-sm">
+											<div class="progress-bar w-50"></div>
+										</div>
                         </div>
                         </div>
 
                         <div class="col-lg-3 col-6">
+
                         <div class="small-box bg-danger">
                         <div class="inner">
-                        <h3>65</h3>
-                        <p>Unique Visitors</p>
+                        <h3>Manage Property</h3>
+                        <p>54</p>
                         </div>
                         <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
+                        <i class="fa fa-pie-chart"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                       <div class="progress progress-sm">
+											<div class="progress-bar w-50"></div>
+										</div>
                         </div>
                         </div>
 
                         </div>
 
-                     <!-- graph -->
-                     <div class="row column2 graph margin_bottom_30">
-                        <div class="col-md-l2 col-lg-12">
-                           <div class="white_shd full">
-                              <div class="full graph_head">
-                                 <div class="heading1 margin_0">
-                                    <h2>Extra Area Chart</h2>
-                                 </div>
-                              </div>
-                              <div class="full graph_revenue">
-                                 <div class="row">
-                                    <div class="col-md-12">
-                                       <div class="content">
-                                          <div class="area_chart">
-                                             <canvas height="120" id="canvas"></canvas>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <!-- end graph -->
-                       <!--  -->
-                       <div class="row">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                           <div class="text-box text-left">
-                                            <div class="huge">26</div>
-                                            <div>New Comments!</div>
-                                            </div>
-                                        </div>
-                                         <div class="col-md-4">
-                                          <div class="fully-box">
-                                            <i class="fa fa-comments fa-5x"></i>
-                                        </div>
-                                     </div>
-                                    </div>
-                                </div>
-                                <a href="#">
-                                    <div class="panel-footer">
-                                        <span class="pull-left">View Details</span>
-                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="panel panel-green">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                           <div class="text-box text-left">
-                                            <div class="huge">12</div>
-                                            <div>New Tasks!</div>
-                                         </div>
-                                        </div>
-                                          <div class="col-md-4">
-                                          <div class="fully-box">
-                                            <i class="fa fa-tasks fa-5x"></i>
-                                         </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="#">
-                                    <div class="panel-footer">
-                                        <span class="pull-left">View Details</span>
-                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="panel panel-yellow">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                           <div class="text-box text-left">
-                                            <div class="huge">124</div>
-                                            <div>New Orders!</div>
-                                         </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                          <div class="fully-box">
-                                            <i class="fa fa-shopping-cart fa-5x"></i>
-                                        </div>
-                                     </div>
-                                    </div>
-                                </div>
-                                <a href="#">
-                                    <div class="panel-footer">
-                                        <span class="pull-left">View Details</span>
-                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="panel panel-red">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                           <div class="text-box text-left">
-                                            <div class="huge">13</div>
-                                            <div>Support Tickets!</div>
-                                            </div>
-                                        </div>
-                                             <div class="col-md-4">
-                                          <div class="fully-box">
-                                            <i class="fa fa-support fa-5x"></i>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="#">
-                                    <div class="panel-footer">
-                                        <span class="pull-left">View Details</span>
-                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                <!--  -->
-
-
-
-                  </div>
-                  <!-- footer -->
-                     <div class="footer">
-                                 <div class="container-fluid">
-                        <p>Copyright ©2023 All rights reserved | Design & Develop by
-                           <a href="https://cyberimpulses.com/"> CISS</a>
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <!-- end dashboard inner -->
-            </div>
-         </div>
-      </div>
-  {% endblock %}
+                   <!--  -->
+					<div class="row">
+						<div class="col-md-12 col-lg-12">
+						
+							<!-- Sales Chart -->
+							<div class="card card-chart bg-border">
+								<div class="card-header">
+									<h4 class="card-title">Sales Overview</h4>
+								</div>
+								<div class="card-body">
+									<div id="morrisArea"></div>
+								</div>
+							</div>
+							<!-- /Sales Chart -->
+							
+						</div>	
+					</div>
+				</div>			
+			
+			<!-- /Page Wrapper -->
+			<div>
+				<div>
+       
+		<!-- /Main Wrapper -->
+{% endblock %}

@@ -1,8 +1,4 @@
 from django.db import models
-import qrcode
-from io import BytesIO
-from django.core.files import File
-from PIL import Image,ImageDraw
 # Create your models here.
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin
@@ -32,7 +28,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     """ Main User config """
     email = models.EmailField(unique=True, verbose_name='Email Address')
-    full_name = models.CharField(max_length=256)
+    username = models.CharField(max_length=256)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
@@ -50,7 +46,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     user_type = models.CharField( choices=user_type_data, max_length=10,default=1)
     
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = [ 'full_name']
+    REQUIRED_FIELDS = [ 'username']
 
     objects = UserManager()
 
@@ -59,7 +55,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
 
-        return f'{self.full_name} '
+        return f'{self.username} '
 
     def has_perm(self, perm, obj=None):
         # User permission
@@ -69,28 +65,31 @@ class User(AbstractBaseUser, PermissionsMixin):
         # User permission to view the ap modules
         return True
 
-class HotelOwner(models.Model):
+
+
+class PropertyOwner(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    property_name = models.CharField(max_length=120)
     address = models.TextField()
-    mobile = models.CharField(max_length=12, default="")
+    mobile = models.CharField(max_length=12 )
 
     def __str__(self):
-        return self.user.full_name
+        return self.property_name
 
-class Hotel(models.Model):
-    owner = models.ForeignKey(HotelOwner, on_delete=models.CASCADE)
-    hotel_name = models.CharField(max_length=100)
-    address = models.TextField()
-    Number_of_rooms = models.CharField(max_length=100,default="")
-  
+
+class TermsCondition(models.Model):
+    
+    terms_condition = models.TextField()
+    
+
     def __str__(self):
-        return self.hotel_name
+        return self.terms_condition
 
-class Branch(models.Model):
-    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
-    location = models.CharField(max_length=100)
+
+class PrivacyPolicy(models.Model):
+    
+    privacy_policy = models.TextField()
+    
+
     def __str__(self):
-        return self.name
-
-
+        return self.privacy_policy
