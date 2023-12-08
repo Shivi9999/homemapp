@@ -152,7 +152,7 @@ def profile(request):
     return render(request,'profile.html')
 
 
-@login_required
+
 def manage_user_admin(request):
     if request.method == 'GET':
         username = request.GET.get('username')
