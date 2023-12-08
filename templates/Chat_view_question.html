@@ -159,74 +159,24 @@
 						        <thead>
 						            <tr>
 						            	<th>S.no</th>
-						                 <th>Chat Question</th>
-						                 <th>Chat Answer</th>
-						                 <th>Product Badge</th>
-						                <th>Action</th> 
+										<th>Chat Question</th>
+										<th>Chat Answer</th>
+										<th>Action</th> 
 						            </tr>
 						        </thead>
 						        <tbody>
+									{% for question in que_ans %}
 						           <tr class="even">
-	                                    <td>1</td>
-	                                    <td> <b>What payment methods will you accept for rent?</b></td>
-	                                     <td> Landlords who only accept cash should be avoided at all costs.</td>
-	                                     <td><div class="badge badge-success">Medium</div></td>
-	                                    <td>
-	                                     <button class="btn btn-primary"><a class="edit-btn" href="#">Edit</a></button>
-	                                      <button class="btn btn-primary"><a class="edit-btn" href="#">Delete</a></button>
+	                                    <td>{{forloop.counter}}</td>
+	                                    <td>{{question.question}}</td>
+	                                    <td>{{question.answer}}</td>
+										<td>
+											<a class="edit-btn" href="{% url 'Edit_question' id=question.id %}"> <button class="btn btn-primary">Edit</button></a>
+											<a class="edit-btn" href="{% url 'Delete_question' id=question.id %}"><button class="btn btn-primary">Delete</button></a>
 	                                  </td>
 	                                </tr>
-	                                 <tr class="odd">
-	                                    <td>2</td>
-	                                    <td> <b>What payment methods will you accept for rent?</b></td> 
-	                                     <td> Landlords who only accept cash should be avoided at all costs.</td>
-	                                     <td><div class="badge badge-primary">Medium</div></td>
-	                                    <td>
-	                                     <button class="btn btn-primary"><a class="edit-btn" href="#">Edit</a></button>
-	                                      <button class="btn btn-primary"><a class="edit-btn" href="#">Delete</a></button>
-	                                  </td>
-	                                </tr>
-	                                   <tr class="even">
-	                                    <td>1</td>
-	                                    <td> <b>What payment methods will you accept for rent?</b></td>
-	                                     <td> Landlords who only accept cash should be avoided at all costs.</td>
-	                                     <td><div class="badge badge-success">Medium</div></td>
-	                                    <td>
-	                                     <button class="btn btn-primary"><a class="edit-btn" href="#">Edit</a></button>
-	                                      <button class="btn btn-primary"><a class="edit-btn" href="#">Delete</a></button>
-	                                  </td>
-	                                </tr>
-	                                 <tr class="odd">
-	                                    <td>2</td>
-	                                    <td> <b>What payment methods will you accept for rent?</b></td> 
-	                                     <td> Landlords who only accept cash should be avoided at all costs.</td>
-	                                     <td><div class="badge badge-primary">Medium</div></td>
-	                                    <td>
-	                                     <button class="btn btn-primary"><a class="edit-btn" href="#">Edit</a></button>
-	                                      <button class="btn btn-primary"><a class="edit-btn" href="#">Delete</a></button>
-	                                  </td>
-	                                </tr>
-	                                   <tr class="even">
-	                                    <td>1</td>
-	                                    <td> <b>What payment methods will you accept for rent?</b></td>
-	                                     <td> Landlords who only accept cash should be avoided at all costs.</td>
-	                                     <td><div class="badge badge-success">Medium</div></td>
-	                                    <td>
-	                                     <button class="btn btn-primary"><a class="edit-btn" href="#">Edit</a></button>
-	                                      <button class="btn btn-primary"><a class="edit-btn" href="#">Delete</a></button>
-	                                  </td>
-	                                </tr>
-	                                 <tr class="odd">
-	                                    <td>2</td>
-	                                    <td> <b>What payment methods will you accept for rent?</b></td> 
-	                                     <td> Landlords who only accept cash should be avoided at all costs.</td>
-	                                     <td><div class="badge badge-primary">Medium</div></td>
-	                                    <td>
-	                                     <button class="btn btn-primary"><a class="edit-btn" href="#">Edit</a></button>
-	                                      <button class="btn btn-primary"><a class="edit-btn" href="#">Delete</a></button>
-	                                  </td>
-	                                </tr>
-	                               
+									{% endfor %}
+	                                
 						        </tbody>
 						    </table>
                                    </div>

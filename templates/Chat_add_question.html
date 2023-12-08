@@ -1,151 +1,6 @@
 {% extends 'base.html'%}
 {% block content %}
 
-
-{% comment %} <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <title> Chat Add Question HomeMapp </title>
-		
-		<!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-		
-		<!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		
-		<!-- Fontawesome CSS -->
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-		
-		<!-- Feathericon CSS -->
-        <link rel="stylesheet" href="assets/css/feathericon.min.css">
-		
-		<!-- Main CSS -->
-        <link rel="stylesheet" href="assets/css/style.css">
-		
-    </head>
-    <body>
-	
-		<!-- Main Wrapper -->
-        <div class="main-wrapper">
-		
-			<!-- Header -->
-            <div class="header">
-			
-				<!-- Logo -->
-                <div class="header-left">
-                    <a href="index.html" class="logo">
-						<img src="assets/img/logo.png" alt="Logo">
-					</a>
-					<a href="index.html" class="logo logo-small">
-						<img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
-					</a>
-                </div>
-				<!-- /Logo -->
-				
-				<a href="javascript:void(0);" id="toggle_btn">
-					<i class="fe fe-text-align-left"></i>
-				</a>
-				
-				
-				<!-- Mobile Menu Toggle -->
-				<a class="mobile_btn" id="mobile_btn">
-					<i class="fa fa-bars"></i>
-				</a>
-				<!-- /Mobile Menu Toggle -->
-				
-				<!-- Header Right Menu -->
-				<ul class="nav user-menu">
-
-					<!-- App Lists -->
-					<li class="nav-item dropdown app-dropdown">
-						<a class="nav-link dropdown-toggle" aria-expanded="false" role="button" data-toggle="dropdown" href="#"><i class="fe fe-app-menu"></i></a>
-						<ul class="dropdown-menu app-dropdown-menu">
-							<li>
-								<div class="app-list">
-									<div class="row">
-										<div class="col"><a class="app-item" href="inbox.html"><i class="fa fa-envelope"></i><span>Email</span></a></div>
-										<div class="col"><a class="app-item" href="calendar.html"><i class="fa fa-calendar"></i><span>Calendar</span></a></div>
-										<div class="col"><a class="app-item" href="#"><i class="fa fa-comments"></i><span>Chat</span></a></div>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</li>
-					<!-- /App Lists -->
-					
-					<!-- User Menu -->
-					<li class="nav-item dropdown has-arrow">
-						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-							<span class="user-img"><img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Ryan Taylor"></span>
-						</a>
-						<div class="dropdown-menu">
-							<div class="user-header">
-								<div class="avatar avatar-sm">
-									<img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
-								</div>
-								<div class="user-text">
-									<h6>Ryan Taylor</h6>
-									<p class="text-muted mb-0">Administrator</p>
-								</div>
-							</div>
-							<a class="dropdown-item" href="profile.html">My Profile</a>
-							<a class="dropdown-item" href="login.html">Logout</a>
-						</div>
-					</li>
-					<!-- /User Menu -->
-					
-				</ul>
-				<!-- /Header Right Menu -->
-				
-            </div>
-			<!-- /Header -->
-			
-			<!-- Sidebar -->
-            <div class="sidebar" id="sidebar">
-                <div class="sidebar-inner slimscroll">
-					<div id="sidebar-menu" class="sidebar-menu">
-						<ul>
-							<li> 
-								<a href="index.html"><i class="fe fe-home"></i> <span>Dashboard</span></a>
-							</li>
-							<li class="submenu">
-								<a href="#" class=""><i class="fa fa-users "></i> <span> Property Owner </span> <span class="menu-arrow"></span></a>
-								<ul style="display: none;">
-									<li><a href="Pro_add_Property.html"> <i class="fa fa-angle-double-right" ></i> Add Property Owner </a></li>
-									<li><a href="Pro_view__Property.html"> <i class="fa fa-angle-double-right" ></i> View Property Owner  </a></li>
-								</ul>
-							</li>
-							<li class="submenu active">
-								<a href="#" class=""><i class="fa fa-tasks"></i> <span> Chat Question </span> <span class="menu-arrow"></span></a>
-								<ul style="display: none;">
-									<li><a href="Chat_add_question.html"> <i class="fa fa-angle-double-right" ></i> Add Chat Question </a></li>
-									<li><a href="Chat_view_question.html"> <i class="fa fa-angle-double-right" ></i> View Chat Question </a></li>
-								</ul>
-							</li>
-							<li class="submenu">
-								<a href="#" class=""><i class="fa fa-bandcamp "></i> <span> Manage Property </span> <span class="menu-arrow"></span></a>
-								<ul style="display: none;">
-									<li><a href="Manage_add_Property.html"> <i class="fa fa-angle-double-right" ></i> Add Manage Property </a></li>
-									<li><a href="Manage_view_Property.html"> <i class="fa fa-angle-double-right" ></i> View Manage Property </a></li>
-								</ul>
-							</li>
-							<li> 
-								<a href="Notification.html"><i class="fa fa-question"></i> <span>Notification</span></a>
-							</li>
-							<li> 
-								<a href="privacy_policy.html"><i class="fa fa-briefcase"></i> <span>privacy policy</span></a>
-							</li>
-							<li> 
-								<a href="terms_condition.html"><i class="fa fa-briefcase"></i> <span>Terms Condition</span></a>
-							</li>
-						</ul>
-					</div>
-                </div>
-            </div>
-			<!-- /Sidebar -->
-			 {% endcomment %}
 			<!-- Page Wrapper -->
             <div class="page-wrapper">
                 <div class="content container-fluid">
@@ -159,53 +14,55 @@
 										<h3 class="page-title">Chat Add Question </h3>
 									</div>
 									<div class="user-box">
-										<form action="#" class=" row">
-
-											<div class="form-group  full-anslist col-sm-12">
-												<label><h5>Que. What payment methods will you accept for rent?</h5></label><br>
-												<label class="answer-lists">
-													<p> A) Landlords who only accept cash should be avoided at all costs.</p>
-													<p> B) Landlords are allowed to designate which forms of payments they will accept, but the best landlords make it easy for a tenant to pay.</p>
-													<p> c) Online payments are the best way to pay rent (in my opinion), because it allows for automation, security, and convenience for both tenant and landlord..</p>
-												</label>
-												<div class="answer">
-						                           <label for="html" style="padding: 6px 5px;"> Ans.  </label>
-						                           <input type="text" name="answer1" class="form-control" placeholder="Enter Answer">
-						                       </div>
+										<form method="post" action="{% url 'save_question_answer' %}" enctype="multipart/form-data" class=" row" >
+											{% csrf_token %}
+											<div class="form-group col-sm-6">
+												<label>Question</label>
+												{{question_form.question}}
 											</div>
-											<div class="form-group  full-anslist col-sm-6">
-												<label><h5>Que. What payment methods will you accept for rent?</h5></label><br>
-												<label class="answer-lists">
-													<p> A) Landlords who only accept cash should be avoided at all costs.</p>
-													<p> B) Landlords are allowed to designate which forms of payments they will accept, but the best landlords make it easy for a tenant to pay.</p>
-													<p> c) Online payments are the best way to pay rent (in my opinion), because it allows for automation, security, and convenience for both tenant and landlord..</p>
-												</label>
-												<div class="answer">
-						                           <label for="html" style="padding: 6px 5px;"> Ans.  </label>
-						                           <input type="text" name="answer1" class="form-control" placeholder="Enter Answer">
-						                       </div>
+											<div class="form-group col-sm-6">
+												<label>Answer</label>
+												{{question_form.answer}}
 											</div>
-											<div class="form-group  full-anslist col-sm-6">
-												<label><h5>Que. What payment methods will you accept for rent?</h5></label><br>
-												<label class="answer-lists">
-													<p> A) Landlords who only accept cash should be avoided at all costs.</p>
-													<p> B) Landlords are allowed to designate which forms of payments they will accept, but the best landlords make it easy for a tenant to pay.</p>
-													<p> c) Online payments are the best way to pay rent (in my opinion), because it allows for automation, security, and convenience for both tenant and landlord..</p>
-												</label>
-												<div class="answer">
-						                           <label for="html" style="padding: 6px 5px;"> Ans.  </label>
-						                           <input type="text" name="answer1" class="form-control" placeholder="Enter Answer">
-						                       </div>
-											</div>
-											
+										
 											<div class="form-group col-sm-12">
 												<div class="submit">
-													<a href="#" class="form-control bg-submits"> Submit</a>
-												</div>
+													<input type="submit" class="form-control bg-submits" value=" Submit">
+													
 												
+													{% comment %} <a href="#" class="form-control bg-submits"> Submit</a> {% endcomment %}
+												</div>
+											
 											</div>
 										</form>
+
+
 									</div>
+									<form method ="post" action="{% url 'import_excel' %}">
+										{% if messages %}
+										<div class="messages">
+											{% for message in messages %}
+												<div class="alert alert-{{ message.tags }}">
+													{{ message }}
+												</div>
+											{% endfor %}
+										</div>
+									{% endif %}
+										{% csrf_token %}
+										<div class="form-group col-sm-12">
+											<label for="excel_file">Import Excel File</label>
+											<input type="file" name="excel_file" id="excel_file" accept=".xls, .xlsx">
+										</div>
+											
+
+											<div class="submit">
+												<input type="submit" class="form-control bg-submits" value="Import">
+												
+											
+												{% comment %} <a href="#" class="form-control bg-submits"> Submit</a> {% endcomment %}
+											</div>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>

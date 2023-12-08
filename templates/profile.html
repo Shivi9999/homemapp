@@ -1,39 +1,11 @@
 {% extends 'base.html'%}
 {% block content %}
-
 {% load static %}
-{% comment %} <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <title> Profile HomeMapp Page</title>
-		
-		<!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-		
-		<!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		
-		<!-- Fontawesome CSS -->
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-		
-		<!-- Feathericon CSS -->
-        <link rel="stylesheet" href="assets/css/feathericon.min.css">
-		
-		<!-- Datetimepicker CSS -->
-		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
-		
-		<!-- Main CSS -->
-        <link rel="stylesheet" href="assets/css/style.css">
-    </head>
-    <body> {% endcomment %}
+
 	
 		<!-- Main Wrapper -->
         <div class="main-wrapper">
 		
-			
-			
 			<!-- Page Wrapper -->
             <div class="page-wrapper">
                 <div class="content container-fluid">
@@ -46,7 +18,7 @@
 							</div>
 							<div class="col-md-4">
 								<ul class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+									<li class="breadcrumb-item"><a href="/">Dashboard</a></li>
 									<li class="breadcrumb-item active">Profile</li>
 								</ul>
 							</div>
@@ -56,7 +28,7 @@
 					
 					<div class="full-profiles">
 						<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-3">
 							<div class="profile-header mb-3 border-full">
 								<div class="row align-items-center">
 									<div class="col-md-12 profile-image">
@@ -65,24 +37,24 @@
 										</a>
 									</div>
 									<div class="col-md-12 mt-3 mb-3 ml-md-n2 profile-user-info">
-										<h4 class="user-name mb-0">John Doe</h4>
-										<h6 class="text-muted">UI/UX Design Team</h6>
-										<div class="user-Location"><i class="fa fa-map-marker"></i> Florida, United States</div>
-										<div class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+										<h4 class="user-name mb-0">{{user.username}}</h4>
+										<h6 class="text-muted">{{user.user_type}}</h6>
+										{% comment %} <div class="user-Location"><i class="fa fa-map-marker"></i> Florida, United States</div> {% endcomment %}
+										{% comment %} <div class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div> {% endcomment %}
 									</div>
-									<div class="col-md-12 profile-btn">
+									{% comment %} <div class="col-md-12 profile-btn">
 										<a href="" class="btn btn-primary">
 											Message
 										</a>
 										<a href="" class="btn btn-primary">
 											Edit
 										</a>
-									</div>
+									</div> {% endcomment %}
 								</div>
 							</div>
 							
 						</div>
-					<div class="col-md-6">
+					<div class="col-md-9">
 							
 							<div class="full-tabs mb-4 border-full">
 							<div class="profile-menu">
@@ -111,17 +83,17 @@
 													</h5>
 													<div class="row">
 														<p class="col-sm-3 text-muted text-sm-left mb-0 mb-sm-3">Name</p>
-														<p class="col-sm-9">John Doe</p>
+														<p class="col-sm-9"> {{ user.username }}</p>
 													</div>
-													<div class="row">
-														<p class="col-sm-3 text-muted text-sm-left mb-0 mb-sm-3">Date of Birth</p>
-														<p class="col-sm-9">24 Jul 1983</p>
-													</div>
+													 {% comment %} <div class="row">
+														<p class="col-sm-3 text-muted text-sm-left mb-0 mb-sm-3">  Password</p>
+														<p class="col-sm-9"> {{ user.password }}</p>
+													</div>  {% endcomment %}
 													<div class="row">
 														<p class="col-sm-3 text-muted text-sm-left mb-0 mb-sm-3">Email ID</p>
-														<p class="col-sm-9">johndoe@example.com</p>
+														<p class="col-sm-9"> {{ user.email }}</p>
 													</div>
-													<div class="row">
+													{% comment %} <div class="row">
 														<p class="col-sm-3 text-muted text-sm-left mb-0 mb-sm-3">Mobile</p>
 														<p class="col-sm-9">305-310-5857</p>
 													</div>
@@ -131,7 +103,7 @@
 														Miami,<br>
 														Florida - 33165,<br>
 														United States.</p>
-													</div>
+													</div> {% endcomment %}
 												</div>
 											</div>
 											
@@ -146,21 +118,25 @@
 															</button>
 														</div>
 														<div class="modal-body">
-															<form>
+														
+															<form method="post" action="{% url 'update_personal_details' %}">
+																{% csrf_token %}
 																<div class="row form-row">
 																	<div class="col-12 col-sm-6">
 																		<div class="form-group">
-																			<label>First Name</label>
-																			<input type="text" class="form-control" value="John">
+																			<label>User Name</label>
+																			{{ profile_form.username }}
+																			{% comment %} <input type="text" class="form-control" value="John"> {% endcomment %}
 																		</div>
 																	</div>
-																	<div class="col-12 col-sm-6">
+																	 <div class="col-12 col-sm-6" style="display: none;">
 																		<div class="form-group">
-																			<label>Last Name</label>
-																			<input type="text" class="form-control" value="Doe">
+																			<label>Password </label>
+																			{{ profile_form.password }}
+																			{% comment %} <input type="text" class="form-control" value="Doe"> {% endcomment %}
 																		</div>
-																	</div>
-																	<div class="col-12">
+																	</div> 
+																	{% comment %} <div class="col-12">
 																		<div class="form-group">
 																			<label>Date of Birth</label>
 																			<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
@@ -170,11 +146,22 @@
 																				</div>
 																			</div>
 																		</div>
-																	</div>
+																	</div> {% endcomment %}
 																	<div class="col-12 col-sm-6">
 																		<div class="form-group">
 																			<label>Email ID</label>
-																			<input type="email" class="form-control" value="johndoe@example.com">
+																			{{ profile_form.email }}
+																			{% comment %} <input type="email" class="form-control" value="johndoe@example.com"> {% endcomment %}
+																		</div>
+																	</div>
+																	
+																	{% comment %} <div class="col-12">
+																		<h5 class="form-title"><span>Address</span></h5>
+																	</div> {% endcomment %}
+																	{% comment %} <div class="col-12">
+																		<div class="form-group">
+																		<label>Address</label>
+																			<input type="text" class="form-control" value="4663 Agriculture Lane">
 																		</div>
 																	</div>
 																	<div class="col-12 col-sm-6">
@@ -182,17 +169,8 @@
 																			<label>Mobile</label>
 																			<input type="text" value="+1 202-555-0125" class="form-control">
 																		</div>
-																	</div>
-																	<div class="col-12">
-																		<h5 class="form-title"><span>Address</span></h5>
-																	</div>
-																	<div class="col-12">
-																		<div class="form-group">
-																		<label>Address</label>
-																			<input type="text" class="form-control" value="4663 Agriculture Lane">
-																		</div>
-																	</div>
-																	<div class="col-12 col-sm-6">
+																	</div> {% endcomment %}
+																	{% comment %} <div class="col-12 col-sm-6">
 																		<div class="form-group">
 																			<label>City</label>
 																			<input type="text" class="form-control" value="Miami">
@@ -215,7 +193,7 @@
 																			<label>Country</label>
 																			<input type="text" class="form-control" value="United States">
 																		</div>
-																	</div>
+																	</div> {% endcomment %}
 																</div>
 																<button type="submit" class="btn btn-primary btn-block">Save Changes</button>
 															</form>
@@ -238,21 +216,34 @@
 									<div class="card">
 										<div class="card-body">
 											<h5 class="card-title">Change Password</h5>
+											{% if messages %}
+											<div class="messages">
+												{% for message in messages %}
+													<div class="alert alert-{{ message.tags }}">
+														{{ message }}
+													</div>
+												{% endfor %}
+											</div>
+										{% endif %}
 											<div class="row">
 												<div class="col-md-12">
-													<form>
+													<form method='post' action="{% url 'change_password' %}">
+														{% csrf_token %}
 														<div class="row ">
 														<div class="form-group col-lg-6">
 															<label>Old Password</label>
-															<input type="password" name='old_password' class="form-control">
+															{{form.old_password}}
+															{% comment %} <input type="password" name='old_password' class="form-control"> {% endcomment %}
 														</div>
 														<div class="form-group col-lg-6">
 															<label>New Password</label>
-															<input type="password" name='new_password' class="form-control">
+															{{form.new_password1}}
+															{% comment %} <input type="password" name='new_password' class="form-control"> {% endcomment %}
 														</div>
 														<div class="form-group col-lg-12">
 															<label>Confirm Password</label>
-															<input type="password" name='confirm_password' class="form-control">
+															{{form.new_password2}}
+															{% comment %} <input type="password" name='confirm_password' class="form-control"> {% endcomment %}
 														</div>
 														<button class="btn btn-primary" type="submit">Save Changes</button>
 													</div>
@@ -276,23 +267,5 @@
 		
         </div>
 		<!-- /Main Wrapper -->
-		
-		{% comment %} <!-- jQuery -->
-        <script src="assets/js/jquery-3.6.0.min.js"></script>
-		
-		<!-- Bootstrap Core JS -->
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
-		
-		<!-- Slimscroll JS -->
-        <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-		<!-- Datetimepicker JS -->
-		<script src="assets/js/moment.min.js"></script>
-		<script src="assets/plugins/datetimepicker/js/tempusdominus-bootstrap-4.min.js"></script>
-		
-		<!-- Custom JS -->
-		<script  src="assets/js/script.js"></script>
-		
-    </body>
-</html> {% endcomment %}
+	
 {% endblock %}

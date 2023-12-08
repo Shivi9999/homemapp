@@ -43,7 +43,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     )
     user_type_data = ((SUPERADMIN, "Superadmin"), ('USER','User'))
-    user_type = models.CharField( choices=user_type_data, max_length=10,default=1)
+    user_type = models.CharField( choices=user_type_data, max_length=10,default='SUPERADMIN')
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [ 'username']
@@ -75,6 +75,16 @@ class PropertyOwner(models.Model):
 
     def __str__(self):
         return self.property_name
+
+
+class QuestionAnswer(models.Model):
+    
+    question = models.CharField(max_length=500)
+    answer=models.CharField(max_length=2000)
+    
+
+    def __str__(self):
+        return self.question
 
 
 class TermsCondition(models.Model):

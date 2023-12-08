@@ -7,13 +7,22 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <title>Property View Property HomeMapp Page </title>
+        <title> Chat Add Question HomeMapp </title>
+		
+		<!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">		
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">		
+		
+		<!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+		
+		<!-- Fontawesome CSS -->
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+		
+		<!-- Feathericon CSS -->
         <link rel="stylesheet" href="assets/css/feathericon.min.css">
+		
+		<!-- Main CSS -->
         <link rel="stylesheet" href="assets/css/style.css">
-         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 		
     </head>
     <body>
@@ -101,14 +110,14 @@
 							<li> 
 								<a href="index.html"><i class="fe fe-home"></i> <span>Dashboard</span></a>
 							</li>
-							<li class="submenu active">
+							<li class="submenu">
 								<a href="#" class=""><i class="fa fa-users "></i> <span> Property Owner </span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
 									<li><a href="Pro_add_Property.html"> <i class="fa fa-angle-double-right" ></i> Add Property Owner </a></li>
 									<li><a href="Pro_view__Property.html"> <i class="fa fa-angle-double-right" ></i> View Property Owner  </a></li>
 								</ul>
 							</li>
-							<li class="submenu">
+							<li class="submenu active">
 								<a href="#" class=""><i class="fa fa-tasks"></i> <span> Chat Question </span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
 									<li><a href="Chat_add_question.html"> <i class="fa fa-angle-double-right" ></i> Add Chat Question </a></li>
@@ -137,7 +146,6 @@
             </div>
 			<!-- /Sidebar -->
 			 {% endcomment %}
-
 			<!-- Page Wrapper -->
             <div class="page-wrapper">
                 <div class="content container-fluid">
@@ -148,46 +156,65 @@
 							<div class="col-sm-12">
 								<div class="card full-header">
 									<div class="users">
-										<h3 class="page-title">Property View Property </h3>
+										<h3 class="page-title">Chat Add Question </h3>
 									</div>
 									<div class="user-box">
-								<div class="datatables">
-                                    <table id="example" class="display" style="width:100%;    border: 2px solid #20214f;">
-                                        <thead>
-                                            <tr>
-                                                <th>S no</th>
-                                                <th>Username</th>
-                                                <th>Email</th>
-                                                
-                                              
-                                                 <th>Property Name</th>
-												 <th>Address</th>
-                                                <th>Mobile</th>
-                                                 <th>Action</th> 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="even">
-												{% for owner in property_owners %}
-                                                <td>{{forloop.counter}}</td>
-                                                <td>{{owner.user.username}}</td>
-                                                <td>{{owner.user.email}}</td>
-                                                <td>{{owner.property_name}}</td> 
-                                                <td>{{owner.address}}</td>
-                                                <td>{{owner.mobile}}</td>
-                                                <td>
-													<a class="edit-btn" href="{% url 'edit_property_owner' id=owner.id %}">
-                                                 <button class="btn btn-primary">Edit</button></a>
-												 <a class="edit-btn" href="{% url 'delete_property_owner' id=owner.id %}"><button class="btn btn-primary">Delete</button></a>
-                                              </td>
-											 
-                                            </tr>
-                                             {% endfor %}                      
-                                           
-                                        </tbody>
-                                        </table>
-                                   </div>
-
+										<form method="post" class=" row">
+											{% csrf_token %}
+											<div class="form-group col-sm-6">
+												<label>Question</label>
+												{{question_form.question}}
+											</div>
+											<div class="form-group col-sm-6">
+												<label>Answer</label>
+												{{question_form.answer}}
+											</div>
+{% comment %} 
+											<div class="form-group  full-anslist col-sm-12">
+												<label><h5>Que. What payment methods will you accept for rent?</h5></label><br>
+												<label class="answer-lists">
+													<p> A) Landlords who only accept cash should be avoided at all costs.</p>
+													<p> B) Landlords are allowed to designate which forms of payments they will accept, but the best landlords make it easy for a tenant to pay.</p>
+													<p> c) Online payments are the best way to pay rent (in my opinion), because it allows for automation, security, and convenience for both tenant and landlord..</p>
+												</label>
+												<div class="answer">
+						                           <label for="html" style="padding: 6px 5px;"> Ans.  </label>
+						                           <input type="text" name="answer1" class="form-control" placeholder="Enter Answer">
+						                       </div>
+											</div>
+											<div class="form-group  full-anslist col-sm-6">
+												<label><h5>Que. What payment methods will you accept for rent?</h5></label><br>
+												<label class="answer-lists">
+													<p> A) Landlords who only accept cash should be avoided at all costs.</p>
+													<p> B) Landlords are allowed to designate which forms of payments they will accept, but the best landlords make it easy for a tenant to pay.</p>
+													<p> c) Online payments are the best way to pay rent (in my opinion), because it allows for automation, security, and convenience for both tenant and landlord..</p>
+												</label>
+												<div class="answer">
+						                           <label for="html" style="padding: 6px 5px;"> Ans.  </label>
+						                           <input type="text" name="answer1" class="form-control" placeholder="Enter Answer">
+						                       </div>
+											</div>
+											<div class="form-group  full-anslist col-sm-6">
+												<label><h5>Que. What payment methods will you accept for rent?</h5></label><br>
+												<label class="answer-lists">
+													<p> A) Landlords who only accept cash should be avoided at all costs.</p>
+													<p> B) Landlords are allowed to designate which forms of payments they will accept, but the best landlords make it easy for a tenant to pay.</p>
+													<p> c) Online payments are the best way to pay rent (in my opinion), because it allows for automation, security, and convenience for both tenant and landlord..</p>
+												</label>
+												<div class="answer">
+						                           <label for="html" style="padding: 6px 5px;"> Ans.  </label>
+						                           <input type="text" name="answer1" class="form-control" placeholder="Enter Answer">
+						                       </div>
+											</div> {% endcomment %}
+											
+											<div class="form-group col-sm-12">
+												<div class="submit">
+													<input type="submit" class="form-control bg-submits" value=" Submit">
+													{% comment %} <a href="#" class="form-control bg-submits"> Submit</a> {% endcomment %}
+												</div>
+												
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>
@@ -206,10 +233,9 @@
 			<!-- /Page Wrapper -->
 		
         </div>
-		
 		<!-- /Main Wrapper -->
-{% comment %} 		
-		<!-- jQuery -->
+		
+		{% comment %} <!-- jQuery -->
         <script src="assets/js/jquery-3.6.0.min.js"></script>
 		
 		<!-- Bootstrap Core JS -->
@@ -220,14 +246,7 @@
 		
 		<!-- Custom JS -->
 		<script  src="assets/js/script.js"></script>
-		<!-- DATATABLES  -->
-		<!--DATATABLES SCRIPT START -->
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script>
-            new DataTable('#example');
-        </script>
+		
     </body>
 </html> {% endcomment %}
-
-{% endblock%}
+{% endblock %}
