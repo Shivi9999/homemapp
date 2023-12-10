@@ -5,14 +5,14 @@ from django.core.exceptions import ValidationError
 class Userform(forms.ModelForm):
   class Meta:
     model=User
-    fields=['username','email','password']
-    
+    fields=['username','email','password','user_type']
+    exclude=['user_type']
     widgets = {
             
               #'user_id': ModelSelect2Widget(model=Add_user, search_fields=['User_Id__icontains']),
               'username': forms.TextInput(attrs={'class': 'form-control'}),
               'email': forms.TextInput(attrs={'class': 'form-control'}),
-              'password': forms.TextInput(attrs={'class': 'form-control'}),
+              'password': forms.PasswordInput(attrs={'class': 'form-control'}),
          
           }
   
@@ -25,9 +25,13 @@ class PropertyForm(forms.ModelForm):
             #'user_id': ModelSelect2Widget(model=Add_user, search_fields=['User_Id__icontains']),
             'property_name': forms.TextInput(attrs={'class': 'form-control', }),
             'address': forms.TextInput(attrs={'class': 'form-control'}),
-            'mobile': forms.TextInput(attrs={'class': 'form-control'}),
+            
             
         }
+  mobile = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'class': 'form-control'}),
+        required=False  # Set this to True if mobile is a required field
+    )
 
 
 class QuestionForm(forms.ModelForm):
@@ -62,6 +66,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
 
             # Perform additional validation if needed
             return old_password
+
     def clean_new_password1(self):
         new_password1 = self.cleaned_data.get('new_password1')
         # Perform additional validation if needed
@@ -77,7 +82,28 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         # Perform additional validation if needed
         return new_password2
 
-    
+class NotificationForm(forms.ModelForm):
+    class Meta:
+        model = Notification
+        fields = ['title', 'message', 'users']
+
+
+        widgets = {
+            
+            
+            'title': forms.TextInput(attrs={'class': 'form-control', 'required': False}),
+            'message': forms.TextInput(attrs={'class': 'form-control', 'required': False}),
+        }
+
+    users = forms.ModelMultipleChoiceField(
+        queryset=User.objects.exclude(user_type='1'),
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox-list'}
+        
+        ),
+    )
+
+
+
 
 class ExcelImportForm(forms.Form):
     excel_file = forms.FileField(label='Select an Excel file')

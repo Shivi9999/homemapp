@@ -3,21 +3,64 @@ from .models import *
 from .forms import *
 import pandas as pd
 from django. contrib import messages
-from django.contrib.auth import authenticate, login as dj_login
+from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login as auth_login
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 import pandas as pd 
 # Create your views here.
-
+@login_required(login_url='login')
 def dashboard(request):
     property_owner_count=PropertyOwner.objects.all().count()
+
     context={'property_owner_count':property_owner_count}
     return render(request,'index.html',context)
 
-def login(request):
-    return render(request,'login.html')
 
+
+def user_dashboard(request):
+    return render(request,'Owner/index.html')
+
+def login(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+
+        user = authenticate(request, email=email, password=password)
+
+        if user is not None:
+            auth_login(request, user)
+            messages.success(request, 'Login successful.')
+
+            if user.user_type == '1':
+                return redirect('dashboard')  
+            elif user.user_type == 'USER':
+                return redirect('user_dashboard') 
+        else:
+            messages.error(request, 'Invalid username or password.')
+
+    return render(request, 'login.html')
+
+
+
+
+
+
+
+def logout_view(request):
+    logout(request)
+    # Optionally add a success message or perform other actions
+    return redirect('login')  # Redirect to your home page or any desired URL after logout
+
+
+
+
+
+
+
+
+@login_required(login_url='login')
 def add_property_owner(request):
     if request.method == "POST":
         user_form = Userform(request.POST)
@@ -25,32 +68,35 @@ def add_property_owner(request):
         
         if user_form.is_valid() and property_form.is_valid():
             username = user_form.cleaned_data['username']
-           
             email = user_form.cleaned_data['email']
             password = user_form.cleaned_data['password']
 
-            user_instance = User.objects.create_user(username=username, email=email,password=password)
+            user_instance = user_form.save(commit=False)
+            user_instance.user_type = 'User'  # Set the user type statically
+            user_instance.set_password(password)
+            user_instance.save()
             
             owner_instance = property_form.save(commit=False)
             owner_instance.user = user_instance
-            owner_instance.user_type = 'User'
             owner_instance.save()
             
             return redirect(view_property_owner)
         else:
             print(user_form.errors)
             print(property_form.errors)
+            return render(request, 'Pro_add_Property.html', {'user_form': user_form, 'property_form': property_form})
 
     user_form = Userform()
     property_form = PropertyForm()
     return render(request, 'Pro_add_Property.html', {'user_form': user_form, 'property_form': property_form})
 
+@login_required(login_url='login')
 def view_property_owner(request):
     property_owners = PropertyOwner.objects.all()
     return render(request, 'Pro_view__Property.html', {'property_owners': property_owners})
 
 
-
+@login_required(login_url='login')
 def edit_property_owner(request, id):
     property_owner = get_object_or_404(PropertyOwner, pk=id)
 
@@ -75,6 +121,7 @@ def edit_property_owner(request, id):
   
     return render(request, 'Pro_edit_Property.html', {'user_form': user_form, 'property_form': property_form})
 
+@login_required(login_url='login')
 def delete_property_owner(request, id):
     property_owner = get_object_or_404(PropertyOwner, pk=id)
     
@@ -87,17 +134,19 @@ def delete_property_owner(request, id):
     return redirect('view_property_owner')
 
 
-
+@login_required(login_url='login')
 def add_question(request):
    
     question_form = QuestionForm()
     return render(request,'Chat_add_question.html',{'question_form':question_form})
 
+@login_required(login_url='login')
 def view_question(request):
     que_ans=QuestionAnswer.objects.all()
     return render(request,'Chat_view_question.html',{'que_ans':que_ans})
 
 
+@login_required(login_url='login')
 def edit_question(request,id):
     quetion_ins = get_object_or_404(QuestionAnswer, pk=id)
     if request.method == "POST":
@@ -119,7 +168,7 @@ def edit_question(request,id):
 
 
 
-
+@login_required(login_url='login')
 def delete_question(request, id):
     question_answer = get_object_or_404(QuestionAnswer, pk=id)
      # Delete the property owner and associated user
@@ -127,17 +176,22 @@ def delete_question(request, id):
     
     return redirect('view_question')
 
-
+@login_required(login_url='login')
 def add_manage_property(request):
     return render(request,'Manage_add_Property.html')
 
+@login_required(login_url='login')
 def view_manage_property(request):
     property_owners = PropertyOwner.objects.all()
     return render(request,'Manage_view_Property.html', {'property_owners': property_owners})
 
+
+@login_required(login_url='login')
 def notification(request):
     return render(request,'Notification.html')
 
+
+@login_required(login_url='login')
 def privacy(request):
     # Assuming you have a model named TermsCondition with a field 'terms_condition'
     privacy = PrivacyPolicy.objects.all()
@@ -163,6 +217,48 @@ def privacy(request):
     return render(request,'privacy_policy.html',context)
 
 
+
+@login_required(login_url='login')
+def notification(request):
+   
+    if request.method == 'POST':
+        form = NotificationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('notification')  # Redirect to a confirmation page or another URL
+    else:
+        form = NotificationForm()
+    notifications=Notification.objects.all()
+    return render(request, 'Notification.html', {'form': form,'notifications':notifications})
+
+
+
+
+@login_required(login_url='login')
+def edit_notification(request, id):
+    notification = get_object_or_404(Notification, id=id)
+
+    if request.method == 'POST':
+        form = NotificationForm(request.POST, instance=notification)
+        if form.is_valid():
+            form.save()
+            return redirect('notification')  # Redirect to the notification list view
+    else:
+        form = NotificationForm(instance=notification)
+
+    return render(request, 'edit_notification.html', {'form': form, 'notification': notification})
+
+@login_required(login_url='login')
+def delete_notification(request,id):
+    if request.method == 'GET':
+        notification_id = request.GET.get('id')
+        notification = get_object_or_404(Notification, id=notification_id)
+        notification.delete()
+
+    return redirect('notification')  # Redirect to the notification list view
+
+
+@login_required(login_url='login')
 def terms_condition(request):
     # Assuming you have a model named TermsCondition with a field 'terms_condition'
     terms_data = TermsCondition.objects.all()
@@ -215,11 +311,14 @@ def terms_condition(request):
 #     return render(request,'profile.html', {'form': form,'profile_form':profile_form})
 
 
+@login_required(login_url='login')
 def profile(request):
     profile_form = Userform(instance=request.user)
     form = CustomPasswordChangeForm(user=request.user)
     return render(request, 'profile.html', {'profile_form': profile_form,'form':form})
 
+
+@login_required(login_url='login')
 def manage_user_admin(request):
     if request.method == 'GET':
         username = request.GET.get('username')
@@ -231,10 +330,11 @@ def manage_user_admin(request):
 
     return render(request, 'Owner/login.html')
 
+
 def index(request):
     return render(request,'Owner/index.html')
 
-
+@login_required(login_url='login')
 def delete_terms_condition(request, id):
     try:
         term = TermsCondition.objects.get(pk=id)
@@ -246,7 +346,7 @@ def delete_terms_condition(request, id):
     return redirect('terms_condition')
 
 
-
+@login_required(login_url='login')
 def delete_privacy_policy(request, id):
     try:
         privacy = PrivacyPolicy.objects.get(pk=id)
@@ -264,7 +364,7 @@ def delete_privacy_policy(request, id):
 
 
 
-@login_required
+@login_required(login_url='login')
 def update_personal_details(request):
     if request.method == 'POST':
         form = Userform(request.POST, instance=request.user)
@@ -276,7 +376,7 @@ def update_personal_details(request):
 
     return redirect('profile')
 
-@login_required
+@login_required(login_url='login')
 def change_password(request):
     if request.method == 'POST':
         form = CustomPasswordChangeForm(request.user, request.POST)
@@ -288,17 +388,18 @@ def change_password(request):
 
     return redirect('profile')
 
-@login_required
-def update_profile_picture(request):
-    if request.method == 'POST':
-        form = ProfilePictureForm(request.POST, request.FILES, instance=request.user)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Profile picture updated successfully!')
-        else:
-            messages.error(request, 'Error updating profile picture. Please check the form.')
 
-    return redirect('profile')
+# @login_required(login_url='login')
+# def update_profile_picture(request):
+#     if request.method == 'POST':
+#         form = ProfilePictureForm(request.POST, request.FILES, instance=request.user)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'Profile picture updated successfully!')
+#         else:
+#             messages.error(request, 'Error updating profile picture. Please check the form.')
+
+#     return redirect('profile')
 
 
 
@@ -307,8 +408,10 @@ def save_question_answer(request):
         question_form = QuestionForm(request.POST)
 
         if question_form.is_valid():
+            question_form.save()
          
             messages.success(request, 'Question and answer saved successfully!')
+            return redirect('view_question')
         else:
             messages.error(request, 'Error saving question and answer. Please try again.')
 
@@ -327,7 +430,7 @@ def save_question_answer(request):
 #         question_answer = QuestionAnswer(question=question_text, answer=answer_text)
 #         question_answer.save()
 
-
+@login_required(login_url='login')
 def import_excel(request):
     if request.method == 'POST':
         form = QuestionForm(request.POST, request.FILES)

@@ -3,8 +3,9 @@ from . import views
 urlpatterns = [
     
     path('',views.dashboard,name='dashboard'),
+    path('user_dashboard',views.user_dashboard,name='user_dashboard'),
     path('login',views.login,name='login'),
-    #path('Logout',views.logout,name='logout'),
+    path('Logout',views.logout_view,name='logout'),
     path('Add_property_owner',views.add_property_owner,name='add_property_owner'),
     path('View_property_owner',views.view_property_owner,name='view_property_owner'),
     path('property_owner/edit/<int:id>/', views.edit_property_owner, name='edit_property_owner'),
@@ -23,7 +24,8 @@ urlpatterns = [
     path('index/', views.index, name='index'),
     path('save_question_answer', views.save_question_answer, name='save_question_answer'),
     path('import_excel', views.import_excel, name='import_excel'),
-
+    path('notifications/edit/<int:id>/', views.edit_notification, name='edit_notification'),
+    path('notifications/delete/<int:id>/', views.delete_notification, name='delete_notification'),
  #   path('import_data/', views.import_data, name='import_data'),
     path('update_personal_details/', views.update_personal_details, name='update_personal_details'),
     path('change_password/', views.change_password, name='change_password'),

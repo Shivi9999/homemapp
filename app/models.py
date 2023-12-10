@@ -87,6 +87,15 @@ class QuestionAnswer(models.Model):
         return self.question
 
 
+class Notification(models.Model):
+    users = models.ManyToManyField(User)
+    title = models.CharField(max_length=255)
+    message = models.CharField(max_length=2550)
+    
+    def __str__(self):
+        return self.title
+
+
 class TermsCondition(models.Model):
     
     terms_condition = models.TextField()
