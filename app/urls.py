@@ -29,8 +29,8 @@ urlpatterns = [
  #  path('import_data/', views.import_data, name='import_data'),
     path('update_personal_details/', views.update_personal_details, name='update_personal_details'),
     path('change_password/', views.change_password, name='change_password'),
-    path('delete_terms_condition/<int:id>/', views.delete_terms_condition, name='delete_terms_condition'),
-    path('delete_privacy_policy/<int:id>/', views.delete_privacy_policy, name='delete_privacy_policy'),
+    # path('delete_terms_condition/<int:id>/', views.delete_terms_condition, name='delete_terms_condition'),
+    # path('delete_privacy_policy/<int:id>/', views.delete_privacy_policy, name='delete_privacy_policy'),
 
 
 ################  USER VIEWS ###################
