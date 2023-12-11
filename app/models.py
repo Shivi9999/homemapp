@@ -42,8 +42,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('User','USER'),
     
     )
-    user_type_data = ((SUPERADMIN, "Superadmin"), ('USER','User'))
-    user_type = models.CharField( choices=user_type_data, max_length=10,default='SUPERADMIN')
+    user_type_data = ((SUPERADMIN, "Superadmin"), (USER,"User"))
+    user_type = models.CharField( choices=user_type_data, max_length=10,default='Superadmin')
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [ 'username']
@@ -99,8 +99,8 @@ class Notification(models.Model):
 class TermsCondition(models.Model):
     
     terms_condition = models.TextField()
-    
-
+   
+   
     def __str__(self):
         return self.terms_condition
 
@@ -112,3 +112,10 @@ class PrivacyPolicy(models.Model):
 
     def __str__(self):
         return self.privacy_policy
+
+
+class Faq(models.Model):
+    question=models.CharField(max_length=500)
+    answer=models.CharField(max_length=2000)
+    def __str__(self):
+        return self.question

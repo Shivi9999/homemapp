@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+{% extends "Owner/base.html" %}
+{% load static %}
+{% block content %}
+
+{% comment %} <!DOCTYPE html>
 <html lang="en">
    <head>
       <meta charset="utf-8">
@@ -25,12 +29,12 @@
 
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
-   </head>
+   </head> {% endcomment %}
    <body class="dashboard dashboard_1">
       <div class="full_container">
          <div class="inner_container">
             <!-- Sidebar  -->
-            <nav id="sidebar">
+            {% comment %} <nav id="sidebar">
                <div class="sidebar_blog_1">
                   <div class="sidebar-header">
                      <div class="logo_section">
@@ -84,10 +88,10 @@
                <!-- Sidebar -->
             </nav>
             <!-- end sidebar -->
-            <!-- right content -->
+            <!-- right content --> {% endcomment %}
             <div id="content">
                <!-- topbar -->
-               <div class="topbar">
+               {% comment %} <div class="topbar">
                   <nav class="navbar navbar-expand-lg navbar-light">
                      <div class="full">
                         <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
@@ -106,7 +110,7 @@
                         </div>
                      </div>
                   </nav>
-               </div>
+               </div> {% endcomment %}
                <!-- end topbar -->
                <!-- dashboard inner -->
                <div class="midde_cont">
@@ -179,7 +183,7 @@
                                </div>
                                <div class="col-md-4">
                                   <div class="full-img">
-                                     <img src="images/customer-img.png">
+                                     <img src="{%static 'images/customer-img.png'%}">
                                   </div>
                                </div>
                             </div>
@@ -201,7 +205,7 @@
             </div>
          </div>
       </div>
-      <script src="js/jquery.min.js"></script>
+      {% comment %} <script src="js/jquery.min.js"></script>
       <script src="js/popper.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
       
@@ -221,4 +225,5 @@
          <script src="js/custom.js"></script>
       <script src="js/chart_custom_style1.js"></script>
    </body>
-</html>
+</html> {% endcomment %}
+{% endblock %}

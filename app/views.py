@@ -13,14 +13,13 @@ import pandas as pd
 @login_required(login_url='login')
 def dashboard(request):
     property_owner_count=PropertyOwner.objects.all().count()
-
-    context={'property_owner_count':property_owner_count}
+    question_count=QuestionAnswer.objects.all().count()
+   
+    context={'property_owner_count':property_owner_count,'question_count':question_count}
     return render(request,'index.html',context)
 
 
 
-def user_dashboard(request):
-    return render(request,'Owner/index.html')
 
 def login(request):
     if request.method == 'POST':
@@ -35,7 +34,7 @@ def login(request):
 
             if user.user_type == '1':
                 return redirect('dashboard')  
-            elif user.user_type == 'USER':
+            elif user.user_type == '2':
                 return redirect('user_dashboard') 
         else:
             messages.error(request, 'Invalid username or password.')
@@ -45,17 +44,10 @@ def login(request):
 
 
 
-
-
-
 def logout_view(request):
     logout(request)
     # Optionally add a success message or perform other actions
     return redirect('login')  # Redirect to your home page or any desired URL after logout
-
-
-
-
 
 
 
@@ -70,12 +62,16 @@ def add_property_owner(request):
             username = user_form.cleaned_data['username']
             email = user_form.cleaned_data['email']
             password = user_form.cleaned_data['password']
-
+            
+            print("Form Data:", user_form.cleaned_data)
+            user_form.instance.user_type = '2'
+            print()
             user_instance = user_form.save(commit=False)
-            user_instance.user_type = 'User'  # Set the user type statically
+            # Set the user type statically
             user_instance.set_password(password)
             user_instance.save()
-            
+            saved_user = User.objects.get(pk=user_instance.pk)
+            print("Saved User Type:", saved_user.user_type)
             owner_instance = property_form.save(commit=False)
             owner_instance.user = user_instance
             owner_instance.save()
@@ -402,7 +398,7 @@ def change_password(request):
 #     return redirect('profile')
 
 
-
+@login_required(login_url='login')
 def save_question_answer(request):
     if request.method == 'POST':
         question_form = QuestionForm(request.POST)

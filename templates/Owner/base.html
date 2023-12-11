@@ -34,7 +34,7 @@
 
         {% endblock %}
  </body>
-   <script src="{%static 'js/jquery.min.js'%}'%}"></script>
+   <script src="{%static 'js/jquery.min.js'%}"></script>
    <script src="{%static 'js/popper.min.js'%}"></script>
    <script src="{%static 'js/bootstrap.min.js'%}"></script>
 
@@ -46,12 +46,26 @@
    <script src="{%static 'js/Chart.bundle.min.js'%}"></script>
    <script src="{%static 'js/utils.js'%}"></script>
    <script src="{%static 'js/analyser.js'%}"></script>
-  
+   <script>
+      new DataTable('#example');
+  </script>
    <script src="{%static 'js/perfect-scrollbar.min.js'%}"></script>
    <script>
       var ps = new PerfectScrollbar('#sidebar');
    </script>
    <script src="{%static 'js/custom.js'%}"></script>
    <script src="{%static 'js/chart_custom_style1.js'%}"></script>
+   <script type="text/javascript" src="https://cdn.ckeditor.com/4.5.1/standard/ckeditor.js">
+   </script>
+   <script type="text/javascript">
+ //resize CKEditor with customised height and width
+CKEDITOR.editorConfig = function (config) {
+  config.language = 'es';
+  config.uiColor = '#F7B42C';
+  config.height = 300;
+  config.toolbarCanCollapse = true;
 
+};
+CKEDITOR.replace('myeditor');
+ </script>
 </html>

@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+{% extends "Owner/base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+ {% comment %} <!DOCTYPE html>
 <html lang="en">
    <head>
       <meta charset="utf-8">
@@ -6,7 +12,7 @@
       
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-           <title>FREQUENTLY ASKED QUESTION HOMEMAPP PAGE </title>
+           <title>USER MANAGEMENT ADMIN HOME PAGE </title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -25,16 +31,12 @@
 
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
-
-   </head>
+   </head> {% endcomment %}
    <body class="dashboard dashboard_1">
       <div class="full_container">
          <div class="inner_container">
             <!-- Sidebar  -->
-            <nav id="sidebar">
+            {% comment %} <nav id="sidebar">
                <div class="sidebar_blog_1">
                   <div class="sidebar-header">
                      <div class="logo_section">
@@ -50,17 +52,17 @@
                      </div>
                   </div>
                </div>
-                 <!-- Sidebar -->
+               <!-- Sidebar -->
                <div class="sidebar_blog_2">
                   <ul class="list-unstyled components">
-                     <li>
+                     <li >
                         <a href="#dashboard">
                            <i class="fa fa-dashboard yellow_color"></i> 
                            <span>Dashboard</span>
                         </a>
                     </li> 
                    
-                     <li>
+                     <li class="active">
                         <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>User Management</span></a>
                         <ul class="collapse list-unstyled" id="element">
                            <li><a href="user_management_add.html">> <span>Add User Management</span></a></li>
@@ -76,27 +78,21 @@
                         </ul>
                      </li>
                     
-                      <li  class="active"><a href="faq.html"><i class="fa fa-clock-o orange_color"></i> <span>Faq</span></a></li>
-                     <li >
+                      <li><a href="faq.html"><i class="fa fa-clock-o orange_color"></i> <span>Faq</span></a></li>
+                     <li>
                         <a href="Notification.html">
                         <i class="fa fa-paper-plane red_color"></i> <span>Notification</span></a>
                      </li>
-                     <li>
-                        <a href="terms_condition.html"><i class="fa fa-map purple_color2"></i> <span>Terms and Condition </span>
-                        </a>
-                     </li>
-                     <li >
-                        <a href="privacy_policy.html"><i class="fa fa-bar-chart-o green_color"></i> <span>Privacy Policy</span>
-                        </a>
-                     </li>
+                     <li><a href="terms_condition.html"><i class="fa fa-map purple_color2"></i> <span>Terms and Condition </span></a></li>
+                     <li><a href="privacy_policy.html"><i class="fa fa-bar-chart-o green_color"></i> <span>Privacy Policy</span></a></li>
                   </ul>
-               </div>
+               </div> 
                <!-- Sidebar -->
-            </nav>
-            <!-- end sidebar -->
+            </nav>{% endcomment %}
+            <!-- end sidebar --> 
             <!-- right content -->
-            <div id="content">
-               <!-- topbar -->
+             <div id="content">
+             {% comment %}  <!-- topbar -->
                <div class="topbar">
                   <nav class="navbar navbar-expand-lg navbar-light">
                      <div class="full">
@@ -117,97 +113,89 @@
                      </div>
                   </nav>
                </div>
-               <!-- end topbar -->
+               <!-- end topbar --> {% endcomment %}
                <!-- dashboard inner -->
-               <div class="midde_cont">
+               <div class="midde_cont mt-4">
                   <div class="container-fluid">
-                     <div class="row column_title">
-                        <div class="col-md-12">
-                           <div class="page_title">
-                              <h2>Frequently Asked Question </h2>
-                           </div>
-                        </div>
-                     </div>
+                    
                 <!--  -->
-                    <div class="row">
-                    <div class="white_shd full">
-                                  <div class="full graph_head">
+                     <div class="row">
+                       <div class="white_shd full">
+                              <div class="full graph_head">
                                  <div class="heading1 margin_0">
-                                    <h2>Add Frequently Asked Question </h2>
+                                    <h2>Faq</h2>
                                  </div>
                               </div>
-                                  <div class="customer-form">
-                                     <div class="row">
-                                       <div class="col-sm-12">
-                                         <div class="text-editor">
-                                <div class="cards-bodys houses">
-
-
-                                   <div class="text-editor">
-                                   <form method = "post">
-                                          <textarea id="myeditor" name="about"  class="form-control" rows="10" cols="80" Required></textarea>  
-
-                                        <div class="submits-btns mt-4">
-                                            <button type="button" class="btn btn-primary submit-btn">Submit</button>
-                                        </div>
-                                  </div>
-
-                                        <div class="fully-tables">
-                                         <div class="full graph_head">
-                                             <div class="heading1 margin_0">
-                                                <h2>View  Frequently Asked Question </h2>
-                                             </div>
-                                          </div>
-                                  <div class="datatabless mt-4 ">
-                                          <div class="header-cards mb-3">
-                                           <h4 style="color: white;">View  Frequently Asked Question  Invoice Management</h4>
-                                       </div>
-                                    <table id="example" class="display dataTable no-footer" style="width:100%;    border: 2px solid #20214f;" aria-describedby="example_info">
-                                        <thead>
-                                            <tr>
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="S no: activate to sort column descending" style="width: 25.375px !important;">S no</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Product Quantity: activate to sort column ascending" style="width: 404.812px;"> Frequently Asked Question  </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 40.453px;">Action</th></tr>
-                                        </thead>
-                                        <tbody>                                  
-                                        <tr class="odd">
-                                                <td class="sorting_1">1</td>
-                                                <td>A  Frequently Asked Question   is a statement or a legal document that states how a company or website collects, handles and processes data of its customers and visitors. It explicitly describes whether that information is kept confidential, or is shared with or sold to third parties</td>
-                                              <td>
-                                        <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Edit</a></button>
-                                         <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Delete</a></button>
-                                     </td>
-                                            </tr>
-                                            <tr class="even">
-                                                 <td class="sorting_1">2</td>
-                                                <td>A  Frequently Asked Question   is a statement or a legal document that states how a company or website collects, handles and processes data of its customers and visitors. It explicitly describes whether that information is kept confidential, or is shared with or sold to third parties</td>
-                                               <td>
-                                        <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Edit</a></button>
-                                         <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Delete</a></button>
-                                     </td>
-                                            </tr>
-                                               <tr class="odd">
-                                                <td class="sorting_1">1</td>
-                                                <td>A  Frequently Asked Question   is a statement or a legal document that states how a company or website collects, handles and processes data of its customers and visitors. It explicitly describes whether that information is kept confidential, or is shared with or sold to third parties</td>
-                                               <td>
-                                        <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Edit</a></button>
-                                         <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Delete</a></button>
-                                     </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                       </div>
-                                        </div>
-
-                                   </div> 
+                            <div class="users-forms">
+                            <div class="row">
+                               <div class="col-md-12">
+                                    <form action="{% url 'Faq'%}" method="post">
+                                       {% csrf_token %}
+                                 <div class="form-group row add-user">
+                                  <div class="form-group col-md-6">
+                                        {% comment %} <i class="fa fa-user icon-user"></i> {% endcomment %}
+                                     <label for="exampleInputPassword1">Question</label>
+                                     {{faq_form.question}}
+                                     {% comment %} <input type="text" class="form-control  user-fill"  name="question" id="user-add-form" placeholder="Question"> {% endcomment %}
                                    </div>
+                                    <div class="form-group col-md-6">
+                                        {% comment %} <i class="fa fa-mobile icon-user"></i> {% endcomment %}
+                                     <label for="exampleInputPassword1">Answer</label>
+                                     {{faq_form.answer}}
+                                   </div>
+                                  
+                                <div class="form-group col-md-12">
+                                   <button type="submit" class="btn btn-primary">Submit</button>
                                  </div>
-                                 </div>
-                  </div>         
-               </div>
-               <!--  -->
-                  </div>
+                              </div>
+                              </form>
+                               </div>
+                               
+                            </div>
+                            </div>
+                           </div>
+                     </div>
             <!--  -->
+            <div class="row mt-4">
+               <div class="white_shd full">
+                      <div class="full graph_head">
+                         <div class="heading1 margin_0">
+                            <h2>View Faq</h2>
+                         </div>
+                      </div>
+                    <div class="users-forms">
+                    <div class="row">
+                       <div class="col-md-12">
+                            <div class="user-table">
+                       <div class="datatables">
+                            <table id="example" class="display" style="width:100%;    border: 2px solid #20214f;">
+                                <thead>
+                                    <tr>
+                                        <th>S no</th>
+                                        <th>Question</th>
+                                        <th>Answer</th>
+                                       
+                                         <th>Action</th> 
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="even">
+                                        <td>1</td>
+                                        <td>Tiger Nixon</td>
+                                        <td>Nick john Nixon</td>
+                                        
+                                     <td>
+                                <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Edit</a></button>
+                                 <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Delete</a></button>
+                             </td>
+                                    </tr>
+                                    
+                                   
+                                </tbody>
+                                </table>
+                           </div>
+             </div>
+
                   </div>
                   <!-- footer -->
                      <div class="footer">
@@ -222,7 +210,7 @@
             </div>
          </div>
       </div>
-      <script src="js/jquery.min.js"></script>
+      {% comment %} <script src="js/jquery.min.js"></script>
       <script src="js/popper.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
       
@@ -241,40 +229,6 @@
       </script>
          <script src="js/custom.js"></script>
       <script src="js/chart_custom_style1.js"></script>
-
-    <!--TEXTEDITOR SCRIPT START -->
-  <script type="text/javascript" src="https://cdn.ckeditor.com/4.5.1/standard/ckeditor.js">
-     </script>
-     <script type="text/javascript">
-   //resize CKEditor with customised height and width
- CKEDITOR.editorConfig = function (config) {
-    config.language = 'es';
-    config.uiColor = '#F7B42C';
-    config.height = 300;
-    config.toolbarCanCollapse = true;
-
-};
-CKEDITOR.replace('myeditor');
-   </script>
-        <!-- TEXT EDITOR SCRIPT END -->
-        <!--DATATABLES SCRIPT START DATATABLES SCRIPT START DATATABLES SCRIPT START DATATABLES SCRIPT START -->
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-         <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-          <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
-           <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-             <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-              <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
-               <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
-        <script>
-            $(document).ready(function() {
-    $('#example').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-    } );
-} );
-        </script>
    </body>
-</html>
+</html> {% endcomment %}
+{% endblock %}

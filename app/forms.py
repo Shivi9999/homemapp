@@ -5,8 +5,8 @@ from django.core.exceptions import ValidationError
 class Userform(forms.ModelForm):
   class Meta:
     model=User
-    fields=['username','email','password','user_type']
-    exclude=['user_type']
+    fields=['username','email','password']
+   
     widgets = {
             
               #'user_id': ModelSelect2Widget(model=Add_user, search_fields=['User_Id__icontains']),
@@ -103,11 +103,17 @@ class NotificationForm(forms.ModelForm):
     )
 
 
+class Faqform(forms.ModelForm):
+    
+    class Meta:
+        model = Faq
+        fields = "__all__"
 
 
-class ExcelImportForm(forms.Form):
-    excel_file = forms.FileField(label='Select an Excel file')
-
-
+        widgets = {
+            
+            'question': forms.TextInput(attrs={'class': 'form-control'}),
+            'answer': forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
 

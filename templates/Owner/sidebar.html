@@ -4,14 +4,15 @@
     <div class="sidebar_blog_1">
        <div class="sidebar-header">
           <div class="logo_section">
-             <a href="index.html"><img class="logo_icon img-responsive" src="{%static 'images/logo/logo_icon.png'%}" alt="#" /></a>
+             <a href="{% url 'login' %}"><img class="logo_icon img-responsive" src="{%static 'images/logo/logo_icon.png'%}" alt="#" /></a>
           </div>
        </div>
        <div class="sidebar_user_info">
           <div class="icon_setting"></div>
-          <div class="user_profle_side">
+          <div class="user_profle_side"
+          >
              <div class="user_img">
-                <a href="index.html"><img class="img-responsive" src="{%static 'images/logo/logo.png'%}" alt="#"></a>
+                <a href="{% url 'user_dashboard' %}"><img class="img-responsive" src="{%static 'images/logo/logo.png'%}" alt="#"></a>
              </div>
           </div>
        </div>
@@ -20,7 +21,7 @@
     <div class="sidebar_blog_2">
        <ul class="list-unstyled components">
           <li class="active">
-             <a href="#dashboard">
+             <a href="{% url 'user_dashboard' %}">
                 <i class="fa fa-dashboard yellow_color"></i> 
                 <span>Dashboard</span>
              </a>
@@ -29,26 +30,26 @@
           <li>
              <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>User Management</span></a>
              <ul class="collapse list-unstyled" id="element">
-                <li><a href="user_management_add.html">> <span>Add User Management</span></a></li>
-                <li><a href="user_management_view.html">> <span>View User Managemen</span></a></li>
+                <li><a href="{% url 'Add_user_management' %}">> <span>Add User Management</span></a></li>
+                <li><a href="{% url 'View_user_management' %}">> <span>View User Management</span></a></li>
              </ul>
           </li>
 
              <li>
              <a href="#additional_page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-clone yellow_color"></i> <span>Room Management</span></a>
              <ul class="collapse list-unstyled" id="additional_page">
-                <li><a href="rooms_add_room.html">> <span> Add Rooms </span></a></li>
-                <li><a href="rooms_view_room.html">> <span> View Rooms </span></a></li>
+                <li><a href="{% url 'Add_room' %}">> <span> Add Rooms </span></a></li>
+                <li><a href="{% url 'View_room' %}">> <span> View Rooms </span></a></li>
              </ul>
           </li>
          
-           <li><a href="faq.html.html"><i class="fa fa-clock-o orange_color"></i> <span>Faq</span></a></li>
+           <li><a href="{% url 'Faq' %}"><i class="fa fa-clock-o orange_color"></i> <span>Faq</span></a></li>
           <li>
-             <a href="Notification.html">
+             <a href="{% url 'Notification_user' %}">
              <i class="fa fa-paper-plane red_color"></i> <span>Notification</span></a>
           </li>
-          <li><a href="terms_condition.html"><i class="fa fa-map purple_color2"></i> <span>Terms and Condition </span></a></li>
-          <li><a href="privacy_policy.html"><i class="fa fa-bar-chart-o green_color"></i> <span>Privacy Policy</span></a></li>
+          <li><a href="{% url 'Terms_condition_user' %}"><i class="fa fa-map purple_color2"></i> <span>Terms and Condition </span></a></li>
+          <li><a href="{% url 'Privacy_policy_user' %}"><i class="fa fa-bar-chart-o green_color"></i> <span>Privacy Policy</span></a></li>
        </ul>
     </div>
     <!-- Sidebar -->

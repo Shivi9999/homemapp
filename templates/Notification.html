@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <style>
 	/* styles.css */
@@ -11,7 +12,15 @@
 .custom-checkbox-list input {
     margin-right: 5px;
 }
-
+.dropdownu .user-selects {
+    position: relative;
+    left: 0px;
+    top: 0px;
+  }
+  ul.dropdown-menu.show {
+    width: 100%;
+    padding: 10px 10px;
+}
 </style>
     <div class="page-wrapper">
         <div class="content container-fluid">
@@ -27,9 +36,24 @@
                                 <form method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <div class="form-row">
-                                        <div class="form-group col-sm-6">
+                                        {% comment %} <div class="form-group col-sm-6">
                                             <label for="id_users">User</label>
                                             {{ form.users }}
+                                        </div> {% endcomment %}
+                                        <div class="form-group col-sm-6">
+                                            <div class="dropdown user-selects">
+                                                <label for="id_title">User</label>
+                                                <button class="btn btn-default text-left form-control dropdown-toggle" type="button" data-toggle="dropdown"><span class="dropdown-text"> Select Options</span>
+                                                <span class="caret"></span></button>
+                                                <ul class="dropdown-menu">
+                                                    {{ form.users }}
+                                                  {% comment %} <li><a href="#"><label><input type="checkbox" class="selectall" /><span class="select-text"> Select</span> All</label></a></li>
+                                                  <li class="divider"></li>
+                                                  <li><a class="option-link" href="#"><label><input name='options[]' type="checkbox" class="option justone" value='Option 1 '/> Option 1</label></a></li>
+                                                  <li><a href="#"><label><input name='options[]' type="checkbox" class="option justone" value='Option 2 '/> Option 2</label></a></li>
+                                                  <li><a href="#"><label><input name='options[]' type="checkbox" class="option justone" value='Option 3 '/> Option 3</label></a></li> {% endcomment %}
+                                                </ul>
+                                              </div>
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="id_title">Title</label>
@@ -39,6 +63,7 @@
                                             <label for="id_message">Message</label>
                                             {{ form.message }}
                                         </div>
+                                     
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
@@ -95,7 +120,7 @@
 
     <!-- DataTables Scripts -->
     
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    {% comment %} <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
@@ -111,5 +136,9 @@
                 ]
             });
         });
+    </script> {% endcomment %}
+    {% comment %} SELECT TAG DROPDOEWN SCRIPT START {% endcomment %}
+    <script src="{%static 'js/selects-dropdownss.js'%}">
+        
     </script>
 {% endblock %}
