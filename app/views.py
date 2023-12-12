@@ -22,6 +22,9 @@ def dashboard(request):
 
 
 def login(request):
+    # Print the entire session dictionary
+    print(request.session)
+
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -33,9 +36,21 @@ def login(request):
             messages.success(request, 'Login successful.')
 
             if user.user_type == '1':
-                return redirect('dashboard')  
+                # Access and print admin_session_id
+                request.session['admin_session_id'] = user.id
+                admin_session_id = request.session.get('admin_session_id')
+                print(f"Admin Session ID: {admin_session_id}")
+
+                return redirect('dashboard')  # Admin dashboard
+
             elif user.user_type == '2':
-                return redirect('user_dashboard') 
+                # Access and print user_session_id
+                request.session['user_session_id'] = user.id
+                user_session_id = request.session.get('user_session_id')
+                print(f"User Session ID: {user_session_id}")
+
+                return redirect('user_dashboard')  # User dashboard
+
         else:
             messages.error(request, 'Invalid username or password.')
 
@@ -43,12 +58,14 @@ def login(request):
 
 
 
-
 def logout_view(request):
+   # Clear the session
     logout(request)
-    # Optionally add a success message or perform other actions
-    return redirect('login')  # Redirect to your home page or any desired URL after logout
 
+    # Optionally, you can delete the sessionid cookie
+    response = redirect('login')
+    response.delete_cookie('sessionid')  # Replace 'your_logout_redirect_view' with the actual logout redirect view
+    return response
 
 
 
@@ -314,17 +331,24 @@ def profile(request):
     return render(request, 'profile.html', {'profile_form': profile_form,'form':form})
 
 
-@login_required(login_url='login')
+
 def manage_user_admin(request):
-    if request.method == 'GET':
-        username = request.GET.get('username')
-        password = request.GET.get('password')
+   
+    if request.method == 'GET' and 'email' in request.GET and 'password' in request.GET:
+        email = request.GET['email']
+        password = request.GET['password']
+        print('email',email)
 
-        if username and password:
-            # Remove manual authentication check and login code
-            return redirect('index')
+        print('password',password)
+        user = User.objects.get(email=email, password=password)
+        print('user',user)
+        if user is not None:
+            auth_login(request, user)
+            return redirect('user_dashboard')  # Redirect to your dashboard
+        else:
+            messages.error(request, 'Email or Password is invalid.')
 
-    return render(request, 'Owner/login.html')
+    return render(request, 'login.html')  # Render your template with the appropriate context
 
 
 def index(request):

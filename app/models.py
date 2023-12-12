@@ -36,13 +36,15 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     SUPERADMIN = '1'
     USER = '2'
+    Web_USER = '3'
   
     User_type=(
         ('Superadmin','SUPERADMIN'),
         ('User','USER'),
+        ('Web_user','Web_USER'),
     
     )
-    user_type_data = ((SUPERADMIN, "Superadmin"), (USER,"User"))
+    user_type_data = ((SUPERADMIN, "Superadmin"), (USER,"User"),(Web_USER,"Web_user"))
     user_type = models.CharField( choices=user_type_data, max_length=10,default='Superadmin')
     
     USERNAME_FIELD = 'email'
@@ -119,3 +121,13 @@ class Faq(models.Model):
     answer=models.CharField(max_length=2000)
     def __str__(self):
         return self.question
+
+
+
+class Add_user(models.Model):
+    user=models.OneToOneField("User", verbose_name=("add_users"), on_delete=models.CASCADE)
+    address=models.CharField( max_length=50)
+    mobile=models.CharField(max_length=12)
+    user_image=models.ImageField(upload_to='user_img', max_length=100)
+    def __str__(self):
+        return self.user.username

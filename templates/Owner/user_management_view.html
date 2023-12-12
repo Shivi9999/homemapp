@@ -131,7 +131,7 @@
                        <div class="white_shd full">
                               <div class="full graph_head">
                                  <div class="heading1 margin_0">
-                                    <h2>Extra Area Chart</h2>
+                                    <h2>  View User Management</h2>
                                  </div>
                               </div>
                             <div class="users-forms">
@@ -144,32 +144,33 @@
                                             <tr>
                                                 <th>S no</th>
                                                 <th>Username</th>
-                                                <th>Full Name</th>
+                                               
                                                 <th>Email </th>
                                                 <th>Number</th>
-                                                <th>Password</th>
+                                               
                                                 <th>Address</th>
-                                                <th>Gender</th>
+                                                <th>Profile Image </th>
+                                               
                                                  <th>Action</th> 
                                             </tr>
                                         </thead>
                                         <tbody>
+                                          {% for usr in user_management %}
                                             <tr class="even">
-                                                <td>1</td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Nick john Nixon</td>
-                                                 <td>abc@gmail.com</td>
-                                                <td>9876543210</td> 
-                                                <td>**************</td>
-                                                <td>new jersey london</td>
-                                                <td>Male</td>
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{usr.user.username}}</td>
+                                                <td>{{usr.user.email}}</td>
+                                                <td>{{usr.mobile}}</td>
+                                                <td>{{usr.address}}</td> 
+                                                
+                                                <td><img src="{{ usr.user_image.url }}" alt="User Image" style="max-width: 100px;" ></td>
                                              <td>
-                                        <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Edit</a></button>
-                                         <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Delete</a></button>
+                                        <button class="btn btn-primary mb-2"><a class="edit-btn" href="{% url 'edit_user' id=usr.id %}">Edit</a></button>
+                                         <button class="btn btn-primary mb-2"><a class="edit-btn" href="{% url 'delete_user' id=usr.id %}">Delete</a></button>
                                      </td>
                                             </tr>
                                             
-                                           
+                                           {% endfor %}
                                         </tbody>
                                         </table>
                                    </div>

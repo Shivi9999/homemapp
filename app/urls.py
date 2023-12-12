@@ -5,6 +5,7 @@ urlpatterns = [
     path('',views.dashboard,name='dashboard'),
    
     path('login',views.login,name='login'),
+
     path('Logout',views.logout_view,name='logout'),
     path('Add_property_owner',views.add_property_owner,name='add_property_owner'),
     path('View_property_owner',views.view_property_owner,name='view_property_owner'),
@@ -33,19 +34,22 @@ urlpatterns = [
     path('delete_privacy_policy/<int:id>/', views.delete_privacy_policy, name='delete_privacy_policy'),
 
 
-################  USER VIEWS ###################
+    ################  USER VIEWS ###################
 
- path('user_dashboard',user_views.user_dashboard,name='user_dashboard'),
- path('logout',user_views.logout_view_user,name='logout'),
- path('Add_user_management',user_views.add_user_management,name='Add_user_management'),
- path('View_user_management',user_views.view_user_management,name='View_user_management'),
- path('Add_room',user_views.add_room,name='Add_room'),
- path('View_room',user_views.view_room,name='View_room'),
- path('Faq',user_views.faq_view,name='Faq'),
- path('Terms_condition_user',user_views.terms_condition_user,name='Terms_condition_user'),
- path('Notification_user',user_views.Notification_user,name='Notification_user'),
- path('Privacy_policy_user',user_views.privacy_policy_user,name='Privacy_policy_user'),
- path('Profile_user',user_views.profile_user,name='Profile_user'),
+    path('user_dashboard',user_views.user_dashboard,name='user_dashboard'),
+    
+  
+    path('Add_user_management',user_views.add_user_management,name='Add_user_management'),
+    path('View_user_management',user_views.view_user_management,name='View_user_management'),
+    path('Add_room',user_views.add_room,name='Add_room'),
+    path('View_room',user_views.view_room,name='View_room'),
+    path('Edit_user/<int:id>',user_views.edit_user,name='edit_user'),
+    path('Delete_user/<int:id>',user_views.delete_user,name='delete_user'),
+    path('Faq',user_views.faq_view,name='Faq'),
+    path('Terms_condition_user',user_views.terms_condition_user,name='Terms_condition_user'),
+    path('Notification_user',user_views.Notification_user,name='Notification_user'),
+    path('Privacy_policy_user',user_views.privacy_policy_user,name='Privacy_policy_user'),
+    path('Profile_user',user_views.profile_user,name='Profile_user'),
 
 
 

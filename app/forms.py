@@ -117,3 +117,20 @@ class Faqform(forms.ModelForm):
         }
 
 
+class Add_userform(forms.ModelForm):
+  class Meta:
+    model=Add_user
+    fields=['address','mobile','user_image']
+    widgets = {
+           
+            #'user_id': ModelSelect2Widget(model=Add_user, search_fields=['User_Id__icontains']),
+          
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+          
+            
+            
+        }
+  mobile = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'class': 'form-control'})
+          # Set this to True if mobile is a required field
+    )

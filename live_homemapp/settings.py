@@ -50,7 +50,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
+
+
+
+
+
+ 
+
+
+
 
 ROOT_URLCONF = 'live_homemapp.urls'
 
@@ -123,6 +133,18 @@ AUTH_USER_MODEL='app.User'
 
 STATIC_URL = 'static/'
 STATIC_ROOT = 'staticfiles'
+
+
+# # settings.py
+
+# # Set a unique session name for the admin panel
+# ADMIN_SESSION_NAME = 'admin_session_id'
+# SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Or any other session engine
+
+# # Set a unique session name for the user panel
+# USER_SESSION_NAME = 'user_session_id'
+
+
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")

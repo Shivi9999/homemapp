@@ -150,62 +150,36 @@
                             <div class="users-forms">
                             <div class="row">
                                <div class="col-md-7">
-                                    <form action="{% url 'Add_user_management'%}" method="post" enctype="multipart/form-data" nonvalidate>
+                                    <form  method="post" enctype="multipart/form-data" nonvalidate>
                                      {% csrf_token %}
                                  <div class="form-group row add-user">
                                   <div class="form-group col-md-12">
                                         <i class="fa fa-user icon-user"></i>
                                      <label for="exampleInputPassword1">Name</label>
-                                     {{form.username}}
-                                     {% if form.username.errors %}
-													<ul>
-														{% for error in form.username.errors %}
-															<li>{{ error }}</li>
-															
-														{% endfor %}
-													</ul>
-											    {% endif %}
+                                     {{user_form.username}}
+                                   
                                    </div>
                                     
                                     <div class="form-group col-md-6 ">
                                         <i class="fa fa-envelope icon-user"></i>
                                      <label for="exampleInputPassword1">Email</label>
                                      {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder="Email"> {% endcomment %}
-                                     {{form.email}}
-                                     {% if form.email.errors %}
-													<ul class="error-list">
-														{% for error in form.email.errors %}
-															<li>{{ error }}</li>
-															
-														{% endfor %}
-													</ul>
-											    {% endif %}
+                                     {{user_form.email}}
+                                    
                                    </div>
-                                    <div class="form-group col-md-6">
-                                       <i class="fa fa-key icon-user"></i>
-                                        <label for="exampleInputPassword1">Password</label>
-                                       {{form.password}}
-                                       {% if form.password.errors %}
-													<ul>
-														{% for error in form.password.errors %}
-															<li>{{ error }}</li>
-															
-														{% endfor %}
-													</ul>
-											    {% endif %}
-                                    </div>
+                                   <div class="form-group col-md-6" style="display: none;" >
+                                    <i class="fa fa-user icon-user"></i> 
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="text" class="form-control user-fill" name="password" id="user-add-form" value="{{ user_form.password.value }}">
+                                </div>
+                                
+                                    
                                     <div class="form-group col-md-12">
                                        <i class="fa fa-mobile icon-user"></i>
                                     <label for="exampleInputPassword1">Mobile</label>
-                                     {{user_form.mobile}}
-                                     {% if user_form.mobile.errors %}
-                                     <ul>
-                                        {% for error in user_form.mobile.errors %}
-                                           <li>{{ error }}</li>
-                                           
-                                        {% endfor %}
-                                     </ul>
-                                   {% endif %}
+                                     {{property_form.mobile}}
+                                     
+                                    
                                     {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder="Name"> {% endcomment %}
                                   </div>
                                    
@@ -213,30 +187,15 @@
                                         <i class="fa fa-envelope icon-user"></i>
                                      <label for="exampleInputPassword1">Address</label>
                                      {% comment %} <textarea type="text" class="form-control  user-fill" id="user-add-form" placeholder="Enter Your Address"></textarea> {% endcomment %}
-                                     {{user_form.address}}
-                                     {% if user_form.address.errors %}
-                                     <ul>
-                                        {% for error in user_form.address.errors %}
-                                           <li>{{ error }}</li>
-                                           
-                                        {% endfor %}
-                                     </ul>
-                                   {% endif %}
+                                     {{property_form.address}}
                                    </div>
 
                                    <div class="form-group col-md-12">
                                     
                                  <label for="exampleInputPassword1"> Profile Image</label>
                                  {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder="Name"> {% endcomment %}
-                                 {{user_form.user_image}}
-                                 {% if user_form.user_image.errors %}
-                                     <ul>
-                                        {% for error in user_form.user_image.errors %}
-                                           <li>{{ error }}</li>
-                                           
-                                        {% endfor %}
-                                     </ul>
-                                   {% endif %}
+                                 {{property_form.user_image}}
+                              
                                </div>
                                 <div class="form-group col-md-12">
                                    <button type="submit" class="btn btn-primary">Submit</button>
