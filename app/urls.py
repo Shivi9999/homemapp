@@ -53,6 +53,8 @@ urlpatterns = [
     path('Notification_user',user_views.Notification_user,name='Notification_user'),
     path('Privacy_policy_user',user_views.privacy_policy_user,name='Privacy_policy_user'),
     path('Profile_user',user_views.profile_user,name='Profile_user'),
+    path('update_personal_details_user',user_views.update_personal_details_user,name='update_personal_details_user'),
+    path('change_password_user',user_views.change_password_user,name='change_password_user'),
 
 
 

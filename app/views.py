@@ -397,6 +397,8 @@ def update_personal_details(request):
 
     return redirect('profile')
 
+
+
 @login_required(login_url='login')
 def change_password(request):
     if request.method == 'POST':

@@ -211,4 +211,48 @@ def Notification_user(request):
 
 @login_required(login_url='login_user')
 def profile_user(request):
-    return render(request,'Owner/profile.html')
+    # Retrieve the PropertyOwner instance related to the logged-in user
+    owner_profile = get_object_or_404(PropertyOwner, user=request.user)
+
+    profile_form = Userform(instance=request.user)
+    owner_form = PropertyForm(instance=owner_profile)
+
+    form = CustomPasswordChangeForm(user=request.user)
+
+    return render(request, 'Owner/profile.html', {'profile_form': profile_form, 'form': form, 'owner_form': owner_form})
+
+
+@login_required(login_url='login_user')
+def update_personal_details_user(request):
+    if request.method == 'POST':
+       
+        property_owner = get_object_or_404(PropertyOwner, user=request.user)
+
+        # Create the forms with modified POST data
+        profile_form = Userform( instance=request.user)
+        owner_form = PropertyForm( instance=property_owner)
+
+        if profile_form.is_valid() and owner_form.is_valid():
+            # Save the forms without updating the password
+            owner_form.save()
+            profile_form.save()
+            messages.success(request, 'Personal details updated successfully!')
+        else:
+            print(profile_form.errors)
+            print(owner_form.errors)
+            messages.error(request, 'Error updating personal details. Please check the form.')
+
+    return redirect('Profile_user')
+
+
+@login_required(login_url='login_user')
+def change_password_user(request):
+    if request.method == 'POST':
+        form = CustomPasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Password changed successfully!')
+        else:
+            messages.error(request, 'Error changing password. Please check the form.')
+
+    return redirect('Profile_user')
