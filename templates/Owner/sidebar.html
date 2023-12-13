@@ -26,6 +26,22 @@
                 <span>Dashboard</span>
              </a>
          </li> 
+
+         <li>
+            <a href="#hotels" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>Hotel Management</span></a>
+            <ul class="collapse list-unstyled" id="hotels">
+               <li><a href="{% url 'Add_hotel_management' %}">> <span>Add Hotel Management</span></a></li>
+               <li><a href="{% url 'view_hotel_management' %}">> <span>View Hotel Management</span></a></li>
+            </ul>
+         </li>
+
+         <li>
+            <a href="#property" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span> property Management</span></a>
+            <ul class="collapse list-unstyled" id="property">
+               <li><a href="{% url 'add_property_management' %}">> <span>Add property Management</span></a></li>
+               <li><a href="{% url 'view_property_management' %}">> <span>View property Management</span></a></li>
+            </ul>
+         </li>
         
           <li>
              <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>User Management</span></a>

@@ -59,12 +59,9 @@
                       <button class="btn mt-1 mb-1 btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						{% comment %} <a class="dropdown-item" onclick="updatetandc('{{ tandc.id }}', {{ tandc.terms|json_script }})" >Edit</a> {% endcomment %}
-            <a class="dropdown-item" onclick="updatetandc('{{ privac.privacy_policy|escapejs }}', '{{ privac.id }}')">Edit</a>
+            <a class="dropdown-item" onclick="updatetandc('{{ privac.privacy_policy|escapejs }}', '{{ privac.id }}')"> <i class="fa fa-edit"></i>  Edit</a>
 
-
-
-
-                        <a class="dropdown-item" href="{% url 'delete_privacy_policy' id=privac.id %}">Delete</a>
+                        <a class="dropdown-item" href="{% url 'delete_privacy_policy' id=privac.id %}"> <i class="fa fa-trash"></i>  Delete</a>
                       </div>
                     </div>
                   </td>

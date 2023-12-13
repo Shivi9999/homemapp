@@ -178,8 +178,9 @@
                                                 <td>
 													<a class="edit-btn" href="{% url 'edit_property_owner' id=owner.id %}">
                                                  <button class="btn btn-primary">Edit</button></a>
-												 <a class="edit-btn" href="{% url 'delete_property_owner' id=owner.id %}"><button class="btn btn-primary">Delete</button></a>
-                                              </td>
+												 <a class="edit-btn" href="{% url 'delete_property_owner' id=owner.id %}"><button class="btn btn-primary">Delete</button></a> <br>
+												 <a class="edit-btn" href="#"><button class="btn btn-dark">Manage</button></a>
+												</td>
 											 
                                             </tr>
                                              {% endfor %}                      

@@ -43,13 +43,7 @@ def login(request):
 
                 return redirect('dashboard')  # Admin dashboard
 
-            elif user.user_type == '2':
-                # Access and print user_session_id
-                request.session['user_session_id'] = user.id
-                user_session_id = request.session.get('user_session_id')
-                print(f"User Session ID: {user_session_id}")
-
-                return redirect('user_dashboard')  # User dashboard
+           
 
         else:
             messages.error(request, 'Invalid username or password.')
@@ -107,6 +101,13 @@ def add_property_owner(request):
 def view_property_owner(request):
     property_owners = PropertyOwner.objects.all()
     return render(request, 'Pro_view__Property.html', {'property_owners': property_owners})
+
+
+
+
+def forget_password(request):
+   
+    return render(request, 'forget_pass.html')
 
 
 @login_required(login_url='login')

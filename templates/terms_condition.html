@@ -59,12 +59,9 @@
                       <button class="btn mt-1 mb-1 btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						{% comment %} <a class="dropdown-item" onclick="updatetandc('{{ tandc.id }}', {{ tandc.terms|json_script }})" >Edit</a> {% endcomment %}
-            <a class="dropdown-item" onclick="updatetandc('{{ tandc.terms_condition|escapejs }}', '{{ tandc.id }}')">Edit</a>
-
-
-
-
-                        <a class="dropdown-item" href="{% url 'delete_terms_condition' id=tandc.id %}">Delete</a>
+            <a class="dropdown-item" onclick="updatetandc('{{ tandc.terms_condition|escapejs }}', '{{ tandc.id }}')"> <i class="fa fa-edit"></i>   Edit</a>
+                        <hr>
+                        <a class="dropdown-item" href="{% url 'delete_terms_condition' id=tandc.id %}"> <i class="fa fa-trash"></i>  Delete</a>
                       </div>
                     </div>
                   </td>

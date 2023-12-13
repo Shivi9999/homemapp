@@ -3,23 +3,21 @@ from . import views,user_views
 urlpatterns = [
     
     path('',views.dashboard,name='dashboard'),
-   
     path('login',views.login,name='login'),
-
-    path('Logout',views.logout_view,name='logout'),
-    path('Add_property_owner',views.add_property_owner,name='add_property_owner'),
-    path('View_property_owner',views.view_property_owner,name='view_property_owner'),
+    path('logout',views.logout_view,name='logout'),
+    path('add_property_owner',views.add_property_owner,name='add_property_owner'),
+    path('view_property_owner',views.view_property_owner,name='view_property_owner'),
     path('property_owner/edit/<int:id>/', views.edit_property_owner, name='edit_property_owner'),
     path('property_owner/delete/<int:id>/', views.delete_property_owner, name='delete_property_owner'),
-    path('Add_question',views.add_question,name='add_question'),
-    path('View_question',views.view_question,name='view_question'),
+    path('add_question',views.add_question,name='add_question'),
+    path('view_question',views.view_question,name='view_question'),
     path('Edit_question/<int:id>/',views.edit_question,name='Edit_question'),
     path('Delete_question/<int:id>/',views.delete_question,name='Delete_question'),
-    path('Add_manage_property',views.add_manage_property,name='add_manage_property'),
-    path('View_manage_property',views.view_manage_property,name='view_manage_property'),
-    path('Notification',views.notification,name='notification'),
-    path('Privacy_Policy',views.privacy,name='privacy_policy'),
-    path('Terms_Condition',views.terms_condition,name='terms_condition'),
+    path('add_manage_property',views.add_manage_property,name='add_manage_property'),
+    path('view_manage_property',views.view_manage_property,name='view_manage_property'),
+    path('notification',views.notification,name='notification'),
+    path('privacy_policy',views.privacy,name='privacy_policy'),
+    path('terms_condition',views.terms_condition,name='terms_condition'),
     path('profile',views.profile,name='profile'),
     path('manage_user_admin/', views.manage_user_admin, name='manage_user_admin'),
     path('index/', views.index, name='index'),
@@ -37,8 +35,13 @@ urlpatterns = [
     ################  USER VIEWS ###################
 
     path('user_dashboard',user_views.user_dashboard,name='user_dashboard'),
-    
-  
+    path('login_user',user_views.login_user,name='login_user'),
+    path('forget_password',views.forget_password,name='forget_password'),
+    path('logout_user',user_views.logout_view_user,name='logout_user'),
+    path('Add_hotel_management',user_views.add_hotel_management,name='Add_hotel_management'),
+    path('view_hotel_management',user_views.view_hotel_management,name='view_hotel_management'),
+    path('add_property_management',user_views.add_property_management,name='add_property_management'),
+    path('view_property_management',user_views.view_property_management,name='view_property_management'),
     path('Add_user_management',user_views.add_user_management,name='Add_user_management'),
     path('View_user_management',user_views.view_user_management,name='View_user_management'),
     path('Add_room',user_views.add_room,name='Add_room'),

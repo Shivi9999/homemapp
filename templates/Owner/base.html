@@ -12,7 +12,11 @@
       <meta name="description" content="">
       <meta name="author" content="">
      <link rel="icon" href="{%static 'images/fevicon.png'%}" type="image/png" />
-     
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+
       <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}" />
       <link rel="stylesheet" href="{%static 'style.css'%}" />
       
@@ -46,9 +50,25 @@
    <script src="{%static 'js/Chart.bundle.min.js'%}"></script>
    <script src="{%static 'js/utils.js'%}"></script>
    <script src="{%static 'js/analyser.js'%}"></script>
-   <script>
-      new DataTable('#example');
-  </script>
+     <!--DATATABLES SCRIPT START DATATABLES SCRIPT START DATATABLES SCRIPT START DATATABLES SCRIPT START -->
+     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+      <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+          <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+           <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+    <script>
+        $(document).ready(function() {
+$('#example').DataTable( {
+    dom: 'Bfrtip',
+    buttons: [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+    ]
+} );
+} );
+    </script>
    <script src="{%static 'js/perfect-scrollbar.min.js'%}"></script>
    <script>
       var ps = new PerfectScrollbar('#sidebar');
@@ -57,6 +77,9 @@
    <script src="{%static 'js/chart_custom_style1.js'%}"></script>
    <script type="text/javascript" src="https://cdn.ckeditor.com/4.5.1/standard/ckeditor.js">
    </script>
+
+
+
    <script type="text/javascript">
  //resize CKEditor with customised height and width
 CKEDITOR.editorConfig = function (config) {
@@ -68,4 +91,38 @@ CKEDITOR.editorConfig = function (config) {
 };
 CKEDITOR.replace('myeditor');
  </script>
+
+ <!-- SELECT DROPDOWN CHECKBOX SCRIPT START  -->
+<script>
+   $('body').on("click", ".dropdown-menu", function (e) {
+       $(this).parent().is(".open") && e.stopPropagation();
+   });
+   
+   $('.selectall').click(function() {
+       if ($(this).is(':checked')) {
+           $('.option').prop('checked', true);
+           var total = $('input[name="options[]"]:checked').length;
+           $(".dropdown-text").html('(' + total + ') Selected');
+           $(".select-text").html(' Deselect');
+       } else {
+           $('.option').prop('checked', false);
+           $(".dropdown-text").html('(0) Selected');
+           $(".select-text").html(' Select');
+       }
+   });
+   
+   $("input[type='checkbox'].justone").change(function(){
+       var a = $("input[type='checkbox'].justone");
+       if(a.length == a.filter(":checked").length){
+           $('.selectall').prop('checked', true);
+           $(".select-text").html(' Deselect');
+       }
+       else {
+           $('.selectall').prop('checked', false);
+           $(".select-text").html(' Select');
+       }
+     var total = $('input[name="options[]"]:checked').length;
+     $(".dropdown-text").html('(' + total + ') Selected');
+   });
+   </script>
 </html>

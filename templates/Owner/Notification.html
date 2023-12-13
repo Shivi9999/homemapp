@@ -1,6 +1,31 @@
 {% extends 'Owner/base.html' %}
 
 {% block content %}
+<style>
+	/* styles.css */
+.custom-checkbox-list label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: normal;
+}
+
+.custom-checkbox-list input {
+    margin-right: 5px;
+}
+.dropdownu .user-selects {
+    position: relative;
+    left: 0px;
+    top: 0px;
+  }
+  ul.dropdown-menu.show {
+    width: 100%;
+    padding: 10px 10px;
+}
+ul.dropdown-menu.show li a label {
+    color: black;
+    text-transform: capitalize;
+}
+</style>
 <body class="dashboard dashboard_1">
    <div class="full_container">
       <div class="inner_container">
@@ -27,24 +52,24 @@
                             <div class="col-md-12">
                               <form method="post" enctype="multipart/form-data">
                                  {% csrf_token %}
-                                 <div class="form-row">
+                                 <div class="form-row add-user">
                                      {% comment %} <div class="form-group col-sm-6">
                                          <label for="id_users">User</label>
                                          {{ form.users }}
                                      </div> {% endcomment %}
-                                     <div class="form-group col-sm-6">
+                                     {% comment %} <div class="form-group col-sm-6">
                                          <div class="dropdown user-selects">
                                              <label for="id_title">User</label>
                                              <button class="btn btn-default text-left form-control dropdown-toggle" type="button" data-toggle="dropdown"><span class="dropdown-text"> Select Options</span>
                                              <span class="caret"></span></button>
                                              <ul class="dropdown-menu">
-                                                 {{ form.users }}
+                                                 {{ form.users }} {% endcomment %}
                                                {% comment %} <li><a href="#"><label><input type="checkbox" class="selectall" /><span class="select-text"> Select</span> All</label></a></li>
                                                <li class="divider"></li>
                                                <li><a class="option-link" href="#"><label><input name='options[]' type="checkbox" class="option justone" value='Option 1 '/> Option 1</label></a></li>
                                                <li><a href="#"><label><input name='options[]' type="checkbox" class="option justone" value='Option 2 '/> Option 2</label></a></li>
                                                <li><a href="#"><label><input name='options[]' type="checkbox" class="option justone" value='Option 3 '/> Option 3</label></a></li> {% endcomment %}
-                                             </ul>
+                                             {% comment %} </ul>
                                            </div>
                                      </div>
                                      <div class="form-group col-sm-6">
@@ -54,8 +79,39 @@
                                      <div class="form-group col-sm-12">
                                          <label for="id_message">Message</label>
                                          {{ form.message }}
-                                     </div>
-                                  
+                                     </div> {% endcomment %}
+                                     <div class="form-group col-md-12">
+                                      <i class="fa fa-user icon-user" style="
+                                      left: 7px;
+                                  "></i>
+                                   <label for="exampleInputPassword1">Select Properties</label>
+                                   <select id="roomnames" name="room" class="form-control user-fill">
+                                     <option value="rooms">Room Items</option>
+                                     <option value="rooms">Room Items</option>
+                                     <option value="rooms">Room Items</option>
+                                     <option value="rooms">Room Items</option>
+                                     <option value="rooms">Room Items</option>
+                                     <option value="rooms">Room Items</option>
+                                     <option value="rooms">Room Items</option>
+                                  </select>
+                                 </div>
+
+                                 <div class="form-group col-sm-12">
+                                  <div class="dropdown user-selects">
+                                      <label for="id_title">User</label>
+                                      <button class="btn btn-default border text-left form-control dropdown-toggle" type="button" data-toggle="dropdown"><span class="dropdown-text"> Select Options</span>
+                                      <span class="caret"></span></button>
+                                      <ul class="dropdown-menu">
+                                          {% comment %} {{ form.users }} {% endcomment %}
+                                   <li><a href="#"><label><input type="checkbox" class="selectall" /><span class="select-text"> Select</span> All</label></a></li>
+                                        <li class="divider"></li>
+                                        <li><a class="option-link" href="#"><label><input name='options[]' type="checkbox" class="option justone" value='Option 1 '/> Option 1</label></a></li>
+                                        <li><a href="#"><label><input name='options[]' type="checkbox" class="option justone" value='Option 2 '/> Option 2</label></a></li>
+                                        <li><a href="#"><label><input name='options[]' type="checkbox" class="option justone" value='Option 3 '/> Option 3</label></a></li>
+                                      </ul>
+                                    </div>
+                              </div>
+
                                  </div>
                                  <button type="submit" class="btn btn-primary">Submit</button>
                              </form>

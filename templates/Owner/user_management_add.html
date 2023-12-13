@@ -153,6 +153,24 @@
                                     <form action="{% url 'Add_user_management'%}" method="post" enctype="multipart/form-data" nonvalidate>
                                      {% csrf_token %}
                                  <div class="form-group row add-user">
+                                    <div class="form-group col-md-12">
+                                       <i class="fa fa-user icon-user"></i>
+                                    <label for="exampleInputPassword1">Select Properties</label>
+                                    <select id="roomnames" name="room" class="form-control user-fill">
+                                      <option value="rooms">Room Items</option>
+                                      <option value="rooms">Room Items</option>
+                                      <option value="rooms">Room Items</option>
+                                      <option value="rooms">Room Items</option>
+                                      <option value="rooms">Room Items</option>
+                                      <option value="rooms">Room Items</option>
+                                      <option value="rooms">Room Items</option>
+                                   </select>
+                                  </div>
+                                  <div class="form-group col-md-12">
+                                    <i class="fa fa-user icon-user"></i>
+                                 <label for="exampleInputPassword1"> Room No</label>
+                                 <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Items Name">
+                               </div>
                                   <div class="form-group col-md-12">
                                         <i class="fa fa-user icon-user"></i>
                                      <label for="exampleInputPassword1">Name</label>
@@ -225,19 +243,12 @@
                                    </div>
 
                                    <div class="form-group col-md-12">
+                                    <i class="fa fa-user icon-user"></i>
+                                    <label for="exampleInputPassword1"> Profile Image</label><br>
                                     
-                                 <label for="exampleInputPassword1"> Profile Image</label>
-                                 {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder="Name"> {% endcomment %}
-                                 {{user_form.user_image}}
-                                 {% if user_form.user_image.errors %}
-                                     <ul>
-                                        {% for error in user_form.user_image.errors %}
-                                           <li>{{ error }}</li>
-                                           
-                                        {% endfor %}
-                                     </ul>
-                                   {% endif %}
-                               </div>
+                                    <input type="file" name="user_image" class="form-control" accept="image/*" required="" id="id_user_image">
+                                    
+                                  </div>
                                 <div class="form-group col-md-12">
                                    <button type="submit" class="btn btn-primary">Submit</button>
                                  </div>
@@ -245,7 +256,7 @@
                               </form>
                                </div>
                                <div class="col-md-4">
-                                  <div class="full-img">
+                                  <div class="full-img" style="padding: 35% 0px;">
                                      <img src="{%static  'images/customer-img.png' %}">
                                   </div>
                                </div>

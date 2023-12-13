@@ -2,7 +2,15 @@
 {% block content %}
 {% load static %}
 
-	
+<style>
+	input#id_old_password, input#id_new_password1, input#id_new_password2 {
+		width: 100%;
+		background: white;
+		padding: 5px 5px;
+		border-radius: 3px;
+		border: 2px solid lightgrey;
+	}
+</style>	
 		<!-- Main Wrapper -->
         <div class="main-wrapper">
 		
@@ -231,17 +239,17 @@
 														{% csrf_token %}
 														<div class="row ">
 														<div class="form-group col-lg-6">
-															<label>Old Password</label>
+															<label>Old Password</label><br>
 															{{form.old_password}}
 															{% comment %} <input type="password" name='old_password' class="form-control"> {% endcomment %}
 														</div>
 														<div class="form-group col-lg-6">
-															<label>New Password</label>
+															<label>New Password</label><br>
 															{{form.new_password1}}
 															{% comment %} <input type="password" name='new_password' class="form-control"> {% endcomment %}
 														</div>
 														<div class="form-group col-lg-12">
-															<label>Confirm Password</label>
+															<label>Confirm Password</label><br>
 															{{form.new_password2}}
 															{% comment %} <input type="password" name='confirm_password' class="form-control"> {% endcomment %}
 														</div>

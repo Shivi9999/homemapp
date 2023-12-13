@@ -7,14 +7,51 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,logout, login as auth_login
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_user')
 def user_dashboard(request):
     return render(request,'Owner/index.html')
 
 
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_user')
+def add_hotel_management(request):
+    
+           
+   
+    return render(request,'Owner/hotel_Add_management.html')
+
+
+@login_required(login_url='login_user')
+def view_hotel_management(request):
+    
+           
+   
+    return render(request,'Owner/hotel_Add_management.html')
+
+
+@login_required(login_url='login_user')
+def add_property_management(request):
+    
+           
+   
+    return render(request,'Owner/view_hotel_managment.html')
+
+
+
+@login_required(login_url='login_user')
+def view_property_management(request):
+    
+           
+   
+    return render(request,'Owner/View_property_managment.html')
+
+
+
+
+
+
+@login_required(login_url='login_user')
 def add_user_management(request):
     if request.method == "POST":
         form = Userform(request.POST)
@@ -48,12 +85,12 @@ def add_user_management(request):
    
     return render(request,'Owner/user_management_add.html',{'form': form,'user_form': user_form})
 
-@login_required(login_url='login')    
+@login_required(login_url='login_user')    
 def view_user_management(request):
     user_management=Add_user.objects.all()
     return render(request,'Owner/user_management_view.html',{'user_management':user_management})
 
-@login_required(login_url='login')
+@login_required(login_url='login_user')
 def edit_user(request, id):
     property_owner = get_object_or_404(Add_user, pk=id)
 
@@ -78,7 +115,7 @@ def edit_user(request, id):
   
     return render(request, 'Owner/edit_user.html', {'user_form': user_form, 'property_form': property_form})
 
-@login_required(login_url='login')
+@login_required(login_url='login_user')
 def delete_user(request, id):
     user1 = get_object_or_404(Add_user, pk=id)
     
@@ -92,19 +129,56 @@ def delete_user(request, id):
 
 
 
+def login_user(request):
+    # Print the entire session dictionary
+    print(request.session)
+
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+
+        user = authenticate(request, email=email, password=password)
+
+        if user is not None:
+            auth_login(request, user)
+            messages.success(request, 'Login successful.')
+
+           
+
+            if user.user_type == '2':
+                # Access and print user_session_id
+                request.session['user_session_id'] = user.id
+                user_session_id = request.session.get('user_session_id')
+                print(f"User Session ID: {user_session_id}")
+
+                return redirect('user_dashboard')  # User dashboard
+
+        else:
+            messages.error(request, 'Invalid username or password.')
+
+    return render(request, 'Owner/login.html')
 
 
 
+def logout_view_user(request):
+   # Clear the session
+    logout(request)
 
-@login_required(login_url='login')    
+    # Optionally, you can delete the sessionid cookie
+    response = redirect('login_user')
+    response.delete_cookie('sessionid')  # Replace 'your_logout_redirect_view' with the actual logout redirect view
+    return response
+
+
+@login_required(login_url='login_user')    
 def add_room(request):
     return render(request,'Owner/rooms_add_room.html')
 
-@login_required(login_url='login')
+@login_required(login_url='login_user')
 def view_room(request):
     return render(request,'Owner/rooms_view_room.html')
 
-@login_required(login_url='login')
+@login_required(login_url='login_user')
 def faq_view(request):
    
     if request.method=="POST":
@@ -120,21 +194,21 @@ def faq_view(request):
     faq=Faq.objects.all()      
     return render(request,'Owner/faq.html',{'faq_form':faq_form,'faq':faq})
 
-@login_required(login_url='login')
+@login_required(login_url='login_user')
 def terms_condition_user(request):
     terms_data = TermsCondition.objects.all()
     return render(request,'Owner/terms_condition.html',{'terms_data':terms_data})
 
-@login_required(login_url='login')
+@login_required(login_url='login_user')
 def privacy_policy_user(request):
     fetch_privacy=PrivacyPolicy.objects.all()
     return render(request,'Owner/privacy_policy.html',{'fetch_privacy':fetch_privacy})
 
-@login_required(login_url='login')
+@login_required(login_url='login_user')
 def Notification_user(request):
     return render(request,'Owner/Notification.html')
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_user')
 def profile_user(request):
     return render(request,'Owner/profile.html')

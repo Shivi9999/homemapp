@@ -597,9 +597,11 @@ a:focus {
     cursor: pointer;
     float: left;
 }
+
 .sidebar_toggle i.fa.fa-bars {
     color: black;
 }
+
 .icon_info span.badge {
     font-size: 10px;
     line-height: 16px;
@@ -725,7 +727,7 @@ span {
 }
 
 #sidebar ul li a {
-    padding: 15px 25px;
+    padding: 15px 15px;
     display: block;
     margin: 5px 0px;
     font-size: 14px;
@@ -735,26 +737,28 @@ span {
 
 #sidebar ul li a:hover,
 #sidebar ul li a:focus {
-      background: linear-gradient(88deg , #d4ad99  50%, #ffe4b5 );
+    background: linear-gradient(88deg, #d4ad99 50%, #ffe4b5);
     color: rgba(255, 255, 255, 0.95);
 }
 
 #sidebar ul.components li {
     position: relative;
 }
+
 #sidebar ul.components li.active {
-    background: linear-gradient(88deg , #d4ad99  50%, #ffe4b5 );
+    background: linear-gradient(88deg, #d4ad99 50%, #ffe4b5);
     color: white;
 }
+
 #sidebar ul.components ul {
-       background: #000000;
+    background: #000000;
     padding: 0px 0;
 }
 
 #sidebar ul.components ul li a {
     font-size: 13px;
     color: rgba(255, 255, 255, .7);
-    padding: 7px 35px;
+    padding: 7px 15px;
 }
 
 #sidebar ul.components ul li a:hover {
@@ -786,7 +790,7 @@ a[data-toggle="collapse"] {
     transition: ease all 0.3s;
     padding: 60px 20px 20px 260px;
     position: relative;
-/*    padding: 60px 25px 25px 305px;*/
+    /*    padding: 60px 25px 25px 305px;*/
     background: #f8f8f8;
 }
 
@@ -810,7 +814,7 @@ a[data-toggle="collapse"] {
 }
 
 .topbar .navbar {
-       padding: 0;
+    padding: 0;
     background: #ffffff;
     border: none;
     border-radius: 0;
@@ -819,7 +823,7 @@ a[data-toggle="collapse"] {
 }
 
 .user_profle_side {
-       display: flex;
+    display: flex;
     width: 100%;
     justify-content: center;
 }
@@ -831,7 +835,7 @@ a[data-toggle="collapse"] {
 
 .user_img img {
     border-radius: 0px;
-        width: 100%;
+    width: 100%;
     height: auto;
 }
 
@@ -889,7 +893,7 @@ a[data-toggle="collapse"] {
 }
 
 .user_img {
-         width: 100%;
+    width: 100%;
     height: 60px;
     float: right;
     padding: 14px 0px;
@@ -1086,10 +1090,10 @@ a[data-toggle="collapse"] {
 }
 
 .graph_head {
-      padding: 18px 25px 15px;
+    padding: 18px 25px 15px;
     float: left;
     width: 100%;
-    background: linear-gradient(88deg , #000000 50%, #000000 ) !important;
+    background: linear-gradient(88deg, #000000 50%, #000000) !important;
     /* border-bottom: 3px solid #000000; */
     border-top: 3px solid #d4ad99;
 }
@@ -1214,7 +1218,7 @@ a[data-toggle="collapse"] {
 .skill {
     font-size: 14px;
     color: #455a64;
-       margin-bottom: 15px;
+    margin-bottom: 15px;
     margin-top: 15px;
     font-weight: 500;
 }
@@ -1296,14 +1300,14 @@ a[data-toggle="collapse"] {
 
 .white_shd {
     background: #fff;
-        border-bottom: 4px solid #000000;
-/*    border-top: 4px solid #000000;*/
+    border-bottom: 4px solid #000000;
+    /*    border-top: 4px solid #000000;*/
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
     margin-top: 0;
-        padding: 0px 15px;
-
+    padding: 0px 15px;
 }
+
 table#example tr td button a {
     color: white;
 }
@@ -1311,6 +1315,7 @@ table#example tr td button a {
 select#roomnames {
     padding-left: 38px;
 }
+
 .dark_bg {
     background: #214162;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
@@ -2065,9 +2070,9 @@ i.icon {
 /** tabbar style 2 **/
 
 .tab_style2 .tabbar nav div.nav-tabs .nav-link.active {
-    background:#214162;
+    background: #214162;
     color: #fff;
-    border-color:#214162;
+    border-color: #214162;
 }
 
 
@@ -3016,7 +3021,7 @@ ul.labels-category li p {
 
 .contact_inner .list-unstyled li {
     float: left;
-   margin: 5px 0px;
+    margin: 5px 0px;
     font-size: 14px;
     color: #58718a;
     width: 100%;
@@ -3145,7 +3150,6 @@ table.projects tr td:first-child {
 -------------------------------------------------------------------*/
 
 
-
 /*------------------------------------------------------------------
     26. Error
 -------------------------------------------------------------------*/
@@ -3191,6 +3195,7 @@ table.projects tr td:first-child {
     min-height: 720px;
 }
 
+
 /*------------------------------------------------------------------
     26. Error
 -------------------------------------------------------------------*/
@@ -3226,38 +3231,49 @@ table.projects tr td:first-child {
     background-color: #fff;
 }
 
+
 /*--------------------------------------------------------------------------------------------------------------------------
  @#$@$#$#$# 1 ND SECTION ADMIN TOP 4 BOX CSS START ADMIN TOP 4 BOX CSS START ADMIN TOP 4 BOX CSS START  4 BOX CSS START 
 ---------------------------------------------------------------------------------------------------------------------------*/
 
-.bg-info, .bg-info>a {
+.bg-info,
+.bg-info>a {
     color: #fff!important;
 }
+
 .small-box {
     border-radius: 5px;
-    box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
     display: block;
     margin-bottom: 20px;
-        border-bottom: 4px solid #000000;
+    border-bottom: 4px solid #000000;
     border-top: 4px solid #000000;
     padding: 15px 10px;
     position: relative;
-    background: linear-gradient(88deg , #d4ad99 50%, #ffe4b5 ) !important;
+    background: linear-gradient(88deg, #d4ad99 50%, #ffe4b5) !important;
 }
+
 .small-box>.inner {
     padding: 10px;
 }
-@media (min-width: 1200px)
-.col-lg-3 .small-box h3, .col-md-3 .small-box h3, .col-xl-3 .small-box h3 {
+
+@media (min-width: 1200px) .col-lg-3 .small-box h3,
+.col-md-3 .small-box h3,
+.col-xl-3 .small-box h3 {
     font-size: 2.2rem;
 }
-@media (min-width: 992px)
-.col-lg-3 .small-box h3, .col-md-3 .small-box h3, .col-xl-3 .small-box h3 {
+
+@media (min-width: 992px) .col-lg-3 .small-box h3,
+.col-md-3 .small-box h3,
+.col-xl-3 .small-box h3 {
     font-size: 1.6rem;
 }
-.small-box h3, .small-box p {
+
+.small-box h3,
+.small-box p {
     z-index: 5;
 }
+
 .small-box h3 {
     font-size: 1.3rem;
     font-weight: 700;
@@ -3266,26 +3282,46 @@ table.projects tr td:first-child {
     white-space: nowrap;
     color: white;
 }
-.small-box h3, .small-box p {
+
+.small-box h3,
+.small-box p {
     z-index: 1;
 }
+
 .small-box p {
     font-size: 1.2rem;
     color: white;
-       font-weight: 500;
+    font-weight: 500;
 }
+
 .small-box .icon {
-    color: rgba(0,0,0,.15);
+    color: rgba(0, 0, 0, .15);
     z-index: 0;
 }
-.small-box:hover .icon>i, .small-box:hover .icon>i.fa, .small-box:hover .icon>i.fab, .small-box:hover .icon>i.fad, .small-box:hover .icon>i.fal, .small-box:hover .icon>i.far, .small-box:hover .icon>i.fas, .small-box:hover .icon>i.ion {
+
+.small-box:hover .icon>i,
+.small-box:hover .icon>i.fa,
+.small-box:hover .icon>i.fab,
+.small-box:hover .icon>i.fad,
+.small-box:hover .icon>i.fal,
+.small-box:hover .icon>i.far,
+.small-box:hover .icon>i.fas,
+.small-box:hover .icon>i.ion {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
 }
-.small-box .icon>i.fa, .small-box .icon>i.fab, .small-box .icon>i.fad, .small-box .icon>i.fal, .small-box .icon>i.far, .small-box .icon>i.fas, .small-box .icon>i.ion {
+
+.small-box .icon>i.fa,
+.small-box .icon>i.fab,
+.small-box .icon>i.fad,
+.small-box .icon>i.fal,
+.small-box .icon>i.far,
+.small-box .icon>i.fas,
+.small-box .icon>i.ion {
     font-size: 70px;
     top: 20px;
 }
+
 .small-box .icon>i {
     font-size: 90px;
     position: absolute;
@@ -3293,66 +3329,79 @@ table.projects tr td:first-child {
     top: 15px;
     transition: -webkit-transform .3s linear;
     transition: transform .3s linear;
-    transition: transform .3s linear,-webkit-transform .3s linear;
+    transition: transform .3s linear, -webkit-transform .3s linear;
 }
+
 .small-box>.small-box-footer {
     background-color: rgb(0 0 0 / 50%);
-    color: rgba(255,255,255,.8);
+    color: rgba(255, 255, 255, .8);
     display: block;
     padding: 3px 0;
-   border-radius: 5px;
+    border-radius: 5px;
     position: relative;
     text-align: center;
     text-decoration: none;
     z-index: 0;
 }
-.bg-info, .bg-info>a {
+
+.bg-info,
+.bg-info>a {
     color: #fff!important;
 }
+
 
 /*--------------------------------------------------------------------------------------------------------------------------
  @#$@$#$#$# 2 ND SECTION  ADMIN TOP 4 BOX CSS START ADMIN TOP 4 BOX CSS START ADMIN TOP 4 BOX CSS START
 ---------------------------------------------------------------------------------------------------------------------------*/
+
 .panel-primary {
     border-color: #337ab7;
 }
+
 .panel {
     margin-bottom: 20px;
     background-color: #fff;
     border: 1px solid transparent;
     border-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 }
+
 .panel-primary>.panel-heading {
     color: #fff;
     background-color: #337ab7;
     border-color: #337ab7;
 }
+
 .panel-green .panel-heading {
     border-color: #5cb85c;
     color: #fff;
     background-color: #5cb85c;
 }
+
 .panel-yellow .panel-heading {
     border-color: #f0ad4e;
     color: #fff;
     background-color: #f0ad4e;
 }
+
 .panel-red .panel-heading {
     border-color: #d9534f;
     color: #fff;
     background-color: #d9534f;
 }
+
 .panel-heading {
     padding: 10px 15px;
     border-bottom: 1px solid transparent;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
+
 .huge {
     font-size: 40px;
 }
+
 .panel-footer {
     padding: 10px 15px;
     background-color: #ffffff;
@@ -3360,26 +3409,34 @@ table.projects tr td:first-child {
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
 }
+
 .pull-left {
     float: left;
 }
+
 .pull-left {
     float: left!important;
 }
+
 .pull-right {
     float: right;
 }
+
 .pull-right {
     float: right!important;
 }
+
 .panel-heading i {
     padding-left: 0px;
-   font-size: 3.6em;
+    font-size: 3.6em;
     opacity: 0.5;
 }
+
+
 /*---------------------------------------------------------------------------------------------------------------
 30. user_management_add.html  user_management_add.html  user_management_add.html  user_management_add.html 
 ----------------------------------------------------------------------------------------------------------------*/
+
 .add-user {
     padding: 20px 10px 0px 10px;
 }
@@ -3394,9 +3451,11 @@ table.projects tr td:first-child {
     padding: 8px 10px;
 }
 
-.add-user input, textarea#user-add-form {
+.add-user input,
+textarea#user-add-form {
     padding-left: 41px;
 }
+
 .full-img {
     text-align: center;
 }
@@ -3405,6 +3464,7 @@ table.projects tr td:first-child {
     width: 100%;
     height: auto;
 }
+
 
 /*---------------------------------------------------------------------------------------------------------------
 30. user_management_VIEW.html  user_management_VIEW.html  user_management_VIEW.html  user_management_VIEW.html 
@@ -3415,16 +3475,25 @@ table.projects tr td:first-child {
     background-color: #d7b19b !important;
     border-color: #d7b19b !important;
 }
+
 .user-table {
     padding: 20px 10px !important;
 }
+
 table#example thead {
     background: black !important;
     color: white !important;
 }
+
 table#example tr td {
     border: 1px solid #ebebeb !important;
+    padding: 4px 10px;
 }
+
+table#example thead tr th {
+    padding: 4px 10px;
+}
+
 table.dataTable tbody tr.odd {
     background: #f5f5f5 !important;
 }
@@ -3432,37 +3501,46 @@ table.dataTable tbody tr.odd {
 table.dataTable tbody tr.even {
     background: white !important;
 }
-table.dataTable tbody th, table.dataTable tbody td {
+
+table.dataTable tbody th,
+table.dataTable tbody td {
     padding: 8px 10px !important;
     color: #214162 !important;
     font-weight: 400 !important;
     text-transform: capitalize !important;
 }
+
+
 /*-----------------
     14. Dashboard
 -----------------------*/
+
 .card-body.bg-gradient.dash_bg_one {
-    background: linear-gradient(88deg , #d4ad99 50%, #ffe4b5 );
+    background: linear-gradient(88deg, #d4ad99 50%, #ffe4b5);
     border-bottom: 4px solid #000000;
     border-top: 4px solid #000000;
 }
+
 .card-body.bg-gradient.dash_bg_two {
-    background: linear-gradient(88deg , #d4ad99 50%, #ffe4b5 );
+    background: linear-gradient(88deg, #d4ad99 50%, #ffe4b5);
     border-bottom: 4px solid #000000;
     border-top: 4px solid #000000;
 }
+
 .card-body.bg-gradient.dash_bg_three {
-    background: linear-gradient(88deg , #d4ad99 50%, #ffe4b5 );
+    background: linear-gradient(88deg, #d4ad99 50%, #ffe4b5);
     border-bottom: 4px solid #000000;
     border-top: 4px solid #000000;
 }
+
 .card-body.bg-gradient.dash_bg_four {
-    background: linear-gradient(88deg , #d4ad99 50%, #ffe4b5 );
+    background: linear-gradient(88deg, #d4ad99 50%, #ffe4b5);
     border-bottom: 4px solid #000000;
     border-top: 4px solid #000000;
 }
+
 .dash-widget-icon {
-       align-items: center;
+    align-items: center;
     border-radius: 5px;
     color: #fff;
     display: inline-flex;
@@ -3474,19 +3552,23 @@ table.dataTable tbody th, table.dataTable tbody td {
     text-align: center;
     width: 50px;
 }
+
 .dash-widget-icon i {
     color: white;
 }
+
 .dash-count {
     font-size: 18px;
     margin-left: auto;
-        color: white;
+    color: white;
 }
+
 .dash-count i {
     color: #a66513 !important;
 }
+
 .dash-widget-info h3 {
-      margin-bottom: 10px;
+    margin-bottom: 10px;
     color: white;
     font-size: 1.19em;
     font-family: 'Mada', sans-serif;
@@ -3495,37 +3577,46 @@ table.dataTable tbody th, table.dataTable tbody td {
     font-weight: 600;
     line-height: 1.2;
 }
+
 h6.text-muted.text-white {
     color: #ffffff !important;
     font-size: 16px;
 }
+
 .dash-widget-header {
     align-items: center;
     display: flex;
     margin-bottom: 15px;
 }
+
 .card-chart .card-body {
     padding: 8px;
 }
-#morrisArea > svg, #morrisLine > svg  {
+
+#morrisArea>svg,
+#morrisLine>svg {
     width: 100%;
 }
+
 .activity-feed {
     list-style: none;
     margin-bottom: 0;
     margin-left: 5px;
     padding: 0;
 }
+
 .activity-feed .feed-item {
     border-left: 2px solid #e4e8eb;
     padding-bottom: 19px;
     padding-left: 20px;
     position: relative;
 }
+
 .activity-feed .feed-item:last-child {
     border-color: transparent;
     padding-bottom: 0;
 }
+
 .activity-feed .feed-item:after {
     content: "";
     display: block;
@@ -3537,17 +3628,20 @@ h6.text-muted.text-white {
     border-radius: 50%;
     background-color: #177dff;
 }
+
 .activity-feed .feed-item .feed-date {
     display: block;
     position: relative;
     color: #777;
     text-transform: uppercase;
     font-size: 13px;
- }
+}
+
 .activity-feed .feed-item .feed-text {
     color: #777;
     position: relative;
 }
+
 .activity-feed .feed-item .feed-text a {
     color: #333;
     font-weight: 600;

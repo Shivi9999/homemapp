@@ -4941,6 +4941,13 @@ button.btn.btn-primary {
     margin-top: 0px;
 }
 
+hr {
+    margin-top: 0.4rem;
+    margin-bottom: 0.5rem;
+    border: 0;
+    border-top: 2px solid rgba(0, 0, 0, .1);
+}
+
 
 /*--------------------------------------------------------------------------------------------------------------------------
  @#$@$#$#$# 1 ND SECTION ADMIN TOP 4 BOX CSS START ADMIN TOP 4 BOX CSS START ADMIN TOP 4 BOX CSS START  4 BOX CSS START 
