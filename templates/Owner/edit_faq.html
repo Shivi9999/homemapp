@@ -2,22 +2,7 @@
 {% load static %}
 {% block content %}
 
-<style>
-   /* Add this to your CSS file */
 
-
-.error-list {
-    color: red;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.error-list li {
-    margin-top: 5px;
-}
-
-</style>
 
  {% comment %} <!DOCTYPE html>
 <html lang="en">
@@ -130,103 +115,47 @@
                </div>
                <!-- end topbar --> {% endcomment %}
                <!-- dashboard inner -->
-               <div class="midde_cont">
+               <div class="midde_cont mt-4">
                   <div class="container-fluid">
-                     <div class="row column_title">
-                        <div class="col-md-12">
-                           <div class="page_title">
-                              <h2>Dashboard</h2>
-                           </div>
-                        </div>
-                     </div>
+                    
                 <!--  -->
                      <div class="row">
                        <div class="white_shd full">
                               <div class="full graph_head">
                                  <div class="heading1 margin_0">
-                                    <h2>Add Hotel</h2>
+                                    <h2>Faq</h2>
                                  </div>
                               </div>
                             <div class="users-forms">
                             <div class="row">
-                               <div class="col-md-7">
-                                    <form action="{% url 'Add_user_management'%}" method="post" enctype="multipart/form-data" nonvalidate>
-                                     {% csrf_token %}
+                               <div class="col-md-12">
+                                    <form  method="post">
+                                       {% csrf_token %}
                                  <div class="form-group row add-user">
-                                    {% comment %} <div class="form-group col-md-12">
-                                       <i class="fa fa-user icon-user"></i>
-                                    <label for="exampleInputPassword1">Select Properties</label>
-                                    <select id="roomnames" name="room" class="form-control user-fill">
-                                      <option value="rooms">Room Items</option>
-                                      <option value="rooms">Room Items</option>
-                                      <option value="rooms">Room Items</option>
-                                      <option value="rooms">Room Items</option>
-                                      <option value="rooms">Room Items</option>
-                                      <option value="rooms">Room Items</option>
-                                      <option value="rooms">Room Items</option>
-                                   </select>
-                                  </div> {% endcomment %}
-                                  <div class="form-group col-md-12">
-                                    <i class="fa fa-user icon-user"></i>
-                                    <label for="exampleInputPassword1"> Hotel Name </label>
-                                    <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Hotel Name">
-                               </div>
-                                  <div class="form-group col-md-12">
-                                    <i class="fa fa-user icon-user"></i>
-                                 <label for="exampleInputPassword1"> Room No</label>
-                                 <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Room Number">
-                               </div>
-                                 
-                                   
-                                  
-                                    <div class="form-group col-md-12">
-                                       <i class="fa fa-mobile icon-user"></i>
-                                    <label for="exampleInputPassword1">Mobile</label>
-                                     {% comment %} {{user_form.mobile}}
-                                     {% if user_form.mobile.errors %}
-                                     <ul>
-                                        {% for error in user_form.mobile.errors %}
-                                           <li>{{ error }}</li>
-                                           
-                                        {% endfor %}
-                                     </ul>
-                                   {% endif %} {% endcomment %}
-                                  <input type="text" class="form-control  user-fill" id="user-add-form" placeholder="Name"> 
-                                  </div>
-                                   
-                                     <div class="form-group col-md-12">
-                                        <i class="fa fa-envelope icon-user"></i>
-                                     <label for="exampleInputPassword1">Address</label>
-                                    <textarea type="text" class="form-control  user-fill" id="user-add-form" placeholder="Enter Your Address"></textarea>
-                                     {% comment %} {{user_form.address}}
-                                     {% if user_form.address.errors %}
-                                     <ul>
-                                        {% for error in user_form.address.errors %}
-                                           <li>{{ error }}</li>
-                                           
-                                        {% endfor %}
-                                     </ul>
-                                   {% endif %} {% endcomment %}
+                                  <div class="form-group col-md-6">
+                                        {% comment %} <i class="fa fa-user icon-user"></i> {% endcomment %}
+                                     <label for="exampleInputPassword1">Question</label>
+                                     {{faq_form.question}}
+                                     {% comment %} <input type="text" class="form-control  user-fill"  name="question" id="user-add-form" placeholder="Question"> {% endcomment %}
                                    </div>
-
-                                 
+                                    <div class="form-group col-md-6">
+                                        {% comment %} <i class="fa fa-mobile icon-user"></i> {% endcomment %}
+                                     <label for="exampleInputPassword1">Answer</label>
+                                     {{faq_form.answer}}
+                                   </div>
+                                  
                                 <div class="form-group col-md-12">
                                    <button type="submit" class="btn btn-primary">Submit</button>
                                  </div>
                               </div>
                               </form>
                                </div>
-                               <div class="col-md-4">
-                                  <div class="full-img" style="padding: 35% 0px;">
-                                     <img src="{%static  'images/customer-img.png' %}">
-                                  </div>
-                               </div>
+                               
                             </div>
                             </div>
                            </div>
                      </div>
-            <!--  -->
-                  </div>
+          
                   <!-- footer -->
                      <div class="footer">
                                  <div class="container-fluid">

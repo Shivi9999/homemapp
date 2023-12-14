@@ -49,8 +49,6 @@ def view_property_management(request):
 
 
 
-
-
 @login_required(login_url='login_user')
 def add_user_management(request):
     if request.method == "POST":
@@ -133,6 +131,8 @@ def login_user(request):
     # Print the entire session dictionary
     print(request.session)
 
+
+
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -191,8 +191,30 @@ def faq_view(request):
             print(faq_form.errors)
             return render(request,'Owner/faq.html',{'faq_form':faq_form})
     faq_form=Faqform(request.POST)
-    faq=Faq.objects.all()      
-    return render(request,'Owner/faq.html',{'faq_form':faq_form,'faq':faq})
+    faqs=Faq.objects.all()      
+    return render(request,'Owner/faq.html',{'faq_form':faq_form,'faqs':faqs})
+
+def edit_faq(request, id):
+    faq = get_object_or_404(Faq, pk=id)
+    if request.method == 'POST':
+        form = Faqform(request.POST, instance=faq)
+        if form.is_valid():
+            form.save()
+            return redirect('Faq')
+    else:
+        faq_form = Faqform(instance=faq)
+    return render(request, 'Owner/edit_faq.html', {'faq_form': faq_form, 'faq': faq})
+
+
+
+@login_required(login_url='login_user')
+def delete_faq(request, id):
+    faq = get_object_or_404(Faq, pk=id)
+    
+    faq.delete()
+    return redirect('Faq')
+
+
 
 @login_required(login_url='login_user')
 def terms_condition_user(request):
@@ -224,16 +246,16 @@ def profile_user(request):
 
 @login_required(login_url='login_user')
 def update_personal_details_user(request):
-    if request.method == 'POST':
-       
-        property_owner = get_object_or_404(PropertyOwner, user=request.user)
+    owner_profile = get_object_or_404(PropertyOwner, user=request.user)
+    profile_form = Userform(instance=request.user)
+    owner_form = PropertyForm(instance=owner_profile)
 
+    if request.method == 'POST':
         # Create the forms with modified POST data
-        profile_form = Userform( instance=request.user)
-        owner_form = PropertyForm( instance=property_owner)
+        profile_form = Userform(request.POST, instance=request.user)
+        owner_form = PropertyForm(request.POST, instance=owner_profile)
 
         if profile_form.is_valid() and owner_form.is_valid():
-            # Save the forms without updating the password
             owner_form.save()
             profile_form.save()
             messages.success(request, 'Personal details updated successfully!')
@@ -253,6 +275,8 @@ def change_password_user(request):
             form.save()
             messages.success(request, 'Password changed successfully!')
         else:
+            print(form.errors)
             messages.error(request, 'Error changing password. Please check the form.')
+            return render(request,'Owner/profile.html',{'form':form})
 
     return redirect('Profile_user')

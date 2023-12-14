@@ -50,12 +50,12 @@ ul.dropdown-menu.show li a label {
                                                 <button class="btn btn-default text-left form-control dropdown-toggle" type="button" data-toggle="dropdown"><span class="dropdown-text"> Select Options</span>
                                                 <span class="caret"></span></button>
                                                 <ul class="dropdown-menu">
-                                                    {% comment %} {{ form.users }} {% endcomment %}
+                                                 
                                              <li><a href="#"><label><input type="checkbox" class="selectall" /><span class="select-text"> Select</span> All</label></a></li>
                                                   <li class="divider"></li>
-                                                  <li><a class="option-link" href="#"><label><input name='options[]' type="checkbox" class="option justone" value='Option 1 '/> Option 1</label></a></li>
-                                                  <li><a href="#"><label><input name='options[]' type="checkbox" class="option justone" value='Option 2 '/> Option 2</label></a></li>
-                                                  <li><a href="#"><label><input name='options[]' type="checkbox" class="option justone" value='Option 3 '/> Option 3</label></a></li>
+                                                  <li><a class="option-link" href="#"><label><input name='options[]' type="checkbox" class="option justone" value='Option 1 '/>  {{ form.users }} </label></a></li>
+                                                  {% comment %} <li><a href="#"><label><input name='options[]' type="checkbox" class="option justone" value='Option 2 '/> Option 2</label></a></li>
+                                                  <li><a href="#"><label><input name='options[]' type="checkbox" class="option justone" value='Option 3 '/> Option 3</label></a></li> {% endcomment %}
                                                 </ul>
                                               </div>
                                         </div>

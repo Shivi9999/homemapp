@@ -150,6 +150,15 @@
 									<div class="users">
 										<h3 class="page-title">Property View Property </h3>
 									</div>
+									{% if messages %}
+											<div class="messages">
+												{% for message in messages %}
+													<div class="alert alert-{{ message.tags }}">
+														{{ message }}
+													</div>
+												{% endfor %}
+											</div>
+										{% endif %}
 									<div class="user-box">
 								<div class="datatables">
                                     <table id="example" class="display" style="width:100%;    border: 2px solid #20214f;">

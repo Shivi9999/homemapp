@@ -33,7 +33,7 @@ def login(request):
 
         if user is not None:
             auth_login(request, user)
-            messages.success(request, 'Login successful.')
+           
 
             if user.user_type == '1':
                 # Access and print admin_session_id
@@ -128,6 +128,7 @@ def edit_property_owner(request, id):
             messages.error(request, 'Error updating property owner. Please check the form.')
             print(user_form.errors)
             print(property_form.errors)
+            return render(request, 'Pro_edit_Property.html', {'user_form': user_form, 'property_form': property_form})
     else:
         user_form = Userform(instance=property_owner.user)
         property_form = PropertyForm(instance=property_owner)

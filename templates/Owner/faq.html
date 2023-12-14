@@ -179,16 +179,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                 {% for faq in faqs %}
                                     <tr class="even">
-                                        <td>1</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>Nick john Nixon</td>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{faq.question}}</td>
+                                        <td>{{faq.answer}}</td>
                                         
                                      <td>
-                                <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Edit</a></button>
-                                 <button class="btn btn-primary mb-2"><a class="edit-btn" href="#">Delete</a></button>
+                                <button class="btn btn-primary mb-2"><a class="edit-btn" href="{% url 'edit_faq' id=faq.id%}">Edit</a></button>
+                                 <button class="btn btn-primary mb-2"><a class="edit-btn" href="{% url 'delete_faq' id=faq.id%}">Delete</a></button>
                              </td>
                                     </tr>
+                                    {% endfor %}
                                     
                                    
                                 </tbody>

@@ -16,9 +16,19 @@
 							 <div class="users">
 								 <h3 class="page-title">Privacy & Policy</h3>
 							 </div>
+               {% if messages %}
+               <div class="messages">
+                 {% for message in messages %}
+                   <div class="alert alert-{{ message.tags }}">
+                     {{ message }}
+                   </div>
+                 {% endfor %}
+               </div>
+             {% endif %}
 							  <div class="user-box">
 								<div class="datatables">
-          <form method="post" action="{% url 'privacy_policy' %}" id="tandcForm" class="needs-validation" novalidate="">
+          <form method="post" action="{% url 'Privacy_Policy' %}" id="tandcForm" class="needs-validation" novalidate="">
+          
             {% csrf_token %}
             <div class="form-group">
               <label for="InputFile">Content</label>
