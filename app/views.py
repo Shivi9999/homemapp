@@ -87,7 +87,7 @@ def add_property_owner(request):
             owner_instance.user = user_instance
             owner_instance.save()
             
-            return redirect(View_property_owner)
+            return redirect('View_property_owner')
         else:
             print(user_form.errors)
             print(property_form.errors)
