@@ -154,3 +154,23 @@ class AddHotelForm(forms.ModelForm):
           # Set this to True if mobile is a required field
     )
    
+
+# class AddRoomForm(forms.ModelForm):
+#     class Meta:
+#         model = Add_Room
+#         fields = ['property_name', 'room_number', 'room_name', 'room_description', 'room_image']
+#         widgets = {
+            
+                
+#                 'total_room': forms.TextInput(attrs={'class': 'form-control'}),
+#                 'email': forms.TextInput(attrs={'class': 'form-control'}),
+#                 'address': forms.TextInput(attrs={'class': 'form-control'}),
+            
+    
+                
+#             }
+#     property_name = forms.ModelMultipleChoiceField(
+#         queryset=Add_hotel.objects.all(),
+#         widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox-list'}
+        
+#         ),

@@ -149,4 +149,14 @@ class Add_hotel(models.Model):
         return self.property_name
 
 
+# class Add_Room(models.Model):
+    
+#     property_name = models.ForeignKey(Add_hotel, on_delete=models.CASCADE)
+#     room_number = models.CharField(max_length=50)
+#     room_name = models.CharField(max_length=50)
+#     room_description = models.CharField(max_length=50)
+    
+#     room_image = models.ImageField(upload_to='room_img', max_length=100)
 
+#     def __str__(self):
+#         return self.property_name
