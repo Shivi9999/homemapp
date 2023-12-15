@@ -27,24 +27,26 @@
 					
                    
                     <div class="row">
+                     
+                            <div class="col-lg-3 col-6">
+                                <a href="{% url 'View_property_owner' %}">
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3>Property Owner</h3>
+                                        <p>{{ property_owner_count }}</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-shopping-bag"></i>
+                                    </div>
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar w-50"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="{% url 'View_question' %}">
                         <div class="col-lg-3 col-6">
-
-                        <div class="small-box bg-info">
-                        <div class="inner">
-                        <h3> Property Owner </h3>
-                        <p>{{property_owner_count}}</p>
-                        </div>
-                        <div class="icon">
-                        <i class="fa fa-shopping-bag"></i>
-                        </div>
-                       <div class="progress progress-sm">
-											<div class="progress-bar w-50"></div>
-										</div>
-                        </div>
-                        </div>
-
-                        <div class="col-lg-3 col-6">
-
+                            <a href="{% url 'View_question' %}">
                         <div class="small-box bg-success">
                         <div class="inner">
                         <h3>Total Question</h3>
@@ -58,7 +60,7 @@
 										</div>
                         </div>
                         </div>
-
+                    </a>
                         <div class="col-lg-3 col-6">
 
                         <div class="small-box bg-warning">
