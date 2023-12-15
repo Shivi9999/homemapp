@@ -435,7 +435,7 @@ def save_question_answer(request):
             question_form.save()
          
             messages.success(request, 'Question and answer saved successfully!')
-            return redirect('view_question')
+            return redirect('View_question')
         else:
             messages.error(request, 'Error saving question and answer. Please try again.')
 
