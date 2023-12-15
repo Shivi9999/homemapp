@@ -289,7 +289,7 @@ def terms_condition(request):
         else:
             messages.success(request, 'Update Success')
 
-        return redirect('Terms_Condition')  # Redirect to the same page after form submission
+        return redirect('terms_condition')  # Redirect to the same page after form submission
 
     context = {
         'terms_data': terms_data,
@@ -365,7 +365,7 @@ def delete_terms_condition(request, id):
     except TermsCondition.DoesNotExist:
         messages.error(request, 'Term not found')
 
-    return redirect('Terms_Condition')
+    return redirect('terms_condition')
 
 
 @login_required(login_url='login')
@@ -377,7 +377,7 @@ def delete_privacy_policy(request, id):
     except PrivacyPolicy.DoesNotExist:
         messages.error(request, 'Privacy not found')
 
-    return redirect('Privacy_Policy')
+    return redirect('privacy_policy')
 
 
 # def import_data(request):
