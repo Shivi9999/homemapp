@@ -16,26 +16,66 @@ def user_dashboard(request):
 
 @login_required(login_url='login_user')
 def add_hotel_management(request):
-    
+    if request.method == 'POST':
+        form = AddHotelForm(request.POST, request.FILES)
+        if form.is_valid():
+            hotel = form.save(commit=False)
+            hotel.user = request.user
+            hotel.save()
+            return redirect('view_hotel_management')
+        else:
+            print(form.errors)
+            return render(request, 'Owner/hotel_Add_management.html', {'form': form})
+    else:
+        form = AddHotelForm()
+
+    return render(request, 'Owner/hotel_Add_management.html', {'form': form})
+
            
    
-    return render(request,'Owner/hotel_Add_management.html')
+    
 
 
 @login_required(login_url='login_user')
 def view_hotel_management(request):
     
-           
+    hotel_view = Add_hotel.objects.filter(user=request.user)
    
-    return render(request,'Owner/hotel_Add_management.html')
+    return render(request,'Owner/view_hotel_managment.html',{'hotel_view':hotel_view})
+
+@login_required(login_url='login_user')
+def edit_hotel(request, id):
+    hotel = Add_hotel.objects.get(id=id)
+
+    if request.method == 'POST':
+        form = AddHotelForm(request.POST, request.FILES, instance=hotel)
+        if form.is_valid():
+            form.save()
+            return redirect('view_hotel_management')  # replace with your URL name
+    else:
+        form = AddHotelForm(instance=hotel)
+
+    return render(request, 'Owner/edit_hotel.html', {'form': form, 'hotel': hotel})
+
+
+@login_required(login_url='login_user')
+def delete_hotel(request, id):
+    user1 = get_object_or_404(Add_hotel, pk=id)
+    # Retrieve the associated user
+    
+    user1.delete()
+    
+    return redirect('view_hotel_management')
+
+
+
+
 
 
 @login_required(login_url='login_user')
 def add_property_management(request):
-    
-           
    
-    return render(request,'Owner/view_hotel_managment.html')
+    return render(request,'Owner/property_Add_Management.html')
 
 
 

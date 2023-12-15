@@ -134,3 +134,23 @@ class Add_userform(forms.ModelForm):
         widget=forms.NumberInput(attrs={'class': 'form-control'})
           # Set this to True if mobile is a required field
     )
+
+class AddHotelForm(forms.ModelForm):
+    class Meta:
+        model = Add_hotel
+        fields = ['property_name', 'total_room', 'email', 'address', 'mobile', 'flat_image']
+        widgets = {
+            
+                'property_name': forms.TextInput(attrs={'class': 'form-control'}),
+                'total_room': forms.TextInput(attrs={'class': 'form-control'}),
+                'email': forms.TextInput(attrs={'class': 'form-control'}),
+                'address': forms.TextInput(attrs={'class': 'form-control'}),
+            
+    
+                
+            }
+    mobile = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'class': 'form-control'})
+          # Set this to True if mobile is a required field
+    )
+   

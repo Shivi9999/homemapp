@@ -4,6 +4,8 @@ from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin
     )
 from django.contrib.auth.base_user import BaseUserManager
+from django.contrib.auth import get_user_model
+
 class UserManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
         if not email:
@@ -131,3 +133,20 @@ class Add_user(models.Model):
     user_image=models.ImageField(upload_to='user_img', max_length=100)
     def __str__(self):
         return self.user.username
+
+
+
+class Add_hotel(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    property_name = models.CharField(max_length=50)
+    total_room = models.CharField(max_length=50)
+    email = models.CharField(max_length=50)
+    address = models.CharField(max_length=50)
+    mobile = models.CharField(max_length=12)
+    flat_image = models.ImageField(upload_to='flat_img', max_length=100)
+
+    def __str__(self):
+        return self.property_name
+
+
+

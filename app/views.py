@@ -87,7 +87,7 @@ def add_property_owner(request):
             owner_instance.user = user_instance
             owner_instance.save()
             
-            return redirect(view_property_owner)
+            return redirect(View_property_owner)
         else:
             print(user_form.errors)
             print(property_form.errors)
@@ -123,7 +123,7 @@ def edit_property_owner(request, id):
             property_form.save()
 
             messages.success(request, 'Property owner updated successfully.')
-            return redirect('view_property_owner')
+            return redirect('View_property_owner')
         else:
             messages.error(request, 'Error updating property owner. Please check the form.')
             print(user_form.errors)
@@ -146,7 +146,7 @@ def delete_property_owner(request, id):
     # Delete the property owner and associated user
     property_owner.delete()
     user_instance.delete()
-    return redirect('view_property_owner')
+    return redirect('View_property_owner')
 
 
 @login_required(login_url='login')
@@ -173,7 +173,7 @@ def edit_question(request,id):
             
             owner_instance.save()
             
-            return redirect(view_question)
+            return redirect(View_question)
         else:
             print(question_form.errors)
       
@@ -189,7 +189,7 @@ def delete_question(request, id):
      # Delete the property owner and associated user
     question_answer.delete()
     
-    return redirect('view_question')
+    return redirect('View_question')
 
 @login_required(login_url='login')
 def add_manage_property(request):
@@ -222,7 +222,7 @@ def privacy(request):
         else:
             messages.success(request, 'Update Success')
 
-        return redirect('privacy_policy')  # Redirect to the same page after form submission
+        return redirect('Privacy_Policy')  # Redirect to the same page after form submission
 
     context = {
         'privacy': privacy,
@@ -240,7 +240,7 @@ def notification(request):
         form = NotificationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('notification')  # Redirect to a confirmation page or another URL
+            return redirect('Notification')  # Redirect to a confirmation page or another URL
     else:
         form = NotificationForm()
     notifications=Notification.objects.all()
@@ -257,7 +257,7 @@ def edit_notification(request, id):
         form = NotificationForm(request.POST, instance=notification)
         if form.is_valid():
             form.save()
-            return redirect('notification')  # Redirect to the notification list view
+            return redirect('Notification')  # Redirect to the notification list view
     else:
         form = NotificationForm(instance=notification)
 
@@ -270,7 +270,7 @@ def delete_notification(request,id):
         notification = get_object_or_404(Notification, id=notification_id)
         notification.delete()
 
-    return redirect('notification')  # Redirect to the notification list view
+    return redirect('Notification')  # Redirect to the notification list view
 
 
 @login_required(login_url='login')
@@ -289,7 +289,7 @@ def terms_condition(request):
         else:
             messages.success(request, 'Update Success')
 
-        return redirect('terms_condition')  # Redirect to the same page after form submission
+        return redirect('Terms_Condition')  # Redirect to the same page after form submission
 
     context = {
         'terms_data': terms_data,
@@ -365,7 +365,7 @@ def delete_terms_condition(request, id):
     except TermsCondition.DoesNotExist:
         messages.error(request, 'Term not found')
 
-    return redirect('terms_condition')
+    return redirect('Terms_Condition')
 
 
 @login_required(login_url='login')
@@ -377,7 +377,7 @@ def delete_privacy_policy(request, id):
     except PrivacyPolicy.DoesNotExist:
         messages.error(request, 'Privacy not found')
 
-    return redirect('privacy_policy')
+    return redirect('Privacy_Policy')
 
 
 # def import_data(request):

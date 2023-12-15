@@ -157,24 +157,19 @@
                                        <i class="fa fa-user icon-user"></i>
                                     <label for="exampleInputPassword1">Select Properties</label>
                                     <select id="roomnames" name="room" class="form-control user-fill">
-                                      <option value="rooms">Room Items</option>
-                                      <option value="rooms">Room Items</option>
-                                      <option value="rooms">Room Items</option>
-                                      <option value="rooms">Room Items</option>
-                                      <option value="rooms">Room Items</option>
-                                      <option value="rooms">Room Items</option>
-                                      <option value="rooms">Room Items</option>
+                                      <option value="rooms">Propert  Name</option>
+                                    
                                    </select>
                                   </div>
                                   <div class="form-group col-md-12">
                                     <i class="fa fa-user icon-user"></i>
                                  <label for="exampleInputPassword1"> Property  Room No</label>
-                                 <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Items Name">
+                                 <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Room Number">
                                </div>
                                   <div class="form-group col-md-12">
                                         <i class="fa fa-user icon-user"></i>
-                                     <label for="exampleInputPassword1"> Property Name</label>
-                                     <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Items Name">
+                                     <label for="exampleInputPassword1"> Room Name</label>
+                                     <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Room Name">
                                      {% comment %} {{form.username}}
                                      {% if form.username.errors %}
 													<ul>
@@ -186,10 +181,10 @@
 											    {% endif %} {% endcomment %}
                                    </div>
                                     
-                                    <div class="form-group col-md-6 ">
+                                    <div class="form-group col-md-12 ">
                                         <i class="fa fa-envelope icon-user"></i>
-                                     <label for="exampleInputPassword1"> Property Email</label>
-                                     <input type="text" class="form-control  user-fill" id="user-add-form" placeholder="Email"> 
+                                     <label for="exampleInputPassword1"> Room  Description</label>
+                                     <input type="text" class="form-control  user-fill" id="user-add-form" placeholder="Room Description"> 
                                      {% comment %} {{form.email}}
                                      {% if form.email.errors %}
 													<ul class="error-list">
@@ -200,52 +195,11 @@
 													</ul>
 											    {% endif %} {% endcomment %}
                                    </div>
-                                    <div class="form-group col-md-6">
-                                       <i class="fa fa-key icon-user"></i>
-                                        <label for="exampleInputPassword1"> Property Password</label>
-                                       {% comment %} {{form.password}}
-                                       {% if form.password.errors %}
-													<ul>
-														{% for error in form.password.errors %}
-															<li>{{ error }}</li>
-															
-														{% endfor %}
-													</ul>
-											    {% endif %} {% endcomment %}
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                       <i class="fa fa-mobile icon-user"></i>
-                                    <label for="exampleInputPassword1"> Property Mobile</label>
-                                     {% comment %} {{user_form.mobile}}
-                                     {% if user_form.mobile.errors %}
-                                     <ul>
-                                        {% for error in user_form.mobile.errors %}
-                                           <li>{{ error }}</li>
-                                           
-                                        {% endfor %}
-                                     </ul>
-                                   {% endif %} {% endcomment %}
-                                  <input type="text" class="form-control  user-fill" id="user-add-form" placeholder="Name"> 
-                                  </div>
                                    
-                                     <div class="form-group col-md-12">
-                                        <i class="fa fa-envelope icon-user"></i>
-                                     <label for="exampleInputPassword1"> Property Address</label>
-                                    <textarea type="text" class="form-control  user-fill" id="user-add-form" placeholder="Enter Your Address"></textarea>
-                                     {% comment %} {{user_form.address}}
-                                     {% if user_form.address.errors %}
-                                     <ul>
-                                        {% for error in user_form.address.errors %}
-                                           <li>{{ error }}</li>
-                                           
-                                        {% endfor %}
-                                     </ul>
-                                   {% endif %} {% endcomment %}
-                                   </div>
 
                                    <div class="form-group col-md-12">
                                     <i class="fa fa-user icon-user"></i>
-                                    <label for="exampleInputPassword1"> Property  Profile Image</label><br>
+                                    <label for="exampleInputPassword1"> Room   Image</label><br>
                                     
                                     <input type="file" name="user_image" class="form-control" accept="image/*" required="" id="id_user_image">
                                     
