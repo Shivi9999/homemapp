@@ -13,15 +13,16 @@
     </div>
     <!-- /Logo -->
    
+
+
     <a href="javascript:void(0);" id="toggle_btn">
         <i class="fe fe-text-align-left"></i>
-    </a>
-    
-    <!-- Mobile Menu Toggle -->
+    </a>    
+  
     <a class="mobile_btn" id="mobile_btn">
         <i class="fa fa-bars"></i>
     </a>
-    <!-- /Mobile Menu Toggle -->
+ 
     
     <!-- Header Right Menu -->
     <ul class="nav user-menu">
@@ -53,3 +54,39 @@
     <!-- /Header Right Menu -->
     
 </div>
+
+
+<script> 
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleBtn = document.getElementById('toggle_btn');
+        const mobileBtn = document.getElementById('mobile_btn');
+        const sidebar = document.querySelector('.sidebar');
+    
+        // Function to toggle the sidebar
+        function toggleSidebar() {
+            sidebar.classList.toggle('opened');
+        }
+    
+        // Event listener for the toggle button
+        toggleBtn.addEventListener('click', toggleSidebar);
+    
+        // Event listener for touch devices
+        toggleBtn.addEventListener('touchstart', function (event) {
+            event.preventDefault();
+            toggleSidebar();
+        });
+    
+        // Event listener for the mobile button
+        mobileBtn.addEventListener('click', toggleSidebar);
+    
+        // Ensure sidebar is closed on mobile view
+        window.addEventListener('resize', function () {
+            if (window.innerWidth <= 767.98) {
+                sidebar.classList.remove('opened');
+            }
+        });
+    });
+    
+
+</script>

@@ -2068,7 +2068,7 @@ html.menu-opened body {
 
 .sidebar {
     background-color: #000000 !important;
-    /* background-image: url('./assets/img/layout_img/pattern.png'); */
+    background-image: url('./assets/img/layout_img/pattern.png');
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     bottom: 0;
     left: 0;
@@ -4427,7 +4427,7 @@ table.table-inbox tbody tr.checked {
 	25. Responsive
 -----------------------*/
 
-@media only screen and (min-width:768px) {
+/* @media only screen and (max-width: 767.98px) {
     .avatar-xxl {
         width: 8rem;
         height: 8rem;
@@ -4446,7 +4446,7 @@ table.table-inbox tbody tr.checked {
     .avatar-xxl.avatar-online:before {
         border-width: 4px;
     }
-}
+} */
 
 @media only screen and (min-width: 992px) {
     #toggle_btn {
@@ -4556,6 +4556,11 @@ table.table-inbox tbody tr.checked {
         top: 0;
         z-index: 10;
     }
+
+
+
+
+
     #toggle_btn {
         display: none;
     }
@@ -4570,14 +4575,31 @@ table.table-inbox tbody tr.checked {
         padding: 50px;
         width: 50%;
     }
+
+
+
+ 
+/*------------------kilvish */
+
+/* Add this style for mobile and small screens */
+@media only screen and (max-width: 767.98px) {
+    /* Existing styles for mobile */
+
     .sidebar {
-        margin-left: -225px;
-        width: 225px;
+        display: none !important; /* Hide the sidebar by default on small screens */
+        margin-left: 0;
+        width: 100%;
         -webkit-transition: all 0.4s ease;
         -moz-transition: all 0.4s ease;
         transition: all 0.4s ease;
         z-index: 1041;
     }
+
+    .sidebar.opened {
+        display: block !important; /* Display the sidebar when opened */
+        width: 60% !important;
+    }
+
     .page-wrapper {
         margin-left: 0;
         padding-left: 0;
@@ -4586,42 +4608,70 @@ table.table-inbox tbody tr.checked {
         -moz-transition: all 0.4s ease;
         transition: all 0.4s ease;
     }
-    .chat-window .chat-scroll {
-        max-height: calc(100vh - 255px);
+
+    #toggle_btn {
+        display: none !important; /* Hide the toggle button on small screens */
     }
-    .chat-window .chat-cont-left,
-    .chat-window .chat-cont-right {
-        flex: 0 0 100%;
-        max-width: 100%;
-        transition: left 0.3s ease-in-out 0s, right 0.3s ease-in-out 0s;
-        width: 100%;
-    }
-    .chat-window .chat-cont-left {
-        border-right: 0;
-    }
-    .chat-window .chat-cont-right {
-        position: absolute;
-        right: calc(-100% + -1.875rem);
-        top: 0;
-    }
-    .chat-window .chat-cont-right .chat-header {
-        justify-content: start;
-    }
-    .chat-window .chat-cont-right .chat-header .back-user-list {
-        display: block;
-    }
-    .chat-window .chat-cont-right .chat-header .chat-options {
-        margin-left: auto;
-    }
-    .chat-window.chat-slide .chat-cont-left {
-        left: calc(-100% + -1.875rem);
-    }
-    .chat-window.chat-slide .chat-cont-right {
-        right: 0;
+
+    .mobile_btn {
+        display: block !important; /* Display the mobile toggle button on small screens */
+        color: #fff !important;
+        cursor: pointer;
+        font-size: 24px;
+        height: 60px;
+        line-height: 60px;
+        padding: 0 15px;
+        text-align: center;
+        z-index: 10;
     }
 }
 
+/* Keep your existing styles for larger screens */
+@media screen and (max-width: 640px){
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter {
+    float: left !important;
+    text-align: center !important;
+    width: 44% !important;
+}
+}
+    
+@media screen and (max-width: 640px){
+.dataTables_wrapper .dataTables_filter {
+    margin-top: 0em !important;
+    float: right !important;
+    width: 54% !important;
+}
+.dataTables_wrapper .dataTables_filter input[type="search"] {
+    width: 65% !important;
+    margin-top: 0px !important;
+}
+}
+
+@media screen and (max-width: 767px){
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate {
+    float: left !important;
+    text-align: center !important;
+    width: 46% !important;
+}
+
+}
+
+@media screen and (max-width: 767px){
+.dataTables_wrapper .dataTables_paginate {
+    margin-top: 0.5em;
+    width: 50%;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+    padding: 0.3em 0.4em !important;
+}
+}
+
+
+
 @media only screen and (max-width: 767.98px) {
+
+    
+
     body {
         font-size: 0.9375rem;
     }
@@ -4836,6 +4886,49 @@ table.table-inbox tbody tr.checked {
 }
 
 
+
+
+
+
+
+
+    .chat-window .chat-scroll {
+        max-height: calc(100vh - 255px);
+    }
+    .chat-window .chat-cont-left,
+    .chat-window .chat-cont-right {
+        flex: 0 0 100%;
+        max-width: 100%;
+        transition: left 0.3s ease-in-out 0s, right 0.3s ease-in-out 0s;
+        width: 100%;
+    }
+    .chat-window .chat-cont-left {
+        border-right: 0;
+    }
+    .chat-window .chat-cont-right {
+        position: absolute;
+        right: calc(-100% + -1.875rem);
+        top: 0;
+    }
+    .chat-window .chat-cont-right .chat-header {
+        justify-content: start;
+    }
+    .chat-window .chat-cont-right .chat-header .back-user-list {
+        display: block;
+    }
+    .chat-window .chat-cont-right .chat-header .chat-options {
+        margin-left: auto;
+    }
+    .chat-window.chat-slide .chat-cont-left {
+        left: calc(-100% + -1.875rem);
+    }
+    .chat-window.chat-slide .chat-cont-right {
+        right: 0;
+    }
+}
+
+
+
 /************************************************************************************
 @#$@$#$# ALL HTML PAGE CSS START ALL HTML PAGE CSS START ALL HTML PAGE CSS START 
 ************************************************************************************/
@@ -4939,13 +5032,6 @@ button.btn.btn-primary {
 .full-anslist label.answer-lists p {
     margin-bottom: 10px;
     margin-top: 0px;
-}
-
-hr {
-    margin-top: 0.4rem;
-    margin-bottom: 0.5rem;
-    border: 0;
-    border-top: 2px solid rgba(0, 0, 0, .1);
 }
 
 

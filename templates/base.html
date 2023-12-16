@@ -3,7 +3,10 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+       
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <title>HomeMapp home page</title>
 		
 		<!-- Favicon -->
@@ -19,9 +22,12 @@
         <link rel="stylesheet" href="{%static 'assets/css/feathericon.min.css'%}">
 		
 		<link rel="stylesheet" href="{%static 'assets/plugins/morris/morris.css'%}">
-		{% comment %} <link rel="stylesheet" type="css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> {% endcomment %}
+
 		<!-- Main CSS -->
         <link rel="stylesheet" href="{%static 'assets/css/style.css'%}">
+
+
+
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
@@ -115,6 +121,9 @@
       var total = $('input[name="options[]"]:checked').length;
       $(".dropdown-text").html('(' + total + ') Selected');
     });
+
+
+
     </script>
             </body>            
 </html>
