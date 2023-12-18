@@ -291,8 +291,8 @@ a.menu-link {
     min-height: 100vh;
     max-width: 100%;
     max-height: 100vh;
-    object-fit: none;
-    /* object-fit: cover; */
+    /* object-fit: none; */
+    object-fit: contain;
     z-index: -1;
     margin-top: -45px;
 }
@@ -306,7 +306,7 @@ a.menu-link {
     background-color: rgba(22, 34, 57, 0.35);
     top: 0;
     left: 0;
-    bottom: -175px;
+    bottom: -0px;
     width: 100%;
 }
 
@@ -922,19 +922,19 @@ footer p a:hover {
 /*CHAT SCREEN CSS START CHAT SCREEN CSS STARTCHAT SCREEN CSS STARTCHAT SCREEN CSS STARTCHAT */
 
 main#msger-chat {
-    height: 200px;
+    height: 83vh;
     overflow-y: auto;
 }
 
 .msger {
-    display: block;
+    display: flex;
     overflow-x: hidden;
     flex-flow: column wrap;
     justify-content: space-between;
     width: 100%;
     max-width: 60%;
-    margin: 11% 20% 0% 20%;
-    height: calc(100% - 130px);
+    margin: 0% 20% 0% 20%;
+    height: 100vh;
     border: var(--border);
     border-radius: 5px;
     background: var(--msger-bg);
@@ -950,10 +950,11 @@ main#msger-chat {
     color: #666;
 }
 
-main#msger-chat {
+
+/* main#msger-chat {
     height: 200px;
     overflow-y: auto;
-}
+} */
 
 .msger-chat {
     background-color: #1a263c8f;
@@ -1140,7 +1141,7 @@ main#msger-chat {
         transform: translate(-50%, -50%);
     }
     .msger {
-        height: 51vh !important;
+        height: 106vh !important;
         max-width: 100% !important;
         margin: 1% 18% 1% 17% !important;
     }
@@ -1155,6 +1156,14 @@ main#msger-chat {
     }
     .msg {
         margin-bottom: 15px !important;
+    }
+    .video-overlay {
+        position: absolute;
+        background-color: rgba(22, 34, 57, 0.35);
+        top: 0;
+        left: 0;
+        bottom: 268px !important;
+        width: 100%;
     }
     .main-header {
         height: 40px !important;
@@ -1175,7 +1184,7 @@ main#msger-chat {
         height: 100vh !important;
     }
     .msger-chat {
-        background-color: #1a263c !important;
+        background-color: #1a263cb5 !important;
     }
     .msger-header {
         background: #ffffffb8 !important;
