@@ -19,7 +19,7 @@ def dashboard(request):
     return render(request,'index.html',context)
 
 
-
+# KIGGGGGGGGG
 
 def login(request):
     # Print the entire session dictionary
