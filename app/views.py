@@ -1,7 +1,13 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import *
 from .forms import *
-import pandas as pd
+
+from django.http import JsonResponse
+
+import spacy
+from fuzzywuzzy import fuzz
+from spellchecker import SpellChecker
+from fuzzywuzzy import process
 from django. contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login as auth_login
@@ -479,3 +485,49 @@ def delete_user(request):
     # For example, you can delete the user and return a success message
     response_data = {'msg': True}
     return JsonResponse(response_data)
+
+############################## CHAT #############################################
+
+
+def chat(request):
+    return render(request,'chatbot/index.html')
+
+def get_answer(request):
+    try:
+        if request.method == 'GET':
+            user_input = request.GET.get('user_input', '').lower().strip()
+           
+
+            if not user_input:
+                return JsonResponse({'answer': 'Please provide a question.'})
+
+            # Spell-check user input
+            spell_checker = SpellChecker()
+            corrected_input = ' '.join(spell_checker.correction(word) for word in user_input.split())
+            nlp = spacy.load("en_core_web_sm")
+            input_doc = nlp(corrected_input)
+          
+            matched_qa = QuestionAnswer.objects.filter(question__icontains=corrected_input).first()
+            if not matched_qa:
+                # If an exact match is not found, try fuzzy matching
+                questions = QuestionAnswer.objects.values_list('question', flat=True)
+                best_match, ratio = process.extractOne(corrected_input, questions)
+                
+                if ratio >= 80:
+                    matched_qa = QuestionAnswer.objects.filter(question=best_match).first()
+            if matched_qa:
+                
+                if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+                    return JsonResponse({'answer': matched_qa.answer})
+               
+                return render(request, 'chatbot/answer.html', {'user_input': user_input, 'answer': matched_qa.answer})
+            else:
+                if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+                    return JsonResponse({'answer': 'Sorry, I don\'t have an answer for that question.'})
+                return render(request, 'chatbot/answer.html', {'user_input': user_input, 'answer': 'Sorry, I don\'t have an answer for that question.'})
+        else:
+            return JsonResponse({'error': 'Invalid request method.'})
+    except Exception as e:
+       
+        print(f"An error occurred: {str(e)}")
+        return JsonResponse({'error': 'Sorry, I don\'t have an answer for that question.'})

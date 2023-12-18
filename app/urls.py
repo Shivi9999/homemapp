@@ -30,8 +30,9 @@ urlpatterns = [
     path('change_password/', views.change_password, name='change_password'),
     path('delete_terms_condition/<int:id>/', views.delete_terms_condition, name='delete_terms_condition'),
     path('delete_privacy_policy/<int:id>/', views.delete_privacy_policy, name='delete_privacy_policy'),
-
-
+    path('get_answer/', views.get_answer, name='get_answer'),
+    #path('', views.index, name='index'),
+    path('chat', views.chat, name='chatbot_page'),
     ################  USER VIEWS ###################
 
     path('user_dashboard',user_views.user_dashboard,name='user_dashboard'),

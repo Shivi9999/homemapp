@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Answer</title>
+</head>
+<body>
+  
+<div id="answerContainer">
+    {% if user_input %}
+        <p>User: {{ user_input }}</p>
+    {% endif %}
+     <p>Chatbot :{{ answer }}</p>
+</div>
+    {% comment %} <div id="answerContainer">{{ answer }}</div> {% endcomment %}
+<script>
+    document.getElementById('questionForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const userInput = document.getElementById('userInput').value;
+        // Make an AJAX request to the Django backend
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    try {
+                        // Update the content of the answerContainer using Django template syntax
+                        document.getElementById('answerContainer').innerHTML = xhr.responseText;
+                    } 
+                    catch (error) {
+                        console.error('Error updating answerContainer:', error);
+                    }
+                } else {
+                    console.error('Error:', xhr.status, xhr.statusText);
+                }
+            }
+        };
+
+        // Replace 'your_django_url' with your actual Django endpoint
+        xhr.open('GET', `/get_answer/?user_input=${encodeURIComponent(userInput)}`, true);
+        xhr.send();
+    });
+</script>
+</body>
+</html>
