@@ -173,7 +173,7 @@ def edit_question(request,id):
             
             owner_instance.save()
             
-            return redirect(View_question)
+            return redirect('View_question')
         else:
             print(question_form.errors)
       
@@ -469,3 +469,13 @@ def import_excel(request):
         form = QuestionForm()
 
     return redirect('add_question',{'form':form})
+
+
+def delete_user(request):
+    user_id = request.POST.get('userID')
+
+    # Perform user deletion logic here
+
+    # For example, you can delete the user and return a success message
+    response_data = {'msg': True}
+    return JsonResponse(response_data)
