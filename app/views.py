@@ -212,7 +212,7 @@ def privacy(request):
     privacy = PrivacyPolicy.objects.all()
 
     if request.method == 'POST':
-        privacy_policy_text = request.POST.get('Privacy_Policy', '')
+        privacy_policy_text = request.POST.get('privacy_policy', '')
         
         # Update or create the TermsCondition object
         obj, created = PrivacyPolicy.objects.update_or_create(defaults={'privacy_policy': privacy_policy_text})
