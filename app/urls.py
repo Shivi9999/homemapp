@@ -22,7 +22,7 @@ urlpatterns = [
     path('manage_user_admin/', views.manage_user_admin, name='manage_user_admin'),
     path('index/', views.index, name='index'),
     path('save_question_answer', views.save_question_answer, name='save_question_answer'),
-    path('import_excel', views.import_excel, name='import_excel'),
+    # path('import_excel', views.import_excel, name='import_excel'),
     path('notifications/edit/<int:id>/', views.edit_notification, name='edit_notification'),
     path('notifications/delete/<int:id>/', views.delete_notification, name='delete_notification'),
  #  path('import_data/', views.import_data, name='import_data'),
@@ -33,6 +33,8 @@ urlpatterns = [
     path('get_answer/', views.get_answer, name='get_answer'),
     #path('', views.index, name='index'),
     path('chat', views.chat, name='chatbot_page'),
+    path('import-csv/', views.import_csv, name='import_csv'),
+  
     ################  USER VIEWS ###################
 
     path('user_dashboard',user_views.user_dashboard,name='user_dashboard'),

@@ -174,3 +174,7 @@ class AddHotelForm(forms.ModelForm):
 #         widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox-list'}
         
 #         ),
+
+
+class CSVUploadForm(forms.Form):
+    file = forms.FileField()

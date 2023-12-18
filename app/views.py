@@ -157,9 +157,9 @@ def delete_property_owner(request, id):
 
 @login_required(login_url='login')
 def add_question(request):
-   
+    form = QuestionForm(request.POST, request.FILES)
     question_form = QuestionForm()
-    return render(request,'Chat_add_question.html',{'question_form':question_form})
+    return render(request,'Chat_add_question.html',{'question_form':question_form,'form':form})
 
 @login_required(login_url='login')
 def view_question(request):
@@ -460,21 +460,21 @@ def save_question_answer(request):
 #         question_answer = QuestionAnswer(question=question_text, answer=answer_text)
 #         question_answer.save()
 
-@login_required(login_url='login')
-def import_excel(request):
-    if request.method == 'POST':
-        form = QuestionForm(request.POST, request.FILES)
-        if form.is_valid():
-            excel_file = request.FILES['excel_file']
-            process_and_save_excel_data(excel_file)
+# @login_required(login_url='login')
+# def import_excel(request):
+#     if request.method == 'POST':
+#         form = QuestionForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             excel_file = request.FILES['excel_file']
+#             process_and_save_excel_data(excel_file)
 
-            messages.success(request, 'Excel file imported and data saved successfully!')
-        else:
-            messages.error(request, 'Error importing Excel file. Please check the form and try again.')
-    else:
-        form = QuestionForm()
+#             messages.success(request, 'Excel file imported and data saved successfully!')
+#         else:
+#             messages.error(request, 'Error importing Excel file. Please check the form and try again.')
+#     else:
+       
 
-    return redirect('add_question',{'form':form})
+#     return redirect('add_question')
 
 
 def delete_user(request):
@@ -531,3 +531,35 @@ def get_answer(request):
        
         print(f"An error occurred: {str(e)}")
         return JsonResponse({'error': 'Sorry, I don\'t have an answer for that question.'})
+
+
+def import_csv(request):
+    if request.method == 'POST':
+        form = CSVUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = request.FILES['file']
+            try:
+                if file.name.endswith('.csv'):
+                    df = pd.read_csv(file)
+                elif file.name.endswith('.xlsx'):
+                    df = pd.read_excel(file, engine='openpyxl')
+                else:
+                    raise ValueError('Unsupported file format. Please upload a CSV or Excel file.')
+                
+                for _, row in df.iterrows():
+                    question = row['question']
+                    answer = row['answer']
+                    QuestionAnswer.objects.create(question=question, answer=answer)
+                
+                messages.success(request, 'File imported successfully.')
+            except Exception as e:
+                messages.error(request, f'Error importing file: {str(e)}')
+            
+            return redirect('import_csv')  # Redirect to the same page after import
+
+    else:
+        form = CSVUploadForm()
+
+    return render(request, 'kil.html', {'form': form})
+
+
