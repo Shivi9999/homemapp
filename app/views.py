@@ -240,7 +240,7 @@ def notification(request):
         form = NotificationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('Notification')  # Redirect to a confirmation page or another URL
+            return redirect('notification')  # Redirect to a confirmation page or another URL
     else:
         form = NotificationForm()
     notifications=Notification.objects.all()
@@ -257,7 +257,7 @@ def edit_notification(request, id):
         form = NotificationForm(request.POST, instance=notification)
         if form.is_valid():
             form.save()
-            return redirect('Notification')  # Redirect to the notification list view
+            return redirect('notification')  # Redirect to the notification list view
     else:
         form = NotificationForm(instance=notification)
 
@@ -270,7 +270,7 @@ def delete_notification(request,id):
         notification = get_object_or_404(Notification, id=notification_id)
         notification.delete()
 
-    return redirect('Notification')  # Redirect to the notification list view
+    return redirect('notification')  # Redirect to the notification list view
 
 
 @login_required(login_url='login')
