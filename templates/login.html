@@ -55,11 +55,11 @@ button.btn.btn-block.btn-facebook.auth-form-btn {
     color: #ffffff;
     margin: 14px 0px;
 }
-.btn-primary {
+{% comment %} .btn-primary {
     color: #fff;
     background: linear-gradient(85deg, #d4ad99, #ffe4b5);
     border-color: #ffe4b5;
-}
+} {% endcomment %}
 .btn-primary:hover {
     color: #fff;
     background-color: #000;
@@ -90,6 +90,13 @@ a:hover {
   text-align: center;
   font-weight: 600;
   text-transform: uppercase;
+}
+
+.btn-primary {
+  color: #ffffff;
+  background: linear-gradient(85deg, #d4ad99, #d14b41);
+  border-color: #ffffff;
+  font-weight: 600;
 }
 </style>
   </head>
@@ -144,7 +151,7 @@ a:hover {
                   <a href="{% url 'forget_password'%}" class="auth-link text-black">Forgot password?</a>
                 </div>
                    <div class="mt-3">
-                    <input type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"  value=" SIGN IN">
+                    <input type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"  value=" Log in">
                   <!-- <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" >SIGN IN</a> -->
                 </div>
                 {% comment %} <div class="text-center mt-3 font-weight-bold" style="color:white">
