@@ -463,7 +463,7 @@ def save_question_answer(request):
         if question_form.is_valid():
             question_form.save()
          
-            messages.success(request, 'Question and answer saved successfully!')
+            
             return redirect('View_question')
         else:
             errors = question_form.errors
