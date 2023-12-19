@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import *
 from .forms import *
-
+from django.views.decorators.csrf import csrf_protect
 from django.http import JsonResponse
 
 import spacy
@@ -152,7 +152,8 @@ def delete_property_owner(request, id):
     # Delete the property owner and associated user
     property_owner.delete()
     user_instance.delete()
-    return redirect('View_property_owner')
+    
+    return JsonResponse({'msg': True})
 
 
 @login_required(login_url='login')
@@ -188,14 +189,23 @@ def edit_question(request,id):
     return render(request,'edit_question_answer.html',{'question_form':question_form})
 
 
-
+@csrf_protect
 @login_required(login_url='login')
 def delete_question(request, id):
-    question_answer = get_object_or_404(QuestionAnswer, pk=id)
-     # Delete the property owner and associated user
-    question_answer.delete()
     
-    return redirect('View_question')
+    question = get_object_or_404(QuestionAnswer, id=id)
+   
+    question.delete()
+
+   
+    return JsonResponse({'msg': True})
+    
+# def delete_question(request, id):
+#     question_answer = get_object_or_404(QuestionAnswer, pk=id)
+#      # Delete the property owner and associated user
+#     question_answer.delete()
+    
+#     return redirect('View_question')
 
 @login_required(login_url='login')
 def add_manage_property(request):
@@ -271,12 +281,12 @@ def edit_notification(request, id):
 
 @login_required(login_url='login')
 def delete_notification(request,id):
-    if request.method == 'GET':
-        notification_id = request.GET.get('id')
-        notification = get_object_or_404(Notification, id=notification_id)
-        notification.delete()
+    notification = get_object_or_404(Notification, id=id)
+   
+    notification.delete()
+      
 
-    return redirect('notification')  # Redirect to the notification list view
+    return JsonResponse({'msg': True})  # Redirect to the notification list view
 
 
 @login_required(login_url='login')
@@ -364,26 +374,20 @@ def index(request):
 
 @login_required(login_url='login')
 def delete_terms_condition(request, id):
-    try:
-        term = TermsCondition.objects.get(pk=id)
-        term.delete()
-        messages.success(request, 'Deleted Successfully')
-    except TermsCondition.DoesNotExist:
-        messages.error(request, 'Term not found')
+    terms_condition = get_object_or_404(TermsCondition, id=id)
+   
+    terms_condition.delete()
 
-    return redirect('terms_condition')
+    return JsonResponse({'msg': True})
 
 
 @login_required(login_url='login')
 def delete_privacy_policy(request, id):
-    try:
-        privacy = PrivacyPolicy.objects.get(pk=id)
-        privacy.delete()
-        messages.success(request, 'Deleted Successfully')
-    except PrivacyPolicy.DoesNotExist:
-        messages.error(request, 'Privacy not found')
+    privacy = get_object_or_404(PrivacyPolicy, id=id)
+   
+    privacy.delete()
 
-    return redirect('Privacy_Policy')
+    return JsonResponse({'msg': True})
 
 
 # def import_data(request):
@@ -476,22 +480,23 @@ def save_question_answer(request):
 
 #     return redirect('add_question')
 
+# @login_required(login_url='login')
+# def delete_user(request):
+#     user_id = request.POST.get('userID')
 
-def delete_user(request):
-    user_id = request.POST.get('userID')
+#     # Perform user deletion logic here
 
-    # Perform user deletion logic here
-
-    # For example, you can delete the user and return a success message
-    response_data = {'msg': True}
-    return JsonResponse(response_data)
+#     # For example, you can delete the user and return a success message
+#     response_data = {'msg': True}
+#     return JsonResponse(response_data)
 
 ############################## CHAT #############################################
 
-
+@login_required(login_url='login')
 def chat(request):
     return render(request,'chatbot/index.html')
-
+    
+@login_required(login_url='login')
 def get_answer(request):
     try:
         if request.method == 'GET':

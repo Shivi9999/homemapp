@@ -192,10 +192,10 @@
 												  <a class="edit-btn" href="{% url 'edit_property_owner' id=owner.id %}">
 													<button class="btn btn-primary">Edit</button>
 												</a>
-												<a class="delete-btn" href="{% url 'delete_property_owner' id=owner.id %}">
+												{% comment %} <a class="delete-btn" href="{% url 'delete_property_owner' id=owner.id %}">
 													<button class="btn btn-primary delete-btn">Delete</button>
-												</a> 
-											
+												</a>  {% endcomment %}
+												<button class="btn btn-primary delete-question-btn " data-id="{{owner.id}}">Delete </button>
 												<br>
 												</td>
 											 
@@ -222,7 +222,72 @@
 				</div>			
 			</div>
 			<!-- /Page Wrapper -->
-		
+			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+			<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+			<script>
+				$(document).ready(function () {
+					$('.delete-question-btn').click(function () {
+						var ownerId = $(this).data('id');
+						console.log('Owner ID:', ownerId);
+						Swal.fire({
+							title: 'Are you sure?',
+							text: "You won't be able to revert this!",
+							icon: 'warning',
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							confirmButtonText: 'Yes, delete Owner'
+						}).then((result) => {
+							if (result.isConfirmed) {
+								// Retrieve CSRF token from the cookie
+								var csrftoken = getCookie('csrftoken');
+				
+								// Make an AJAX request to delete the question
+								$.ajax({
+									type: 'DELETE',
+									headers: { "X-CSRFToken": csrftoken },
+									url: "/delete_property_owner/" + ownerId + "/",
+									
+
+									data: { id: ownerId },
+									success: function (response) {
+										console.log('Owner deleted successfully');
+										var message = 'Owner Deleted Successfully !!';
+										if (response.msg == true) {
+											window.location.reload();
+										} else {
+											$("#errorMessage").removeClass("d-none");
+											$("#successMessage").addClass("d-none");
+										}
+									},
+									error: function (error) {
+										console.error('Error deleting owner', error);
+										// Handle error
+									}
+								});
+							}
+						});
+					});
+				
+					// Function to get CSRF token from the cookie
+					function getCookie(name) {
+						var cookieValue = null;
+						if (document.cookie && document.cookie !== '') {
+							var cookies = document.cookie.split(';');
+							for (var i = 0; i < cookies.length; i++) {
+								var cookie = $.trim(cookies[i]);
+								// Check if the cookie name matches the expected pattern
+								if (cookie.substring(0, name.length + 1) === (name + '=')) {
+									cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+									break;
+								}
+							}
+						}
+						return cookieValue;
+					}
+				});
+				
+			</script>
         </div>
 		
 		<!-- /Main Wrapper -->

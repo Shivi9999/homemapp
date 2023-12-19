@@ -30,7 +30,7 @@ class PropertyForm(forms.ModelForm):
         }
   mobile = forms.IntegerField(
         widget=forms.NumberInput(attrs={'class': 'form-control'}),
-        required=False  # Set this to True if mobile is a required field
+        required=True  # Set this to True if mobile is a required field
     )
 
 

@@ -9,9 +9,9 @@
   
 <div id="answerContainer">
     {% if user_input %}
-        <p>User: {{ user_input }}</p>
+        <p>{{user.username}}: {{ user_input }}</p>
     {% endif %}
-     <p>Chatbot :{{ answer }}</p>
+     <p>Avai :{{ answer }}</p>
 </div>
     {% comment %} <div id="answerContainer">{{ answer }}</div> {% endcomment %}
 <script>

@@ -93,6 +93,55 @@
 			<!-- /Page Wrapper -->
 		
         </div>
+
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
+
+		<script>
+			$(document).ready(function () {
+				$('.delete-question-btn').click(function () {
+					var questionId = $(this).data('question-id');
+		
+					Swal.fire({
+						title: 'Are you sure?',
+						text: "You won't be able to revert this!",
+						icon: 'warning',
+						showCancelButton: true,
+						confirmButtonColor: '#3085d6',
+						cancelButtonColor: '#d33',
+						confirmButtonText: 'Yes, delete Question'
+					}).then((result) => {
+						if (result.isConfirmed) {
+							// Get CSRF token
+							var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+		
+							// Make an AJAX request to delete the question
+							$.ajax({
+								type: 'DELETE',
+								headers: { "X-CSRFToken": csrftoken },
+								url: '/views/delete_question/',  // Update this URL
+								data: { questionID: questionId },  // Change variable name if necessary
+								success: function (response) {
+									console.log('Question deleted successfully');
+									var message = 'Question Deleted Successfully !!';
+									if (response.msg == true) {
+										window.location.href = '/admin/viewQuestions/';  // Update this URL
+									} else {
+										$("#errorMessage").removeClass("d-none");
+										$("#successMessage").addClass("d-none");
+									}
+								},
+								error: function (error) {
+									console.error('Error deleting question', error);
+									// Handle error
+								}
+							});
+						}
+					});
+				});
+			});
+		</script>
 		<!-- /Main Wrapper -->
 		
 		{% comment %} <!-- jQuery -->
