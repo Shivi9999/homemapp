@@ -5,7 +5,7 @@ import pandas as pd
 from django. contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,logout, login as auth_login
-
+from django.http import JsonResponse
 
 @login_required(login_url='login_user')
 def user_dashboard(request):
@@ -75,18 +75,56 @@ def delete_hotel(request, id):
 @login_required(login_url='login_user')
 def add_property_management(request):
    
-    return render(request,'Owner/property_Add_Management.html')
+    if request.method == 'POST':
+        form = AddRoomForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('view_property_management')  # Assuming you have a URL pattern named 'room_list' for displaying the list of rooms
+        else:
+           print(form.errors )
+    else:
+        form = AddRoomForm()
+
+   
+    return render(request,'Owner/property_Add_Management.html',{'form': form})
 
 
 
 @login_required(login_url='login_user')
 def view_property_management(request):
+    hotels = Add_hotel.objects.filter(user=request.user)
     
-           
+    # Fetch rooms associated with the hotels of the logged-in user
+    property_management = Add_Room.objects.filter(flat_name__in=hotels)
    
-    return render(request,'Owner/View_property_managment.html')
+    return render(request,'Owner/View_property_managment.html',{'property_management':property_management})
+
+@login_required(login_url='login_user')
+def edit_room(request, id):
+    room = Add_Room.objects.get(id=id)
+
+    if request.method == 'POST':
+        form = AddRoomForm(request.POST, request.FILES, instance=room)
+        if form.is_valid():
+            form.save()
+            return redirect('view_property_management')  # replace with your URL name
+    else:
+        form = AddRoomForm(instance=room)
+
+    return render(request, 'Owner/edit_room.html', {'form': form, 'room': room})
 
 
+
+
+
+@login_required(login_url='login_user')
+def delete_property_management(request,id):
+    property_manage = get_object_or_404(Add_Room, id=id)
+    
+    property_manage.delete()
+        
+
+    return JsonResponse({'msg': True})
 
 
 @login_required(login_url='login_user')

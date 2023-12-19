@@ -93,21 +93,19 @@ class NotificationForm(forms.ModelForm):
         model = Notification
         fields = ['title', 'message', 'users']
 
-
         widgets = {
-            
-            
-            'title': forms.TextInput(attrs={'class': 'form-control', 'required': False}),
-            'message': forms.TextInput(attrs={'class': 'form-control', 'required': False}),
+            'title': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
+            'message': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
         }
 
     users = forms.ModelMultipleChoiceField(
         queryset=User.objects.exclude(user_type='1'),
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox-list'}
-        
-        ),
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox-list'}),
     )
 
+    def __init__(self, *args, **kwargs):
+        super(NotificationForm, self).__init__(*args, **kwargs)
+        self.fields['users'].initial = User.objects.exclude(user_type='1').values_list('id', flat=True)
 
 class Faqform(forms.ModelForm):
     
@@ -161,25 +159,17 @@ class AddHotelForm(forms.ModelForm):
     )
    
 
-# class AddRoomForm(forms.ModelForm):
-#     class Meta:
-#         model = Add_Room
-#         fields = ['property_name', 'room_number', 'room_name', 'room_description', 'room_image']
-#         widgets = {
-            
-                
-#                 'total_room': forms.TextInput(attrs={'class': 'form-control'}),
-#                 'email': forms.TextInput(attrs={'class': 'form-control'}),
-#                 'address': forms.TextInput(attrs={'class': 'form-control'}),
-            
-    
-                
-#             }
-#     property_name = forms.ModelMultipleChoiceField(
-#         queryset=Add_hotel.objects.all(),
-#         widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox-list'}
-        
-#         ),
+class AddRoomForm(forms.ModelForm):
+    class Meta:
+        model = Add_Room
+        fields = ['flat_name', 'room_number', 'room_name', 'room_description', 'room_image']
+        widgets = {
+            'flat_name': forms.Select(attrs={'class': 'form-control'}),
+            'room_number': forms.TextInput(attrs={'class': 'form-control'}),
+            'room_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'room_description': forms.TextInput(attrs={'class': 'form-control'}),
+            'room_image': forms.FileInput(attrs={'class': 'form-control'}),
+        }
 
 
 class CSVUploadForm(forms.Form):

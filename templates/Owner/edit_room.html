@@ -1,0 +1,168 @@
+{% extends "Owner/base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+   /* Add this to your CSS file */
+
+
+.error-list {
+    color: red;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.error-list li {
+    margin-top: 5px;
+}
+
+</style>
+
+ 
+   <body class="dashboard dashboard_1">
+      <div class="full_container">
+         <div class="inner_container">
+           
+             <div id="content">
+             
+               <div class="midde_cont">
+                  <div class="container-fluid">
+                     <div class="row column_title">
+                        <div class="col-md-12">
+                           <div class="page_title">
+                              <h2>Dashboard</h2>
+                           </div>
+                        </div>
+                     </div>
+                <!--  -->
+                     <div class="row">
+                       <div class="white_shd full">
+                              <div class="full graph_head">
+                                 <div class="heading1 margin_0">
+                                    <h2>Edit Room</h2>
+                                 </div>
+                              </div>
+                            <div class="users-forms">
+                            <div class="row">
+                               <div class="col-md-7">
+                                    <form  method="post" enctype="multipart/form-data" nonvalidate>
+                                     {% csrf_token %}
+                                     <div class="form-group row add-user">
+                                       <div class="form-group col-md-12">
+                                          <i class="fa fa-user icon-user"></i>
+                                          <label for="exampleInputPassword1">Select Properties</label>
+                                          <select id="roomnames" name="flat_name" class="form-control user-fill">
+                                              <option value="{{ form.instance.flat_name.id }}">{{ form.instance.flat_name }}</option>
+                                              <!-- Add other options if needed -->
+                                          </select>
+                                      </div>
+                                  
+                                   
+                                  <div class="form-group col-md-12">
+                                    <i class="fa fa-user icon-user"></i>
+                                 <label for="exampleInputPassword1"> Property  Room No</label>
+                                 {{ form.room_number }}
+                                 {% if form.room_number.errors %}
+                                     <ul class="error-list">
+                                         {% for error in form.room_number.errors %}
+                                             <li>{{ error }}</li>
+                                         {% endfor %}
+                                     </ul>
+                                 {% endif %}
+                                 {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Room Number"> {% endcomment %}
+                               </div>
+                                  <div class="form-group col-md-12">
+                                        <i class="fa fa-user icon-user"></i>
+                                     <label for="exampleInputPassword1"> Room Name</label>
+                                     {{ form.room_name }}
+                                     {% if form.room_name.errors %}
+                                         <ul class="error-list">
+                                             {% for error in form.room_name.errors %}
+                                                 <li>{{ error }}</li>
+                                             {% endfor %}
+                                         </ul>
+                                     {% endif %}
+                                     {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Room Name"> {% endcomment %}
+                                     {% comment %} {{form.username}}
+                                     {% if form.username.errors %}
+													<ul>
+														{% for error in form.username.errors %}
+															<li>{{ error }}</li>
+															
+														{% endfor %}
+													</ul>
+											    {% endif %} {% endcomment %}
+                                   </div>
+                                    
+                                    <div class="form-group col-md-12 ">
+                                        <i class="fa fa-envelope icon-user"></i>
+                                     <label for="exampleInputPassword1"> Room  Description</label>
+                                     {{ form.room_description }}
+                                     {% if form.room_description.errors %}
+                                         <ul class="error-list">
+                                             {% for error in form.room_description.errors %}
+                                                 <li>{{ error }}</li>
+                                             {% endfor %}
+                                         </ul>
+                                     {% endif %}
+                                     {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder="Room Description">  {% endcomment %}
+                                     {% comment %} {{form.email}}
+                                     {% if form.email.errors %}
+													<ul class="error-list">
+														{% for error in form.email.errors %}
+															<li>{{ error }}</li>
+															
+														{% endfor %}
+													</ul>
+											    {% endif %} {% endcomment %}
+                                   </div>
+                                   
+
+                                   <div class="form-group col-md-12">
+                            
+                                    <label for="exampleInputPassword1"> Room Image</label><br>
+                                    <img src="{{ form.instance.room_image.url }}" alt="Room Image"  style="max-width: 20%; height: auto; border: 1px solid #ddd; border-radius: 4px; padding: 5px;">
+                                    {{ form.room_image }}
+                                    {% if form.room_image.errors %}
+                                        <ul class="error-list">
+                                            {% for error in form.room_image.errors %}
+                                                <li>{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                    {% comment %} <input type="file" name="user_image" class="form-control" accept="image/*" required="" id="id_user_image"> {% endcomment %}
+                                    
+                                  </div>
+                                <div class="form-group col-md-12">
+                                   <button type="submit" class="btn btn-primary">Submit</button>
+                                 </div>
+                              </div>
+                              </form>
+                               </div>
+                               <div class="col-md-4">
+                                  <div class="full-img" style="padding: 35% 0px;">
+                                     <img src="{%static  'images/customer-img.png' %}">
+                                  </div>
+                               </div>
+                            </div>
+                            </div>
+                           </div>
+                     </div>
+            <!--  -->
+                  </div>
+                  <!-- footer -->
+                     <div class="footer">
+                                 <div class="container-fluid">
+                        <p>Copyright ©2023 All rights reserved | Design & Develop by
+                           <a href="https://cyberimpulses.com/"> CISS</a>
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      
+{% endblock %}

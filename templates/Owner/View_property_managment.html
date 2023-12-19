@@ -155,18 +155,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                          {% for usr in user_management %}
+                                          {% for property in property_management %}
                                             <tr class="even">
                                                 <td>{{forloop.counter}}</td>
-                                                <td>{{usr.user.username}}</td>
-                                                <td>{{usr.user.email}}</td>
-                                                <td>{{usr.mobile}}</td>
-                                                <td>{{usr.address}}</td> 
+                                                <td>{{property.flat_name}}</td>
+                                                <td>{{property.room_number}}</td>
+                                                <td>{{property.room_name}}</td>
+                                                <td>{{property.room_description}}</td> 
                                                 
-                                                <td><img src="{{ usr.user_image.url }}" alt="User Image" style="max-width: 100px;" ></td>
+                                                <td><img src="{{ property.room_image.url }}" alt="User Image" style="max-width: 100px;" ></td>
                                              <td>
-                                        <button class="btn btn-primary mb-2"><a class="edit-btn" href="{% url 'edit_user' id=usr.id %}">Edit</a></button>
-                                         <button class="btn btn-primary mb-2"><a class="edit-btn" href="{% url 'delete_user' id=usr.id %}">Delete</a></button>
+                                        <button class="btn btn-primary mb-2"><a class="edit-btn" href="{% url 'edit_room' property.id %}">Edit</a></button>
+                                        <button class="btn btn-primary delete-question-btn " data-id="{{property.id}}">Delete </button>
                                      </td>
                                             </tr>
                                             
@@ -195,90 +195,70 @@
             </div>
          </div>
       </div>
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
       <script>
          $(document).ready(function () {
-             $('.delete-user-btn').on('click', function () {
-                 Swal.fire({
-                     title: 'Are you sure?',
-                     text: 'You won\'t be able to revert this!',
-                     icon: 'warning',
-                     showCancelButton: true,
-                     confirmButtonColor: '#3085d6',
-                     cancelButtonColor: '#d33',
-                     confirmButtonText: 'Yes, delete User'
-                 }).then((result) => {
-                     if (result.isConfirmed) {
-                         // Make an AJAX request to delete the user
-                         $.ajax({
-                             type: 'POST',
-                             url: '{% url "delete_user" %}',  // Replace with your actual URL
-                             data: { 'userID': userId, csrfmiddlewaretoken: '{{ csrf_token }}' },
-                             success: function(response) {
-                                 console.log('User deleted successfully');
-                                 var message = 'User Deleted Successfully !!'
-                                 if (response.msg == true) {
-                                     window.location.href = '/admin/viewUsers';
-                                 } else {
-                                     $("#errorMessage").removeClass("d-none");
-                                     $("#successMessage").addClass("d-none");
-                                 }
-                             },
-                             error: function(error) {
-                                 console.error('Error deleting user', error);
-                                 // Handle error
-                             }
-                         });
-                     }
-                 });
-             });
-         });
-         </script>
-      <!--DATATABLES SCRIPT START -->
-<!--         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script>
-            new DataTable('#example');
-        </script> -->
+            $('.delete-question-btn').click(function () {
+               var propertyId = $(this).data('id');
+               console.log('Question ID:', propertyId);
+               Swal.fire({
+                  title: 'Are you sure?',
+                  text: "You won't be able to revert this!",
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Yes, delete Property Management '
+               }).then((result) => {
+                  if (result.isConfirmed) {
+                     // Retrieve CSRF token from the cookie
+                     var csrftoken = getCookie('csrftoken');
+         
+                     // Make an AJAX request to delete the question
+                     $.ajax({
+                        type: 'DELETE',
+                        headers: { "X-CSRFToken": csrftoken },
+                        url: "/delete_property_management/" + propertyId + "/",
+                        
 
-      {% comment %} <script src="js/jquery.min.js"></script>
-      <script src="js/popper.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-      
-      <script src="js/animate.js"></script>
-     
-      <script src="js/bootstrap-select.js"></script>
-            <script src="js/owl.carousel.js"></script> 
-        <script src="js/Chart.min.js"></script>
-      <script src="js/Chart.bundle.min.js"></script>
-      <script src="js/utils.js"></script>
-      <script src="js/analyser.js"></script>
-     
-      <script src="js/perfect-scrollbar.min.js"></script>
-      <script>
-         var ps = new PerfectScrollbar('#sidebar');
+                        data: { id: propertyId },
+                        success: function (response) {
+                           console.log('Property Management deleted successfully');
+                           var message = 'Property Management  Successfully !!';
+                           if (response.msg == true) {
+                              window.location.reload();
+                           } else {
+                              $("#errorMessage").removeClass("d-none");
+                              $("#successMessage").addClass("d-none");
+                           }
+                        },
+                        error: function (error) {
+                           console.error('Error deleting property management ', error);
+                           // Handle error
+                        }
+                     });
+                  }
+               });
+            });
+         
+            // Function to get CSRF token from the cookie
+            function getCookie(name) {
+               var cookieValue = null;
+               if (document.cookie && document.cookie !== '') {
+                  var cookies = document.cookie.split(';');
+                  for (var i = 0; i < cookies.length; i++) {
+                     var cookie = $.trim(cookies[i]);
+                     // Check if the cookie name matches the expected pattern
+                     if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                     }
+                  }
+               }
+               return cookieValue;
+            }
+         });
+         
       </script>
-         <script src="js/custom.js"></script>
-      <script src="js/chart_custom_style1.js"></script>
-            <!--DATATABLES SCRIPT START DATATABLES SCRIPT START DATATABLES SCRIPT START DATATABLES SCRIPT START -->
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-         <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-          <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
-           <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-             <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-              <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
-               <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
-        <script>
-            $(document).ready(function() {
-    $('#example').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-    } );
-} );
-        </script>
-   </body>
-</html> {% endcomment %}
 {% endblock %}

@@ -47,17 +47,26 @@ ul.dropdown-menu.show li a label {
                                         <div class="form-group col-sm-6">
                                             <div class="dropdown user-selects">
                                                 <label for="id_title">User</label>
-                                                <button class="btn btn-default text-left form-control dropdown-toggle" type="button" data-toggle="dropdown"><span class="dropdown-text"> Select Options</span>
-                                                <span class="caret"></span></button>
+                                                <button class="btn btn-default text-left form-control dropdown-toggle" type="button" data-toggle="dropdown">
+                                                    <span class="dropdown-text"> Select Options</span>
+                                                    <span class="caret"></span>
+                                                </button>
                                                 <ul class="dropdown-menu">
-                                                 
-                                             <li><a href="#"><label><input type="checkbox" class="selectall" /><span class="select-text"> Select</span> All</label></a></li>
-                                                  <li class="divider"></li>
-                                                  <li><a class="option-link" href="#"><label><input name='options[]' type="checkbox" class="option justone" value='Option 1 '/>  {{ form.users }} </label></a></li>
-                                                  {% comment %} <li><a href="#"><label><input name='options[]' type="checkbox" class="option justone" value='Option 2 '/> Option 2</label></a></li>
-                                                  <li><a href="#"><label><input name='options[]' type="checkbox" class="option justone" value='Option 3 '/> Option 3</label></a></li> {% endcomment %}
+                                                    <li><a href="#"><label><input type="checkbox" class="selectall" /><span class="select-text"> Select</span> All</label></a></li>
+                                                    <li class="divider"></li>
+                                                    {% for user in form.users.field.queryset %}
+                                                        <li>
+                                                            <a href="#">
+                                                                <label>
+                                                                    <input name='users' type="checkbox" class="option justone" value="{{ user.id }}"/>
+
+                                                                    {{ user.username }}
+                                                                </label>
+                                                            </a>
+                                                        </li>
+                                                    {% endfor %}
                                                 </ul>
-                                              </div>
+                                            </div>
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="id_title">Title</label>
@@ -121,6 +130,37 @@ ul.dropdown-menu.show li a label {
             <!-- /DataTable -->
 
         </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                var checkboxCounter = 0;
+        
+                // Event listener for checkbox changes
+                $('input[name="users"]').change(function () {
+                    if ($(this).prop('checked')) {
+                        checkboxCounter++;
+                    } else {
+                        checkboxCounter--;
+                    }
+                
+                    // Update the counter display or use it as needed
+                    console.log('Number of checked checkboxes: ' + checkboxCounter);
+                });
+        
+              
+                $('.selectall').change(function () {
+                    if ($(this).prop('checked')) {
+                        // If "Select All" is checked, set counter to total number of checked checkboxes
+                        checkboxCounter = $('input[name="users"]:checked').length;
+                    } else {
+                        // If "Select All" is unchecked, reset the counter
+                        checkboxCounter = 0;
+                    }
+                
+                    // Update the counter display or use it as needed
+                    console.log('Number of checked checkboxes: ' + checkboxCounter);
+                });
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 			<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 			<script>

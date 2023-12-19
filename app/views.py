@@ -217,9 +217,9 @@ def view_manage_property(request):
     return render(request,'Manage_view_Property.html', {'property_owners': property_owners})
 
 
-@login_required(login_url='login')
-def notification(request):
-    return render(request,'Notification.html')
+# @login_required(login_url='login')
+# def notification(request):
+#     return render(request,'Notification.html')
 
 
 @login_required(login_url='login')
@@ -248,19 +248,38 @@ def privacy(request):
     return render(request,'privacy_policy.html',context)
 
 
-
 @login_required(login_url='login')
 def notification(request):
-   
     if request.method == 'POST':
         form = NotificationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('notification')  # Redirect to a confirmation page or another URL
+            instance = form.save(commit=False)
+            instance.save()
+            form.save_m2m()  # Save the many-to-many relationships
+           
+            return redirect('notification')
+        else:
+            print(form.errors)
     else:
         form = NotificationForm()
-    notifications=Notification.objects.all()
-    return render(request, 'Notification.html', {'form': form,'notifications':notifications})
+
+    notifications = Notification.objects.all()
+    return render(request, 'Notification.html', {'form': form, 'notifications': notifications})
+
+# @login_required(login_url='login')
+# def notification(request):
+   
+#     if request.method == 'POST':
+#         form = NotificationForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('notification')  # Redirect to a confirmation page or another URL
+#         else:
+#             print(form.errors)
+#     else:
+#         form = NotificationForm()
+#     notifications=Notification.objects.all()
+#     return render(request, 'Notification.html', {'form': form,'notifications':notifications})
 
 
 

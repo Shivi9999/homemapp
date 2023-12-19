@@ -144,32 +144,51 @@
                        <div class="white_shd full">
                               <div class="full graph_head">
                                  <div class="heading1 margin_0">
-                                    <h2>Add User</h2>
+                                    <h2>Add Room</h2>
                                  </div>
                               </div>
                             <div class="users-forms">
                             <div class="row">
                                <div class="col-md-7">
-                                    <form action="{% url 'Add_user_management'%}" method="post" enctype="multipart/form-data" nonvalidate>
+                                    <form action="{% url 'add_property_management'%}" method="post" enctype="multipart/form-data" nonvalidate>
                                      {% csrf_token %}
-                                 <div class="form-group row add-user">
-                                    <div class="form-group col-md-12">
-                                       <i class="fa fa-user icon-user"></i>
-                                    <label for="exampleInputPassword1">Select Properties</label>
-                                    <select id="roomnames" name="room" class="form-control user-fill">
-                                      <option value="rooms">Propert  Name</option>
-                                    
-                                   </select>
-                                  </div>
+                                     <div class="form-group row add-user">
+                                       <div class="form-group col-md-12">
+                                           <i class="fa fa-user icon-user"></i>
+                                           <label for="exampleInputPassword1">Select Properties</label>
+                                           <select id="roomnames" name="flat_name" class="form-control user-fill">
+                                               {% for choice in form.flat_name.field.choices %}
+                                                   <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                               {% endfor %}
+                                           </select>
+                                       </div>
+                                  
+                                   
                                   <div class="form-group col-md-12">
                                     <i class="fa fa-user icon-user"></i>
                                  <label for="exampleInputPassword1"> Property  Room No</label>
-                                 <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Room Number">
+                                 {{ form.room_number }}
+                                 {% if form.room_number.errors %}
+                                     <ul class="error-list">
+                                         {% for error in form.room_number.errors %}
+                                             <li>{{ error }}</li>
+                                         {% endfor %}
+                                     </ul>
+                                 {% endif %}
+                                 {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Room Number"> {% endcomment %}
                                </div>
                                   <div class="form-group col-md-12">
                                         <i class="fa fa-user icon-user"></i>
                                      <label for="exampleInputPassword1"> Room Name</label>
-                                     <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Room Name">
+                                     {{ form.room_name }}
+                                     {% if form.room_name.errors %}
+                                         <ul class="error-list">
+                                             {% for error in form.room_name.errors %}
+                                                 <li>{{ error }}</li>
+                                             {% endfor %}
+                                         </ul>
+                                     {% endif %}
+                                     {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Room Name"> {% endcomment %}
                                      {% comment %} {{form.username}}
                                      {% if form.username.errors %}
 													<ul>
@@ -184,7 +203,15 @@
                                     <div class="form-group col-md-12 ">
                                         <i class="fa fa-envelope icon-user"></i>
                                      <label for="exampleInputPassword1"> Room  Description</label>
-                                     <input type="text" class="form-control  user-fill" id="user-add-form" placeholder="Room Description"> 
+                                     {{ form.room_description }}
+                                     {% if form.room_description.errors %}
+                                         <ul class="error-list">
+                                             {% for error in form.room_description.errors %}
+                                                 <li>{{ error }}</li>
+                                             {% endfor %}
+                                         </ul>
+                                     {% endif %}
+                                     {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder="Room Description">  {% endcomment %}
                                      {% comment %} {{form.email}}
                                      {% if form.email.errors %}
 													<ul class="error-list">
@@ -200,8 +227,15 @@
                                    <div class="form-group col-md-12">
                                     <i class="fa fa-user icon-user"></i>
                                     <label for="exampleInputPassword1"> Room   Image</label><br>
-                                    
-                                    <input type="file" name="user_image" class="form-control" accept="image/*" required="" id="id_user_image">
+                                    {{ form.room_image }}
+                                    {% if form.room_image.errors %}
+                                        <ul class="error-list">
+                                            {% for error in form.room_image.errors %}
+                                                <li>{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                    {% comment %} <input type="file" name="user_image" class="form-control" accept="image/*" required="" id="id_user_image"> {% endcomment %}
                                     
                                   </div>
                                 <div class="form-group col-md-12">
