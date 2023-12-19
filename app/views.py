@@ -158,9 +158,9 @@ def delete_property_owner(request, id):
 
 @login_required(login_url='login')
 def add_question(request):
-    form = QuestionForm(request.POST, request.FILES)
+    
     question_form = QuestionForm()
-    return render(request,'Chat_add_question.html',{'question_form':question_form,'form':form})
+    return render(request,'Chat_add_question.html',{'question_form':question_form})
 
 @login_required(login_url='login')
 def view_question(request):
@@ -447,8 +447,8 @@ def save_question_answer(request):
             messages.success(request, 'Question and answer saved successfully!')
             return redirect('View_question')
         else:
-            messages.error(request, 'Error saving question and answer. Please try again.')
-
+            errors = question_form.errors
+            return render(request, 'Chat_add_question.html', {'question_form': question_form, 'errors': errors})
     return redirect('add_question')  
 
 # def process_and_save_excel_data(excel_file):

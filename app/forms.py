@@ -45,9 +45,15 @@ class QuestionForm(forms.ModelForm):
             'question': forms.TextInput(attrs={'class': 'form-control','required': False}),
             'answer': forms.TextInput(attrs={'class': 'form-control','required': False}),
         }
+    def clean_question(self):
+        # Cleaned data for the 'question' field
+        question = self.cleaned_data['question']
 
-   
+        # Check if the question already exists in the database
+        if QuestionAnswer.objects.filter(question__iexact=question).exists():
+            raise forms.ValidationError("This question already exists.")
 
+        return question
 class CustomPasswordChangeForm(PasswordChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
