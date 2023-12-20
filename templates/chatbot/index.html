@@ -921,7 +921,7 @@ footer p a:hover {
 /*CHAT SCREEN CSS START CHAT SCREEN CSS STARTCHAT SCREEN CSS STARTCHAT SCREEN CSS STARTCHAT */
 
 main#msger-chat {
-    height: 70vh;
+    height: 70vh !important;
     overflow-y: auto;
 }
 
@@ -1143,13 +1143,12 @@ main#msger-chat {
         height: 76vh !important;
         max-width: 100% !important;
         margin: 0!important;
-        display: block !important;
+        {% comment %} display: block !important; {% endcomment %}
     }
     #bg-video {
         object-fit: contain !important;
-        margin-top: -126px !important;
         object-fit: none;
-        margin-top: -151px !important;
+        margin-top: 20px !important;
         min-height: 67vh;
     }
     .msger-inputarea {
