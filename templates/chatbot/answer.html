@@ -13,8 +13,15 @@
     {% endif %}
      <p>Avai :{{ answer }}</p>
 </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const synth = window.speechSynthesis;
+                const utterance = new SpeechSynthesisUtterance("{{ answer }}");
+                synth.speak(utterance);
+            });
+        </script>
     {% comment %} <div id="answerContainer">{{ answer }}</div> {% endcomment %}
-<script>
+{% comment %} <script>
     document.getElementById('questionForm').addEventListener('submit', function(event) {
         event.preventDefault();
         const userInput = document.getElementById('userInput').value;
@@ -40,6 +47,6 @@
         xhr.open('GET', `/get_answer/?user_input=${encodeURIComponent(userInput)}`, true);
         xhr.send();
     });
-</script>
+</script> {% endcomment %}
 </body>
 </html>
