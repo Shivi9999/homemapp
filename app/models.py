@@ -126,16 +126,6 @@ class Faq(models.Model):
 
 
 
-class Add_user(models.Model):
-    user=models.OneToOneField("User", verbose_name=("add_users"), on_delete=models.CASCADE)
-    address=models.CharField( max_length=50)
-    mobile=models.CharField(max_length=12)
-    user_image=models.ImageField(upload_to='user_img', max_length=100)
-    def __str__(self):
-        return self.user.username
-
-
-
 class Add_hotel(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     property_name = models.CharField(max_length=50)
@@ -159,4 +149,26 @@ class Add_Room(models.Model):
     room_image = models.ImageField(upload_to='room_img', max_length=100)
 
     def __str__(self):
-        return self.flat_name
+        return self.room_number
+
+
+
+class Add_user(models.Model):
+    user=models.OneToOneField(User, verbose_name=("add_users"), on_delete=models.CASCADE)
+    hotel_name=models.ForeignKey(Add_hotel, on_delete=models.CASCADE)
+    room_number=models.ForeignKey(Add_Room, on_delete=models.CASCADE)
+    address=models.CharField( max_length=50)
+    mobile=models.CharField(max_length=12)
+    user_image=models.ImageField(upload_to='user_img', max_length=100)
+    def __str__(self):
+        return self.user.username
+
+
+class Add_items(models.Model):
+    user=models.OneToOneField(User, verbose_name=("add_users"), on_delete=models.CASCADE)
+    select_hotel=models.ForeignKey(Add_hotel, on_delete=models.CASCADE)
+    select_room=models.ForeignKey(Add_Room, on_delete=models.CASCADE)
+    items=models.CharField( max_length=50)
+   
+    def __str__(self):
+        return self.user.username

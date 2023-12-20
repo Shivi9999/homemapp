@@ -135,31 +135,33 @@
                                <div class="col-md-7">
                                     <form action="#" method="post">
                                  <div class="form-group row add-user">
-                                    <div class="form-group col-md-12">
-                                        <i class="fa fa-user icon-user"></i>
-                                     <label for="exampleInputPassword1">Select Properties</label>
-                                     <select id="roomnames" name="room" class="form-control user-fill">
-                                       <option value="rooms">Room Items</option>
-                                       <option value="rooms">Room Items</option>
-                                       <option value="rooms">Room Items</option>
-                                       <option value="rooms">Room Items</option>
-                                       <option value="rooms">Room Items</option>
-                                       <option value="rooms">Room Items</option>
-                                       <option value="rooms">Room Items</option>
-                                    </select>
-                                   </div>
-                                  <div class="form-group col-md-12">
-                                        <i class="fa fa-user icon-user"></i>
-                                     <label for="exampleInputPassword1"> Room No</label>
-                                     <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Items Name">
+                                   
+                                       <div class="form-group col-md-12">
+                                          <i class="fa fa-user icon-user"></i>
+                                          <label for="exampleInputPassword1">Select Flat</label>
+                                          <select id="roomnames" name="select_hotel" class="form-control user-fill">
+                                              {% for choice in form.select_hotel.field.choices %}
+                                                  <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                              {% endfor %}
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-12">
+                                       <i class="fa fa-user icon-user"></i>
+                                       <label for="exampleInputPassword1">Select Room No</label>
+                                       <select id="roomnames" name="select_room" class="form-control user-fill">
+                                           {% for choice in form.select_room.field.choices %}
+                                               <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                           {% endfor %}
+                                       </select>
                                    </div>
 
-
-                                    {% comment %} <div class="form-group col-md-6">
+                                   <div class="form-group col-md-6">
                                         <i class="fa fa-mobile icon-user"></i>
                                      <label for="exampleInputPassword1">Items Mobile</label>
-                                     <input type="number" class="form-control  user-fill" id="user-add-form" placeholder="Items Mobile">
+                                     {{form.items}}
+                                     {% comment %} <input type="number" class="form-control  user-fill" id="user-add-form" placeholder="Items Mobile"> {% endcomment %}
                                    </div>
+                                    {% comment %}
                                     <div class="form-group col-md-6">
                                         <i class="fa fa-envelope icon-user"></i>
                                      <label for="exampleInputPassword1">Items Email</label>

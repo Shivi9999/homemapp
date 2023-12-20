@@ -124,11 +124,11 @@ class Faqform(forms.ModelForm):
 class Add_userform(forms.ModelForm):
   class Meta:
     model=Add_user
-    fields=['address','mobile','user_image']
+    fields=['address','mobile','hotel_name','room_number','user_image']
     widgets = {
-           
+            'hotel_name': forms.Select(attrs={'class': 'form-control'}),
             #'user_id': ModelSelect2Widget(model=Add_user, search_fields=['User_Id__icontains']),
-          
+            'room_number': forms.Select(attrs={'class': 'form-control'}),
             'address': forms.TextInput(attrs={'class': 'form-control'}),
           
             
@@ -174,3 +174,17 @@ class AddRoomForm(forms.ModelForm):
 
 class CSVUploadForm(forms.Form):
     file = forms.FileField()
+
+
+class AddItemsForm(forms.ModelForm):
+    class Meta:
+        model = Add_items
+        fields = ['select_hotel', 'select_room', 'items']
+        widgets = {
+            'select_hotel': forms.Select(attrs={'class': 'form-control'}),
+            'select_room': forms.TextInput(attrs={'class': 'form-control'}),        
+            'items': forms.TextInput(attrs={'class': 'form-control'}),
+            
+        }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)

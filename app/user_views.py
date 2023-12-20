@@ -172,7 +172,7 @@ def edit_user(request, id):
 
     if request.method == 'POST':
         user_form = Userform(request.POST, instance=property_owner.user)
-        property_form = Add_userform(request.POST, instance=property_owner)
+        property_form = Add_userform(request.POST,request.FILES, instance=property_owner)
 
         if user_form.is_valid() and property_form.is_valid():
             user_form.save()
@@ -250,7 +250,20 @@ def logout_view_user(request):
 
 @login_required(login_url='login_user')    
 def add_room(request):
-    return render(request,'Owner/rooms_add_room.html')
+
+    if request.method == 'POST':
+        form = AddItemsForm(request.POST)
+        if form.is_valid():
+            # Save the form, associating it with the current user
+            item_instance = form.save(commit=False)
+            item_instance.user = request.user
+            item_instance.save()
+            return redirect('View_room')  # Replace 'item_list' with the URL name for your item list view
+    else:
+        form = AddItemsForm()
+
+  
+    return render(request,'Owner/rooms_add_room.html',{'form': form})
 
 @login_required(login_url='login_user')
 def view_room(request):

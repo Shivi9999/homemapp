@@ -105,7 +105,7 @@ def add_property_owner(request):
 
 @login_required(login_url='login')
 def view_property_owner(request):
-    property_owners = PropertyOwner.objects.all()
+    property_owners = PropertyOwner.objects.all().order_by('-id')
     return render(request, 'Pro_view__Property.html', {'property_owners': property_owners})
 
 
@@ -164,7 +164,7 @@ def add_question(request):
 
 @login_required(login_url='login')
 def view_question(request):
-    que_ans=QuestionAnswer.objects.all()
+    que_ans=QuestionAnswer.objects.all().order_by('-id')
     return render(request,'Chat_view_question.html',{'que_ans':que_ans})
 
 
@@ -213,7 +213,7 @@ def add_manage_property(request):
 
 @login_required(login_url='login')
 def view_manage_property(request):
-    property_owners = PropertyOwner.objects.all()
+    property_owners = PropertyOwner.objects.all().order_by('-id')
     return render(request,'Manage_view_Property.html', {'property_owners': property_owners})
 
 

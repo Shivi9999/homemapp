@@ -150,9 +150,32 @@
                             <div class="users-forms">
                             <div class="row">
                                <div class="col-md-7">
-                                    <form  method="post" enctype="multipart/form-data" nonvalidate>
+                                    <form method="post"  enctype="multipart/form-data"  nonvalidate>
                                      {% csrf_token %}
+
+
+                                     
                                  <div class="form-group row add-user">
+                                 
+                                    <div class="form-group col-md-12">
+                                       <i class="fa fa-user icon-user"></i>
+                                       <label for="exampleInputPassword1">Select Properties</label>
+                                       <select id="roomnames" name="hotel_name" class="form-control user-fill">
+                                           <option value="{{ property_form.instance.hotel_name.id }}" selected>{{ property_form.instance.hotel_name }}</option>
+                                           <!-- Add other options if needed -->
+                                       </select>
+                                   </div>
+                                   
+                                   <div class="form-group col-md-12">
+                                    <i class="fa fa-user icon-user"></i>
+                                    <label for="exampleInputPassword1">Select Room No </label>
+                                    <select id="roomnames" name="room_number" class="form-control user-fill">
+                                        <option value="{{ property_form.instance.room_number.id }}" selected>{{ property_form.instance.room_number }}</option>
+                                        <!-- Add other options if needed -->
+                                    </select>
+                                </div>
+                                
+                                   
                                   <div class="form-group col-md-12">
                                         <i class="fa fa-user icon-user"></i>
                                      <label for="exampleInputPassword1">Name</label>
@@ -190,12 +213,19 @@
                                      {{property_form.address}}
                                    </div>
 
-                                   <div class="form-group col-md-12">
+                                 <div class="form-group col-md-12">
                                     
                                  <label for="exampleInputPassword1"> Profile Image</label>
+                                
                                  {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder="Name"> {% endcomment %}
-                                 {{property_form.user_image}}
-                              
+                                    {{property_form.user_image}}
+                                    {% if property_form.user_image.errors %}
+                                    <ul class="error-list">
+                                       {% for error in property_form.user_image.errors %}
+                                          <li>{{ error }}</li>
+                                       {% endfor %}
+                                    </ul>
+                                   {% endif %}
                                </div>
                                 <div class="form-group col-md-12">
                                    <button type="submit" class="btn btn-primary">Submit</button>

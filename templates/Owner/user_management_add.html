@@ -155,22 +155,27 @@
                                  <div class="form-group row add-user">
                                     <div class="form-group col-md-12">
                                        <i class="fa fa-user icon-user"></i>
-                                    <label for="exampleInputPassword1">Select Properties</label>
-                                    <select id="roomnames" name="room" class="form-control user-fill">
-                                      <option value="rooms">Room Items</option>
-                                      <option value="rooms">Room Items</option>
-                                      <option value="rooms">Room Items</option>
-                                      <option value="rooms">Room Items</option>
-                                      <option value="rooms">Room Items</option>
-                                      <option value="rooms">Room Items</option>
-                                      <option value="rooms">Room Items</option>
-                                   </select>
-                                  </div>
-                                  <div class="form-group col-md-12">
+                                       <label for="exampleInputPassword1">Select Flat</label>
+                                       <select id="roomnames" name="hotel_name" class="form-control user-fill">
+                                           {% for choice in user_form.hotel_name.field.choices %}
+                                               <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                           {% endfor %}
+                                       </select>
+                                   </div>
+                                   <div class="form-group col-md-12">
+                                    <i class="fa fa-user icon-user"></i>
+                                    <label for="exampleInputPassword1">Select Room No</label>
+                                    <select id="roomnames" name="room_number" class="form-control user-fill">
+                                        {% for choice in user_form.room_number.field.choices %}
+                                            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                  {% comment %} <div class="form-group col-md-12">
                                     <i class="fa fa-user icon-user"></i>
                                  <label for="exampleInputPassword1"> Room No</label>
                                  <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Items Name">
-                               </div>
+                               </div> {% endcomment %}
                                   <div class="form-group col-md-12">
                                         <i class="fa fa-user icon-user"></i>
                                      <label for="exampleInputPassword1">Name</label>
