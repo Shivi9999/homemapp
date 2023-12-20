@@ -283,7 +283,7 @@ a.menu-link {
     max-height: 100%;
     overflow: hidden;
     height: 100vh;
-    margin-bottom: -7px;
+    margin-bottom: 10px;
 }
 
 #bg-video {
@@ -922,7 +922,7 @@ footer p a:hover {
 /*CHAT SCREEN CSS START CHAT SCREEN CSS STARTCHAT SCREEN CSS STARTCHAT SCREEN CSS STARTCHAT */
 
 main#msger-chat {
-    height: 83vh;
+    height: 76vh;
     overflow-y: auto;
 }
 
@@ -1135,9 +1135,9 @@ main#msger-chat {
         text-align: center;
         position: absolute;
         width: 100% !important;
-        height: 100vh !important;
+        height: 90vh !important;
         left: 34% !important;
-        top: 83% !important;
+        top: 78% !important;
         transform: translate(-50%, -50%);
     }
     .msger {
