@@ -1141,7 +1141,7 @@ main#msger-chat {
         transform: translate(-50%, -50%);
     }
     .msger {
-        height: 100vh !important;
+        height: 90vh !important;
         max-width: 100% !important;
         margin: 1% 18% 1% 17% !important;
     }
@@ -1149,13 +1149,13 @@ main#msger-chat {
         /* object-fit: contain !important; */
         /* margin-top: -126px !important; */
         object-fit: none;
-        margin-top: 6px !important;
+        margin-top: -46px !important;
         min-height: 100vh;
     }
     .msger-inputarea {
         padding: 5px !important;
         margin-bottom: 20px !important;
-        margin-top: 20px;
+        margin-top: 10px;
         border: 2px solid lightgrey;
         /* padding: 5px !important;
         margin-bottom: 70px !important; */
