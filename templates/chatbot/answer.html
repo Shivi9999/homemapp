@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 {% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,16 +12,36 @@
         {% if user_input %}
             <p>{{ user.username }}: {{ user_input }}</p>
         {% endif %}
+        <div id="chatArea">
+            <!-- Chat messages will appear here -->
+        </div>
         <p id="answerText">Avai: {{answer}}<span id="typedAnswer"></span></p>
 
         <audio id="answerAudio" onended="pauseAudio()">
             <source src="{% static 'answer.mp3' %}" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
-        
     </div>
 
-    
-    <!-- Add your additional scripts or other body content here -->
+    <script>
+        function updateChat(user, message, targetChatArea) {
+            const chatArea = document.getElementById(targetChatArea);
+            const msgHTML = `<p>${user}: ${message}</p>`;
+            chatArea.insertAdjacentHTML('beforeend', msgHTML);
+        }
+
+        function playAudio() {
+            const audio = document.getElementById('answerAudio');
+            audio.play();
+        }
+
+        function pauseAudio() {
+            // Your logic to handle audio pause
+        }
+
+        // Example usage:
+        // Call updateChat(user, message, targetChatArea) when you receive a new message
+        // Call playAudio() when you want to play the audio
+    </script>
 </body>
 </html>

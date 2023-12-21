@@ -519,6 +519,8 @@ def save_question_answer(request):
 def chat(request):
     return render(request,'chatbot/index.html')
     
+
+
 @login_required(login_url='login')
 def get_answer(request):
     try:
@@ -543,35 +545,32 @@ def get_answer(request):
                 if ratio >= 80:
                     matched_qa = QuestionAnswer.objects.filter(question=best_match).first()
 
+            # Generate speech from the answer or "Sorry" message with pyttsx3
             if matched_qa:
-                # Generate speech from the answer with pyttsx3
                 answer_text = matched_qa.answer
-                print('answer_text',answer_text)
-                # Initialize the text-to-speech engine
-                engine = pyttsx3.init()
-
-                # Set properties (optional)
-                engine.setProperty('rate', 150)  # Adjust the speed as needed
-
-                # Save the audio file
-                audio_file_path = "static/answer.mp3"
-                engine.save_to_file(answer_text, audio_file_path)
-
-                # Wait for the file to be saved
-                engine.runAndWait()
-
-                if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-                    print('answer',answer)
-                    return JsonResponse({'answer': answer_text}, safe=False)
-        
-                return render(request, 'chatbot/answer.html', {'user_input': user_input, 'answer': answer_text, 'audio_file_path': audio_file_path})
-                print('answer',answer)
             else:
-                if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-                    return JsonResponse({'answer': 'Sorry, I don\'t have an answer for that question.'})
-                    
-                return render(request, 'chatbot/answer.html', {'user_input': user_input, 'answer': 'Sorry, I don\'t have an answer for that question.'})
-               
+                answer_text = 'Sorry, I don\'t have an answer for that question.'
+ 
+            print('answer_text', answer_text)
+
+            # Initialize the text-to-speech engine
+            engine = pyttsx3.init()
+
+            # Set properties (optional)
+            engine.setProperty('rate', 150)  # Adjust the speed as needed
+
+            # Use pyttsx3 to directly speak the answer
+            engine.say(answer_text)
+            engine.runAndWait()
+
+            if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+                print('answer', answer_text)
+                return JsonResponse({'answer': answer_text}, safe=False)
+
+            return render(request, 'chatbot/answer.html',
+                          {'user_input': user_input, 'answer': answer_text})
+            
+
         else:
             return JsonResponse({'error': 'Invalid request method.'})
     except Exception as e:
