@@ -44,7 +44,7 @@
 										
 											<div class="form-group col-sm-12">
 												<div class="submit">
-													<input type="submit" class="form-control bg-submits" value=" Submit">
+													<input type="submit" class="form-control bg-submits" value=" Submit" >
 											
 													
 													{% comment %} <a href="#" class="form-control bg-submits"> Submit</a> {% endcomment %}
@@ -53,9 +53,12 @@
 											</div>
 										</form>
 
-									<a href="{% url 'import_csv' %}">
-													<input type="submit" class="btn btn-success bg-submits" value="Import Csv/Excel File">
-												</a>
+									<div class="import mb-3">
+										<a href="{% url 'import_csv' %}">
+											<input type="submit" class="btn btn-success bg-submits" value="Import Csv/Excel File">
+										</a>
+									</div>
+
 									</div>
 									{% comment %} <form method ="post" action="{% url 'import_excel' %}">
 										{% if messages %}

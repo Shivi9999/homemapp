@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="{% static 'chat/assets/css/templatemo-grad-school.css' %}">
     <link rel="stylesheet" href="{% static 'chat/assets/css/owl.css' %}">
     <link rel="stylesheet" href="{% static 'chat/assets/css/lightbox.css' %}">
+   
+   
+   
     <style>
         @import url(fontawesome.css);
 @import url("<link href="https: //fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">");
@@ -1243,6 +1246,7 @@ main#msger-chat {
 
 /**/
     </style>
+   
 </head>
 
 <body>
@@ -1258,7 +1262,8 @@ main#msger-chat {
                 <section class="msger">
                     <header class="msger-header">
                         <div class="msger-header-title">
-                            <i class="fa fa-envelope"></i> {{user.username}}
+                            <a href="/" style="color: #000000;"> <i class="fa fa-envelope"></i> 
+                                {{user.username}} </a>
                         </div>
                         <div class="msger-header-options">
                             <span><img src="{%static 'chat/assets/images/author-01.png' %}"
@@ -1294,7 +1299,42 @@ main#msger-chat {
     <script src="{% static 'chat/assets/js/slick-slider.js' %}"></script>
     <script src="{% static 'chat/assets/js/custom.js' %}"></script>
     <!-- ... (previous HTML code) ... -->
+    {% comment %} <script>
+        // ... (previous script code)
 
+        // Your modified typing effect function
+        function typeEffect(element, text, speed) {
+            let words = text.split(' ');
+            let i = 0;
+        
+            function type() {
+                if (i < words.length) {
+                    element.innerText += words[i] + ' '; // Display one word at a time
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+        
+            type();
+        }
+
+        // Function to initiate typing effect
+        // Function to initiate typing effect
+        function initiateTypingEffect(answerContainer, answerText) {
+        const typedAnswerContainer = document.getElementById("typedAnswer");
+        typedAnswerContainer.innerHTML = ''; // Clear previous content
+
+        // Create a temporary element to avoid HTML interpretation
+        const tempElement = document.createElement("div");
+        tempElement.innerText = answerText;
+
+        // Trigger the typing effect on the typedAnswerContainer
+        typeEffect(typedAnswerContainer, tempElement.innerText, 500); // Adjust the speed as needed
+      }
+
+        // Call the typing effect function when the page loads
+        initiateTypingEffect(document.getElementById("typedAnswer"), "{{ answer }}");
+    </script> {% endcomment %}
 {% comment %} <script>
     const bgVideo = document.getElementById('bg-video');
 
@@ -1357,24 +1397,32 @@ main#msger-chat {
     }
 </script> {% endcomment %}
 
-   <script> document.getElementById('questionForm').addEventListener('submit', function (event) {
+<!-- ... (previous HTML code) ... -->
+
+
+
+<script>
+    document.getElementById('questionForm').addEventListener('submit', function (event) {
         // Prevent the default form submission behavior
         event.preventDefault();
 
         // Get user input from the form
         const userInput = document.getElementById('userInput').value;
-    
+
         // Make an AJAX request to the Django backend
         const xhr = new XMLHttpRequest();
+       
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     try {
                         // Update the content of the answerContainer using Django template syntax
                         const msgerChat = document.getElementById('msger-chat');
+                        
                         const msgHTML = `
+                        
                             <div class="msg left-msg">
-                                <div class="msg-img" style="background-image: url(/chat/static/assets/images/author-01.png)"></div>
+                                <div class="msg-img" style="background-image: url(/static/chat/assets/images/author-01.png)"></div>
                                 <div class="msg-bubble">
                                     <div class="msg-info">
                                         <div class="msg-info-name">Avai </div>
@@ -1384,13 +1432,19 @@ main#msger-chat {
                                 </div>
                             </div>
                         `;
+                        
                         msgerChat.insertAdjacentHTML("beforeend", msgHTML);
-    
+
                         // Clear the input field after submission
                         document.getElementById('userInput').value = '';
-    
+
                         // Scroll to the bottom of the chat window
                         msgerChat.scrollTop = msgerChat.scrollHeight;
+
+                        // Play the audio after generating the answer
+                        playAudio(xhr.responseText);
+                        console.log('Response:', xhr.responseText);
+
                     } catch (error) {
                         console.error('Error updating chat:', error);
                     }
@@ -1399,19 +1453,38 @@ main#msger-chat {
                 }
             }
         };
-    
+
         // Replace 'your_django_url' with your actual Django endpoint
         xhr.open('GET', `/get_answer/?user_input=${encodeURIComponent(userInput)}`, true);
         xhr.send();
     });
-    
+
     // Utils
     function formatDate(date) {
         const h = "0" + date.getHours();
         const m = "0" + date.getMinutes();
         return `${h.slice(-2)}:${m.slice(-2)}`;
     }
+
+    // Function to play the audio
+    function playAudio(answerText) {
+        var audio = document.getElementById("answerAudio");
+        audio.src = `/static/answer.mp3?${Date.now()}`; // Add a timestamp to the URL
+        audio.play();
+
+        // Update the answer text with the generated text
+        const answerTextContainer = document.getElementById("answerText");
+        initiateTypingEffect(answerTextContainer, answerText);
+    }
 </script>
+
+
+
+
+
+
+<!-- ... (remaining HTML code) ... -->
+
      
     {% comment %} <script>
         document.getElementById('questionForm').addEventListener('submit', function (event) {

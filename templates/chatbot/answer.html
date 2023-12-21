@@ -1,52 +1,27 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot Answer</title>
+    <title>Avai Answer</title>
+    <!-- Add your stylesheet links or other head content here -->
 </head>
 <body>
-  
-<div id="answerContainer">
-    {% if user_input %}
-        <p>{{user.username}}: {{ user_input }}</p>
-    {% endif %}
-     <p>Avai :{{ answer }}</p>
-</div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const synth = window.speechSynthesis;
-                const utterance = new SpeechSynthesisUtterance("{{ answer }}");
-                synth.speak(utterance);
-            });
-        </script>
-    {% comment %} <div id="answerContainer">{{ answer }}</div> {% endcomment %}
-{% comment %} <script>
-    document.getElementById('questionForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const userInput = document.getElementById('userInput').value;
-        // Make an AJAX request to the Django backend
-        const xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    try {
-                        // Update the content of the answerContainer using Django template syntax
-                        document.getElementById('answerContainer').innerHTML = xhr.responseText;
-                    } 
-                    catch (error) {
-                        console.error('Error updating answerContainer:', error);
-                    }
-                } else {
-                    console.error('Error:', xhr.status, xhr.statusText);
-                }
-            }
-        };
+    <div id="answerContainer">
+        {% if user_input %}
+            <p>{{ user.username }}: {{ user_input }}</p>
+        {% endif %}
+        <p id="answerText">Avai: {{answer}}<span id="typedAnswer"></span></p>
 
-        // Replace 'your_django_url' with your actual Django endpoint
-        xhr.open('GET', `/get_answer/?user_input=${encodeURIComponent(userInput)}`, true);
-        xhr.send();
-    });
-</script> {% endcomment %}
+        <audio id="answerAudio" onended="pauseAudio()">
+            <source src="{% static 'answer.mp3' %}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        
+    </div>
+
+    
+    <!-- Add your additional scripts or other body content here -->
 </body>
 </html>

@@ -4427,6 +4427,7 @@ table.table-inbox tbody tr.checked {
 	25. Responsive
 -----------------------*/
 
+
 /* @media only screen and (max-width: 767.98px) {
     .avatar-xxl {
         width: 8rem;
@@ -4556,11 +4557,6 @@ table.table-inbox tbody tr.checked {
         top: 0;
         z-index: 10;
     }
-
-
-
-
-
     #toggle_btn {
         display: none;
     }
@@ -4575,323 +4571,298 @@ table.table-inbox tbody tr.checked {
         padding: 50px;
         width: 50%;
     }
-
-
-
- 
-/*------------------kilvish */
-
-/* Add this style for mobile and small screens */
-@media only screen and (max-width: 767.98px) {
-    /* Existing styles for mobile */
-
-    .sidebar {
-        display: none !important; /* Hide the sidebar by default on small screens */
-        margin-left: 0;
-        width: 100%;
-        -webkit-transition: all 0.4s ease;
-        -moz-transition: all 0.4s ease;
-        transition: all 0.4s ease;
-        z-index: 1041;
+    /*------------------kilvish */
+    /* Add this style for mobile and small screens */
+    @media only screen and (max-width: 767.98px) {
+        /* Existing styles for mobile */
+        .sidebar {
+            display: none !important;
+            /* Hide the sidebar by default on small screens */
+            margin-left: 0;
+            width: 100%;
+            -webkit-transition: all 0.4s ease;
+            -moz-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+            z-index: 1041;
+        }
+        .sidebar.opened {
+            display: block !important;
+            /* Display the sidebar when opened */
+            width: 60% !important;
+        }
+        .page-wrapper {
+            margin-left: 0;
+            padding-left: 0;
+            padding-right: 0;
+            -webkit-transition: all 0.4s ease;
+            -moz-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+        }
+        #toggle_btn {
+            display: none !important;
+            /* Hide the toggle button on small screens */
+        }
+        .mobile_btn {
+            display: block !important;
+            /* Display the mobile toggle button on small screens */
+            color: #fff !important;
+            cursor: pointer;
+            font-size: 24px;
+            height: 60px;
+            line-height: 60px;
+            padding: 0 15px;
+            text-align: center;
+            z-index: 10;
+        }
     }
-
-    .sidebar.opened {
-        display: block !important; /* Display the sidebar when opened */
-        width: 60% !important;
+    /* Keep your existing styles for larger screens */
+    @media screen and (max-width: 640px) {
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dataTables_filter {
+            float: left !important;
+            text-align: center !important;
+            width: 44% !important;
+        }
     }
-
-    .page-wrapper {
-        margin-left: 0;
-        padding-left: 0;
-        padding-right: 0;
-        -webkit-transition: all 0.4s ease;
-        -moz-transition: all 0.4s ease;
-        transition: all 0.4s ease;
+    @media screen and (max-width: 640px) {
+        .dataTables_wrapper .dataTables_filter {
+            margin-top: 0em !important;
+            float: right !important;
+            width: 54% !important;
+        }
+        .dataTables_wrapper .dataTables_filter input[type="search"] {
+            width: 65% !important;
+            margin-top: 0px !important;
+        }
     }
-
-    #toggle_btn {
-        display: none !important; /* Hide the toggle button on small screens */
+    @media screen and (max-width: 767px) {
+        .dataTables_wrapper .dataTables_info,
+        .dataTables_wrapper .dataTables_paginate {
+            float: left !important;
+            text-align: center !important;
+            width: 46% !important;
+        }
     }
-
-    .mobile_btn {
-        display: block !important; /* Display the mobile toggle button on small screens */
-        color: #fff !important;
-        cursor: pointer;
-        font-size: 24px;
-        height: 60px;
-        line-height: 60px;
-        padding: 0 15px;
-        text-align: center;
-        z-index: 10;
+    @media screen and (max-width: 767px) {
+        .dataTables_wrapper .dataTables_paginate {
+            margin-top: 0.5em;
+            width: 50%;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: 0.3em 0.4em !important;
+        }
     }
-}
-
-/* Keep your existing styles for larger screens */
-@media screen and (max-width: 640px){
-.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter {
-    float: left !important;
-    text-align: center !important;
-    width: 44% !important;
-}
-}
-    
-@media screen and (max-width: 640px){
-.dataTables_wrapper .dataTables_filter {
-    margin-top: 0em !important;
-    float: right !important;
-    width: 54% !important;
-}
-.dataTables_wrapper .dataTables_filter input[type="search"] {
-    width: 65% !important;
-    margin-top: 0px !important;
-}
-}
-
-@media screen and (max-width: 767px){
-.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate {
-    float: left !important;
-    text-align: center !important;
-    width: 46% !important;
-}
-
-}
-
-@media screen and (max-width: 767px){
-.dataTables_wrapper .dataTables_paginate {
-    margin-top: 0.5em;
-    width: 50%;
-}
-.dataTables_wrapper .dataTables_paginate .paginate_button{
-    padding: 0.3em 0.4em !important;
-}
-}
-
-
-
-@media only screen and (max-width: 767.98px) {
-
-    
-
-    body {
-        font-size: 0.9375rem;
+    @media only screen and (max-width: 767.98px) {
+        body {
+            font-size: 0.9375rem;
+        }
+        h1,
+        .h1 {
+            font-size: 2rem;
+        }
+        h2,
+        .h2 {
+            font-size: 1.75rem;
+        }
+        h3,
+        .h3 {
+            font-size: 1.5rem;
+        }
+        h4,
+        .h4 {
+            font-size: 1.125rem;
+        }
+        h5,
+        .h5 {
+            font-size: 1rem;
+        }
+        h6,
+        .h6 {
+            font-size: 0.875rem;
+        }
+        .header .has-arrow .dropdown-toggle:after {
+            display: none;
+        }
+        .user-menu.nav>li>a>span:not(.user-img) {
+            display: none;
+        }
+        .navbar-nav .open .dropdown-menu {
+            float: left;
+            position: absolute;
+        }
+        .navbar-nav.user-menu .open .dropdown-menu {
+            left: auto;
+            right: 0;
+        }
+        .header .header-left {
+            padding: 0 15px;
+        }
+        .header .header-left .logo {
+            display: none;
+        }
+        .header-left .logo.logo-small {
+            display: inline-block;
+        }
+        .login-wrapper .loginbox .login-left {
+            display: none;
+        }
+        .login-wrapper .loginbox {
+            max-width: 450px;
+            min-height: unset;
+        }
+        .login-wrapper .loginbox .login-right {
+            float: none;
+            padding: 1.875rem;
+            width: 100%;
+        }
+        .invoice-container {
+            padding: 20px;
+        }
+        .left-action {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .right-action {
+            text-align: center;
+        }
+        .top-action-left .float-left {
+            float: none !important;
+        }
+        .top-action-left .btn-group {
+            margin-bottom: 15px;
+        }
+        .top-action-right {
+            text-align: center;
+        }
+        .top-action-right a.btn.btn-white {
+            margin-bottom: 15px;
+        }
+        .mail-sent-time {
+            float: left;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .profile-btn {
+            flex: 0 0 100%;
+            margin-top: 20px;
+        }
+        .chat-window .chat-cont-left .chat-users-list a.media .media-body>div:first-child .user-name,
+        .chat-window .chat-cont-left .chat-users-list a.media .media-body>div:first-child .user-last-chat {
+            max-width: 250px;
+        }
+        .app-dropdown {
+            display: none;
+        }
+        .edit-link {
+            font-size: 0.875rem;
+            margin-top: 0;
+        }
+        .product_price {
+            font-size: 1.5rem;
+        }
+        .login-wrapper .loginbox .login-right h1 {
+            font-size: 22px;
+        }
+        .error-box h1 {
+            font-size: 6em;
+        }
+        .error-box .btn {
+            font-size: 15px;
+            min-width: 150px;
+            padding: 8px 20px;
+        }
+        .dash-count {
+            font-size: 16px;
+        }
     }
-    h1,
-    .h1 {
-        font-size: 2rem;
+    @media only screen and (max-width: 575.98px) {
+        .card {
+            margin-bottom: 0.9375rem;
+        }
+        .page-wrapper>.content {
+            padding: 0.9375rem 0.9375rem 0;
+        }
+        .chat-window {
+            margin-bottom: 0.9375rem;
+        }
+        .card-body {
+            padding: 1.25rem;
+        }
+        .card-header {
+            padding: .75rem 1.25rem;
+        }
+        .card-footer {
+            padding: .75rem 1.25rem;
+        }
+        .card-chart .card-body {
+            padding: 5px;
+        }
+        .page-header {
+            margin-bottom: 0.9375rem;
+        }
+        .account-wrapper {
+            padding: 0.9375rem;
+        }
+        .pagination-lg .page-link {
+            font-size: 1.2rem;
+            padding: 0.5rem 0.625rem;
+        }
+        .profile-image {
+            flex: 0 0 100%;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .profile-user-info {
+            text-align: center;
+        }
+        .profile-btn {
+            text-align: center;
+        }
+        .invoice-details,
+        .invoice-payment-details>li span {
+            float: left;
+            text-align: left;
+        }
+        .fc-toolbar .fc-right {
+            display: inline-block;
+            float: none;
+            margin: 10px auto 0;
+            width: 200px;
+            clear: both;
+        }
+        .fc-toolbar .fc-left {
+            float: none;
+            margin: 0 auto;
+            width: 200px;
+        }
+        .fc-toolbar .fc-center {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+        .fc-toolbar .fc-center h2 {
+            width: 100%;
+        }
+        .profile-tab-cont {
+            padding-top: 1.25rem;
+        }
+        .chat-window .chat-cont-right .chat-header .media .media-body {
+            display: none;
+        }
     }
-    h2,
-    .h2 {
-        font-size: 1.75rem;
+    @media only screen and (max-width: 479px) {
+        .add-btn {
+            font-size: 14px;
+            padding: 6px 7px;
+        }
+        .chat-window .chat-cont-left .chat-users-list a.media .media-body>div:first-child .user-name,
+        .chat-window .chat-cont-left .chat-users-list a.media .media-body>div:first-child .user-last-chat {
+            max-width: 160px;
+        }
+        .page-header .breadcrumb {
+            display: none;
+        }
     }
-    h3,
-    .h3 {
-        font-size: 1.5rem;
-    }
-    h4,
-    .h4 {
-        font-size: 1.125rem;
-    }
-    h5,
-    .h5 {
-        font-size: 1rem;
-    }
-    h6,
-    .h6 {
-        font-size: 0.875rem;
-    }
-    .header .has-arrow .dropdown-toggle:after {
-        display: none;
-    }
-    .user-menu.nav>li>a>span:not(.user-img) {
-        display: none;
-    }
-    .navbar-nav .open .dropdown-menu {
-        float: left;
-        position: absolute;
-    }
-    .navbar-nav.user-menu .open .dropdown-menu {
-        left: auto;
-        right: 0;
-    }
-    .header .header-left {
-        padding: 0 15px;
-    }
-    .header .header-left .logo {
-        display: none;
-    }
-    .header-left .logo.logo-small {
-        display: inline-block;
-    }
-    .login-wrapper .loginbox .login-left {
-        display: none;
-    }
-    .login-wrapper .loginbox {
-        max-width: 450px;
-        min-height: unset;
-    }
-    .login-wrapper .loginbox .login-right {
-        float: none;
-        padding: 1.875rem;
-        width: 100%;
-    }
-    .invoice-container {
-        padding: 20px;
-    }
-    .left-action {
-        text-align: center;
-        margin-bottom: 15px;
-    }
-    .right-action {
-        text-align: center;
-    }
-    .top-action-left .float-left {
-        float: none !important;
-    }
-    .top-action-left .btn-group {
-        margin-bottom: 15px;
-    }
-    .top-action-right {
-        text-align: center;
-    }
-    .top-action-right a.btn.btn-white {
-        margin-bottom: 15px;
-    }
-    .mail-sent-time {
-        float: left;
-        margin-top: 10px;
-        width: 100%;
-    }
-    .profile-btn {
-        flex: 0 0 100%;
-        margin-top: 20px;
-    }
-    .chat-window .chat-cont-left .chat-users-list a.media .media-body>div:first-child .user-name,
-    .chat-window .chat-cont-left .chat-users-list a.media .media-body>div:first-child .user-last-chat {
-        max-width: 250px;
-    }
-    .app-dropdown {
-        display: none;
-    }
-    .edit-link {
-        font-size: 0.875rem;
-        margin-top: 0;
-    }
-    .product_price {
-        font-size: 1.5rem;
-    }
-    .login-wrapper .loginbox .login-right h1 {
-        font-size: 22px;
-    }
-    .error-box h1 {
-        font-size: 6em;
-    }
-    .error-box .btn {
-        font-size: 15px;
-        min-width: 150px;
-        padding: 8px 20px;
-    }
-    .dash-count {
-        font-size: 16px;
-    }
-}
-
-@media only screen and (max-width: 575.98px) {
-    .card {
-        margin-bottom: 0.9375rem;
-    }
-    .page-wrapper>.content {
-        padding: 0.9375rem 0.9375rem 0;
-    }
-    .chat-window {
-        margin-bottom: 0.9375rem;
-    }
-    .card-body {
-        padding: 1.25rem;
-    }
-    .card-header {
-        padding: .75rem 1.25rem;
-    }
-    .card-footer {
-        padding: .75rem 1.25rem;
-    }
-    .card-chart .card-body {
-        padding: 5px;
-    }
-    .page-header {
-        margin-bottom: 0.9375rem;
-    }
-    .account-wrapper {
-        padding: 0.9375rem;
-    }
-    .pagination-lg .page-link {
-        font-size: 1.2rem;
-        padding: 0.5rem 0.625rem;
-    }
-    .profile-image {
-        flex: 0 0 100%;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-    .profile-user-info {
-        text-align: center;
-    }
-    .profile-btn {
-        text-align: center;
-    }
-    .invoice-details,
-    .invoice-payment-details>li span {
-        float: left;
-        text-align: left;
-    }
-    .fc-toolbar .fc-right {
-        display: inline-block;
-        float: none;
-        margin: 10px auto 0;
-        width: 200px;
-        clear: both;
-    }
-    .fc-toolbar .fc-left {
-        float: none;
-        margin: 0 auto;
-        width: 200px;
-    }
-    .fc-toolbar .fc-center {
-        display: inline-block;
-        width: 100%;
-        text-align: center;
-    }
-    .fc-toolbar .fc-center h2 {
-        width: 100%;
-    }
-    .profile-tab-cont {
-        padding-top: 1.25rem;
-    }
-    .chat-window .chat-cont-right .chat-header .media .media-body {
-        display: none;
-    }
-}
-
-@media only screen and (max-width: 479px) {
-    .add-btn {
-        font-size: 14px;
-        padding: 6px 7px;
-    }
-    .chat-window .chat-cont-left .chat-users-list a.media .media-body>div:first-child .user-name,
-    .chat-window .chat-cont-left .chat-users-list a.media .media-body>div:first-child .user-last-chat {
-        max-width: 160px;
-    }
-    .page-header .breadcrumb {
-        display: none;
-    }
-}
-
-
-
-
-
-
-
-
     .chat-window .chat-scroll {
         max-height: calc(100vh - 255px);
     }
@@ -4926,7 +4897,6 @@ table.table-inbox tbody tr.checked {
         right: 0;
     }
 }
-
 
 
 /************************************************************************************
@@ -5162,3 +5132,53 @@ button.btn.btn-primary {
 .bg-info>a {
     color: #fff!important;
 }
+
+hr {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+}
+
+
+/* FOOTER CSS START  FOOTER CSS START  FOOTER CSS START  FOOTER CSS START */
+
+.footer {
+    min-height: 65px;
+    background: #fff;
+    margin-top: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+    width: 100%;
+}
+
+.footer p {
+    margin: 0;
+    line-height: normal;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #214162;
+    padding: 25px 15px;
+}
+
+.footer a {
+    color: #d9b39c;
+    font-weight: 600;
+}
+
+
+/* MEDIA QUER CSS START  MEDIA QUER CSS START   MEDIA QUER CSS START   MEDIA QUER CSS START */
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+    .submit input.form-control.bg-submits {
+        width: 30% !important;
+    }
+    .footer a {
+        color: #d9b39c;
+        font-weight: 600;
+    }
+}
+
+
+/*  */
