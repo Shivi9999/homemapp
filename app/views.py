@@ -546,7 +546,7 @@ def get_answer(request):
             if matched_qa:
                 # Generate speech from the answer with pyttsx3
                 answer_text = matched_qa.answer
-
+                print('answer_text',answer_text)
                 # Initialize the text-to-speech engine
                 engine = pyttsx3.init()
 
@@ -561,15 +561,17 @@ def get_answer(request):
                 engine.runAndWait()
 
                 if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+                    print('answer',answer)
                     return JsonResponse({'answer': answer_text}, safe=False)
-
+        
                 return render(request, 'chatbot/answer.html', {'user_input': user_input, 'answer': answer_text, 'audio_file_path': audio_file_path})
-
+                print('answer',answer)
             else:
                 if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
                     return JsonResponse({'answer': 'Sorry, I don\'t have an answer for that question.'})
-
+                    
                 return render(request, 'chatbot/answer.html', {'user_input': user_input, 'answer': 'Sorry, I don\'t have an answer for that question.'})
+               
         else:
             return JsonResponse({'error': 'Invalid request method.'})
     except Exception as e:
