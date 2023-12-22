@@ -550,7 +550,7 @@ def get_answer(request):
                 answer_text = matched_qa.answer
             else:
                 answer_text = 'Sorry, I don\'t have an answer for that question.'
- 
+
             print('answer_text', answer_text)
 
             # Initialize the text-to-speech engine
@@ -560,21 +560,18 @@ def get_answer(request):
             engine.setProperty('rate', 150)  # Adjust the speed as needed
 
             # Use pyttsx3 to directly speak the answer
-            engine.say(answer_text)
-            
+            engine.say("Hello, testing text-to-speech.")
 
             # Log statements to check the control flow
             print("Before engine.runAndWait()")  # Add this line
             engine.runAndWait()
             print("After engine.runAndWait()")   # Add this line
 
-
             if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-            
-             return JsonResponse({'answer': answer_text}, safe=False)
+                return JsonResponse({'answer': answer_text}, safe=False)
+
             return render(request, 'chatbot/answer.html',
                           {'user_input': user_input, 'answer': answer_text})
-            
 
         else:
             return JsonResponse({'error': 'Invalid request method.'})
