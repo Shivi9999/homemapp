@@ -561,7 +561,12 @@ def get_answer(request):
 
             # Use pyttsx3 to directly speak the answer
             engine.say(answer_text)
+            
+
+            # Log statements to check the control flow
+            print("Before engine.runAndWait()")  # Add this line
             engine.runAndWait()
+            print("After engine.runAndWait()")   # Add this line
 
             if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
                 print('answer', answer_text)
