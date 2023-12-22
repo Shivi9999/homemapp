@@ -9,6 +9,7 @@
 </head>
 <body>
     <div id="answerContainer">
+        
         {% if user_input %}
             <p>{{ user.username }}: {{ user_input }}</p>
         {% endif %}
@@ -17,7 +18,7 @@
         </div>
         <p id="answerText">Avai: {{answer}}<span id="typedAnswer"></span></p>
 
-        <audio id="answerAudio" onended="pauseAudio()">
+        <audio id="answerAudio" preload="auto">
             <source src="{% static 'answer.mp3' %}" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
@@ -32,7 +33,12 @@
 
         function playAudio() {
             const audio = document.getElementById('answerAudio');
-            audio.play();
+            // Check if the audio can be played before calling play()
+            if (audio.canPlayType && audio.canPlayType('audio/mpeg')) {
+                audio.play();
+            } else {
+                console.error('Audio format not supported.');
+            }
         }
 
         function pauseAudio() {

@@ -545,7 +545,7 @@ def get_answer(request):
                 if ratio >= 80:
                     matched_qa = QuestionAnswer.objects.filter(question=best_match).first()
 
-            # Generate speech from the answer or "Sorry" message with pyttsx3
+            # Generate speech from the answer or "Sorry" message with gTTS
             if matched_qa:
                 answer_text = matched_qa.answer
             else:
@@ -553,25 +553,18 @@ def get_answer(request):
 
             print('answer_text', answer_text)
 
-            # Initialize the text-to-speech engine
-            engine = pyttsx3.init()
-
-            # Set properties (optional)
-            engine.setProperty('rate', 150)  # Adjust the speed as needed
-
-            # Use pyttsx3 to directly speak the answer
-            engine.say("Hello, testing text-to-speech.")
+            # Save the speech as an MP3 file
+            tts = gTTS(text=answer_text, lang='en')
+            tts.save("static/answer.mp3")
 
             # Log statements to check the control flow
-            print("Before engine.runAndWait()")  # Add this line
-            engine.runAndWait()
-            print("After engine.runAndWait()")   # Add this line
+            print("MP3 file saved successfully")
 
             if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-                return JsonResponse({'answer': answer_text}, safe=False)
+                return JsonResponse({'answer': answer_text, 'audio_path': 'static/answer.mp3'}, safe=False)
 
             return render(request, 'chatbot/answer.html',
-                          {'user_input': user_input, 'answer': answer_text})
+                          {'user_input': user_input, 'answer': answer_text, 'audio_path': '/media/answer.mp3'})
 
         else:
             return JsonResponse({'error': 'Invalid request method.'})
@@ -579,7 +572,7 @@ def get_answer(request):
         print(f"An error occurred: {str(e)}")
         return JsonResponse({'error': 'Sorry, I don\'t have an answer for that question.'})
 
-
+        
 def import_csv(request):
     if request.method == 'POST':
         form = CSVUploadForm(request.POST, request.FILES)
