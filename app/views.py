@@ -564,14 +564,14 @@ def get_answer(request):
                 return JsonResponse({'answer': answer_text, 'audio_path': '/static/answer.mp3'}, safe=False)
 
             return render(request, 'chatbot/answer.html',
-                          {'user_input': user_input, 'answer': answer_text, 'audio_path': '/media/answer.mp3'})
+                          {'user_input': user_input, 'answer': answer_text, 'audio_path': '/static/answer.mp3'})
 
         else:
             return JsonResponse({'error': 'Invalid request method.'})
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         return JsonResponse({'error': 'Sorry, I don\'t have an answer for that question.'})
-
+    
         
 def import_csv(request):
     if request.method == 'POST':
