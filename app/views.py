@@ -568,10 +568,10 @@ def get_answer(request):
             engine.runAndWait()
             print("After engine.runAndWait()")   # Add this line
 
-            if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-                print('answer', answer_text)
-                return JsonResponse({'answer': answer_text}, safe=False)
 
+            if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            
+             return JsonResponse({'answer': answer_text}, safe=False)
             return render(request, 'chatbot/answer.html',
                           {'user_input': user_input, 'answer': answer_text})
             
