@@ -553,20 +553,24 @@ def get_answer(request):
  
             print('answer_text', answer_text)
 
-            # Initialize the text-to-speech engine
-            engine = pyttsx3.init()
+            try:
+                            # Initialize the text-to-speech engine
+                            engine = pyttsx3.init()
 
-            # Set properties (optional)
-            engine.setProperty('rate', 150)  # Adjust the speed as needed
+                            # Set properties (optional)
+                            engine.setProperty('rate', 150)  # Adjust the speed as needed
 
-            # Use pyttsx3 to directly speak the answer
-            engine.say(answer_text)
-            
+                            # Use pyttsx3 to directly speak the answer
+                            engine.say(answer_text)
 
-            # Log statements to check the control flow
-            print("Before engine.runAndWait()")  # Add this line
-            engine.runAndWait()
-            print("After engine.runAndWait()")   # Add this line
+                            # Log statements to check the control flow
+                            print("Before engine.runAndWait()")
+                            engine.runAndWait()
+                            print("After engine.runAndWait()")
+
+            except Exception as e:
+                            print(f"An error occurred during TTS: {str(e)}")
+
 
             if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
                 print('answer', answer_text)
