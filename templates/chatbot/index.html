@@ -1233,8 +1233,19 @@ main#msger-chat {
         top: 63% !important;
         transform: translate(-40%, -60%);
     }
-    
-    
+    .chatbot img#bg-image {
+        width: 100%;
+        height: 470px !important;
+        padding: 4px 6px;
+    }
+    div#bg-image{
+        background: url(/static/chat/assets/images/avai.jpg) !important;
+        width: 100% !important; 
+        height: 80vh !important;
+        background-position: center !important;
+        background-size: cover !important;
+        background-repeat: no-repeat !important; 
+    }
     
     
     
@@ -1258,9 +1269,16 @@ main#msger-chat {
             <source src="{% static 'chat/assets/images/course-video.mp4' %}" type="video/mp4" />
         </video>
 
-        <div class="chatbot">
-            <img src="{% static 'chat/assets/images/Picture1.png' %}" alt="Placeholder Image" id="bg-image" class="fallback-image" 
-            style="width: 100%; height:640px;">
+        <div class="chatbot fallback-image" id="bg-image"  style="
+        background: url(/static/chat/assets/images/Picture1.png);
+        width: 100%;
+        height: 100vh;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    ">
+            {% comment %} <img src="{% static 'chat/assets/images/Picture1.png' %}" alt="Placeholder Image" id="bg-image" class="fallback-image" 
+            style="width: 100%; height:640px;"> {% endcomment %}
         </div>
     </div>
         <div class="video-overlay header-text">
