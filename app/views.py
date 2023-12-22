@@ -521,9 +521,7 @@ def chat(request):
     
 
 
-
-import pygame
-
+@login_required(login_url='login')
 def get_answer(request):
     try:
         if request.method == 'GET':
@@ -547,25 +545,28 @@ def get_answer(request):
                 if ratio >= 80:
                     matched_qa = QuestionAnswer.objects.filter(question=best_match).first()
 
-            # Generate speech from the answer or "Sorry" message with gTTS and pygame
+            # Generate speech from the answer or "Sorry" message with pyttsx3
             if matched_qa:
                 answer_text = matched_qa.answer
             else:
                 answer_text = 'Sorry, I don\'t have an answer for that question.'
-
+ 
             print('answer_text', answer_text)
 
-            # Use gTTS to generate audio file
-            tts = gTTS(text=answer_text, lang='en')
-            tts.save("/static/answer.mp3")  # Change the path as needed
+            # Initialize the text-to-speech engine
+            engine = pyttsx3.init()
 
-            # Initialize pygame and play the audio
-            pygame.mixer.init()
-            pygame.mixer.music.load("/static/answer.mp3")  # Change the path as needed
-            pygame.mixer.music.play()
+            # Set properties (optional)
+            engine.setProperty('rate', 150)  # Adjust the speed as needed
+
+            # Use pyttsx3 to directly speak the answer
+            engine.say(answer_text)
+            
 
             # Log statements to check the control flow
-            print("After pygame.mixer.music.play()")  # Add this line
+            print("Before engine.runAndWait()")  # Add this line
+            engine.runAndWait()
+            print("After engine.runAndWait()")   # Add this line
 
             if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
                 print('answer', answer_text)
@@ -573,12 +574,14 @@ def get_answer(request):
 
             return render(request, 'chatbot/answer.html',
                           {'user_input': user_input, 'answer': answer_text})
+            
 
         else:
             return JsonResponse({'error': 'Invalid request method.'})
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         return JsonResponse({'error': 'Sorry, I don\'t have an answer for that question.'})
+
 
 def import_csv(request):
     if request.method == 'POST':
