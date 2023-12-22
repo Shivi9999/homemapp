@@ -561,7 +561,7 @@ def get_answer(request):
             print("MP3 file saved successfully")
 
             if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-                return JsonResponse({'answer': answer_text, 'audio_path': 'static/answer.mp3'}, safe=False)
+                return JsonResponse({'answer': answer_text, 'audio_path': '/static/answer.mp3'}, safe=False)
 
             return render(request, 'chatbot/answer.html',
                           {'user_input': user_input, 'answer': answer_text, 'audio_path': '/media/answer.mp3'})
