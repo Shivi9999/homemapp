@@ -1399,102 +1399,62 @@ main#msger-chat {
 
 <!-- ... (previous HTML code) ... -->
 
-
-
 <script>
 
+document.getElementById('questionForm').addEventListener('submit', function (event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
 
+    // Get user input from the form
+    const userInput = document.getElementById('userInput').value;
 
-    document.getElementById('questionForm').addEventListener('submit', async function (event) {
-        // Prevent the default form submission behavior
-        event.preventDefault();
-    
-        // Get user input from the form
-        const userInput = document.getElementById('userInput').value;
-    
-        try {
-            // Make an AJAX request to the Django backend using fetch
-            const response = await fetch(`/get_answer/?user_input=${encodeURIComponent(userInput)}`);
-    
-            if (response.ok) {
+    // Make an AJAX request to the Django backend
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
                 try {
+                    // Update the content of the answerContainer using Django template syntax
                     const msgerChat = document.getElementById('msger-chat');
-    
-                    console.log("Before alert - befores");
-                    alert("befored");
-                    console.log("After alert - afters");
-    
-                    let responseData;
-    
-                    try {
-                        // Try to parse the response as JSON
-                        responseData = await response.json();
-                    } catch (jsonError) {
-                        // Handle the case where the response is not JSON
-                        console.error('Error parsing JSON:', jsonError);
-                        alert("Error parsing JSON");
-    
-                        // Do additional handling for non-JSON response, if needed
-                        return;
-                    }
-    
                     const msgHTML = `
                         <div class="msg left-msg">
-                            <div class="msg-img" style="background-image: url(/static/chat/assets/images/author-01.png)"></div>
+                            <div class="msg-img" style="background-image: url(/chat/static/assets/images/author-01.png)"></div>
                             <div class="msg-bubble">
                                 <div class="msg-info">
                                     <div class="msg-info-name">Avai </div>
                                     <div class="msg-info-time">${formatDate(new Date())}</div>
                                 </div>
-                                <div class="msg-text">${responseData.answer}</div>
+                                <div class="msg-text">${xhr.responseText}</div>
                             </div>
                         </div>
                     `;
-    
                     msgerChat.insertAdjacentHTML("beforeend", msgHTML);
-    
+
                     // Clear the input field after submission
                     document.getElementById('userInput').value = '';
-    
+
                     // Scroll to the bottom of the chat window
                     msgerChat.scrollTop = msgerChat.scrollHeight;
-    
-                    // Play the audio after generating the answer
-                    console.log('Response:', responseData.answer);
-                } catch (jsonError) {
-                    console.error('Error parsing JSON:', jsonError);
-                    alert('Error parsing JSON. Please try again.');
-                    return
+                } catch (error) {
+                    console.error('Error updating chat:', error);
                 }
             } else {
-                console.error('Error:', response.status, response.statusText);
+                console.error('Error:', xhr.status, xhr.statusText);
             }
-        } catch (error) {
-            console.error('Fetch error:', error);
         }
-    });
-    
+    };
 
+    // Replace 'your_django_url' with your actual Django endpoint
+    xhr.open('GET', `/get_answer/?user_input=${encodeURIComponent(userInput)}`, true);
+    xhr.send();
+});
 
-    // Utils
-    function formatDate(date) {
-        const h = "0" + date.getHours();
-        const m = "0" + date.getMinutes();
-        return `${h.slice(-2)}:${m.slice(-2)}`;
-    }
-
-    // Function to play the audio
-    function playAudio(answerText) {  alert("playAudio called")
-
-        var audio = document.getElementById("answerAudio");
-        audio.src = `/static/answer.mp3?${Date.now()}`; // Add a timestamp to the URL
-        audio.play();
-        alert("Audio Played success")
-
-        // Update the answer text with the generated text
-        const answerTextContainer = document.getElementById("answerText");
-        initiateTypingEffect(answerTextContainer, answerText);
-    }
+// Utils
+function formatDate(date) {
+    const h = "0" + date.getHours();
+    const m = "0" + date.getMinutes();
+    return `${h.slice(-2)}:${m.slice(-2)}`;
+}
 </script>
 
 
