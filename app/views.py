@@ -518,61 +518,155 @@ def save_question_answer(request):
 @login_required(login_url='login')
 def chat(request):
     return render(request,'chatbot/index.html')
-    
 
+nlp = spacy.load("en_core_web_sm")
+   
+def get_category_and_prompt(user_input):
+    doc = nlp(user_input)
+    category = None
 
-@login_required(login_url='login')
+    # Assuming "CATEGORY" is the entity label for question categories
+    for ent in doc.ents:
+        category = ent.text
+        break
+
+    # Provide dynamic clarification prompt based on the recognized category
+    if category == "towel":
+        return category, "Which towel are you asking about?"
+    elif category == "maker":
+        return category, "Which maker are you asking about?"
+    else:
+        return None, "Can you please provide more details or specify the context of your question?"
+
 def get_answer(request):
+    error_message = ''  # Default value
+    user_input = ''  # Initialize user_input here
+
     try:
         if request.method == 'GET':
             user_input = request.GET.get('user_input', '').lower().strip()
 
             if not user_input:
-                return JsonResponse({'answer': 'Please provide a question.'})
-
-            # Spell-check user input
-            spell_checker = SpellChecker()
-            corrected_input = ' '.join(spell_checker.correction(word) for word in user_input.split())
-            nlp = spacy.load("en_core_web_sm")
-            input_doc = nlp(corrected_input)
-
-            matched_qa = QuestionAnswer.objects.filter(question__icontains=corrected_input).first()
-            if not matched_qa:
-                # If an exact match is not found, try fuzzy matching
-                questions = QuestionAnswer.objects.values_list('question', flat=True)
-                best_match, ratio = process.extractOne(corrected_input, questions)
-
-                if ratio >= 80:
-                    matched_qa = QuestionAnswer.objects.filter(question=best_match).first()
-
-            # Generate speech from the answer or "Sorry" message with gTTS
-            if matched_qa:
-                answer_text = matched_qa.answer
+                # Voice response for missing question
+                error_message = 'Please provide a question.'
             else:
-                answer_text = 'Sorry, I don\'t have an answer for that question.'
+                # Spell-check user input
+                spell_checker = SpellChecker()
+                corrected_input = ' '.join(spell_checker.correction(word) for word in user_input.split())
 
-            print('answer_text', answer_text)
+                # Get category and dynamic clarification prompt
+                category, clarification_prompt = get_category_and_prompt(corrected_input)
 
-            # Save the speech as an MP3 file
-            tts = gTTS(text=answer_text, lang='en')
-            tts.save("static/answer.mp3")
+                if category:
+                    # Provide a dynamic clarification prompt based on the recognized category
+                    tts = gTTS(text=clarification_prompt, lang='en')
+                    tts.save("static/clarification_prompt.mp3")
+                    return render(request, 'chatbot/answer.html', {'user_input': user_input, 'answer': clarification_prompt, 'audio_path': '/static/clarification_prompt.mp3'})
+                
+                # Continue processing the question based on the recognized category
+                matched_qa = QuestionAnswer.objects.filter(question__icontains=corrected_input).first()
 
-            # Log statements to check the control flow
-            print("MP3 file saved successfully")
+                if not matched_qa:
+                    # If an exact match is not found, try fuzzy matching
+                    questions = QuestionAnswer.objects.values_list('question', flat=True)
+                    matches = process.extractBests(corrected_input, questions, score_cutoff=80, limit=2)
 
-            if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-                return JsonResponse({'answer': answer_text, 'audio_path': '/static/answer.mp3'}, safe=False)
+                    if len(matches) == 1:
+                        best_match, ratio = matches[0]
+                        matched_qa = QuestionAnswer.objects.filter(question=best_match).first()
+                    elif len(matches) > 1:
+                        # Provide a dynamic clarification prompt based on the number of matches
+                        match_options = ', '.join(match[0] for match in matches)
+                        clarification_prompt = f'Which towel are you asking about? {match_options}?'
+                        tts = gTTS(text=clarification_prompt, lang='en')
+                        tts.save("static/clarification_prompt.mp3")
+                        return render(request, 'chatbot/answer.html', {'user_input': user_input, 'answer': clarification_prompt, 'audio_path': '/static/clarification_prompt.mp3'})
+                    else:
+                        error_message = 'Sorry, I don\'t have an answer for that question.'
 
-            return render(request, 'chatbot/answer.html',
-                          {'user_input': user_input, 'answer': answer_text, 'audio_path': '/static/answer.mp3'})
+                # Generate speech from the answer or "Sorry" message with gTTS
+                if matched_qa:
+                    error_message = matched_qa.answer
+
+                print('answer_text', error_message)
 
         else:
-            return JsonResponse({'error': 'Invalid request method.'})
+            # Voice response for invalid request method
+            error_message = 'Invalid request method.'
+
     except Exception as e:
+        # Voice response for generic error
+        error_message = 'Sorry, an error occurred.'
         print(f"An error occurred: {str(e)}")
-        return JsonResponse({'error': 'Sorry, I don\'t have an answer for that question.'})
-    
-        
+
+    finally:
+        if not error_message:
+            error_message = 'Sorry, I don\'t have an answer for that question.'
+
+        # Save the speech as an MP3 file for all error cases
+        tts = gTTS(text=error_message, lang='en')
+        tts.save("static/answer.mp3")
+
+    return render(request, 'chatbot/answer.html', {'user_input': user_input, 'answer': error_message, 'audio_path': '/static/answer.mp3'})
+
+# def get_answer(request):
+#     error_message = ''  # Default value
+#     user_input = ''  # Initialize user_input here
+
+#     try:
+#         if request.method == 'GET':
+#             user_input = request.GET.get('user_input', '').lower().strip()
+
+#             if not user_input:
+#                 # Voice response for missing question
+#                 error_message = 'Please provide a question.'
+#             else:
+#                 # Spell-check user input
+#                 spell_checker = SpellChecker()
+#                 corrected_input = ' '.join(spell_checker.correction(word) for word in user_input.split())
+#                 nlp = spacy.load("en_core_web_sm")
+#                 input_doc = nlp(corrected_input)
+
+#                 matched_qa = QuestionAnswer.objects.filter(question__icontains=corrected_input).first()
+#                 if not matched_qa:
+#                     # If an exact match is not found, try fuzzy matching
+#                     questions = QuestionAnswer.objects.values_list('question', flat=True)
+#                     best_match, ratio = process.extractOne(corrected_input, questions)
+
+#                     if ratio >= 80:
+#                         matched_qa = QuestionAnswer.objects.filter(question=best_match).first()
+
+#                 # Generate speech from the answer or "Sorry" message with gTTS
+#                 if matched_qa:
+#                     error_message = matched_qa.answer
+#                 else:
+#                     error_message = 'Sorry, I don\'t have an answer for that question.'
+
+#                 print('answer_text', error_message)
+
+#         else:
+#             # Voice response for invalid request method
+#             error_message = 'Invalid request method.'
+
+#     except Exception as e:
+#         # Voice response for generic error
+#         error_message = 'Sorry, an error occurred.'
+#         print(f"An error occurred: {str(e)}")
+
+#     finally:
+#         if not error_message:
+#             error_message = 'Sorry, an error occurred.'
+
+#         # Save the speech as an MP3 file for all error cases
+#         tts = gTTS(text=error_message, lang='en')
+#         tts.save("static/answer.mp3")
+
+#     if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+#         return JsonResponse({'answer': error_message, 'audio_path': '/static/answer.mp3'}, safe=False)
+
+#     return render(request, 'chatbot/answer.html',
+#                   {'user_input': user_input, 'answer': error_message, 'audio_path': '/static/answer.mp3'})
+
 def import_csv(request):
     if request.method == 'POST':
         form = CSVUploadForm(request.POST, request.FILES)
