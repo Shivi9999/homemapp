@@ -1266,14 +1266,14 @@ main#msger-chat {
             <source src="{% static 'chat/assets/images/course-video.mp4' %}" type="video/mp4" />
         </video>
 
-        <div class="chatbot fallback-image" id="bg-image"  style="
+        {% comment %} <div class="chatbot fallback-image" id="bg-image"  style="
         background: url(/static/chat/assets/images/Picture1.png);
         width: 100%;
         height: 100vh;
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
-    ">
+    "> {% endcomment %}
             {% comment %} <img src="{% static 'chat/assets/images/Picture1.png' %}" alt="Placeholder Image" id="bg-image" class="fallback-image" 
             style="width: 100%; height:640px;"> {% endcomment %}
         </div>
