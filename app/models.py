@@ -81,14 +81,7 @@ class PropertyOwner(models.Model):
         return self.property_name
 
 
-class QuestionAnswer(models.Model):
-    
-    question = models.CharField(max_length=500)
-    answer=models.CharField(max_length=2000)
-    
 
-    def __str__(self):
-        return self.question
 
 
 class Notification(models.Model):
@@ -139,6 +132,8 @@ class Add_hotel(models.Model):
         return self.property_name
 
 
+
+
 class Add_Room(models.Model):
     
     flat_name = models.ForeignKey(Add_hotel, on_delete=models.CASCADE)
@@ -151,6 +146,15 @@ class Add_Room(models.Model):
     def __str__(self):
         return self.room_number
 
+class QuestionAnswer(models.Model):
+    hotel=models.ManyToManyField(Add_hotel)
+    room=models.ManyToManyField(Add_Room)
+    question = models.CharField(max_length=500)
+    answer=models.CharField(max_length=2000)
+    
+
+    def __str__(self):
+        return self.question
 
 
 class Add_user(models.Model):

@@ -162,6 +162,14 @@
 										<form method="post" class=" row">
 											{% csrf_token %}
 											<div class="form-group col-sm-6">
+												<label for="id_users">User</label>
+												{{ question_form.hotel }}
+											</div>
+											<div class="form-group col-sm-6">
+												<label for="id_users">User</label>
+												{{ question_form.room }}
+											</div>
+											<div class="form-group col-sm-6">
 												<label>Question</label>
 												{{question_form.question}}
 											</div>

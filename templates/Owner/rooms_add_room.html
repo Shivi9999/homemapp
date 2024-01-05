@@ -133,7 +133,8 @@
                             <div class="users-forms">
                             <div class="row">
                                <div class="col-md-7">
-                                    <form action="#" method="post">
+                                    <form  method="post">
+                                      {% csrf_token %}
                                  <div class="form-group row add-user">
                                    
                                        <div class="form-group col-md-12">
@@ -157,7 +158,7 @@
 
                                    <div class="form-group col-md-6">
                                         <i class="fa fa-mobile icon-user"></i>
-                                     <label for="exampleInputPassword1">Items Mobile</label>
+                                     <label for="exampleInputPassword1">Items </label>
                                      {{form.items}}
                                      {% comment %} <input type="number" class="form-control  user-fill" id="user-add-form" placeholder="Items Mobile"> {% endcomment %}
                                    </div>

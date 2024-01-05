@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views,user_views
+from . import views,user_views,customer_views
 urlpatterns = [
     
     path('',views.dashboard,name='dashboard'),
@@ -57,6 +57,8 @@ urlpatterns = [
     path('View_room',user_views.view_room,name='View_room'),
     path('Edit_user/<int:id>',user_views.edit_user,name='edit_user'),
     path('Delete_user/<int:id>',user_views.delete_user,name='delete_user'),
+    path('edit_items/<int:id>',user_views.edit_items,name='edit_items'),
+    path('delete_items/<int:id>/',user_views.delete_items,name='delete_items'),
     path('Faq',user_views.faq_view,name='Faq'),
     path('edit_faq/<int:id>',user_views.edit_faq,name='edit_faq'),
     path('delete_faq/<int:id>',user_views.delete_faq,name='delete_faq'),
@@ -67,7 +69,11 @@ urlpatterns = [
     path('update_personal_details_user',user_views.update_personal_details_user,name='update_personal_details_user'),
     path('change_password_user',user_views.change_password_user,name='change_password_user'),
 
-
-
+       ################  CUSTOMER VIEWS ###################
+    path('customer_dashboard',customer_views.customer_dashboard,name='customer_dashboard'),
+    path('login_customer',customer_views.login_customer,name='login_customer'),
+    # path('chat_customer',customer_views.chat_customer,name='chat_customer'),
+    path('get_answer_cutomer/',customer_views.get_answer_cutomer,name='get_answer_cutomer'),
+    path('logout_customer',customer_views.logout_view_customer,name='logout_customer'),
 
 ]

@@ -267,7 +267,8 @@ def add_room(request):
 
 @login_required(login_url='login_user')
 def view_room(request):
-    return render(request,'Owner/rooms_view_room.html')
+    items=Add_items.objects.all().order_by('-id')
+    return render(request,'Owner/rooms_view_room.html',{'items':items})
 
 @login_required(login_url='login_user')
 def faq_view(request):
@@ -320,6 +321,38 @@ def privacy_policy_user(request):
 @login_required(login_url='login_user')
 def Notification_user(request):
     return render(request,'Owner/Notification.html')
+
+
+@login_required(login_url='login_user')
+def edit_items(request, id):
+    items = Add_items.objects.get(id=id)
+
+    if request.method == 'POST':
+        form = AddItemsForm(request.POST,instance=items)
+        if form.is_valid():
+            form.save()
+            return redirect('View_room')  # replace with your URL name
+    else:
+        form = AddItemsForm(instance=items)
+
+    return render(request, 'Owner/edit_items.html', {'form': form, 'items': items})
+
+
+@login_required(login_url='login_user')
+def delete_items(request, id):
+    items = get_object_or_404(Add_items, pk=id)
+    
+    # Retrieve the associated user
+   
+    items.delete()
+    
+    return JsonResponse({'msg': True})
+
+
+
+
+
+
 
 
 @login_required(login_url='login_user')

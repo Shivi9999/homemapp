@@ -39,12 +39,20 @@ class QuestionForm(forms.ModelForm):
 
     class Meta:
         model = QuestionAnswer
-        fields = ['question', 'answer']
+        fields = ['hotel','room','question', 'answer']
 
         widgets = {
             'question': forms.TextInput(attrs={'class': 'form-control','required': False}),
             'answer': forms.TextInput(attrs={'class': 'form-control','required': False}),
         }
+    hotel = forms.ModelMultipleChoiceField(
+        queryset=Add_hotel.objects.all(),
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox-list','required': True}),
+    )
+    room = forms.ModelMultipleChoiceField(
+        queryset=Add_Room.objects.all(),
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox-list','required': True}),
+    )
     def clean_question(self):
         # Cleaned data for the 'question' field
         question = self.cleaned_data['question']

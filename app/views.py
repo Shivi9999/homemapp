@@ -4,9 +4,10 @@ from .forms import *
 from django.views.decorators.csrf import csrf_protect
 from django.http import JsonResponse
 import os
+import logging
 from gtts import gTTS
 import pyttsx3
-
+from transformers import pipeline
 from django.conf import settings
 import spacy
 from fuzzywuzzy import fuzz
@@ -471,6 +472,7 @@ def save_question_answer(request):
             return redirect('View_question')
         else:
             errors = question_form.errors
+            print(question_form.errors)
             return render(request, 'Chat_add_question.html', {'question_form': question_form, 'errors': errors})
     return redirect('add_question')  
 
@@ -579,6 +581,29 @@ def get_answer(request):
 
     return render(request, 'chatbot/answer.html',
                   {'user_input': user_input, 'answer': error_message, 'audio_path': '/static/answer.mp3'})
+
+
+                  
+def get_answer_from_hugging_face(question):
+    # Use Hugging Face model for question answering
+    url = "https://api-inference.huggingface.co/models/deepset/bert-base-cased-squad2"
+    headers = {"Authorization": "Bearer YOUR_HUGGING_FACE_API_KEY"}  # Replace with your Hugging Face API key
+
+    payload = {
+        "inputs": {
+            "question": question,
+            "context": "Your context here"  # Provide context relevant to your questions
+        }
+    }
+
+    response = requests.post(url, headers=headers, json=payload)
+    result = response.json()
+
+    # Extract the answer from the Hugging Face response
+    answer = result.get('answer', 'Sorry, I don\'t have an answer for that question.')
+
+    return answer
+
 
 def import_csv(request):
     if request.method == 'POST':
