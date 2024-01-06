@@ -35,7 +35,7 @@
 													<ul class="dropdown-menu">
 														<li><a href="#"><label><input type="checkbox" class="selectall" /><span class="select-text"> Select</span> All</label></a></li>
 														<li class="divider"></li>
-														{% for user in chat_form.hotel.field.queryset %}
+														{% for user in question_form.hotel.field.queryset %}
 															<li>
 																<a href="#">
 																	<label>
@@ -58,12 +58,12 @@
 										
 											<div class="form-group col-sm-6">
 												<label>Question</label>
-												{{ chat_form.question }}
+												{{ question_form.question }}
 											</div>
 										
 											<div class="form-group col-sm-6">
 												<label>Answer</label>
-												{{ chat_form.answer }}
+												{{ question_form.answer }}
 											</div>
 										
 											<div class="form-group col-sm-12">
