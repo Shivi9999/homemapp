@@ -81,182 +81,97 @@
     <script src="{% static 'chat/assets/js/custom.js' %}"></script>
 
 
-{% comment %} <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const video = document.getElementById("bg-video");
-        const image = document.getElementById("bg-image");
 
-        // Show the image initially
-        image.style.display = "block";
-        video.style.display = "none";
-
-        document.getElementById('questionForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            const userInput = document.getElementById('userInput').value;
-            const xhr = new XMLHttpRequest();
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        try {
-                            const msgerChat = document.getElementById('msger-chat');
-                            const msgHTML = `
-                                <div class="msg left-msg">
-                                    <div class="msg-img" style="background-image: url(/static/chat/assets/images/author-01.png)"></div>
-                                    <div class="msg-bubble">
-                                        <div class="msg-info">
-                                            <div class="msg-info-name">Avai </div>
-                                            <div class="msg-info-time">${formatDate(new Date())}</div>
-                                        </div>
-                                        <div class="msg-text">${xhr.responseText}</div>
-                                    </div>
-                                </div>
-                            `;
-                            msgerChat.insertAdjacentHTML("beforeend", msgHTML);
-
-                            document.getElementById('userInput').value = '';
-
-                            // Toggle video and image visibility based on the response
-                            if (xhr.responseText.trim() !== "") {
-                                console.log("Answer generated. Playing video.");
-                                image.style.display = "none";  // Hide the image
-                                video.style.display = "block";  // Show the video
-                                video.play();  // Start playing the video
-
-                                // Dynamically set the audio source based on the response
-                                const audio = document.getElementById("answerAudio");
-                                audio.src = `static/answer.mp3?${Date.now()}`; // Add timestamp
-                                audio.play();  // Start playing the audio
-
-                                // Pause the video when the audio playback ends
-                                audio.addEventListener('ended', function () {
-                                    video.pause();  // Pause the video
-                                    image.style.display = "block";  // Show the image
-                                    video.style.display = "none";  // Hide the video
-                                });
-                            } else {
-                                console.log("No answer generated. Displaying image.");
-                                // Hide the video and show the image
-                                video.pause();  // Pause the video
-                                image.style.display = "block";  // Show the image
-                                video.style.display = "none";  // Hide the video
-                            }
-
-                            msgerChat.scrollTop = msgerChat.scrollHeight;
-                        } catch (error) {
-                            console.error('Error updating chat:', error);
-                        }
-                    } else {
-                        console.error('Error:', xhr.status, xhr.statusText);
-                        // Customize error handling based on status
-                        const msgerChat = document.getElementById('msger-chat');
-                        displayErrorMessage(msgerChat, 'Sorry, an error occurred while processing your request.');
-                    }
-                }
-            };
-
-            xhr.open('GET', `/get_answer/?user_input=${encodeURIComponent(userInput)}`, true);
-            xhr.send();
-        });
-
-        // Utils
-        function formatDate(date) {
-            const h = "0" + date.getHours();
-            const m = "0" + date.getMinutes();
-            return `${h.slice(-2)}:${m.slice(-2)}`;
-        }
-    });
-</script> {% endcomment %}
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const video = document.getElementById("bg-video");
-        const image = document.getElementById("bg-image");
-
-        // Show the image initially
-        image.style.display = "block";
-        video.style.display = "none";
-
-        document.getElementById('questionForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            const userInput = document.getElementById('userInput').value;
-            const xhr = new XMLHttpRequest();
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        try {
-                            const msgerChat = document.getElementById('msger-chat');
-                            const msgHTML = `
-                                <div class="msg left-msg">
-                                    <div class="msg-img" style="background-image: url(/static/chat/assets/images/author-01.png)"></div>
-                                    <div class="msg-bubble">
-                                        <div class="msg-info">
-                                            <div class="msg-info-name">Avai </div>
-                                            <div class="msg-info-time">${formatDate(new Date())}</div>
-                                        </div>
-                                        <div class="msg-text">${xhr.responseText}</div>
-                                    </div>
-                                </div>
-                            `;
-                            msgerChat.insertAdjacentHTML("beforeend", msgHTML);
-
-                            document.getElementById('userInput').value = '';
-
-                            // Toggle video and image visibility based on the response
-                            if (xhr.responseText.trim() !== "") {
-                                console.log("Answer generated. Playing video.");
-                                image.style.display = "none";  // Hide the image
-                                video.style.display = "block";  // Show the video
-                                video.play();  // Start playing the video
-
-                                // Dynamically set the audio source based on the response
-                                const audio = document.getElementById("answerAudio");
-                                audio.src = `static/answer.mp3?${Date.now()}`; // Add timestamp
-                                audio.play();  // Start playing the audio
-
-                                // Pause the video when the audio playback ends
-                                audio.addEventListener('ended', function () {
-                                    video.pause();  // Pause the video
-                                    image.style.display = "block";  // Show the image
-                                    video.style.display = "none";  // Hide the video
-                                });
-                            } else {
-                                console.log("No answer generated. Displaying image.");
-                                // Hide the video and show the image
-                                video.pause();  // Pause the video
-                                image.style.display = "block";  // Show the image
-                                video.style.display = "none";  // Hide the video
-                            }
-
-                            msgerChat.scrollTop = msgerChat.scrollHeight;
-                        } catch (error) {
-                            console.error('Error updating chat:', error);
-                        }
-                    } else {
-                        console.error('Error:', xhr.status, xhr.statusText);
-                        // Customize error handling based on status
-                        const msgerChat = document.getElementById('msger-chat');
-                        displayErrorMessage(msgerChat, 'Sorry, an error occurred while processing your request.');
-                    }
-                }
-            };
-
-            xhr.open('GET', `/get_answer/?user_input=${encodeURIComponent(userInput)}`, true);
-            xhr.send();
-        });
-
-        // Utils
-        function formatDate(date) {
-            const h = "0" + date.getHours();
-            const m = "0" + date.getMinutes();
-            return `${h.slice(-2)}:${m.slice(-2)}`;
-        }
-    });
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const video = document.getElementById("bg-video");
+           
+            
+            video.pause();  // Pause the video
+            video.currentTime = 0; 
     
-</script>
+            document.getElementById('questionForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+        
+                const userInput = document.getElementById('userInput').value;
+                const xhr = new XMLHttpRequest();
+        
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            try {
+                                const msgerChat = document.getElementById('msger-chat');
+                                const msgHTML = `
+                                    <div class="msg left-msg">
+                                        <div class="msg-img" style="background-image: url(/static/chat/assets/images/author-01.png)"></div>
+                                        <div class="msg-bubble">
+                                            <div class="msg-info">
+                                                <div class="msg-info-name">Avai </div>
+                                                <div class="msg-info-time">${formatDate(new Date())}</div>
+                                            </div>
+                                            <div class="msg-text">${xhr.responseText}</div>
+                                        </div>
+                                    </div>
+                                `;
+                                msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+        
+                                document.getElementById('userInput').value = '';
+        
+                                // Toggle video visibility based on the response
+                                if (xhr.responseText.trim() !== "") {
+                                    console.log("Answer generated. Playing video.");
+        
+                                    // Set the video source
+                                    video.src = `/static/chat/assets/images/course-video.mp4`;
+                                    video.style.display = "block";  // Show the video
+                                    video.play();  // Start playing the video
+        
+                                    // Dynamically set the audio source based on the response
+                                    const audio = document.getElementById("answerAudio");
+                                    audio.src = `static/answer.mp3?${Date.now()}`; // Add timestamp
+                                    audio.play();  // Start playing the audio
+        
+                                    // Pause the video when the audio playback ends
+                                    audio.addEventListener('ended', function () {
+                                        video.pause();  // Pause the video
+                                        video.currentTime = 0;  // Reset the video to 0.0 seconds
+                                    });
+                                } else {
+                                    console.log("No answer generated. Pausing video immediately.");
+        
+                                    // Set the video source
+                                    video.src = `/static/chat/assets/images/course-video.mp4`;
+                                    video.style.display = "block";  // Show the video
+                                    video.pause();  // Pause the video initially
+                                }
+        
+                                msgerChat.scrollTop = msgerChat.scrollHeight;
+                            } catch (error) {
+                                console.error('Error updating chat:', error);
+                            }
+                        } else {
+                            console.error('Error:', xhr.status, xhr.statusText);
+                            // Customize error handling based on status
+                            const msgerChat = document.getElementById('msger-chat');
+                            displayErrorMessage(msgerChat, 'Sorry, an error occurred while processing your request.');
+                        }
+                    }
+                };
+        
+                xhr.open('GET', `/get_answer/?user_input=${encodeURIComponent(userInput)}`, true);
+                xhr.send();
+            });
+        
+            // Utils
+            function formatDate(date) {
+                const h = "0" + date.getHours();
+                const m = "0" + date.getMinutes();
+                return `${h.slice(-2)}:${m.slice(-2)}`;
+            }
+        });
+        
+        
+    </script>
 </body>
 
 </html>

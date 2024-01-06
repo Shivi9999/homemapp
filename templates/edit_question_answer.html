@@ -162,11 +162,11 @@
 										<form method="post" class=" row">
 											{% csrf_token %}
 											<div class="form-group col-sm-6">
-												<label for="id_users">User</label>
+												<label for="id_users">Hotel</label>
 												{{ question_form.hotel }}
 											</div>
 											<div class="form-group col-sm-6">
-												<label for="id_users">User</label>
+												<label for="id_users">Room</label>
 												{{ question_form.room }}
 											</div>
 											<div class="form-group col-sm-6">
@@ -177,43 +177,7 @@
 												<label>Answer</label>
 												{{question_form.answer}}
 											</div>
-{% comment %} 
-											<div class="form-group  full-anslist col-sm-12">
-												<label><h5>Que. What payment methods will you accept for rent?</h5></label><br>
-												<label class="answer-lists">
-													<p> A) Landlords who only accept cash should be avoided at all costs.</p>
-													<p> B) Landlords are allowed to designate which forms of payments they will accept, but the best landlords make it easy for a tenant to pay.</p>
-													<p> c) Online payments are the best way to pay rent (in my opinion), because it allows for automation, security, and convenience for both tenant and landlord..</p>
-												</label>
-												<div class="answer">
-						                           <label for="html" style="padding: 6px 5px;"> Ans.  </label>
-						                           <input type="text" name="answer1" class="form-control" placeholder="Enter Answer">
-						                       </div>
-											</div>
-											<div class="form-group  full-anslist col-sm-6">
-												<label><h5>Que. What payment methods will you accept for rent?</h5></label><br>
-												<label class="answer-lists">
-													<p> A) Landlords who only accept cash should be avoided at all costs.</p>
-													<p> B) Landlords are allowed to designate which forms of payments they will accept, but the best landlords make it easy for a tenant to pay.</p>
-													<p> c) Online payments are the best way to pay rent (in my opinion), because it allows for automation, security, and convenience for both tenant and landlord..</p>
-												</label>
-												<div class="answer">
-						                           <label for="html" style="padding: 6px 5px;"> Ans.  </label>
-						                           <input type="text" name="answer1" class="form-control" placeholder="Enter Answer">
-						                       </div>
-											</div>
-											<div class="form-group  full-anslist col-sm-6">
-												<label><h5>Que. What payment methods will you accept for rent?</h5></label><br>
-												<label class="answer-lists">
-													<p> A) Landlords who only accept cash should be avoided at all costs.</p>
-													<p> B) Landlords are allowed to designate which forms of payments they will accept, but the best landlords make it easy for a tenant to pay.</p>
-													<p> c) Online payments are the best way to pay rent (in my opinion), because it allows for automation, security, and convenience for both tenant and landlord..</p>
-												</label>
-												<div class="answer">
-						                           <label for="html" style="padding: 6px 5px;"> Ans.  </label>
-						                           <input type="text" name="answer1" class="form-control" placeholder="Enter Answer">
-						                       </div>
-											</div> {% endcomment %}
+
 											
 											<div class="form-group col-sm-12">
 												<div class="submit">
