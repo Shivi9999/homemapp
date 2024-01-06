@@ -33,6 +33,7 @@ urlpatterns = [
     path('delete_terms_condition/<int:id>/', views.delete_terms_condition, name='delete_terms_condition'),
     path('delete_privacy_policy/<int:id>/', views.delete_privacy_policy, name='delete_privacy_policy'),
     path('get_answer/', views.get_answer, name='get_answer'),
+    path('get_rooms1/', views.get_rooms1, name='get_rooms1'),
     #path('', views.index, name='index'),
     path('chat', views.chat, name='chatbot_page'),
     path('import-csv/', views.import_csv, name='import_csv'),
@@ -45,6 +46,11 @@ urlpatterns = [
     path('logout_user',user_views.logout_view_user,name='logout_user'),
     path('Add_hotel_management',user_views.add_hotel_management,name='Add_hotel_management'),
     path('view_hotel_management',user_views.view_hotel_management,name='view_hotel_management'),
+    path('Add_chat_management',user_views.add_chat_management,name='Add_chat_management'),
+    path('view_chat_management',user_views.view_chat_management,name='view_chat_management'),
+    path('Edit_chat_management/<int:id>/',user_views.edit_chat_management,name='Edit_chat_management'),
+    path('delete_chat/<int:id>/',user_views.delete_chat,name='delete_chat'),
+
     path('delete_hotel/<int:id>',user_views.delete_hotel,name='delete_hotel'),
     path('edit_hotel/<int:id>',user_views.edit_hotel,name='edit_hotel'),
     path('add_property_management',user_views.add_property_management,name='add_property_management'),
@@ -55,6 +61,7 @@ urlpatterns = [
     path('View_user_management',user_views.view_user_management,name='View_user_management'),
     path('Add_room',user_views.add_room,name='Add_room'),
     path('View_room',user_views.view_room,name='View_room'),
+    path('get_rooms/', user_views.get_rooms, name='get_rooms'),
     path('Edit_user/<int:id>',user_views.edit_user,name='edit_user'),
     path('Delete_user/<int:id>',user_views.delete_user,name='delete_user'),
     path('edit_items/<int:id>',user_views.edit_items,name='edit_items'),
@@ -68,12 +75,15 @@ urlpatterns = [
     path('Profile_user',user_views.profile_user,name='Profile_user'),
     path('update_personal_details_user',user_views.update_personal_details_user,name='update_personal_details_user'),
     path('change_password_user',user_views.change_password_user,name='change_password_user'),
-
+    path('get_answer_owner/', user_views.get_answer_owner, name='get_answer_owner'),
+  
+    path('chat_owner', user_views.chat_owner, name='chat_owner'),
        ################  CUSTOMER VIEWS ###################
     path('customer_dashboard',customer_views.customer_dashboard,name='customer_dashboard'),
     path('login_customer',customer_views.login_customer,name='login_customer'),
     # path('chat_customer',customer_views.chat_customer,name='chat_customer'),
     path('get_answer_cutomer/',customer_views.get_answer_cutomer,name='get_answer_cutomer'),
     path('logout_customer',customer_views.logout_view_customer,name='logout_customer'),
+ 
 
 ]

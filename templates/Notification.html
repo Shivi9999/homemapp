@@ -131,36 +131,7 @@ ul.dropdown-menu.show li a label {
 
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                var checkboxCounter = 0;
-        
-                // Event listener for checkbox changes
-                $('input[name="users"]').change(function () {
-                    if ($(this).prop('checked')) {
-                        checkboxCounter++;
-                    } else {
-                        checkboxCounter--;
-                    }
-                
-                    // Update the counter display or use it as needed
-                    console.log('Number of checked checkboxes: ' + checkboxCounter);
-                });
-        
-              
-                $('.selectall').change(function () {
-                    if ($(this).prop('checked')) {
-                        // If "Select All" is checked, set counter to total number of checked checkboxes
-                        checkboxCounter = $('input[name="users"]:checked').length;
-                    } else {
-                        // If "Select All" is unchecked, reset the counter
-                        checkboxCounter = 0;
-                    }
-                
-                    // Update the counter display or use it as needed
-                    console.log('Number of checked checkboxes: ' + checkboxCounter);
-                });
-        </script>
+       
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 			<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 			<script>

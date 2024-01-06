@@ -6,6 +6,12 @@ from django. contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,logout, login as auth_login
 from django.http import JsonResponse
+from gtts import gTTS
+import pyttsx3
+
+import spacy
+from fuzzywuzzy import fuzz
+from spellchecker import SpellChecker
 
 @login_required(login_url='login_user')
 def user_dashboard(request):
@@ -404,3 +410,139 @@ def change_password_user(request):
             return render(request,'Owner/profile.html',{'form':form})
 
     return redirect('Profile_user')
+def get_rooms(request):
+    if request.method == 'POST':
+        try:
+            selected_hotel_ids = request.POST.getlist('hotel_ids[]')
+            rooms = Add_Room.objects.filter(flat_name_id__in=selected_hotel_ids)
+
+            rooms_data = [{'id': room.id, 'room_number': room.room_number} for room in rooms]
+            return JsonResponse({'rooms': rooms_data})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
+    
+@login_required(login_url='login_user')
+def add_chat_management(request):
+    if request.method=="POST":
+            chat_form = QuestionForm(request.POST)
+            if chat_form.is_valid():
+                chat=chat_form.save(commit=False)
+                chat.save()
+                return redirect('Add_chat_management')
+            else:
+                print(chat_form.errors)
+                return render(request,'Owner/Chat_add_manage.html',{'chat_form':chat_form})
+    chat_form=QuestionForm(request.POST)
+         
+    return render(request,'Owner/Chat_add_manage.html',{'chat_form':chat_form})
+
+@login_required(login_url='login_user')
+def view_chat_management(request):
+    hotels = Add_hotel.objects.filter(user=request.user)
+    
+
+   
+    chat=QuestionAnswer.objects.filter(hotel__in=hotels)
+         
+    return render(request,'Owner/Chat_view_manage.html',{'chat':chat})
+
+
+@login_required(login_url='login')
+def edit_chat_management(request,id):
+    quetion_ins = get_object_or_404(QuestionAnswer, pk=id)
+    if request.method == "POST":
+        question_form = QuestionForm(request.POST,instance=quetion_ins)
+       
+        if question_form.is_valid():
+      
+            owner_instance = question_form.save(commit=False)
+            
+            owner_instance.save()
+            
+            return redirect('view_chat_management')
+        else:
+            print(question_form.errors)
+      
+    else:
+     question_form = QuestionForm(instance=quetion_ins)
+    return render(request,'Owner/edit_chat_manage.html',{'question_form':question_form})
+
+
+@login_required(login_url='login')
+def delete_chat(request, id):
+    
+    question = get_object_or_404(QuestionAnswer, id=id)
+   
+    question.delete()
+
+   
+    return JsonResponse({'msg': True})
+
+
+
+@login_required(login_url='login')
+def chat_owner(request):
+    return render(request,'Owner/chat_index.html')
+
+nlp = spacy.load("en_core_web_sm")
+   
+
+def get_answer_owner(request):
+    error_message = ''  # Default value
+    user_input = ''  # Initialize user_input here
+
+    try:
+        if request.method == 'GET':
+            user_input = request.GET.get('user_input', '').lower().strip()
+
+            if not user_input:
+                # Voice response for missing question
+                error_message = 'Please provide a question.'
+            else:
+                # Spell-check user input
+                spell_checker = SpellChecker()
+                corrected_input = ' '.join(spell_checker.correction(word) for word in user_input.split())
+                nlp = spacy.load("en_core_web_sm")
+                input_doc = nlp(corrected_input)
+
+                matched_qa = QuestionAnswer.objects.filter(question__icontains=corrected_input).first()
+                if not matched_qa:
+                    # If an exact match is not found, try fuzzy matching
+                    questions = QuestionAnswer.objects.values_list('question', flat=True)
+                    best_match, ratio = process.extractOne(corrected_input, questions)
+
+                    if ratio >= 80:
+                        matched_qa = QuestionAnswer.objects.filter(question=best_match).first()
+
+                # Generate speech from the answer or "Sorry" message with gTTS
+                if matched_qa:
+                    error_message = matched_qa.answer
+                else:
+                    error_message = 'Sorry, I don\'t have an answer for that question.'
+
+                print('answer_text', error_message)
+
+        else:
+            # Voice response for invalid request method
+            error_message = 'Invalid request method.'
+
+    except Exception as e:
+        # Voice response for generic error
+        error_message = 'Sorry, an error occurred.'
+        print(f"An error occurred: {str(e)}")
+
+    finally:
+        if not error_message:
+            error_message = 'Sorry, an error occurred.'
+
+        # Save the speech as an MP3 file for all error cases
+        tts = gTTS(text=error_message, lang='en')
+        tts.save("static/answer.mp3")
+
+    if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+        return JsonResponse({'answer': error_message, 'audio_path': '/static/answer.mp3'}, safe=False)
+
+    return render(request, 'Owner/answer.html',
+                  {'user_input': user_input, 'answer': error_message, 'audio_path': '/static/answer.mp3'})

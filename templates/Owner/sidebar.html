@@ -42,7 +42,13 @@
                <li><a href="{% url 'view_property_management' %}">> <span>View Room Management</span></a></li>
             </ul>
          </li>
-        
+         <li>
+            <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>Chat Management</span></a>
+            <ul class="collapse list-unstyled" id="element">
+               <li><a href="{% url 'Add_chat_management' %}">> <span>Add Chat Management</span></a></li>
+               <li><a href="{% url 'view_chat_management' %}">> <span>View Chat Management</span></a></li>
+            </ul>
+         </li>
           <li>
              <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>User Management</span></a>
              <ul class="collapse list-unstyled" id="element">
@@ -60,13 +66,16 @@
           </li>
          
            <li><a href="{% url 'Faq' %}"><i class="fa fa-clock-o orange_color"></i> <span>Faq</span></a></li>
-          <li>
+          {% comment %} <li>
              <a href="{% url 'Notification_user' %}">
              <i class="fa fa-paper-plane red_color"></i> <span>Notification</span></a>
-          </li>
+          </li> {% endcomment %}
           <li><a href="{% url 'Terms_condition_user' %}"><i class="fa fa-map purple_color2"></i> <span>Terms and Condition </span></a></li>
           <li><a href="{% url 'Privacy_policy_user' %}"><i class="fa fa-bar-chart-o green_color"></i> <span>Privacy Policy</span></a></li>
-       </ul>
+          <li> 
+            <a href="{% url 'chat_owner'%}"><i class="fa fa-briefcase"></i> <span> Chat</span></a>
+        </li>
+         </ul>
     </div>
     <!-- Sidebar -->
  </nav>

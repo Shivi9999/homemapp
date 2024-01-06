@@ -23,7 +23,7 @@
 									</div>
 								 {% endif %}
 									<div class="user-box">
-										<form method="post" action="{% url 'save_question_answer' %}" enctype="multipart/form-data" class=" row" >
+										<form method="post" enctype="multipart/form-data" class="row">
 											{% csrf_token %}
 											<div class="form-group col-sm-6">
 												<div class="dropdown user-selects">
@@ -35,12 +35,11 @@
 													<ul class="dropdown-menu">
 														<li><a href="#"><label><input type="checkbox" class="selectall" /><span class="select-text"> Select</span> All</label></a></li>
 														<li class="divider"></li>
-														{% for user in question_form.hotel.field.queryset %}
+														{% for user in chat_form.hotel.field.queryset %}
 															<li>
 																<a href="#">
 																	<label>
-																		<input name='hotel' type="checkbox" class="option justone" value="{{ user.id }}"/>
-	
+																		<input id="id_hotel" name='hotel' type="checkbox" class="option justone" value="{{ user.id }}"/>
 																		{{ user.property_name }}
 																	</label>
 																</a>
@@ -49,58 +48,30 @@
 													</ul>
 												</div>
 											</div>
+										
 											<div class="form-group col-sm-6">
-												<div class="dropdown user-selects">
-													<label for="id_title">Room</label>
-													<button class="btn btn-default text-left form-control dropdown-toggle" type="button" data-toggle="dropdown">
-														<span class="dropdown-text"> Select Options</span>
-														<span class="caret"></span>
-													</button>
-													<ul class="dropdown-menu">
-														<li><a href="#"><label><input type="checkbox" class="selectall" /><span class="select-text"> Select</span> All</label></a></li>
-														<li class="divider"></li>
-														{% for user in question_form.room.field.queryset %}
-															<li>
-																<a href="#">
-																	<label>
-																		<input name='room' type="checkbox" class="option justone" value="{{ user.id }}"/>
-	
-																		{{ user.room_number }}
-																	</label>
-																</a>
-															</li>
-														{% endfor %}
-													</ul>
-												</div>
+												<label for="id_title">Room</label>
+												<select id="id_room" name="room" class="form-control">
+													<!-- Options will be dynamically populated using JavaScript -->
+												</select>
 											</div>
+										
 											<div class="form-group col-sm-6">
 												<label>Question</label>
-												{{question_form.question}}
-												{% if question_form.question.errors %}
-													<ul class="error-list">
-														{% for error in question_form.question.errors %}
-															<li>{{ error }}</li>
-															
-														{% endfor %}
-													</ul>
-											    {% endif %}
+												{{ chat_form.question }}
 											</div>
+										
 											<div class="form-group col-sm-6">
 												<label>Answer</label>
-												{{question_form.answer}}
+												{{ chat_form.answer }}
 											</div>
 										
 											<div class="form-group col-sm-12">
 												<div class="submit">
-													<input type="submit" class="form-control bg-submits" value=" Submit" >
-											
-													
-													{% comment %} <a href="#" class="form-control bg-submits"> Submit</a> {% endcomment %}
+													<input type="submit" class="btn btn-primary" value="Submit">
 												</div>
-												
 											</div>
 										</form>
-
 									<div class="import mb-3">
 										<a href="{% url 'import_csv' %}">
 											<input type="submit" class="btn btn-success bg-submits" value="Import Csv/Excel File">
@@ -152,7 +123,36 @@
 			<!-- /Page Wrapper -->
 		
         </div>
-
+		<script>
+			$(document).ready(function () {
+				$("#id_hotel").change(function () {
+					var selectedHotelIds = $("input[name='hotel']:checked").map(function () {
+						return this.value;
+					}).get();
+		
+					$.ajax({
+						url: '/get_rooms1/',
+						type: 'POST',
+						data: {
+							'hotel_ids': selectedHotelIds,
+							'csrfmiddlewaretoken': '{{ csrf_token }}'
+						},
+						dataType: 'json',
+						success: function (data) {
+							var roomDropdown = $("#id_room");
+							roomDropdown.empty();
+		
+							$.each(data.rooms, function (index, room) {
+								roomDropdown.append('<option value="' + room.id + '">' + room.room_number + '</option>');
+							});
+						},
+						error: function (xhr, status, error) {
+							console.error(xhr.responseText);
+						}
+					});
+				});
+			});
+		</script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 
