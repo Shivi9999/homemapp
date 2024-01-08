@@ -172,11 +172,29 @@ def get_rooms1(request):
             return JsonResponse({'error': str(e)}, status=500)
 
     return JsonResponse({'error': 'Invalid request method'}, status=400)
+    
 @login_required(login_url='login')
 def add_question(request):
     
     question_form = QuestionForm()
     return render(request,'Chat_add_question.html',{'question_form':question_form})
+
+
+@login_required(login_url='login')
+def save_question_answer(request):
+    if request.method == 'POST':
+        question_form = QuestionForm(request.POST)
+
+        if question_form.is_valid():
+            question_form.save()
+         
+            
+            return redirect('View_question')
+        else:
+            errors = question_form.errors
+            print(question_form.errors)
+            return render(request, 'Chat_add_question.html', {'question_form': question_form, 'errors': errors})
+    return redirect('add_question')  
 
 @login_required(login_url='login')
 def view_question(request):
@@ -471,21 +489,7 @@ def change_password(request):
 #     return redirect('profile')
 
 
-@login_required(login_url='login')
-def save_question_answer(request):
-    if request.method == 'POST':
-        question_form = QuestionForm(request.POST)
 
-        if question_form.is_valid():
-            question_form.save()
-         
-            
-            return redirect('View_question')
-        else:
-            errors = question_form.errors
-            print(question_form.errors)
-            return render(request, 'Chat_add_question.html', {'question_form': question_form, 'errors': errors})
-    return redirect('add_question')  
 
 # def process_and_save_excel_data(excel_file):
 #     # Assuming your Excel file has columns named 'question' and 'answer'
