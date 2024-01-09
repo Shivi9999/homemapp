@@ -1,25 +1,5 @@
-{% extends "Owner/base.html" %}
+<!DOCTYPE html>
 {% load static %}
-{% block content %}
-
-<style>
-   /* Add this to your CSS file */
-
-
-.error-list {
-    color: red;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.error-list li {
-    margin-top: 5px;
-}
-
-</style>
-
- {% comment %} <!DOCTYPE html>
 <html lang="en">
    <head>
       <meta charset="utf-8">
@@ -27,108 +7,35 @@
       
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-           <title>USER MANAGEMENT ADMIN HOME PAGE </title>
+           <title>PROPERTY  MANAGEMENT OWNER HOME PAGE </title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
-          <link rel="icon" href="images/fevicon.png" type="image/png" />
+          <link rel="icon" href="{%static 'images/fevicon.png'%}" type="image/png" />
      
-      <link rel="stylesheet" href="css/bootstrap.min.css" />
-         <link rel="stylesheet" href="style.css" />
+      <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}" />
+         <link rel="stylesheet" href="{%static 'style.css'%}" />
       
-      <link rel="stylesheet" href="css/responsive.css" />
-          <link rel="stylesheet" href="css/colors.css" />
+      <link rel="stylesheet" href="{%static 'css/responsive.css'%}" />
+          {% comment %} <link rel="stylesheet" href="{%static 'css/colors.css'%}" /> {% endcomment %}
        
-      <link rel="stylesheet" href="css/bootstrap-select.css" />
+      <link rel="stylesheet" href="{%static 'css/bootstrap-select.css'%}" />
       
-      <link rel="stylesheet" href="css/perfect-scrollbar.css" />
-           <link rel="stylesheet" href="css/custom.css" />
+      <link rel="stylesheet" href="{%static 'css/perfect-scrollbar.css'%}" />
+           <link rel="stylesheet" href="{%static 'css/custom.css'%}" />
 
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
-   </head> {% endcomment %}
+   </head>
    <body class="dashboard dashboard_1">
       <div class="full_container">
          <div class="inner_container">
             <!-- Sidebar  -->
-            {% comment %} <nav id="sidebar">
-               <div class="sidebar_blog_1">
-                  <div class="sidebar-header">
-                     <div class="logo_section">
-                        <a href="index.html"><img class="logo_icon img-responsive" src="images/logo/logo_icon.png" alt="#" /></a>
-                     </div>
-                  </div>
-                  <div class="sidebar_user_info">
-                     <div class="icon_setting"></div>
-                     <div class="user_profle_side">
-                        <div class="user_img">
-                           <a href="index.html"><img class="img-responsive" src="images/logo/logo.png" alt="#"></a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <!-- Sidebar -->
-               <div class="sidebar_blog_2">
-                  <ul class="list-unstyled components">
-                     <li >
-                        <a href="#dashboard">
-                           <i class="fa fa-dashboard yellow_color"></i> 
-                           <span>Dashboard</span>
-                        </a>
-                    </li> 
-                   
-                     <li class="active">
-                        <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>User Management</span></a>
-                        <ul class="collapse list-unstyled" id="element">
-                           <li><a href="user_management_add.html">> <span>Add User Management</span></a></li>
-                           <li><a href="user_management_view.html">> <span>View User Managemen</span></a></li>
-                        </ul>
-                     </li>
-
-                        <li>
-                        <a href="#additional_page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-clone yellow_color"></i> <span>Room Management</span></a>
-                        <ul class="collapse list-unstyled" id="additional_page">
-                           <li><a href="rooms_add_room.html">> <span> Add Rooms </span></a></li>
-                           <li><a href="rooms_view_room.html">> <span> View Rooms </span></a></li>
-                        </ul>
-                     </li>
-                    
-                      <li><a href="faq.html"><i class="fa fa-clock-o orange_color"></i> <span>Faq</span></a></li>
-                     <li>
-                        <a href="Notification.html">
-                        <i class="fa fa-paper-plane red_color"></i> <span>Notification</span></a>
-                     </li>
-                     <li><a href="terms_condition.html"><i class="fa fa-map purple_color2"></i> <span>Terms and Condition </span></a></li>
-                     <li><a href="privacy_policy.html"><i class="fa fa-bar-chart-o green_color"></i> <span>Privacy Policy</span></a></li>
-                  </ul>
-               </div> 
-               <!-- Sidebar -->
-            </nav>{% endcomment %}
-            <!-- end sidebar --> 
+          {% include 'Owner/sidebar.html'%}
+            <!-- end sidebar -->
             <!-- right content -->
-             <div id="content">
-             {% comment %}  <!-- topbar -->
-               <div class="topbar">
-                  <nav class="navbar navbar-expand-lg navbar-light">
-                     <div class="full">
-                        <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
-                        <div class="right_topbar">
-                           <div class="icon_info">
-                              <ul class="user_profile_dd">
-                                 <li>
-                                    <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="images/layout_img/user_img.jpg" alt="#" /><span class="name_user">John</span></a>
-                                    <div class="dropdown-menu">
-                                       <a class="dropdown-item" href="profile.html">My Profile</a>
-                                       <a class="dropdown-item" href="login.html"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
-                                    </div>
-                                 </li>
-                              </ul>
-                           </div>
-                        </div>
-                     </div>
-                  </nav>
-               </div>
-               <!-- end topbar --> {% endcomment %}
+            <div id="content">
+              {% include 'Owner/header.html' %}
                <!-- dashboard inner -->
                <div class="midde_cont">
                   <div class="container-fluid">
@@ -149,120 +56,120 @@
                               </div>
                             <div class="users-forms">
                             <div class="row">
-                               <div class="col-md-7">
-                                    <form action="{% url 'Add_user_management'%}" method="post" enctype="multipart/form-data" nonvalidate>
-                                     {% csrf_token %}
-                                 <div class="form-group row add-user">
-                                    <div class="form-group col-md-12">
-                                       <i class="fa fa-user icon-user"></i>
-                                       <label for="exampleInputPassword1">Select Flat</label>
-                                       <select id="roomnames" name="hotel_name" class="form-control user-fill">
-                                           {% for choice in user_form.hotel_name.field.choices %}
-                                               <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                                           {% endfor %}
-                                       </select>
-                                   </div>
+                              <div class="col-md-7">
+                                 <form action="{% url 'Add_user_management'%}" method="post" enctype="multipart/form-data" nonvalidate>
+                                    {% csrf_token %}
+                                <div class="form-group row add-user">
                                    <div class="form-group col-md-12">
-                                    <i class="fa fa-user icon-user"></i>
-                                    <label for="exampleInputPassword1">Select Room No</label>
-                                    <select id="roomnames" name="room_number" class="form-control user-fill">
-                                        {% for choice in user_form.room_number.field.choices %}
-                                            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                  {% comment %} <div class="form-group col-md-12">
-                                    <i class="fa fa-user icon-user"></i>
-                                 <label for="exampleInputPassword1"> Room No</label>
-                                 <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Items Name">
-                               </div> {% endcomment %}
+                                      <i class="fa fa-user icon-user"></i>
+                                      <label for="exampleInputPassword1">Select Flat</label>
+                                      <select id="roomnames" name="hotel_name" class="form-control user-fill">
+                                          {% for choice in user_form.hotel_name.field.choices %}
+                                              <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                          {% endfor %}
+                                      </select>
+                                  </div>
                                   <div class="form-group col-md-12">
-                                        <i class="fa fa-user icon-user"></i>
-                                     <label for="exampleInputPassword1">Name</label>
-                                     {{form.username}}
-                                     {% if form.username.errors %}
-													<ul>
-														{% for error in form.username.errors %}
-															<li>{{ error }}</li>
-															
-														{% endfor %}
-													</ul>
-											    {% endif %}
-                                   </div>
-                                    
-                                    <div class="form-group col-md-6 ">
-                                        <i class="fa fa-envelope icon-user"></i>
-                                     <label for="exampleInputPassword1">Email</label>
-                                     {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder="Email"> {% endcomment %}
-                                     {{form.email}}
-                                     {% if form.email.errors %}
-													<ul class="error-list">
-														{% for error in form.email.errors %}
-															<li>{{ error }}</li>
-															
-														{% endfor %}
-													</ul>
-											    {% endif %}
-                                   </div>
-                                    <div class="form-group col-md-6">
-                                       <i class="fa fa-key icon-user"></i>
-                                        <label for="exampleInputPassword1">Password</label>
-                                       {{form.password}}
-                                       {% if form.password.errors %}
-													<ul>
-														{% for error in form.password.errors %}
-															<li>{{ error }}</li>
-															
-														{% endfor %}
-													</ul>
-											    {% endif %}
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                       <i class="fa fa-mobile icon-user"></i>
-                                    <label for="exampleInputPassword1">Mobile</label>
-                                     {{user_form.mobile}}
-                                     {% if user_form.mobile.errors %}
-                                     <ul>
-                                        {% for error in user_form.mobile.errors %}
-                                           <li>{{ error }}</li>
-                                           
-                                        {% endfor %}
-                                     </ul>
-                                   {% endif %}
-                                    {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder="Name"> {% endcomment %}
+                                   <i class="fa fa-user icon-user"></i>
+                                   <label for="exampleInputPassword1">Select Room No</label>
+                                   <select id="roomnames" name="room_number" class="form-control user-fill">
+                                       {% for choice in user_form.room_number.field.choices %}
+                                           <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                       {% endfor %}
+                                   </select>
+                               </div>
+                                 {% comment %} <div class="form-group col-md-12">
+                                   <i class="fa fa-user icon-user"></i>
+                                <label for="exampleInputPassword1"> Room No</label>
+                                <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Items Name">
+                              </div> {% endcomment %}
+                                 <div class="form-group col-md-12">
+                                       <i class="fa fa-user icon-user"></i>
+                                    <label for="exampleInputPassword1">Name</label>
+                                    {{form.username}}
+                                    {% if form.username.errors %}
+                                      <ul>
+                                         {% for error in form.username.errors %}
+                                            <li>{{ error }}</li>
+                                            
+                                         {% endfor %}
+                                      </ul>
+                                    {% endif %}
                                   </div>
                                    
-                                     <div class="form-group col-md-12">
-                                        <i class="fa fa-envelope icon-user"></i>
-                                     <label for="exampleInputPassword1">Address</label>
-                                     {% comment %} <textarea type="text" class="form-control  user-fill" id="user-add-form" placeholder="Enter Your Address"></textarea> {% endcomment %}
-                                     {{user_form.address}}
-                                     {% if user_form.address.errors %}
-                                     <ul>
-                                        {% for error in user_form.address.errors %}
-                                           <li>{{ error }}</li>
-                                           
-                                        {% endfor %}
-                                     </ul>
-                                   {% endif %}
-                                   </div>
-
-                                   <div class="form-group col-md-12">
-                                    <i class="fa fa-user icon-user"></i>
-                                    <label for="exampleInputPassword1"> Profile Image</label><br>
-                                    
-                                    <input type="file" name="user_image" class="form-control" accept="image/*" required="" id="id_user_image">
-                                    
+                                   <div class="form-group col-md-6 ">
+                                       <i class="fa fa-envelope icon-user"></i>
+                                    <label for="exampleInputPassword1">Email</label>
+                                    {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder="Email"> {% endcomment %}
+                                    {{form.email}}
+                                    {% if form.email.errors %}
+                                      <ul class="error-list">
+                                         {% for error in form.email.errors %}
+                                            <li>{{ error }}</li>
+                                            
+                                         {% endfor %}
+                                      </ul>
+                                    {% endif %}
                                   </div>
-                                <div class="form-group col-md-12">
-                                   <button type="submit" class="btn btn-primary">Submit</button>
+                                   <div class="form-group col-md-6">
+                                      <i class="fa fa-key icon-user"></i>
+                                       <label for="exampleInputPassword1">Password</label>
+                                      {{form.password}}
+                                      {% if form.password.errors %}
+                                      <ul>
+                                         {% for error in form.password.errors %}
+                                            <li>{{ error }}</li>
+                                            
+                                         {% endfor %}
+                                      </ul>
+                                    {% endif %}
+                                   </div>
+                                   <div class="form-group col-md-12">
+                                      <i class="fa fa-mobile icon-user"></i>
+                                   <label for="exampleInputPassword1">Mobile</label>
+                                    {{user_form.mobile}}
+                                    {% if user_form.mobile.errors %}
+                                    <ul>
+                                       {% for error in user_form.mobile.errors %}
+                                          <li>{{ error }}</li>
+                                          
+                                       {% endfor %}
+                                    </ul>
+                                  {% endif %}
+                                   {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder="Name"> {% endcomment %}
                                  </div>
-                              </div>
-                              </form>
+                                  
+                                    <div class="form-group col-md-12">
+                                       <i class="fa fa-envelope icon-user"></i>
+                                    <label for="exampleInputPassword1">Address</label>
+                                    {% comment %} <textarea type="text" class="form-control  user-fill" id="user-add-form" placeholder="Enter Your Address"></textarea> {% endcomment %}
+                                    {{user_form.address}}
+                                    {% if user_form.address.errors %}
+                                    <ul>
+                                       {% for error in user_form.address.errors %}
+                                          <li>{{ error }}</li>
+                                          
+                                       {% endfor %}
+                                    </ul>
+                                  {% endif %}
+                                  </div>
+
+                                  <div class="form-group col-md-12">
+                                   <i class="fa fa-user icon-user"></i>
+                                   <label for="exampleInputPassword1"> Profile Image</label><br>
+                                   
+                                   <input type="file" name="user_image" class="form-control" accept="image/*" required="" id="id_user_image">
+                                   
+                                 </div>
+                               <div class="form-group col-md-12">
+                                  <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                             </div>
+                             </form>
                                </div>
                                <div class="col-md-4">
-                                  <div class="full-img" style="padding: 35% 0px;">
-                                     <img src="{%static  'images/customer-img.png' %}">
+                                  <div class="full-img">
+                                     <img src="{%static 'images/customer-img.png'%}">
                                   </div>
                                </div>
                             </div>
@@ -271,38 +178,30 @@
                      </div>
             <!--  -->
                   </div>
-                  <!-- footer -->
-                     <div class="footer">
-                                 <div class="container-fluid">
-                        <p>Copyright ©2023 All rights reserved | Design & Develop by
-                           <a href="https://cyberimpulses.com/"> CISS</a>
-                        </p>
-                     </div>
-                  </div>
+                  {% include 'Owner/footer.html' %}
                </div>
                <!-- end dashboard inner -->
             </div>
          </div>
       </div>
-      {% comment %} <script src="js/jquery.min.js"></script>
-      <script src="js/popper.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
+      <script src="{%static 'js/jquery.min.js'%}"></script>
+      <script src="{%static 'js/popper.min.js'%}"></script>
+      <script src="{%static 'js/bootstrap.min.js'%}"></script>
       
-      <script src="js/animate.js"></script>
+      <script src="{%static 'js/animate.js'%}"></script>
      
-      <script src="js/bootstrap-select.js"></script>
-            <script src="js/owl.carousel.js"></script> 
-        <script src="js/Chart.min.js"></script>
-      <script src="js/Chart.bundle.min.js"></script>
-      <script src="js/utils.js"></script>
-      <script src="js/analyser.js"></script>
+      <script src="{%static 'js/bootstrap-select.js'%}"></script>
+            <script src="{%static 'js/owl.carousel.js'%}"></script> 
+        <script src="{%static 'js/Chart.min.js'%}"></script>
+      <script src="{%static 'js/Chart.bundle.min.js'%}"></script>
+      <script src="{%static 'js/utils.js'%}"></script>
+      <script src="{%static 'js/analyser.js'%}"></script>
      
-      <script src="js/perfect-scrollbar.min.js"></script>
+      <script src="{%static 'js/perfect-scrollbar.min.js'%}"></script>
       <script>
          var ps = new PerfectScrollbar('#sidebar');
       </script>
-         <script src="js/custom.js"></script>
-      <script src="js/chart_custom_style1.js"></script>
+         <script src="{%static 'js/custom.js'%}"></script>
+      <script src="{%static 'js/chart_custom_style1.js'%}"></script>
    </body>
-</html> {% endcomment %}
-{% endblock %}
+</html>

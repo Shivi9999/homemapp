@@ -1,11 +1,15 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import *
 from .forms import *
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect,csrf_exempt
 from django.http import JsonResponse
 import os
 import logging
 from gtts import gTTS
+from autocorrect import Speller
+from django.views import View
+from transformers import GPTNeoForCausalLM, GPT2Tokenizer
+import torch
 import pyttsx3
 from transformers import pipeline
 from django.conf import settings
@@ -20,20 +24,18 @@ from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 import pandas as pd 
-# Create your views here.
 @login_required(login_url='login')
 def dashboard(request):
     property_owner_count=PropertyOwner.objects.all().count()
     question_count=QuestionAnswer.objects.all().count()
    
     context={'property_owner_count':property_owner_count,'question_count':question_count}
-    return render(request,'index.html',context)
+    return render(request,'Superadmin/index.html',context)
 
 
-# KIGGGGGGGGG
 
 def login(request):
-    # Print the entire session dictionary
+    
     print(request.session)
 
     if request.method == 'POST':
@@ -47,29 +49,29 @@ def login(request):
            
 
             if user.user_type == '1':
-                # Access and print admin_session_id
+               
                 request.session['admin_session_id'] = user.id
                 admin_session_id = request.session.get('admin_session_id')
                 print(f"Admin Session ID: {admin_session_id}")
 
-                return redirect('dashboard')  # Admin dashboard
+                return redirect('dashboard') 
 
            
 
         else:
             messages.error(request, 'Invalid username or password.')
 
-    return render(request, 'login.html')
+    return render(request, 'Superadmin/login.html')
 
 
 
 def logout_view(request):
-   # Clear the session
+
     logout(request)
 
-    # Optionally, you can delete the sessionid cookie
+    
     response = redirect('login')
-    response.delete_cookie('sessionid')  # Replace 'your_logout_redirect_view' with the actual logout redirect view
+    response.delete_cookie('sessionid')  
     return response
 
 
@@ -89,7 +91,7 @@ def add_property_owner(request):
             user_form.instance.user_type = '2'
             print()
             user_instance = user_form.save(commit=False)
-            # Set the user type statically
+            
             user_instance.set_password(password)
             user_instance.save()
             saved_user = User.objects.get(pk=user_instance.pk)
@@ -102,23 +104,19 @@ def add_property_owner(request):
         else:
             print(user_form.errors)
             print(property_form.errors)
-            return render(request, 'Pro_add_Property.html', {'user_form': user_form, 'property_form': property_form})
+            return render(request, 'Superadmin/Pro_add_Property.html', {'user_form': user_form, 'property_form': property_form})
 
     user_form = Userform()
     property_form = PropertyForm()
-    return render(request, 'Pro_add_Property.html', {'user_form': user_form, 'property_form': property_form})
+    return render(request, 'Superadmin/Pro_add_Property.html', {'user_form': user_form, 'property_form': property_form})
 
 @login_required(login_url='login')
 def view_property_owner(request):
     property_owners = PropertyOwner.objects.all().order_by('-id')
-    return render(request, 'Pro_view__Property.html', {'property_owners': property_owners})
+    return render(request, 'Superadmin/Pro_view__Property.html', {'property_owners': property_owners})
 
 
 
-
-def forget_password(request):
-   
-    return render(request, 'forget_pass.html')
 
 
 @login_required(login_url='login')
@@ -139,27 +137,28 @@ def edit_property_owner(request, id):
             messages.error(request, 'Error updating property owner. Please check the form.')
             print(user_form.errors)
             print(property_form.errors)
-            return render(request, 'Pro_edit_Property.html', {'user_form': user_form, 'property_form': property_form})
+            return render(request, 'Superadmin/Pro_edit_Property.html', {'user_form': user_form, 'property_form': property_form})
     else:
         user_form = Userform(instance=property_owner.user)
         property_form = PropertyForm(instance=property_owner)
 
   
-    return render(request, 'Pro_edit_Property.html', {'user_form': user_form, 'property_form': property_form})
+    return render(request, 'Superadmin/Pro_edit_Property.html', {'user_form': user_form, 'property_form': property_form})
 
 @login_required(login_url='login')
 def delete_property_owner(request, id):
     property_owner = get_object_or_404(PropertyOwner, pk=id)
     
-    # Retrieve the associated user
     user_instance = property_owner.user
     print(user_instance)
-    # Delete the property owner and associated user
+    
     property_owner.delete()
     user_instance.delete()
     
     return JsonResponse({'msg': True})
 
+
+@login_required(login_url='login')
 def get_rooms1(request):
     if request.method == 'POST':
         try:
@@ -172,12 +171,13 @@ def get_rooms1(request):
             return JsonResponse({'error': str(e)}, status=500)
 
     return JsonResponse({'error': 'Invalid request method'}, status=400)
-    
+
+
 @login_required(login_url='login')
 def add_question(request):
     
     question_form = QuestionForm()
-    return render(request,'Chat_add_question.html',{'question_form':question_form})
+    return render(request,'Superadmin/Chat_add_question.html',{'question_form':question_form})
 
 
 @login_required(login_url='login')
@@ -192,14 +192,13 @@ def save_question_answer(request):
             return redirect('View_question')
         else:
             errors = question_form.errors
-            print(question_form.errors)
-            return render(request, 'Chat_add_question.html', {'question_form': question_form, 'errors': errors})
+            return render(request, 'Superadmin/Chat_add_question.html', {'question_form': question_form, 'errors': errors})
     return redirect('add_question')  
 
 @login_required(login_url='login')
 def view_question(request):
     que_ans=QuestionAnswer.objects.all().order_by('-id')
-    return render(request,'Chat_view_question.html',{'que_ans':que_ans})
+    return render(request,'Superadmin/Chat_view_question.html',{'que_ans':que_ans})
 
 
 @login_required(login_url='login')
@@ -220,7 +219,7 @@ def edit_question(request,id):
       
     else:
      question_form = QuestionForm(instance=quetion_ins)
-    return render(request,'edit_question_answer.html',{'question_form':question_form})
+    return render(request,'Superadmin/edit_question_answer.html',{'question_form':question_form})
 
 
 @csrf_protect
@@ -234,37 +233,30 @@ def delete_question(request, id):
    
     return JsonResponse({'msg': True})
     
-# def delete_question(request, id):
-#     question_answer = get_object_or_404(QuestionAnswer, pk=id)
-#      # Delete the property owner and associated user
-#     question_answer.delete()
-    
-#     return redirect('View_question')
+
 
 @login_required(login_url='login')
 def add_manage_property(request):
-    return render(request,'Manage_add_Property.html')
+    return render(request,'Superadmin/Manage_add_Property.html')
 
 @login_required(login_url='login')
 def view_manage_property(request):
     property_owners = PropertyOwner.objects.all().order_by('-id')
-    return render(request,'Manage_view_Property.html', {'property_owners': property_owners})
+    return render(request,'Superadmin/Manage_view_Property.html', {'property_owners': property_owners})
 
 
-# @login_required(login_url='login')
-# def notification(request):
-#     return render(request,'Notification.html')
+
 
 
 @login_required(login_url='login')
 def privacy(request):
-    # Assuming you have a model named TermsCondition with a field 'terms_condition'
+    
     privacy = PrivacyPolicy.objects.all()
 
     if request.method == 'POST':
         privacy_policy_text = request.POST.get('privacy_policy', '')
         
-        # Update or create the TermsCondition object
+       
         obj, created = PrivacyPolicy.objects.update_or_create(defaults={'privacy_policy': privacy_policy_text})
         
         if created:
@@ -272,14 +264,14 @@ def privacy(request):
         else:
             messages.success(request, 'Update Success')
 
-        return redirect('Privacy_Policy')  # Redirect to the same page after form submission
+        return redirect('Privacy_Policy')  
 
     context = {
         'privacy': privacy,
     }
 
   
-    return render(request,'privacy_policy.html',context)
+    return render(request,'Superadmin/privacy_policy.html',context)
 
 
 @login_required(login_url='login')
@@ -289,7 +281,7 @@ def notification(request):
         if form.is_valid():
             instance = form.save(commit=False)
             instance.save()
-            form.save_m2m()  # Save the many-to-many relationships
+            form.save_m2m()  
            
             return redirect('notification')
         else:
@@ -297,23 +289,11 @@ def notification(request):
     else:
         form = NotificationForm()
 
-    notifications = Notification.objects.all()
-    return render(request, 'Notification.html', {'form': form, 'notifications': notifications})
-
-# @login_required(login_url='login')
-# def notification(request):
+    
+        notifications = Notification.objects.all()
    
-#     if request.method == 'POST':
-#         form = NotificationForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('notification')  # Redirect to a confirmation page or another URL
-#         else:
-#             print(form.errors)
-#     else:
-#         form = NotificationForm()
-#     notifications=Notification.objects.all()
-#     return render(request, 'Notification.html', {'form': form,'notifications':notifications})
+    return render(request, 'Superadmin/Notification.html', {'form': form, 'notifications': notifications})
+
 
 
 
@@ -326,11 +306,11 @@ def edit_notification(request, id):
         form = NotificationForm(request.POST, instance=notification)
         if form.is_valid():
             form.save()
-            return redirect('notification')  # Redirect to the notification list view
+            return redirect('notification')  
     else:
         form = NotificationForm(instance=notification)
 
-    return render(request, 'edit_notification.html', {'form': form, 'notification': notification})
+    return render(request, 'Superadmin/Edit_notification.html', {'form': form, 'notification': notification})
 
 @login_required(login_url='login')
 def delete_notification(request,id):
@@ -339,18 +319,17 @@ def delete_notification(request,id):
     notification.delete()
       
 
-    return JsonResponse({'msg': True})  # Redirect to the notification list view
+    return JsonResponse({'msg': True})  
 
 
 @login_required(login_url='login')
 def terms_condition(request):
-    # Assuming you have a model named TermsCondition with a field 'terms_condition'
     terms_data = TermsCondition.objects.all()
 
     if request.method == 'POST':
         terms_condition_text = request.POST.get('terms_condition', '')
         
-        # Update or create the TermsCondition object
+      
         obj, created = TermsCondition.objects.update_or_create(defaults={'terms_condition': terms_condition_text})
         
         if created:
@@ -358,48 +337,21 @@ def terms_condition(request):
         else:
             messages.success(request, 'Update Success')
 
-        return redirect('terms_condition')  # Redirect to the same page after form submission
+        return redirect('terms_condition')  
 
     context = {
         'terms_data': terms_data,
     }
 
-    return render(request, 'terms_condition.html', context)
+    return render(request, 'Superadmin/terms_condition.html', context)
 
-
-# def profile(request):
-#     if request.method == 'POST':
-#         form = CustomPasswordChangeForm(request.user, request.POST)
-#         profile_form = Userform(request.POST)
-
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'Your password was successfully updated!')
-#             return redirect('profile')  # Redirect to the profile page or wherever you want
-#         else:
-#             print(form.errors)
-
-#         if profile_form.is_valid():
-#             # Update user profile data
-#             request.user.username = profile_form.cleaned_data['username']
-#             request.user.email = profile_form.cleaned_data['email']
-#             request.user.password = profile_form.cleaned_data['password']
-#             request.user.save()
-#             messages.success(request, 'Your profile was successfully updated!')
-#             return redirect('profile')  # Redirect to the profile page or wherever you want
-#         else:
-#             print(profile_form.errors)
-#     else:
-#         form = CustomPasswordChangeForm(request.user)
-#         profile_form = Userform(initial={'username': request.user.username, 'email': request.user.email,'password': request.user.password})
-#     return render(request,'profile.html', {'form': form,'profile_form':profile_form})
 
 
 @login_required(login_url='login')
 def profile(request):
     profile_form = Userform(instance=request.user)
     form = CustomPasswordChangeForm(user=request.user)
-    return render(request, 'profile.html', {'profile_form': profile_form,'form':form})
+    return render(request, 'Superadmin/profile.html', {'profile_form': profile_form,'form':form})
 
 
 
@@ -414,12 +366,13 @@ def manage_user_admin(request):
         user = User.objects.get(email=email, password=password)
         print('user',user)
         if user is not None:
-            auth_login(request, user)
-            return redirect('user_dashboard')  # Redirect to your dashboard
+            
+            return redirect('user_dashboard')  
         else:
             messages.error(request, 'Email or Password is invalid.')
 
-    return render(request, 'login.html')  # Render your template with the appropriate context
+    return render(request, 'Superadmin/login.html')  
+
 
 
 def index(request):
@@ -441,12 +394,6 @@ def delete_privacy_policy(request, id):
     privacy.delete()
 
     return JsonResponse({'msg': True})
-
-
-# def import_data(request):
-#     return render(request,'Notification.html')
-
-
 
 
 @login_required(login_url='login')
@@ -476,149 +423,65 @@ def change_password(request):
     return redirect('profile')
 
 
-# @login_required(login_url='login')
-# def update_profile_picture(request):
-#     if request.method == 'POST':
-#         form = ProfilePictureForm(request.POST, request.FILES, instance=request.user)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'Profile picture updated successfully!')
-#         else:
-#             messages.error(request, 'Error updating profile picture. Please check the form.')
-
-#     return redirect('profile')
 
 
 
 
-# def process_and_save_excel_data(excel_file):
-#     # Assuming your Excel file has columns named 'question' and 'answer'
-#     df = pd.read_excel(excel_file)
-    
-#     # Iterate over rows and save data to QuestionAnswer model
-#     for index, row in df.iterrows():
-#         question_text = row['question']
-#         answer_text = row['answer']
-        
-#         # Save data to the model
-#         question_answer = QuestionAnswer(question=question_text, answer=answer_text)
-#         question_answer.save()
-
-# @login_required(login_url='login')
-# def import_excel(request):
-#     if request.method == 'POST':
-#         form = QuestionForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             excel_file = request.FILES['excel_file']
-#             process_and_save_excel_data(excel_file)
-
-#             messages.success(request, 'Excel file imported and data saved successfully!')
-#         else:
-#             messages.error(request, 'Error importing Excel file. Please check the form and try again.')
-#     else:
-       
-
-#     return redirect('add_question')
-
-# @login_required(login_url='login')
-# def delete_user(request):
-#     user_id = request.POST.get('userID')
-
-#     # Perform user deletion logic here
-
-#     # For example, you can delete the user and return a success message
-#     response_data = {'msg': True}
-#     return JsonResponse(response_data)
-
-############################## CHAT #############################################
-
-@login_required(login_url='login')
-def chat(request):
-    return render(request,'chatbot/index.html')
 
 nlp = spacy.load("en_core_web_sm")
-   
+spell_checker = Speller()
+
+def chat(request):
+    return render(request, 'chatbot/index.html')
 
 def get_answer(request):
-    error_message = ''  # Default value
-    user_input = ''  # Initialize user_input here
-
     try:
         if request.method == 'GET':
             user_input = request.GET.get('user_input', '').lower().strip()
 
             if not user_input:
-                # Voice response for missing question
-                error_message = 'Please provide a question.'
+                return JsonResponse({'answer': 'Please provide a question.', 'audio_path': '/static/answer.mp3'})
+
+           
+            corrected_input = ' '.join(spell_checker(word) for word in user_input.split())
+            input_doc = nlp(corrected_input)
+
+            
+            matched_qa = QuestionAnswer.objects.filter(question__icontains=corrected_input).first()
+
+            if not matched_qa:
+              
+                questions = QuestionAnswer.objects.values_list('question', flat=True)
+                best_match, ratio = process.extractOne(corrected_input, questions)
+
+                if ratio >= 80:
+                    matched_qa = QuestionAnswer.objects.filter(question=best_match).first()
+
+            # Generate speech from the answer or "Sorry" message with gTTS
+            if matched_qa:
+                answer_text = matched_qa.answer
             else:
-                # Spell-check user input
-                spell_checker = SpellChecker()
-                corrected_input = ' '.join(spell_checker.correction(word) for word in user_input.split())
-                nlp = spacy.load("en_core_web_sm")
-                input_doc = nlp(corrected_input)
+                answer_text = 'Sorry, I don\'t have an answer for that question.'
 
-                matched_qa = QuestionAnswer.objects.filter(question__icontains=corrected_input).first()
-                if not matched_qa:
-                    # If an exact match is not found, try fuzzy matching
-                    questions = QuestionAnswer.objects.values_list('question', flat=True)
-                    best_match, ratio = process.extractOne(corrected_input, questions)
-
-                    if ratio >= 80:
-                        matched_qa = QuestionAnswer.objects.filter(question=best_match).first()
-
-                # Generate speech from the answer or "Sorry" message with gTTS
-                if matched_qa:
-                    error_message = matched_qa.answer
-                else:
-                    error_message = 'Sorry, I don\'t have an answer for that question.'
-
-                print('answer_text', error_message)
+            print('answer_text:', answer_text)
 
         else:
-            # Voice response for invalid request method
-            error_message = 'Invalid request method.'
+            return JsonResponse({'answer': 'Invalid request method.', 'audio_path': '/static/answer.mp3'})
 
     except Exception as e:
-        # Voice response for generic error
-        error_message = 'Sorry, an error occurred.'
         print(f"An error occurred: {str(e)}")
+        answer_text = 'Sorry, an error occurred.'
 
     finally:
-        if not error_message:
-            error_message = 'Sorry, an error occurred.'
-
-        # Save the speech as an MP3 file for all error cases
-        tts = gTTS(text=error_message, lang='en')
+     
+        tts = gTTS(text=answer_text, lang='en')
         tts.save("static/answer.mp3")
 
     if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-        return JsonResponse({'answer': error_message, 'audio_path': '/static/answer.mp3'}, safe=False)
+        return JsonResponse({'answer': answer_text, 'audio_path': '/static/answer.mp3'})
 
     return render(request, 'chatbot/answer.html',
-                  {'user_input': user_input, 'answer': error_message, 'audio_path': '/static/answer.mp3'})
-
-
-                  
-def get_answer_from_hugging_face(question):
-    # Use Hugging Face model for question answering
-    url = "https://api-inference.huggingface.co/models/deepset/bert-base-cased-squad2"
-    headers = {"Authorization": "Bearer YOUR_HUGGING_FACE_API_KEY"}  # Replace with your Hugging Face API key
-
-    payload = {
-        "inputs": {
-            "question": question,
-            "context": "Your context here"  # Provide context relevant to your questions
-        }
-    }
-
-    response = requests.post(url, headers=headers, json=payload)
-    result = response.json()
-
-    # Extract the answer from the Hugging Face response
-    answer = result.get('answer', 'Sorry, I don\'t have an answer for that question.')
-
-    return answer
-
+                  {'user_input': user_input, 'answer': answer_text, 'audio_path': '/static/answer.mp3'})
 
 def import_csv(request):
     if request.method == 'POST':
@@ -647,6 +510,48 @@ def import_csv(request):
     else:
         form = CSVUploadForm()
 
-    return render(request, 'kil.html', {'form': form})
+    return render(request, 'Superadmin/kil.html', {'form': form})
 
 
+
+
+
+@login_required(login_url='login')
+def faq_view_admin(request):
+   
+    if request.method=="POST":
+        faq_form = Faqformadmin(request.POST)
+        if faq_form.is_valid():
+            faq=faq_form.save(commit=False)
+            faq.save()
+            return redirect('Faq_admin')
+        else:
+            print(faq_form.errors)
+            return render(request,'Superadmin/Faq.html',{'faq_form':faq_form})
+    faq_form=Faqformadmin(request.POST)
+    faqs=Faq_admin.objects.all()      
+    return render(request,'Superadmin/Faq.html',{'faq_form':faq_form,'faqs':faqs})
+
+@login_required(login_url='login')
+def edit_faq_admin(request, id):
+    faq_admin = get_object_or_404(Faq_admin, pk=id)
+    if request.method == 'POST':
+        faq_form = Faqformadmin(request.POST, instance=faq_admin)
+        if faq_form.is_valid():
+            faq_form.save()
+            return redirect('Faq_admin')
+    else:
+        faq_form = Faqformadmin(instance=faq_admin)
+    return render(request, 'Superadmin/Edit_faq.html', {'faq_form': faq_form, 'faq_admin': faq_admin})
+
+
+
+@login_required(login_url='login')
+def delete_faq_admin(request, id):
+    
+    
+    faq = get_object_or_404(Faq_admin, pk=id)
+  
+    faq.delete()
+    
+    return JsonResponse({'msg': True})

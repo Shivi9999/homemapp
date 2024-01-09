@@ -1,196 +1,218 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <head>
+        <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel='shortcut icon' type='image/x-icon' href='{%static 'assets/img/favicon.png'%}' />
-    <title>LOG IN HOMEMAPP  </title>
+      <title>LOG IN HOMEMAPP  </title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+            <link rel="icon" href="{%static 'images/fevicon.png'%}" type="image/png" />
+      <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}" />
+           <link rel="stylesheet" href="{%static 'style.css'%}" />
 
+      <link rel="stylesheet" href="{%static 'css/responsive.css'%}" />
+            <link rel="stylesheet" href="{%static 'css/colors.css'%}" />
+
+      <link rel="stylesheet" href="{%static 'css/bootstrap-select.css'%}" />
+
+      <link rel="stylesheet" href="{%static 'css/perfect-scrollbar.css'%}" />
+      
+      <link rel="stylesheet" href="{%static 'css/custom.css'%}" />
 <style>
-  .top-login {
-    padding: 47% 5%;
+    .account-page {
+        display: block;
+    height: auto;
 }
-section#login-page {
-/*         background: linear-gradient(356deg, #28bcde, #14789F); */
-    background: linear-gradient(90deg, #00000000, #00000000),url(static/assets/img/Login_bg1.png);
-    width: 100%;
-    height: 100vh;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+.register-link {
+    color: black;
 }
-.auth-form-light {
-  /* background: #00000073; */
- background:#222222ad;
-    margin: 60px 35px;
-    border-radius: 0px;
+/**/
+/*-----------------
+  8. Login
+-----------------------*/
+
+.account-page {
+  height: 100%;
+  padding: 40px 0px !important;
+}
+.account-title {
+  font-size: 32px;
+  font-weight: normal;
+  margin: 0 0 40px;
+  text-align: center;
+}
+.account-wrapper {
+  display: table;
+  table-layout: fixed;
+  height: 100%;
+  padding: 30px;
+  width: 100%;
+}
+.account-center {
+  display: table-cell;
+  vertical-align: middle;
+}
+.account-box {
+      background-color: #0000008a;
     border-top: 6px solid #d8b29b;
     border-bottom: 6px solid #d8b29b;
+    margin: 0 auto;
+    padding: 30px 15px;
+    width: 334px;
 }
-
-.brand-logo {
-    margin-bottom: 1rem;
-    text-align: center;
+.account-logo {
+  margin-bottom: 20px;
+  text-align: center;
 }
-
-.brand-logo h4 {
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    line-height: 1.2;
+.account-box .form-group {
+  margin-bottom: 20px;
 }
-
-a.auth-link.text-black {
-    color: white;
-    text-decoration: none;
-    font-size: 12px;
+.account-box a {
+  color: #333;
+  font-size: 14px;
 }
-
-button.btn.btn-block.btn-facebook.auth-form-btn {
-    background: #7DA0FA;
-    color: #ffffff;
-    margin: 14px 0px;
+.account-box a:hover {
+  color: #fb5a00;
 }
-{% comment %} .btn-primary {
+.account-box .form-control {
+  border: 1px solid #eaeaea;
+  border-radius: 0;
+  box-shadow: inherit;
+  font-size: 14px;
+  height: 40px;
+}
+.account-box textarea.form-control {
+  height: 130px;
+}
+.account-box label {
+  color: #323232;
+  font-size: 14px;
+  font-weight: normal;
+}
+.account-logo img {
+  max-height: 60px;
+  width: auto;
+}
+.account-box .account-btn {
+  border-radius: 10px 0px;
+  font-size: 16px;
+  min-width: 150px;
+  width: 100%;
+  padding: 8px 30px;
+  text-transform: uppercase;
+}
+.btn-primary {
     color: #fff;
     background: linear-gradient(85deg, #d4ad99, #ffe4b5);
     border-color: #ffe4b5;
-} {% endcomment %}
+}
 .btn-primary:hover {
     color: #fff;
-    background-color: #000;
-    border-color: #000;
-}
-.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
-    color: #fff;
-    background-color: #000;
-    border-color: #000;
-}
-a.text-primary:focus, a.text-primary:hover {
-    color: #f4c61b!important;
-}
-.text-primary {
-    color: #ffffff!important;
-}
-a:hover {
-    color: #0056b3;
-    text-decoration: underline;
-}
-.create-img img {
-    width: 100%;
-}
-.messages {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  color: white;
-  text-align: center;
-  font-weight: 600;
-  text-transform: uppercase;
+    background: linear-gradient(85deg, #d4ad99, #ffe4b5);
+    border-color: #ffe4b5;
 }
 
-.btn-primary {
-  color: #ffffff;
-  background: linear-gradient(85deg, #d4ad99, #d14b41);
-  border-color: #ffffff;
-  font-weight: 600;
-}
-@media screen and (min-width: 320px) and (max-width: 768px) {
-  .auth-form-light {
-      background: #222222ad;
-      margin: 60px 13px !important;
-  }
-  a.auth-link.text-black {
-      font-size: 14px !important;
-  }
-  label {
-      font-weight: 600;
-  }
-  .messages {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-  }
-}
 </style>
-  </head>
-  <body>
-   
-<!-- LOGIN PAGE SRTDSRT -->
-<section id="login-page" class="login-page">
-   <div class="container-fluid">
-      <div class="row w-100 mx-0">
-        <div class="col-lg-4 mx-auto">
-  
-        </div> 
+   </head>
+   <body class="inner_page login">
+    
+      <div class="login-bgs" style="
+    background: linear-gradient(90deg, #00000000 , #000000bd), url(../static/images/login-bg.jpg);background-position: center;background-repeat: no-repeat;width: 99%;background-size: cover;height: 100vh;">
+    <div class="container-fluid">
+           <div class="row">
+               <div class="col-md-4">
+                   
+               </div> 
+               <div class="col-md-4">
+                   <div class="login-form">
+                        <div class="account-page">
+                            <div class="account-center">
+                                <div class="account-box">
+                                  
+                                     
+                                        <div class="account-logo">
+                                          <a href="index.html"><img class="img-responsive" src="{%static 'images/logo/logo.png'%}" alt="#" 
+                                            style="margin-bottom: 20px ;"></a>
+                                            <h3 style="color: white;font-size: 22px;">Welcome To HomeMapp </h3>
+                                            <h5 style="color: white;">Login In To Continue </h5>
+                                            
+                                        </div>
+                                        {% if messages %}
+                                        <div class="messages">
+                                           {% for message in messages %}
+                                              <div class="alert alert-{{ message.tags }}">
+                                                 {{ message }}
+                                              </div>
+                                           {% endfor %}
+                                        </div>
+                                     {% endif %}
+                                        <form method='post' action="{% url 'login_user'%}" class="form-signin">
+                                          {% csrf_token %}
+                                        <div class="form-group">
+                                            <label style="color: white;">  Email</label>
+                                            <input type="text" autofocus="" name='email' class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="color: white;"> Password</label>
+                                            <input type="password"  name='password' class="form-control">
+                                        </div>
+                                        <div class="form-group text-right">
+                                            <a href="#" style="color: white;">Forgot your password?</a>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <button type="submit" class="btn btn-primary account-btn">Login</button>
+                                        </div>
+                                        <div class="text-center register-link" style="color: white;">
+                                            Don’t have an account? <a href="#" style="color: white;"> Register Now</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+               </div>
+             <div class="col-md-4">
+                   
+               </div> 
+           </div>
+       </div>
+       </div>
 
-         <div class="col-lg-4 mx-auto">
-            <div class="auth-form-light text-left py-4 px-3 px-sm-4">
-              <div class="brand-logo">
-                <a href=""> <img alt="image" src="{%static 'assets/img/logo.PNG'%}" class="header-logo"
-                 style="width:70%;">
-            </a>
-                <!-- <h3 style="color:white">|)E/\/\@</h3> -->
-              </div>
-              <h4 style="color:white;text-align:left;font-size: 19px;line-height: 1.6;margin-bottom: 10px;">Welcome To HomeMapp Website</h4>
-              <h6 class="font-weight-light " style="color:white">Sign in to continue.</h6>
-              {% if messages %}
-											<div class="messages">
-												{% for message in messages %}
-													<div class="alert alert-{{ message.tags }}">
-														{{ message }}
-													</div>
-												{% endfor %}
-											</div>
-										{% endif %}
-              <form method="post"  action="{% url 'login_customer'%}" class="pt-3">
-                {% csrf_token %}
-                
-                <div class="form-group">
-                  <label style="color: white;">Email</label>
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" name="email" placeholder="Email">
-                </div>
-                <div class="form-group">
-                   <label style="color: white;">Password</label>
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="password" placeholder="Password">
-                </div>
-             
-                <div class="my-3 d-flex justify-content-between align-items-center">
-                  {% comment %} <div class="form-check">
-                    <label class="form-check-label text-muted" style="color: white !important;">
-                      <input type="checkbox" class="form-check-input">
-                     
-                    <i class="input-helper"></i></label>
-                  </div> {% endcomment %}
-                  {% comment %} <a href="{% url 'forget_password'%}" class="auth-link text-black">Forgot password?</a> {% endcomment %}
-                </div>
-                   <div class="mt-3">
-                    <input type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"  value=" Log in">
-                  <!-- <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" >SIGN IN</a> -->
-                </div>
-                {% comment %} <div class="text-center mt-3 font-weight-bold" style="color:white">
-                  Don't have an account ? <a href="#" class="text-primary">Create</a>
-                </div> {% endcomment %}
-              </form>
-            </div>
-          </div>
-       <div class="col-lg-4">
-          </div> 
 
-        </div>
-    </div>
-</section>
-<!-- LOGIN SCRIPT START -->
+      <!-- jQuery -->
+      <script src="{%static 'js/jquery.min.js'%}"></script>
+      <script src="{%static 'js/popper.min.js'%}"></script>
+      <script src="{%static 'js/bootstrap.min.js'%}"></script>
+      <script src="{%static 'js/animate.js'%}"></script>
+      <script src="{%static 'js/bootstrap-select.js'%}"></script>
+      <script src="{%static 'js/perfect-scrollbar.min.js'%}"></script>
+      <script>
+         var ps = new PerfectScrollbar('#sidebar');
+      </script>
+      <script src="{%static 'js/custom.js'%}"></script>
+      <!--  -->
+      <script>
+  const pass_field = document.querySelector(".pass-key");
+const showBtn = document.querySelector(".show");
+showBtn.addEventListener("click", function() {
+  if (pass_field.type === "password") {
+    pass_field.type = "text";
+    showBtn.textContent = "HIDE";
+    showBtn.style.color = "#3498db";
+  } else {
+    pass_field.type = "password";
+    showBtn.textContent = "SHOW";
+    showBtn.style.color = "#222";
+  }
+});
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  
-</body>
+
+
+</script>
+   </body>
 </html>

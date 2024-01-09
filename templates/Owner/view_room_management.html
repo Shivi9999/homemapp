@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+           <title>PROPERTY MANAGEMENT OWNER HOME PAGE </title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+          <link rel="icon" href="{%static 'images/fevicon.png'%}" type="image/png" />
+     
+      <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}" />
+         <link rel="stylesheet" href="{%static 'style.css'%}" />
+      
+      <link rel="stylesheet" href="{%static 'css/responsive.css'%}" />
+          {% comment %} <link rel="stylesheet" href="{%static 'css/colors.css'%}" /> {% endcomment %}
+       
+      <link rel="stylesheet" href="{%static 'css/bootstrap-select.css'%}" />
+      
+      <link rel="stylesheet" href="{%static 'css/perfect-scrollbar.css'%}" />
+           <link rel="stylesheet" href="{%static 'css/custom.css'%}" />
+
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+          <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+
+   </head>
+   <body class="dashboard dashboard_1">
+    <div class="full_container">
+        <div class="inner_container">
+           <!-- Sidebar  -->
+         {% include 'Owner/sidebar.html'%}
+           <!-- end sidebar -->
+           <!-- right content -->
+           <div id="content">
+             {% include 'Owner/header.html' %}
+              <!-- dashboard inner -->
+              <div class="midde_cont">
+                  <div class="container-fluid">
+                     <div class="row column_title">
+                        <div class="col-md-12">
+                           <div class="page_title">
+                              <h2>Dashboard</h2>
+                           </div>
+                        </div>
+                     </div>
+                <!--  -->
+                     <div class="row">
+                       <div class="white_shd full">
+                              <div class="full graph_head">
+                                 <div class="heading1 margin_0">
+                                    <h2>View Room Management</h2>
+                                 </div>
+                              </div>
+                              <div class="users-forms">
+                                <div class="row">
+                                   <div class="col-md-12">
+                                        <div class="user-table">
+                                   <div class="datatables">
+                                        <table id="example" class="display" style="width:100%;    border: 2px solid #20214f;">
+                                            <thead>
+                                                <tr>
+                                                    <th>S no</th>
+                                                    <th>Property Name</th>
+                                                   
+                                                    <th>Room Number </th>
+                                                    <th>Room Name</th>
+                                                   
+                                                    <th>Room Description</th>
+                                                    <th>Room Image </th>
+                                                   
+                                                     <th>Action</th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                              {% for property in room %}
+                                                <tr class="even">
+                                                    <td>{{forloop.counter}}</td>
+                                                    <td>{{property.flat_name}}</td>
+                                                    <td>{{property.room_number}}</td>
+                                                    <td>{{property.room_name}}</td>
+                                                    <td>{{property.room_description}}</td> 
+                                                    
+                                                    <td><img src="{{ property.room_image.url }}" alt="User Image" style="max-width: 100px;" ></td>
+                                                 <td>
+                                            <button class="btn btn-primary mb-2"><a class="edit-btn" href="{% url 'edit_room' property.id %}">Edit</a></button>
+                                            <button class="btn btn-primary delete-room-btn " data-id="{{property.id}}">Delete </button>
+                                         </td>
+                                                </tr>
+                                                
+                                               {% endfor %}
+                                            </tbody>
+                                            </table>
+                                   </div>
+                     </div>
+                               </div>
+                            </div>
+                            </div>
+                           </div>
+                     </div>
+            <!--  -->
+                  </div>
+                 {% include 'Owner/footer.html' %}
+               </div>
+               <!-- end dashboard inner -->
+            </div>
+         </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+      <script>
+          $(document).ready(function () {
+              $('.delete-room-btn ').click(function () {
+                  var roomId = $(this).data('id');
+                  console.log('Room ID:', roomId);
+                  Swal.fire({
+                      title: 'Are you sure?',
+                      text: "You won't be able to revert this!",
+                      icon: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Yes, delete Room'
+                  }).then((result) => {
+                      if (result.isConfirmed) {
+                          // Retrieve CSRF token from the cookie
+                          var csrftoken = getCookie('csrftoken');
+          
+                          // Make an AJAX request to delete the question
+                          $.ajax({
+                              type: 'DELETE',
+                              headers: { "X-CSRFToken": csrftoken },
+                              url: "/delete_room/" + roomId + "/",
+                              
+
+                              data: { id: roomId },
+                              success: function (response) {
+                                  console.log('Room deleted successfully');
+                                  var message = 'Room Deleted Successfully !!';
+                                  if (response.msg == true) {
+                                      window.location.reload();
+                                  } else {
+                                      $("#errorMessage").removeClass("d-none");
+                                      $("#successMessage").addClass("d-none");
+                                  }
+                              },
+                              error: function (error) {
+                                  console.error('Error deleting room', error);
+                                  // Handle error
+                              }
+                          });
+                      }
+                  });
+              });
+          
+              // Function to get CSRF token from the cookie
+              function getCookie(name) {
+                  var cookieValue = null;
+                  if (document.cookie && document.cookie !== '') {
+                      var cookies = document.cookie.split(';');
+                      for (var i = 0; i < cookies.length; i++) {
+                          var cookie = $.trim(cookies[i]);
+                          // Check if the cookie name matches the expected pattern
+                          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                              break;
+                          }
+                      }
+                  }
+                  return cookieValue;
+              }
+          });
+          
+      </script>
+
+     
+      <script src="{%static 'js/jquery.min.js'%}"></script>
+      <script src="{%static 'js/popper.min.js'%}"></script>
+      <script src="{%static 'js/bootstrap.min.js'%}"></script>
+      
+      <script src="{%static 'js/animate.js'%}"></script>
+     
+      <script src="{%static 'js/bootstrap-select.js'%}"></script>
+            <script src="{%static 'js/owl.carousel.js'%}"></script> 
+        <script src="{%static 'js/Chart.min.js'%}"></script>
+      <script src="{%static 'js/Chart.bundle.min.js'%}"></script>
+      <script src="{%static 'js/utils.js'%}"></script>
+      <script src="{%static 'js/analyser.js'%}"></script>
+     
+      <script src="{%static 'js/perfect-scrollbar.min.js'%}"></script>
+      <script>
+         var ps = new PerfectScrollbar('#sidebar');
+      </script>
+         <script src="{%static 'js/custom.js'%}"></script>
+      <script src="{%static 'js/chart_custom_style1.js'%}"></script>
+            <!--DATATABLES SCRIPT START DATATABLES SCRIPT START DATATABLES SCRIPT START DATATABLES SCRIPT START -->
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+         <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+          <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+           <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+             <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+              <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+               <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+        <script>
+          
+        new DataTable('#example')
+        
+        </script>
+   </body>
+</html>

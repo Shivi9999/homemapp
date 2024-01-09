@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>HomeMapp home page</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{%static 'assets/img/favicon.png'%}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{%static 'assets/css/bootstrap.min.css'%}">
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="{%static 'assets/css/font-awesome.min.css'%}">
+
+    <!-- Feathericon CSS -->
+    <link rel="stylesheet" href="{%static 'assets/css/feathericon.min.css'%}">
+
+    <link rel="stylesheet" href="{%static 'assets/plugins/morris/morris.css'%}">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{%static 'assets/css/style.css'%}">
+    <style>
+        input#id_old_password, input#id_new_password1, input#id_new_password2 {
+            width: 100%;
+            background: white;
+            padding: 5px 5px;
+            border-radius: 3px;
+            border: 2px solid lightgrey;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+
+       {% include 'Superadmin/header.html'%}
+       {% include 'Superadmin/sidebar.html'%}
+        <!-- Page Wrapper -->
+        <div class="page-wrapper">
+
+            <div class="content container-fluid">
+
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3 class="page-title">Welcome To HomeMapp Admin!</h3>
+                        </div>
+                        <div class="col-md-4">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'dashboard'%}">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Dashboard</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Page Header -->
+
+                
+               
+                <div class="row">
+                 
+                        <div class="col-lg-3 col-12">
+                            <a href="{% url 'View_property_owner' %}">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>Property Owner</h3>
+                                    <p>{{ property_owner_count }}</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-shopping-bag"></i>
+                                </div>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar w-50"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{% url 'View_question' %}">
+                    <div class="col-lg-3 col-12">
+                        <a href="{% url 'View_question' %}">
+                    <div class="small-box bg-success">
+                    <div class="inner">
+                    <h3>Total Question</h3>
+                    <p>{{question_count}}</p>
+                    </div>
+                    <div class="icon">
+                    <i class="fa fa-bars"></i>
+                    </div>
+                   <div class="progress progress-sm">
+                                        <div class="progress-bar w-50"></div>
+                                    </div>
+                    </div>
+                    </div>
+                </a>
+                    {% comment %} <div class="col-lg-3 col-6">
+
+                    <div class="small-box bg-warning">
+                    <div class="inner">
+                    <h3>Total Guest</h3>
+                    <p>1233</p>
+                    </div>
+                    <div class="icon">
+                    <i class="fa fa-user-plus"></i>
+                    </div>
+                   <div class="progress progress-sm">
+                                        <div class="progress-bar w-50"></div>
+                                    </div>
+                    </div>
+                    </div>
+
+                    <div class="col-lg-3 col-6">
+
+                    <div class="small-box bg-danger">
+                    <div class="inner">
+                    <h3>Manage Property</h3>
+                    <p>54</p>
+                    </div>
+                    <div class="icon">
+                    <i class="fa fa-pie-chart"></i>
+                    </div>
+                   <div class="progress progress-sm">
+                                        <div class="progress-bar w-50"></div>
+                                    </div>
+                    </div>
+                    </div>
+
+                    </div> {% endcomment %}
+
+               <!--  -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                    
+                        {% comment %} <!-- Sales Chart -->
+                        <div class="card card-chart bg-border">
+                            <div class="card-header">
+                                <h4 class="card-title">Sales Overview</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="morrisArea"></div>
+                            </div>
+                        </div>
+                        <!-- /Sales Chart --> {% endcomment %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Wrapper -->
+        {% include  'Superadmin/footer.html' %}
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+    <script src="{%static 'assets/js/jquery-3.6.0.min.js'%}"></script>
+
+    <!-- Bootstrap Core JS -->
+    <script src="{%static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+
+    <!-- Slimscroll JS -->
+    <script src="{%static 'assets/plugins/slimscroll/jquery.slimscroll.min.js'%}"></script>
+
+    <script src="{%static 'assets/plugins/raphael/raphael.min.js'%}"></script>
+    <script src="{%static 'assets/plugins/morris/morris.min.js'%}"></script>
+    <script src="{%static 'assets/js/chart.morris.js'%}"></script>
+
+    <!-- Custom JS -->
+    <script src="{%static 'assets/js/script.js'%}"></script>
+
+</body>
+
+</html>

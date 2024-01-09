@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+        <title>Notification HomeMapp Page </title>
+        <link rel="shortcut icon" type="image/x-icon" href="{%static 'assets/img/favicon.png'%}">
+        <link rel="stylesheet" href="{%static 'assets/css/bootstrap.min.css'%}">		
+        <link rel="stylesheet" href="{%static 'assets/css/font-awesome.min.css'%}">		
+        <link rel="stylesheet" href="{%static 'assets/css/feathericon.min.css'%}">
+        <link rel="stylesheet" href="{%static 'assets/css/style.css'%}">
+         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+
+    </head>
+	<style>
+	/* styles.css */
+	.custom-checkbox-list label {
+		display: block;
+		margin-bottom: 5px;
+		font-weight: normal;
+	}
+	
+	.custom-checkbox-list input {
+		margin-right: 5px;
+	}
+	.dropdownu .user-selects {
+		position: relative;
+		left: 0px;
+		top: 0px;
+	  }
+	  ul.dropdown-menu.show {
+		width: 100%;
+		padding: 10px 10px;
+	}
+	ul.dropdown-menu.show li a label {
+		color: black;
+		text-transform: capitalize;
+	}
+	</style>
+    <body>
+	
+		<!-- Main Wrapper -->
+        <div class="main-wrapper">
+			{% include 'Superadmin/header.html'%}
+			{% include 'Superadmin/sidebar.html'%}
+			
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+				
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row">
+							<div class="col-sm-12">
+							   <div class="card full-header">
+								  <div class="text-editor">
+									 <div class="users">
+										 <h3 class="page-title">Notification</h3>
+									 </div>
+									 <form  method="post">
+                                        {% csrf_token %}
+                                  <div class="form-group row add-user">
+                                   <div class="form-group col-md-6">
+                                         {% comment %} <i class="fa fa-user icon-user"></i> {% endcomment %}
+                                      <label for="exampleInputPassword1">Question</label>
+                                      {{faq_form.question}}
+                                      {% comment %} <input type="text" class="form-control  user-fill"  name="question" id="user-add-form" placeholder="Question"> {% endcomment %}
+                                    </div>
+                                     <div class="form-group col-md-6">
+                                         {% comment %} <i class="fa fa-mobile icon-user"></i> {% endcomment %}
+                                      <label for="exampleInputPassword1">Answer</label>
+                                      {{faq_form.answer}}
+                                    </div>
+                                   
+                                 <div class="form-group col-md-12">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                  </div>
+                               </div>
+                               </form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- /DataTable -->
+					</div>
+					
+				{% include 'Superadmin/footer.html'%}
+		
+		<!-- jQuery -->
+        <script src="{%static 'assets/js/jquery-3.6.0.min.js'%}"></script>
+		
+		<!-- Bootstrap Core JS -->
+        <script src="{%static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+		
+		<!-- Slimscroll JS -->
+        <script src="{%static 'assets/plugins/slimscroll/jquery.slimscroll.min.js'%}"></script>
+		
+		<!-- Custom JS -->
+		<script  src="{%static 'assets/js/script.js'%}"></script>
+		<!-- DATATABLES  -->
+
+<!--DATATABLES SCRIPT START DATATABLES SCRIPT START DATATABLES SCRIPT START DATATABLES SCRIPT START -->
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+         <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+          <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+           <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+             <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+              <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+               <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+        <script>
+     new DataTable('#example')
+    
+        </script>
+
+
+    </body>
+</html>

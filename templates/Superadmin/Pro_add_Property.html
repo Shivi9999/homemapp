@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+{% load static %} 
+{% load crispy_forms_tags %} 
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+        <title>Property Add Property HomeMapp Page</title>
+		
+		<!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="{%static 'assets/img/favicon.png'%}">
+		
+		<!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{%static 'assets/css/bootstrap.min.css'%}">
+		
+		<!-- Fontawesome CSS -->
+        <link rel="stylesheet" href="{%static 'assets/css/font-awesome.min.css'%}">
+		
+		<!-- Feathericon CSS -->
+        <link rel="stylesheet" href="{%static 'assets/css/feathericon.min.css'%}">
+		
+		<!-- Main CSS -->
+        <link rel="stylesheet" href="{%static 'assets/css/style.css'%}">
+		
+		<!--[if lt IE 9]>
+			<script src="{%static 'assets/js/html5shiv.min.js"></script>
+			<script src="{%static 'assets/js/respond.min.js"></script>
+		<![endif]-->
+		<style>
+			.error-list {
+				color: red;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+		
+    </head>
+    <body>
+	
+		<!-- Main Wrapper -->
+        <div class="main-wrapper">
+		
+			{% include 'Superadmin/header.html'%}
+			{% include 'Superadmin/sidebar.html'%}
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+				
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="card full-header">
+									<div class="users">
+										<h3 class="page-title">Property Add Property </h3>
+									</div>
+									<div class="user-box">
+										<form method="post" class="row">
+											{% csrf_token %}
+												
+									
+
+										 <div class="form-group col-sm-6">
+
+												<label>Username</label>
+												{{user_form.username}}
+												{% if user_form.username.errors %}
+													<ul class="error-list">
+														{% for error in user_form.username.errors %}
+															<li>{{ error }}</li>
+															
+														{% endfor %}
+													</ul>
+											    {% endif %}
+											</div>
+											<div class="form-group col-sm-6">
+												<label>Email</label>
+												{{user_form.email}}
+												{% if user_form.email.errors %}
+											<ul class="error-list">
+												{% for error in user_form.email.errors %}
+													<li>{{ error }}</li>
+													
+												{% endfor %}
+											</ul>
+										{% endif %}
+											</div>
+											<div class="form-group col-sm-12">
+												<label>Password</label>
+												 {{user_form.password}}
+												 {% if user_form.password.errors %}
+											<ul class="error-list">
+												{% for error in user_form.password.errors %}
+													<li>{{ error }}</li>
+													
+												{% endfor %}
+											</ul>
+										{% endif %}
+												
+											</div>
+											 
+											 <div class="form-group col-sm-6">
+												<label>Property Name</label>
+												{{property_form.property_name}}
+												{% if property_form.property_name.errors %}
+												<ul class="error-list">
+													{% for error in property_form.property_name.errors %}
+														<li>{{ error }}</li>
+														
+													{% endfor %}
+												</ul>
+											{% endif %}
+
+											</div>
+											<div class="form-group col-sm-6">
+												<label>Address</label>
+												{{property_form.address}}
+												{% if property_form.address.errors %}
+												<ul class="error-list">
+													{% for error in property_form.address.errors %}
+														<li>{{ error }}</li>
+														
+													{% endfor %}
+												</ul>
+											{% endif %}
+											</div>
+												
+											<div class="form-group col-sm-12">
+												 <label>Mobile</label>
+												 {{property_form.mobile}}
+												 {% if property_form.mobile.errors %}
+												<ul class="error-list">
+													{% for error in property_form.mobile.errors %}
+														<li>{{ error }}</li>
+														
+													{% endfor %}
+												</ul>
+											{% endif %}
+												
+											</div>  
+											<div class="form-group col-sm-12">
+												<div class="button">
+													<input type="submit" value=" Submit">
+												</div>
+												
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /Page Header -->
+					
+					<div class="row">
+						<div class="col-sm-12">
+							
+						</div>			
+					</div>
+					
+				</div>			
+			</div>
+			<!-- /Page Wrapper -->
+			{% include 'Superadmin/footer.html'%}
+        </div>
+		<!-- /Main Wrapper -->
+		
+		<!-- jQuery -->
+        <script src="{%static 'assets/js/jquery-3.6.0.min.js'%}"></script>
+		
+		<!-- Bootstrap Core JS -->
+        <script src="{%static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+		
+		<!-- Slimscroll JS -->
+        <script src="{%static 'assets/plugins/slimscroll/jquery.slimscroll.min.js'%}"></script>
+		
+		<!-- Custom JS -->
+		<script  src="{%static 'assets/js/script.js'%}"></script>
+		
+    </body>
+</html>

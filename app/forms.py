@@ -47,20 +47,19 @@ class QuestionForm(forms.ModelForm):
         }
     hotel = forms.ModelMultipleChoiceField(
         queryset=Add_hotel.objects.all(),
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox-list'}),
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox-list','required': True}),
     )
     room = forms.ModelMultipleChoiceField(
         queryset=Add_Room.objects.all(),
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox-list'}),
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox-list','required': True}),
     )
-    
     def clean_question(self):
-        # Cleaned data for the 'question' field
+    
         question = self.cleaned_data['question']
 
-        # Check if the instance is being created (new record)
+        
         if self.instance is None or self.instance.pk is None:
-            # Check if the question already exists in the database
+            
             if QuestionAnswer.objects.filter(question__iexact=question).exists():
                 raise forms.ValidationError("This question already exists.")
 
@@ -69,25 +68,20 @@ class QuestionForm(forms.ModelForm):
 class CustomPasswordChangeForm(PasswordChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Add custom styles or attributes if needed
-
-    # def clean_old_password(self):
-    #     old_password = self.cleaned_data.get('old_password')
-    #     # Perform additional validation if needed
-    #     return old_password
+       
     def clean_old_password(self):
             old_password = self.cleaned_data.get('old_password')
 
-            # Check if the old password matches the user's current password
+          
             if not self.user.check_password(old_password):
                 raise ValidationError("The old password is incorrect.")
 
-            # Perform additional validation if needed
+           
             return old_password
 
     def clean_new_password1(self):
         new_password1 = self.cleaned_data.get('new_password1')
-        # Perform additional validation if needed
+       
         return new_password1
 
     def clean_new_password2(self):
@@ -97,7 +91,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         if new_password1 and new_password2 and new_password1 != new_password2:
             raise ValidationError("The two password fields didn't match.")
 
-        # Perform additional validation if needed
+     
         return new_password2
 
 class NotificationForm(forms.ModelForm):
@@ -151,7 +145,7 @@ class Add_userform(forms.ModelForm):
           # Set this to True if mobile is a required field
     )
 
-class AddHotelForm(forms.ModelForm):
+class AddPropertyForm(forms.ModelForm):
     class Meta:
         model = Add_hotel
         fields = ['property_name', 'total_room', 'email', 'address', 'mobile', 'flat_image']
@@ -191,12 +185,57 @@ class CSVUploadForm(forms.Form):
 class AddItemsForm(forms.ModelForm):
     class Meta:
         model = Add_items
-        fields = ['select_hotel', 'select_room', 'items']
+        fields = ['select_hotel', 'select_room', 'amenity']
         widgets = {
             'select_hotel': forms.Select(attrs={'class': 'form-control'}),
-            'select_room': forms.TextInput(attrs={'class': 'form-control'}),        
-            'items': forms.TextInput(attrs={'class': 'form-control'}),
+            'select_room': forms.Select(attrs={'class': 'form-control'}),        
+            'amenity': forms.Select(attrs={'class': 'form-control'}),
             
         }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+class property_equipment_form(forms.ModelForm):
+    class Meta:
+        model = PropertyAmenity
+        fields = ['items_name']
+        widgets = {
+            'items_name': forms.TextInput(attrs={'class': 'form-control'}),
+            
+            
+        }
+
+class OwnerNotificationForm(forms.ModelForm):
+    class Meta:
+        model = Notification_owner
+        fields = ['title', 'message', 'users']
+
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
+            'message': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
+        }
+
+    users = forms.ModelMultipleChoiceField(
+        queryset=User.objects.exclude(user_type__in=['1', '2']),
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox-list'}),
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(OwnerNotificationForm, self).__init__(*args, **kwargs)
+        # You can also set initial values if needed
+        self.fields['users'].initial = User.objects.exclude(user_type__in=['1', '2']).values_list('id', flat=True)
+
+
+
+class Faqformadmin(forms.ModelForm):
+    
+    class Meta:
+        model = Faq_admin
+        fields = "__all__"
+
+
+        widgets = {
+            
+            'question': forms.TextInput(attrs={'class': 'form-control'}),
+            'answer': forms.TextInput(attrs={'class': 'form-control'}),
+        }

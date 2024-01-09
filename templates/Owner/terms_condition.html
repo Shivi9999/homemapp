@@ -1,136 +1,139 @@
-{% extends 'Owner/base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+           <title>TERMS AND CONDITION HOMEMAPP PAGE </title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+          <link rel="icon" href="{%static 'images/fevicon.png'%}" type="image/png" />
+     
+      <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}" />
+         <link rel="stylesheet" href="{%static 'style.css'%}" />
+      
+      <link rel="stylesheet" href="{%static 'css/responsive.css'%}" />
+          <link rel="stylesheet" href="{%static 'css/colors.css'%}" />
+       
+      <link rel="stylesheet" href="{%static 'css/bootstrap-select.css'%}" />
+      
+      <link rel="stylesheet" href="{%static 'css/perfect-scrollbar.css'%}" />
+           <link rel="stylesheet" href="{%static 'css/custom.css'%}" />
 
-{% block content %}
-<style>   .users-forms{
-  padding: 10px 10px; 
-}
-.users-forms p {
-  color: #58718a;
-  font-size: 14px;
-  line-height: 28px;
-  font-weight: 400;
-  text-transform: capitalize;
-  margin-top: 10px;
-  margin-bottom: 1rem;
-}
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
-.users-forms p strong {
-  color: black;
-  font-weight: 600;
-  text-transform: uppercase;
-  padding: 9px 0px;
-  font-size: 17px;
-} </style>
-<body class="dashboard dashboard_1">
-   <div class="full_container">
-      <div class="inner_container">
-         <div id="content">
-            <div class="midde_cont">
-               <div class="container-fluid">
-                  <div class="row column_title">
-                     <div class="col-md-12">
-                        <div class="page_title">
-                           <h2>Terms And Condition</h2>
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+
+   </head>
+   <style>   .users-forms{
+    padding: 10px 10px; 
+  }
+  .users-forms p {
+    color: #58718a;
+    font-size: 14px;
+    line-height: 28px;
+    font-weight: 400;
+    text-transform: capitalize;
+    margin-top: 10px;
+    margin-bottom: 1rem;
+  }
+  
+  .users-forms p strong {
+    color: black;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 9px 0px;
+    font-size: 17px;
+  } </style>
+   <body class="dashboard dashboard_1">
+      <div class="full_container">
+         <div class="inner_container">
+          {% include 'Owner/sidebar.html'%}
+            <!-- end sidebar -->
+            <!-- right content -->
+            <div id="content">
+              {% include 'Owner/header.html'%}
+               <!-- dashboard inner -->
+               <div class="midde_cont">
+                  <div class="container-fluid">
+                     <div class="row column_title">
+                        <div class="col-md-12">
+                           <div class="page_title">
+                              <h2>Terms and Condition</h2>
+                           </div>
                         </div>
                      </div>
-                  </div>
-             <!--  -->
-                  <div class="row">
+                <!--  -->
+                    <div class="row">
                     <div class="white_shd full">
-                           <div class="full graph_head">
-                              <div class="heading1 margin_0">
-                                 <h2> Terms And Condition</h2>
+                                  <div class="full graph_head">
+                                 <div class="heading1 margin_0">
+                                    <h2> Terms & Condition </h2>
+                                 </div>
                               </div>
-                           </div>
-                         <div class="users-forms">
-                         <div class="row">
-                            <div class="col-md-12">
-                              {% for tandc in terms_data %}
+                                  <div class="customer-form">
+                                     <div class="row">
+                                       <div class="col-sm-12">
+                                        {% for tandc in terms_data %}
                               
-                              {{ tandc.terms_condition|safe }}
-                           
-                             
-                            {% endfor %}
-                              {% comment %} <form method="post" action="{% url 'Terms_condition_user' %}" id="tandcForm" class="needs-validation" novalidate="">
-                                 {% csrf_token %}
-                                 <div class="form-group">
-                                   <label for="InputFile">Content</label>
-                                   <textarea id="myeditor" name="terms_condition" class="form-control" rows="10" cols="80" Required>{{ privacy }}</textarea>
-                                   <input class="form-control" type="hidden" id="shivi" name="tandcID">
+                                        {{ tandc.terms_condition|safe }}
+                                     
+                                       
+                                      {% endfor %}
+                                   </div>
                                  </div>
-                     
-                                 <div class="add-admin" style="margin-bottom: 0px;">
-                                   <input type="submit" class="btn btn-primary" style="width:20%;margin-left: 10px;">
                                  </div>
-                               </form> {% endcomment %}
+                  </div>         
+               </div>
+               <!--  -->
+                  </div>
+            <!--  -->
+                  </div>
+                  <!-- footer -->
+                   {% include 'Owner/footer.html'%}
+               </div>
+               <!-- end dashboard inner -->
+            </div>
          </div>
-         
       </div>
-      {% comment %} <div class="fulls-headings mt-4">
-         <h4> View Terms And Condition</h4>
-       </div>
-       <table id="example" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="example_info" style="margin: 20px 00px;">
-         <thead>
-           <tr role="row">
-             <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Id: activate to sort column descending" style="width: 10%;" aria-sort="ascending">S.No</th>
-             <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="box: activate to sort column ascending" style="width: 80%;">Terms And Condition </th>
-             <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 10%;">Action</th>
-           </tr>
-         </thead>
-         <tbody>
-           {% for tandc in terms_data %}
-             <tr class="odd">
-               <td>{{ forloop.counter }}</td>
-               <td>{{ tandc.terms_condition|safe }}</td>
-          
-               <td>
-                 <div class="dropdown">
-                   <button class="btn mt-1 mb-1 btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-               {% comment %} <a class="dropdown-item" onclick="updatetandc('{{ tandc.id }}', {{ tandc.terms|json_script }})" >Edit</a> 
-         <a class="dropdown-item" onclick="updatetandc('{{ tandc.terms_condition|escapejs }}', '{{ tandc.id }}')">Edit</a>
-
-
-
-
-                     <a class="dropdown-item" href="{% url 'delete_terms_condition' id=tandc.id %}">Delete</a>
-                   </div>
-                 </div>
-               </td>
-             </tr>
-           {% endfor %}
-         </tbody>
-       </table> {% endcomment %}
-     </div>
-   </div>
-     </div>
-</div>
-
-</div>
-
-         
-
-        
-    </section>
-  </div>
-</div>
-</div>
-</div>
-<!-- end dashboard inner -->
-</div>
-</div>
-</div>
-<script>
-   function updatetandc(content, id) {
+      <script src="{%static 'js/jquery.min.js'%}"></script>
+      <script src="{%static 'js/popper.min.js'%}"></script>
+      <script src="{%static 'js/bootstrap.min.js'%}"></script>
+      
+      <script src="{%static 'js/animate.js'%}"></script>
      
- 
-     CKEDITOR.instances.myeditor.setData(content);
-     document.getElementById("shivi").value = id;
-     // Additional logic if needed
-   }
- </script>
-  
-{% endblock %}
+      <script src="{%static 'js/bootstrap-select.js'%}"></script>
+            <script src="{%static 'js/owl.carousel.js'%}"></script> 
+        <script src="{%static 'js/Chart.min.js'%}"></script>
+      <script src="{%static 'js/Chart.bundle.min.js'%}"></script>
+      <script src="{%static 'js/utils.js'%}"></script>
+      <script src="{%static 'js/analyser.js'%}"></script>
+     
+      <script src="{%static 'js/perfect-scrollbar.min.js'%}"></script>
+      <script>
+         var ps = new PerfectScrollbar('#sidebar');
+      </script>
+         <script src="{%static 'js/custom.js'%}"></script>
+      <script src="{%static 'js/chart_custom_style1.js'%}"></script>
 
-
-  
+    
+        <!-- TEXT EDITOR SCRIPT END -->
+        <!--DATATABLES SCRIPT START DATATABLES SCRIPT START DATATABLES SCRIPT START DATATABLES SCRIPT START -->
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+         <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+          <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+           <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+             <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+              <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+               <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+      
+        
+   </body>
+</html>
