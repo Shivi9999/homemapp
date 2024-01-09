@@ -144,6 +144,14 @@ class Add_userform(forms.ModelForm):
         widget=forms.NumberInput(attrs={'class': 'form-control'})
           # Set this to True if mobile is a required field
     )
+  def __init__(self, user, *args, **kwargs):
+        super(Add_userform, self).__init__(*args, **kwargs)
+
+        # Filter hotel_name choices based on the logged-in user
+        self.fields['hotel_name'].queryset = Add_hotel.objects.filter(user=user)
+
+        # Filter room_number choices based on the logged-in user
+        self.fields['room_number'].queryset = Add_Room.objects.filter(flat_name__user=user)
 
 class AddPropertyForm(forms.ModelForm):
     class Meta:
@@ -176,7 +184,13 @@ class AddRoomForm(forms.ModelForm):
             'room_description': forms.TextInput(attrs={'class': 'form-control'}),
             'room_image': forms.FileInput(attrs={'class': 'form-control'}),
         }
+    def __init__(self, user, *args, **kwargs):
+        super(AddRoomForm, self).__init__(*args, **kwargs)
 
+        # Filter flat_name choices based on the logged-in user
+        self.fields['flat_name'].queryset = Add_hotel.objects.filter(user=user)
+
+        
 
 class CSVUploadForm(forms.Form):
     file = forms.FileField()
@@ -190,10 +204,18 @@ class AddItemsForm(forms.ModelForm):
             'select_hotel': forms.Select(attrs={'class': 'form-control'}),
             'select_room': forms.Select(attrs={'class': 'form-control'}),        
             'amenity': forms.Select(attrs={'class': 'form-control'}),
-            
         }
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+
+    def __init__(self, user, *args, **kwargs):
+        super(AddItemsForm, self).__init__(*args, **kwargs)
+
+        # Filter select_hotel choices based on the logged-in user
+        self.fields['select_hotel'].queryset = Add_hotel.objects.filter(user=user)
+
+        # Filter select_room choices based on the logged-in user
+        self.fields['select_room'].queryset = Add_Room.objects.filter(flat_name__user=user)
+
+       
 
 class property_equipment_form(forms.ModelForm):
     class Meta:
@@ -204,6 +226,7 @@ class property_equipment_form(forms.ModelForm):
             
             
         }
+    
 
 class OwnerNotificationForm(forms.ModelForm):
     class Meta:

@@ -123,14 +123,14 @@ def delete_property(request, id):
 def add_room_management(request):
    
     if request.method == 'POST':
-        form = AddRoomForm(request.POST, request.FILES)
+        form = AddRoomForm(request.user,request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('view_room_management')  # Assuming you have a URL pattern named 'room_list' for displaying the list of rooms
         else:
            print(form.errors )
     else:
-        form = AddRoomForm()
+        form = AddRoomForm(request.user)
 
    
     return render(request,'Owner/Room_Add_Management.html',{'form': form})
@@ -149,12 +149,12 @@ def edit_room(request, id):
     room = Add_Room.objects.get(id=id)
 
     if request.method == 'POST':
-        form = AddRoomForm(request.POST, request.FILES, instance=room)
+        form = AddRoomForm(request.user,request.POST, request.FILES, instance=room)
         if form.is_valid():
             form.save()
             return redirect('view_room_management')  # replace with your URL name
     else:
-        form = AddRoomForm(instance=room)
+        form = AddRoomForm(request.user,instance=room)
 
     return render(request, 'Owner/edit_room.html', {'form': form, 'room': room})
 
@@ -175,7 +175,7 @@ def delete_room(request,id):
 def add_user_management(request):
     if request.method == "POST":
         form = Userform(request.POST)
-        user_form= Add_userform(request.POST,request.FILES)
+        user_form= Add_userform(request.user,request.POST,request.FILES)
         
         if form.is_valid() and user_form.is_valid():
             username = form.cleaned_data['username']
@@ -201,13 +201,13 @@ def add_user_management(request):
             print(user_form.errors)
             return render(request, 'Owner/user_management_add.html', {'form': form,'user_form': user_form})
     form = Userform()
-    user_form = Add_userform()
+    user_form = Add_userform(request.user)
    
     return render(request,'Owner/user_management_add.html',{'form': form,'user_form': user_form})
 
 @login_required(login_url='login_owner')    
 def view_user_management(request):
-    user_management=Add_user.objects.all().order_by('-id')
+    user_management=Add_user.objects.filter(hotel_name__user=request.user).order_by('-id')
     return render(request,'Owner/user_management_view.html',{'user_management':user_management})
 
 @login_required(login_url='login_owner')
@@ -216,7 +216,7 @@ def edit_user(request, id):
 
     if request.method == 'POST':
         user_form = Userform(request.POST, instance=property_owner.user)
-        property_form = Add_userform(request.POST,request.FILES, instance=property_owner)
+        property_form = Add_userform(request.user,request.POST,request.FILES, instance=property_owner)
 
         if user_form.is_valid() and property_form.is_valid():
             user_form.save()
@@ -230,7 +230,7 @@ def edit_user(request, id):
             print(property_form.errors)
     else:
         user_form = Userform(instance=property_owner.user)
-        property_form = Add_userform(instance=property_owner)
+        property_form = Add_userform(request.user,instance=property_owner)
 
   
     return render(request, 'Owner/edit_user.html', {'user_form': user_form, 'property_form': property_form})
@@ -267,7 +267,8 @@ def add_equipments(request):
 
 @login_required(login_url='login_owner')
 def view_equipments(request):
-    equipment=PropertyAmenity.objects.all().order_by('-id')
+    user_hotels = Add_user.objects.filter(user=request.user)
+    equipment = PropertyAmenity.objects.filter(add_user__in=user_hotels).order_by('-id')
     return render(request,'Owner/View_equipment.html',{'equipment':equipment})
 
 
@@ -301,7 +302,7 @@ def delete_equipments(request, id):
 def add_items(request):
 
     if request.method == 'POST':
-        form = AddItemsForm(request.POST)
+        form = AddItemsForm(request.user,request.POST)
         if form.is_valid():
             # Save the form, associating it with the current user
             item_instance = form.save(commit=False)
@@ -309,7 +310,7 @@ def add_items(request):
             item_instance.save()
             return redirect('View_items')  # Replace 'item_list' with the URL name for your item list view
     else:
-        form = AddItemsForm()
+        form = AddItemsForm(request.user)
 
   
     return render(request,'Owner/add_items.html',{'form': form})
@@ -325,12 +326,12 @@ def edit_items(request, id):
     items = Add_items.objects.get(id=id)
 
     if request.method == 'POST':
-        form = AddItemsForm(request.POST,instance=items)
+        form = AddItemsForm(request.user,request.POST,instance=items)
         if form.is_valid():
             form.save()
             return redirect('View_items')  # replace with your URL name
     else:
-        form = AddItemsForm(instance=items)
+        form = AddItemsForm(request.user,instance=items)
 
     return render(request, 'Owner/Edit_items.html', {'form': form, 'items': items})
 
