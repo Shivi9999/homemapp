@@ -62,15 +62,15 @@
                                 <div class="form-group row add-user">
                                  
                                      <div class="form-group col-md-12">
-                                        <i class="fa fa-user icon-user"></i>
+                                        
                                         <label for="exampleInputPassword1">Select Flat</label>
-                                        <select id="roomnames" name="select_hotel" class="form-control user-fill">
+                                        <select id="id_hotel" name="select_hotel" class="form-control user-fill">
                                             {% for choice in form.select_hotel.field.choices %}
                                                 <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-12">
+                                    {% comment %} <div class="form-group col-md-12">
                                      <i class="fa fa-user icon-user"></i>
                                      <label for="exampleInputPassword1">Select Room No</label>
                                      <select id="roomnames" name="select_room" class="form-control user-fill">
@@ -78,8 +78,13 @@
                                              <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                                          {% endfor %}
                                      </select>
-                                 </div>
-                                
+                                 </div> {% endcomment %}
+                                 <div class="form-group col-sm-12">
+                                    <label for="id_title">Select Room No</label>
+                                    <select id="id_room" name="room_number" class="form-control">
+                                        <!-- Options will be dynamically populated using JavaScript -->
+                                    </select>
+                                </div>
                                  <div class="form-group col-md-6">
                                       <i class="fa fa-mobile icon-user"></i>
                                    <label for="exampleInputPassword1">Items </label>
@@ -110,7 +115,39 @@
             </div>
          </div>
       </div>
-      <script src="{%static 'js/jquery.min.js'%}"></script>
+      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+      <script>
+        $(document).ready(function () {
+            $("#id_hotel").change(function () {
+               var selectedHotelIds = [$("#id_hotel").val()];
+    
+                $.ajax({
+                    url: '/get_rooms/',
+                    type: 'POST',
+                    data: {
+                        'hotel_ids': selectedHotelIds,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var roomDropdown = $("#id_room");
+                        roomDropdown.empty();
+    
+                        $.each(data.rooms, function (index, room) {
+                            roomDropdown.append('<option value="' + room.id + '">' + room.room_number + '</option>');
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
+      {% comment %} <script src="{%static 'js/jquery.min.js'%}"></script> {% endcomment %}
       <script src="{%static 'js/popper.min.js'%}"></script>
       <script src="{%static 'js/bootstrap.min.js'%}"></script>
       
