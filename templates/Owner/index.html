@@ -60,12 +60,14 @@
                               
                            </div>
                            <div class="dash-widget-info">
+                              <a href="{% url 'view_room_management' %}">
                               <h3>Total Room </h3>
-                              <h6 class="text-muted text-white">168 </h6>
+                              <h6 class="text-muted text-white">{{room_count}} </h6>
                               <div class="progress progress-sm mt-3">
                                  <div class="progress-bar w-50"></div>
                               </div>
                            </div>
+                        </a>
                         </div>
                      </div>
                   </div>
@@ -79,13 +81,15 @@
                               
                            </div>
                            <div class="dash-widget-info">
+                              <a href="{% url 'view_property_management' %}">
                               <h3>Total Property</h3>
-                              <h6 class="text-muted text-white">21587</h6>
+                              <h6 class="text-muted text-white">{{hotel_count}}</h6>
                               <div class="progress progress-sm mt-3">
                                  <div class="progress-bar  w-50"></div>
                               </div>
                            </div>
                         </div>
+                     </a>
                      </div>
                   </div>
                   <div class="col-xl-3 col-sm-6 col-12">
@@ -98,13 +102,16 @@
                               
                            </div>
                            <div class="dash-widget-info">
-                              <h3>  Total Guest </h3>
-                              <h6 class="text-muted text-white">$56485</h6>
+                              <a href="{% url 'View_user_management' %}">
+                              <h3>  Total User </h3>
+                              <h6 class="text-muted text-white">{{user_count}}</h6>
                               <div class="progress progress-sm mt-3">
                                  <div class="progress-bar w-50"></div>
                               </div>
                            </div>
+
                         </div>
+                     </a>
                      </div>
                   </div>
                   <div class="col-xl-3 col-sm-6 col-12">

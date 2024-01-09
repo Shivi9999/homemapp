@@ -17,8 +17,11 @@ from spellchecker import SpellChecker
 
 @login_required(login_url='login_owner')
 def owner_dashboard(request):
-    
-    return render(request,'Owner/index.html')
+    room_count = Add_Room.objects.filter(flat_name__user=request.user).count()
+    hotel_count = Add_hotel.objects.filter(user=request.user).count()
+    user_count = Add_user.objects.filter(hotel_name__user=request.user).count()
+    context={'room_count':room_count,'hotel_count':hotel_count,'user_count':user_count}
+    return render(request,'Owner/index.html',context)
 
 def login_owner(request):
     # Print the entire session dictionary
