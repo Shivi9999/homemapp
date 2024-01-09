@@ -280,8 +280,9 @@ def add_equipments(request):
 @login_required(login_url='login_owner')
 def view_equipments(request):
     user_hotels = Add_user.objects.filter(user=request.user)
-    equipment = PropertyAmenity.objects.filter(add_user__in=user_hotels).order_by('-id')
-    return render(request,'Owner/View_equipment.html',{'equipment':equipment})
+    equipment = PropertyAmenity.objects.all().order_by('-id')
+    return render(request, 'Owner/View_equipment.html', {'equipment': equipment})
+
 
 
 
