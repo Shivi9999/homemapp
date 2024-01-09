@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+           <title>PROPERTY  MANAGEMENT OWNER HOME PAGE </title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+          <link rel="icon" href="{%static 'images/fevicon.png'%}" type="image/png" />
+     
+      <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}" />
+         <link rel="stylesheet" href="{%static 'style.css'%}" />
+      
+      <link rel="stylesheet" href="{%static 'css/responsive.css'%}" />
+          {% comment %} <link rel="stylesheet" href="{%static 'css/colors.css'%}" /> {% endcomment %}
+       
+      <link rel="stylesheet" href="{%static 'css/bootstrap-select.css'%}" />
+      
+      <link rel="stylesheet" href="{%static 'css/perfect-scrollbar.css'%}" />
+           <link rel="stylesheet" href="{%static 'css/custom.css'%}" />
+
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+   </head>
+   <body class="dashboard dashboard_1">
+      <div class="full_container">
+         <div class="inner_container">
+            <!-- Sidebar  -->
+          {% include 'Owner/sidebar.html'%}
+            <!-- end sidebar -->
+            <!-- right content -->
+            <div id="content">
+              {% include 'Owner/header.html' %}
+               <!-- dashboard inner -->
+               <div class="midde_cont">
+                  <div class="container-fluid">
+                     <div class="row column_title">
+                        <div class="col-md-12">
+                           <div class="page_title">
+                              <h2>Dashboard</h2>
+                           </div>
+                        </div>
+                     </div>
+                <!--  -->
+                     <div class="row">
+                       <div class="white_shd full">
+                              <div class="full graph_head">
+                                 <div class="heading1 margin_0">
+                                    <h2>Edit Property</h2>
+                                 </div>
+                              </div>
+                            <div class="users-forms">
+                            <div class="row">
+                              <div class="col-md-7">
+                                <form  method="post" enctype="multipart/form-data" nonvalidate>
+                                    {% csrf_token %}
+                                <div class="form-group row add-user">
+                                   {% comment %} <div class="form-group col-md-12">
+                                      <i class="fa fa-user icon-user"></i>
+                                   <label for="exampleInputPassword1">Select Properties</label>
+                                   <select id="roomnames" name="room" class="form-control user-fill">
+                                     <option value="rooms">Room Items</option>
+                                     <option value="rooms">Room Items</option>
+                                     <option value="rooms">Room Items</option>
+                                     <option value="rooms">Room Items</option>
+                                     <option value="rooms">Room Items</option>
+                                     <option value="rooms">Room Items</option>
+                                     <option value="rooms">Room Items</option>
+                                  </select>
+                                 </div> {% endcomment %}
+                                 <div class="form-group col-md-12">
+                                   <i class="fa fa-user icon-user"></i>
+                                   <label for="exampleInputPassword1"> Hotel Name </label>
+                                   {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Hotel Name"> {% endcomment %}
+                                   {{form.property_name}}
+                                   {% if form.property_name.errors %}
+                                   <ul>
+                                      {% for error in form.property_name.errors %}
+                                         <li>{{ error }}</li>
+                                         
+                                      {% endfor %}
+                                   </ul>
+                                 {% endif %}
+                              </div>
+                                 <div class="form-group col-md-12">
+                                   <i class="fa fa-user icon-user"></i>
+                                <label for="exampleInputPassword1"> Total Room No</label><br>
+                                {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Room Number"> {% endcomment %}
+                                {{form.total_room}}
+                                {% if form.total_room.errors %}
+                             <ul>
+                                {% for error in form.total_room.errors %}
+                                   <li>{{ error }}</li>
+                                   
+                                {% endfor %}
+                             </ul>
+                           {% endif %}
+                              </div>
+                              <div class="form-group col-md-12">
+                                <i class="fa fa-user icon-user"></i>
+                             <label for="exampleInputPassword1"> Email </label><br>
+                             {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Email "> {% endcomment %}
+                             {{form.email}}
+                             {% if form.email.errors %}
+                             <ul>
+                                {% for error in form.email.errors %}
+                                   <li>{{ error }}</li>
+                                   
+                                {% endfor %}
+                             </ul>
+                           {% endif %}
+                           </div>
+                                  
+                                 
+                                   <div class="form-group col-md-12">
+                                      <i class="fa fa-mobile icon-user"></i>
+                                   <label for="exampleInputPassword1">Mobile</label>
+                                      {{form.mobile}}
+                                      {% if form.mobile.errors %}
+                                      <ul>
+                                         {% for error in form.mobile.errors %}
+                                            <li>{{ error }}</li>
+                                            
+                                         {% endfor %}
+                                      </ul>
+                                   {% endif %}
+                                 {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder="Mobile">  {% endcomment %}
+                                 </div>
+                                 
+                                    <div class="form-group col-md-12">
+                                       <i class="fa fa-envelope icon-user"></i>
+                                    <label for="exampleInputPassword1">Address</label>
+                                   {% comment %} <textarea type="text" class="form-control  user-fill" id="user-add-form" placeholder="Enter Your Address"></textarea> {% endcomment %}
+                                    {{form.address}}
+                                    {% if form.address.errors %}
+                                    <ul>
+                                       {% for error in form.address.errors %}
+                                          <li>{{ error }}</li>
+                                          
+                                       {% endfor %}
+                                    </ul>
+                                  {% endif %} 
+                                  </div>
+
+                                  <div class="form-group col-md-12">
+                                  
+                                <label for="exampleInputPassword1"> Flat Image</label><br>
+                                {% comment %} <input type="text" class="form-control  user-fill" id="user-add-form" placeholder=" Room Number"> {% endcomment %}
+                                {{form.flat_image}}
+                                {% if form.flat_image.errors %}
+                             <ul>
+                                {% for error in form.flat_image.errors %}
+                                   <li>{{ error }}</li>
+                                   
+                                {% endfor %}
+                             </ul>
+                           {% endif %}
+                              </div>
+                               <div class="form-group col-md-12">
+                                  <button type="submit" class="btn btn-primary">Submit</button>
+                               </div>
+                             </div>
+                             </form>
+                               </div>
+                               <div class="col-md-4">
+                                  <div class="full-img">
+                                     <img src="{%static 'images/customer-img.png'%}">
+                                  </div>
+                               </div>
+                            </div>
+                            </div>
+                           </div>
+                     </div>
+            <!--  -->
+                  </div>
+                  {% include 'Owner/footer.html' %}
+               </div>
+               <!-- end dashboard inner -->
+            </div>
+         </div>
+      </div>
+      <script src="{%static 'js/jquery.min.js'%}"></script>
+      <script src="{%static 'js/popper.min.js'%}"></script>
+      <script src="{%static 'js/bootstrap.min.js'%}"></script>
+      
+      <script src="{%static 'js/animate.js'%}"></script>
+     
+      <script src="{%static 'js/bootstrap-select.js'%}"></script>
+            <script src="{%static 'js/owl.carousel.js'%}"></script> 
+        <script src="{%static 'js/Chart.min.js'%}"></script>
+      <script src="{%static 'js/Chart.bundle.min.js'%}"></script>
+      <script src="{%static 'js/utils.js'%}"></script>
+      <script src="{%static 'js/analyser.js'%}"></script>
+     
+      <script src="{%static 'js/perfect-scrollbar.min.js'%}"></script>
+      <script>
+         var ps = new PerfectScrollbar('#sidebar');
+      </script>
+         <script src="{%static 'js/custom.js'%}"></script>
+      <script src="{%static 'js/chart_custom_style1.js'%}"></script>
+   </body>
+</html>

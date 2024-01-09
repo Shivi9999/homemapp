@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+        <title>Chat View Question HomeMapp Page</title>
+        <link rel="shortcut icon" type="image/x-icon" href="{%static 'assets/img/favicon.png'%}">
+        <link rel="stylesheet" href="{%static 'assets/css/bootstrap.min.css'%}">		
+        <link rel="stylesheet" href="{%static 'assets/css/font-awesome.min.css'%}">		
+        <link rel="stylesheet" href="{%static 'assets/css/feathericon.min.css'%}">
+        <link rel="stylesheet" href="{%static 'assets/css/style.css'%}">
+         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+
+    </head>
+    <body>
+	
+		<!-- Main Wrapper -->
+        <div class="main-wrapper">
+		
+			{% include 'Superadmin/header.html'%}
+			{% include 'Superadmin/sidebar.html'%}
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+				
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="card full-header">
+									<div class="users">
+										<h3 class="page-title">Chat View Question</h3>
+									</div>
+									<div class="user-box">
+										<div class="datatables">
+											<table id="example" class="display nowrap" style="width:100%">
+										<thead>
+											<tr>
+												<th>S.no</th>
+												<th> Hotel </th>
+												<th>Room </th>
+												<th>Chat Question</th>
+												<th>Chat Answer</th>
+												<th>Action</th> 
+											</tr>
+										</thead>
+										<tbody>
+											{% for question in que_ans %}
+										   <tr class="even">
+												<td>{{forloop.counter}}</td>
+												<td> {% for hotel in question.hotel.all %}
+													{{ hotel.property_name }}
+													{% if not forloop.last %}, {% endif %}
+												{% endfor %}</td>
+												<td> {% for room in question.room.all %}
+													{{ room.room_number }}
+													{% if not forloop.last %}, {% endif %}
+												{% endfor %}</td>
+												<td>{{question.question}}</td>
+												<td>{{question.answer}}</td>
+												<td>
+													<a class="edit-btn" href="{% url 'Edit_question' id=question.id %}"> <button class="btn btn-primary">Edit</button></a>
+													{% comment %} <a class="edit-btn" href="{% url 'Delete_question' id=question.id %}"><button class="btn btn-primary">Delete</button></a> {% endcomment %}
+													<button class="btn btn-primary delete-question-btn " data-id="{{question.id}}">Delete </button>
+													
+											  </td>
+											</tr>
+											{% endfor %}
+											
+										</tbody>
+									</table>
+										   </div>
+		
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /Page Header -->
+							
+							<div class="row">
+								<div class="col-sm-12">
+									
+								</div>			
+							</div>
+							
+						</div>			
+					</div>
+					<!-- /Page Wrapper -->
+					<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+					<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+					<script>
+						$(document).ready(function () {
+							$('.delete-question-btn').click(function () {
+								var questionId = $(this).data('id');
+								console.log('Question ID:', questionId);
+								Swal.fire({
+									title: 'Are you sure?',
+									text: "You won't be able to revert this!",
+									icon: 'warning',
+									showCancelButton: true,
+									confirmButtonColor: '#3085d6',
+									cancelButtonColor: '#d33',
+									confirmButtonText: 'Yes, delete Question'
+								}).then((result) => {
+									if (result.isConfirmed) {
+										// Retrieve CSRF token from the cookie
+										var csrftoken = getCookie('csrftoken');
+						
+										// Make an AJAX request to delete the question
+										$.ajax({
+											type: 'DELETE',
+											headers: { "X-CSRFToken": csrftoken },
+											url: "/Delete_question/" + questionId + "/",
+											
+		
+											data: { id: questionId },
+											success: function (response) {
+												console.log('Question deleted successfully');
+												var message = 'Question Deleted Successfully !!';
+												if (response.msg == true) {
+													window.location.reload();
+												} else {
+													$("#errorMessage").removeClass("d-none");
+													$("#successMessage").addClass("d-none");
+												}
+											},
+											error: function (error) {
+												console.error('Error deleting question', error);
+												// Handle error
+											}
+										});
+									}
+								});
+							});
+						
+							// Function to get CSRF token from the cookie
+							function getCookie(name) {
+								var cookieValue = null;
+								if (document.cookie && document.cookie !== '') {
+									var cookies = document.cookie.split(';');
+									for (var i = 0; i < cookies.length; i++) {
+										var cookie = $.trim(cookies[i]);
+										// Check if the cookie name matches the expected pattern
+										if (cookie.substring(0, name.length + 1) === (name + '=')) {
+											cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+											break;
+										}
+									}
+								}
+								return cookieValue;
+							}
+						});
+						
+					</script>
+			<!-- /Page Wrapper -->
+			{% include 'Superadmin/footer.html'%}
+        </div>
+		<!-- /Main Wrapper -->
+		
+		<!-- jQuery -->
+        <script src="{%static 'assets/js/jquery-3.6.0.min.js'%}"></script>
+		
+		<!-- Bootstrap Core JS -->
+        <script src="{%static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+		
+		<!-- Slimscroll JS -->
+        <script src="{%static 'assets/plugins/slimscroll/jquery.slimscroll.min.js'%}"></script>
+		
+		<!-- Custom JS -->
+		<script  src="{%static 'assets/js/script.js'%}"></script>
+		<!-- DATATABLES  -->
+		<!--DATATABLES SCRIPT START -->
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+         <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+          <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+           <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+             <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+              <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+               <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+        <script>
+          
+    new DataTable('#example')
+      
+        </script>
+    </body>
+</html>

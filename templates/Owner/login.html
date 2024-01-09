@@ -151,7 +151,7 @@
                                            {% endfor %}
                                         </div>
                                      {% endif %}
-                                        <form method='post' class="form-signin">
+                                        <form method='post' action="{% url 'login_owner'%}" class="form-signin">
                                           {% csrf_token %}
                                         <div class="form-group">
                                             <label style="color: white;"> Username or Email</label>

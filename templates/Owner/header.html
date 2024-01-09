@@ -10,8 +10,8 @@
                    <li>
                       <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="{%static 'images/layout_img/user_img.jpg'%}" alt="#" /><span class="name_user">{{user.username}}</span></a>
                       <div class="dropdown-menu">
-                         <a class="dropdown-item" href="{% url 'Profile_user' %}">My Profile</a>
-                         <a class="dropdown-item" href="{% url 'logout_user'%}"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
+                         <a class="dropdown-item" href="{% url 'Profile_owner'%}">My Profile</a>
+                         <a class="dropdown-item" href="{% url 'logout_owner'%}"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
                       </div>
                    </li>
                 </ul>

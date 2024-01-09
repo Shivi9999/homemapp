@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+{% load static %} 
+{% load crispy_forms_tags %} 
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+        <title>Property Add Property HomeMapp Page</title>
+		
+		<!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="{%static 'assets/img/favicon.png'%}">
+		
+		<!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{%static 'assets/css/bootstrap.min.css'%}">
+		
+		<!-- Fontawesome CSS -->
+        <link rel="stylesheet" href="{%static 'assets/css/font-awesome.min.css'%}">
+		
+		<!-- Feathericon CSS -->
+        <link rel="stylesheet" href="{%static 'assets/css/feathericon.min.css'%}">
+		
+		<!-- Main CSS -->
+        <link rel="stylesheet" href="{%static 'assets/css/style.css'%}">
+		
+		<!--[if lt IE 9]>
+			<script src="{%static 'assets/js/html5shiv.min.js"></script>
+			<script src="{%static 'assets/js/respond.min.js"></script>
+		<![endif]-->
+		<style>
+			.error-list {
+				color: red;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+		
+    </head>
+    <body>
+	
+		<!-- Main Wrapper -->
+        <div class="main-wrapper">
+		
+			{% include 'Superadmin/header.html'%}
+			{% include 'Superadmin/sidebar.html'%}
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+				
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="card full-header">
+									<div class="users">
+										<h3 class="page-title">Property Add Property </h3>
+									</div>
+									<div class="user-box">
+                                        <form action="{% url 'Faq_admin'%}" method="post">
+                                            {% csrf_token %}
+                                      <div class="form-group row add-user">
+                                       <div class="form-group col-md-6">
+                                             {% comment %} <i class="fa fa-user icon-user"></i> {% endcomment %}
+                                          <label for="exampleInputPassword1">Question</label>
+                                          {{faq_form.question}}
+                                          {% comment %} <input type="text" class="form-control  user-fill"  name="question" id="user-add-form" placeholder="Question"> {% endcomment %}
+                                        </div>
+                                         <div class="form-group col-md-6">
+                                             {% comment %} <i class="fa fa-mobile icon-user"></i> {% endcomment %}
+                                          <label for="exampleInputPassword1">Answer</label>
+                                          {{faq_form.answer}}
+                                        </div>
+                                       
+                                     <div class="form-group col-md-12">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                      </div>
+                                   </div>
+                                   </form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /Page Header -->
+					<!-- /Page Header -->
+					
+					<div class="full-editor mt-3">
+						<div class="users">
+							<h3 class="page-title">Notification Detail</h3>
+						</div>
+						<table id="example" class="display nowrap" style="width:100%">
+							<thead>
+								
+								<tr>
+									<th>S no</th>
+									<th>Question</th>
+									<th>Answer</th>
+								   
+									 <th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for faq in faqs %}
+								<tr class="even">
+									<td>{{forloop.counter}}</td>
+									<td>{{faq.question}}</td>
+									<td>{{faq.answer}}</td>
+									
+								 <td>
+							<button class="btn btn-primary mb-2"><a class="edit-btn" href="{% url 'edit_faq_admin' id=faq.id%}">Edit</a></button>
+							<button class="btn btn-primary mb-2  delete-faq-btn" data-id="{{faq.id}}">Delete </button>
+						 </td>
+								</tr>
+								{% endfor %}
+		
+							</tbody>
+						</table>
+					</div>
+					<!-- /DataTable -->
+					</div>
+					
+					
+				
+			<!-- /Page Wrapper -->
+			{% include 'Superadmin/footer.html'%}
+     
+		<!-- /Main Wrapper -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				$('.delete-faq-btn').click(function () {
+					var faqId = $(this).data('id');
+					console.log('Faq ID:', faqId);
+					Swal.fire({
+						title: 'Are you sure?',
+						text: "You won't be able to revert this!",
+						icon: 'warning',
+						showCancelButton: true,
+						confirmButtonColor: '#3085d6',
+						cancelButtonColor: '#d33',
+						confirmButtonText: 'Yes, delete Faq'
+					}).then((result) => {
+						if (result.isConfirmed) {
+							// Retrieve CSRF token from the cookie
+							var csrftoken = getCookie('csrftoken');
+			
+							// Make an AJAX request to delete the question
+							$.ajax({
+								type: 'DELETE',
+								headers: { "X-CSRFToken": csrftoken },
+								url: "/delete_faq_admin/" + faqId + "/",
+								
+
+								data: { id: faqId },
+								success: function (response) {
+									console.log('Faq deleted successfully');
+									var message = 'Faq Deleted Successfully !!';
+									if (response.msg == true) {
+										window.location.reload();
+									} else {
+										$("#errorMessage").removeClass("d-none");
+										$("#successMessage").addClass("d-none");
+									}
+								},
+								error: function (error) {
+									console.error('Error deleting faq', error);
+									// Handle error
+								}
+							});
+						}
+					});
+				});
+			
+				// Function to get CSRF token from the cookie
+				function getCookie(name) {
+					var cookieValue = null;
+					if (document.cookie && document.cookie !== '') {
+						var cookies = document.cookie.split(';');
+						for (var i = 0; i < cookies.length; i++) {
+							var cookie = $.trim(cookies[i]);
+							// Check if the cookie name matches the expected pattern
+							if (cookie.substring(0, name.length + 1) === (name + '=')) {
+								cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+								break;
+							}
+						}
+					}
+					return cookieValue;
+				}
+			});
+			
+		</script>
+		
+		<!-- jQuery -->
+        <script src="{%static 'assets/js/jquery-3.6.0.min.js'%}"></script>
+		
+		<!-- Bootstrap Core JS -->
+        <script src="{%static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+		
+		<!-- Slimscroll JS -->
+        <script src="{%static 'assets/plugins/slimscroll/jquery.slimscroll.min.js'%}"></script>
+		
+		<!-- Custom JS -->
+		<script  src="{%static 'assets/js/script.js'%}"></script>
+		
+    </body>
+</html>

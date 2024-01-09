@@ -4,7 +4,7 @@
     <div class="sidebar_blog_1">
        <div class="sidebar-header">
           <div class="logo_section">
-             <a href="{% url 'login' %}"><img class="logo_icon img-responsive" src="{%static 'images/logo/logo_icon.png'%}" alt="#" /></a>
+             <a href="{% url 'login_owner' %}"><img class="logo_icon img-responsive" src="{%static 'images/logo/logo_icon.png'%}" alt="#" /></a>
           </div>
        </div>
        <div class="sidebar_user_info">
@@ -12,7 +12,7 @@
           <div class="user_profle_side"
           >
              <div class="user_img">
-                <a href="{% url 'user_dashboard' %}"><img class="img-responsive" src="{%static 'images/logo/logo.png'%}" alt="#"></a>
+                <a href="{% url 'owner_dashboard' %}"><img class="img-responsive" src="{%static 'images/logo/logo.png'%}" alt="#"></a>
              </div>
           </div>
        </div>
@@ -21,62 +21,66 @@
     <div class="sidebar_blog_2">
        <ul class="list-unstyled components">
           <li class="active">
-             <a href="{% url 'user_dashboard' %}">
+             <a href="{% url 'owner_dashboard' %}">
                 <i class="fa fa-dashboard yellow_color"></i> 
                 <span>Dashboard</span>
              </a>
          </li> 
 
          <li>
-            <a href="#hotels" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>Property Management</span></a>
+            <a href="#hotels" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-hotel purple_color"></i> <span>Property Management</span></a>
             <ul class="collapse list-unstyled" id="hotels">
-               <li><a href="{% url 'Add_hotel_management' %}">> <span>Add Property Management</span></a></li>
-               <li><a href="{% url 'view_hotel_management' %}">> <span>View Property Management</span></a></li>
+               <li><a href="{% url 'Add_property_management' %}">> <span>Add Property Management</span></a></li>
+               <li><a href="{% url 'view_property_management' %}">> <span>View Property Management</span></a></li>
             </ul>
          </li>
 
-         <li>
+       <li>
             <a href="#property" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span> Room Management</span></a>
             <ul class="collapse list-unstyled" id="property">
-               <li><a href="{% url 'add_property_management' %}">> <span>Add Room Management</span></a></li>
-               <li><a href="{% url 'view_property_management' %}">> <span>View Room Management</span></a></li>
+               <li><a href="{% url 'add_room_management' %}">> <span>Add Room Management</span></a></li>
+               <li><a href="{% url 'view_room_management' %}">> <span>View Room Management</span></a></li>
             </ul>
          </li>
-         <li>
-            <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>Chat Management</span></a>
-            <ul class="collapse list-unstyled" id="element">
-               <li><a href="{% url 'Add_chat_management' %}">> <span>Add Chat Management</span></a></li>
-               <li><a href="{% url 'view_chat_management' %}">> <span>View Chat Management</span></a></li>
-            </ul>
-         </li>
+      
           <li>
-             <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>User Management</span></a>
+             <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user purple_color"></i> <span>User Management</span></a>
              <ul class="collapse list-unstyled" id="element">
                 <li><a href="{% url 'Add_user_management' %}">> <span>Add User Management</span></a></li>
                 <li><a href="{% url 'View_user_management' %}">> <span>View User Management</span></a></li>
              </ul>
           </li>
-
+          <li>
+            <a href="#additional_page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-clone yellow_color"></i> <span>Equipment Management</span></a>
+            <ul class="collapse list-unstyled" id="additional_page">
+               <li><a href="{% url 'Add_equipment' %}">> <span> Add Equipment </span></a></li>
+               <li><a href="{% url 'View_equipment' %}">> <span> View Equipment </span></a></li>
+            </ul>
+         </li>
              <li>
-             <a href="#additional_page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-clone yellow_color"></i> <span>Items Management</span></a>
-             <ul class="collapse list-unstyled" id="additional_page">
-                <li><a href="{% url 'Add_room' %}">> <span> Add Items </span></a></li>
-                <li><a href="{% url 'View_room' %}">> <span> View Items </span></a></li>
+             <a href="#additional_page1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-clone yellow_color"></i> <span>Items Management</span></a>
+             <ul class="collapse list-unstyled" id="additional_page1">
+                <li><a href="{% url 'Add_items' %}">> <span> Add Items </span></a></li>
+                <li><a href="{% url 'View_items' %}">> <span> View Items </span></a></li>
              </ul>
           </li>
-         
+          <li>
+            <a href="#additional_page2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-clone yellow_color"></i> <span>Question Answer Manage</span></a>
+            <ul class="collapse list-unstyled" id="additional_page2">
+               <li><a href="{% url 'Add_question_answer' %}">> <span> Add Question Answer </span></a></li>
+               <li><a href="{% url 'View_question_answer' %}">> <span> View Question Answer </span></a></li>
+            </ul>
+         </li>
            <li><a href="{% url 'Faq' %}"><i class="fa fa-clock-o orange_color"></i> <span>Faq</span></a></li>
-          {% comment %} <li>
-             <a href="{% url 'Notification_user' %}">
+         <li>
+             <a href="{% url 'Notification_owner' %}">
              <i class="fa fa-paper-plane red_color"></i> <span>Notification</span></a>
-          </li> {% endcomment %}
-          <li><a href="{% url 'Terms_condition_user' %}"><i class="fa fa-map purple_color2"></i> <span>Terms and Condition </span></a></li>
-          <li><a href="{% url 'Privacy_policy_user' %}"><i class="fa fa-bar-chart-o green_color"></i> <span>Privacy Policy</span></a></li>
-          <li> 
-            <a href="{% url 'chat_owner'%}"><i class="fa fa-briefcase"></i> <span> Chat</span></a>
-        </li>
-         </ul>
-    </div>
+          </li>
+           <li><a href="{% url 'Terms_condition_owner' %}"><i class="fa fa-map purple_color2"></i> <span>Terms and Condition </span></a></li>
+          <li><a href="{% url 'Privacy_policy_owner' %}"><i class="fa fa-bar-chart-o green_color"></i> <span>Privacy Policy</span></a></li>
+          <li><a href="{% url 'owner_chat' %}"><i class="fa fa-comment-o green_color"></i> <span>Chat </span></a></li>
+       </ul>
+    </div> 
     <!-- Sidebar -->
  </nav>
  <!-- end sidebar -->

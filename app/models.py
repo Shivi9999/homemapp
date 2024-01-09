@@ -1,4 +1,5 @@
 from django.db import models
+
 # Create your models here.
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin
@@ -26,9 +27,7 @@ class UserManager(BaseUserManager):
             raise ValueError(('Superuser must have is_superuser=True.'))
         return self.create_user(email, password, **extra_fields)
     
-
 class User(AbstractBaseUser, PermissionsMixin):
-    """ Main User config """
     email = models.EmailField(unique=True, verbose_name='Email Address')
     username = models.CharField(max_length=256)
     is_active = models.BooleanField(default=True)
@@ -39,18 +38,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     SUPERADMIN = '1'
     USER = '2'
     Web_USER = '3'
-  
+
     User_type=(
         ('Superadmin','SUPERADMIN'),
         ('User','USER'),
         ('Web_user','Web_USER'),
-    
     )
     user_type_data = ((SUPERADMIN, "Superadmin"), (USER,"User"),(Web_USER,"Web_user"))
-    user_type = models.CharField( choices=user_type_data, max_length=10,default='Superadmin')
-    
+    user_type = models.CharField(choices=user_type_data, max_length=10, default='Superadmin')
+
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = [ 'username']
+    REQUIRED_FIELDS = ['username']
 
     objects = UserManager()
 
@@ -58,15 +56,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         db_table = 'user_profile'
 
     def __str__(self):
-
         return f'{self.username} '
 
     def has_perm(self, perm, obj=None):
-        # User permission
         return True
 
     def has_module_perms(self, app_label):
-        # User permission to view the ap modules
         return True
 
 
@@ -75,12 +70,10 @@ class PropertyOwner(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     property_name = models.CharField(max_length=120)
     address = models.TextField()
-    mobile = models.CharField(max_length=12 )
+    mobile = models.CharField(max_length=12)
 
     def __str__(self):
         return self.property_name
-
-
 
 
 
@@ -132,8 +125,6 @@ class Add_hotel(models.Model):
         return self.property_name
 
 
-
-
 class Add_Room(models.Model):
     
     flat_name = models.ForeignKey(Add_hotel, on_delete=models.CASCADE)
@@ -146,15 +137,6 @@ class Add_Room(models.Model):
     def __str__(self):
         return self.room_number
 
-class QuestionAnswer(models.Model):
-    hotel=models.ManyToManyField(Add_hotel)
-    room=models.ManyToManyField(Add_Room)
-    question = models.CharField(max_length=500)
-    answer=models.CharField(max_length=2000)
-    
-
-    def __str__(self):
-        return self.question
 
 
 class Add_user(models.Model):
@@ -167,12 +149,44 @@ class Add_user(models.Model):
     def __str__(self):
         return self.user.username
 
+class QuestionAnswer(models.Model):
+    hotel=models.ManyToManyField(Add_hotel)
+    room=models.ManyToManyField(Add_Room)
+    question = models.CharField(max_length=500)
+    answer=models.CharField(max_length=2000)
+    
 
+    def __str__(self):
+        return self.question
+
+class PropertyAmenity(models.Model):
+    items_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.items_name
+        
 class Add_items(models.Model):
-    user=models.OneToOneField(User, verbose_name=("add_users"), on_delete=models.CASCADE)
-    select_hotel=models.ForeignKey(Add_hotel, on_delete=models.CASCADE)
-    select_room=models.ForeignKey(Add_Room, on_delete=models.CASCADE)
-    items=models.CharField( max_length=50)
-   
+    user = models.OneToOneField(User, verbose_name=("add_users"), on_delete=models.CASCADE)
+    select_hotel = models.ForeignKey(Add_hotel, on_delete=models.CASCADE)
+    select_room = models.ForeignKey(Add_Room, on_delete=models.CASCADE)
+    amenity = models.ForeignKey(PropertyAmenity, on_delete=models.CASCADE)
+
     def __str__(self):
         return self.user.username
+
+
+
+class Notification_owner(models.Model):
+    users = models.ManyToManyField(User)
+    title = models.CharField(max_length=255)
+    message = models.CharField(max_length=2550)
+    
+    def __str__(self):
+        return self.title
+
+
+class Faq_admin(models.Model):
+    question=models.CharField(max_length=500)
+    answer=models.CharField(max_length=2000)
+    def __str__(self):
+        return self.question

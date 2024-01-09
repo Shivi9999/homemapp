@@ -1,7 +1,5 @@
-{% extends 'Owner/base.html'%}
+<!DOCTYPE html>
 {% load static %}
-{% block content %}
-{% comment %} <!DOCTYPE html>
 <html lang="en">
    <head>
       <meta charset="utf-8">
@@ -19,7 +17,7 @@
          <link rel="stylesheet" href="{%static 'style.css'%}" />
       
       <link rel="stylesheet" href="{%static 'css/responsive.css'%}" />
-          <link rel="stylesheet" href="{%static 'css/colors.css'%}" />
+          {% comment %} <link rel="stylesheet" href="{%static 'css/colors.css'%}" /> {% endcomment %}
        
       <link rel="stylesheet" href="{%static 'css/bootstrap-select.css'%}" />
       
@@ -28,14 +26,16 @@
 
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
-   </head> {% endcomment %}
+   </head>
    <body class="dashboard dashboard_1">
       <div class="full_container">
          <div class="inner_container">
-           
+            <!-- Sidebar  -->
+          {% include 'Owner/sidebar.html'%}
+            <!-- end sidebar -->
             <!-- right content -->
             <div id="content">
-              
+              {% include 'Owner/header.html' %}
                <!-- dashboard inner -->
                <div class="midde_cont">
                   <div class="container-fluid">
@@ -168,7 +168,7 @@
             </div>
          </div>
       </div>
-      {% comment %} <script src="{%static 'js/jquery.min.js'%}'%}"></script>
+      <script src="{%static 'js/jquery.min.js'%}"></script>
       <script src="{%static 'js/popper.min.js'%}"></script>
       <script src="{%static 'js/bootstrap.min.js'%}"></script>
       
@@ -188,5 +188,4 @@
          <script src="{%static 'js/custom.js'%}"></script>
       <script src="{%static 'js/chart_custom_style1.js'%}"></script>
    </body>
-</html> {% endcomment %}
-{% endblock %}
+</html>
