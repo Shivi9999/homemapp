@@ -153,7 +153,7 @@ def edit_room(request, id):
     else:
         form = AddRoomForm(instance=room)
 
-    return render(request, 'Owner/Edit_room.html', {'form': form, 'room': room})
+    return render(request, 'Owner/edit_room.html', {'form': form, 'room': room})
 
 
 
@@ -230,7 +230,7 @@ def edit_user(request, id):
         property_form = Add_userform(instance=property_owner)
 
   
-    return render(request, 'Owner/Edit_user.html', {'user_form': user_form, 'property_form': property_form})
+    return render(request, 'Owner/edit_user.html', {'user_form': user_form, 'property_form': property_form})
 
 @login_required(login_url='login_owner')
 def delete_user(request, id):
