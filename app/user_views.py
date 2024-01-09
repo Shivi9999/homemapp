@@ -14,7 +14,7 @@ from django.http import JsonResponse
 
 @login_required(login_url='login_user')
 def user_dashboard(request):
-    return render(request,'User/user_dashboard.html')
+    return render(request,'user/user_dashboard.html')
 
 def login_user(request):
     # Print the entire session dictionary
@@ -45,7 +45,7 @@ def login_user(request):
         else:
             messages.error(request, 'Invalid username or password.')
 
-    return render(request, 'User/login.html')
+    return render(request, 'user/login.html')
 
 
 
@@ -116,5 +116,5 @@ def get_answer_user(request):
     if request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
         return JsonResponse({'answer': error_message, 'audio_path': '/static/answer.mp3'}, safe=False)
 
-    return render(request, 'User/answer.html',
+    return render(request, 'user/answer.html',
                   {'user_input': user_input, 'answer': error_message, 'audio_path': '/static/answer.mp3'})
