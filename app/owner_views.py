@@ -139,7 +139,7 @@ def view_room_management(request):
     # Fetch rooms associated with the hotels of the logged-in user
     room = Add_Room.objects.filter(flat_name__in=hotels)
    
-    return render(request,'Owner/View_room_management.html',{'room':room})
+    return render(request,'Owner/view_room_management.html',{'room':room})
 
 @login_required(login_url='login_owner')
 def edit_room(request, id):
