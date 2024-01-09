@@ -53,9 +53,9 @@ def logout_view_user(request):
    # Clear the session
     logout(request)
 
-    # Optionally, you can delete the sessionid cookie
+    
     response = redirect('login_user')
-    response.delete_cookie('sessionid')  # Replace 'your_logout_redirect_view' with the actual logout redirect view
+    response.delete_cookie('sessionid')  
     return response
 
 nlp = spacy.load("en_core_web_sm")
