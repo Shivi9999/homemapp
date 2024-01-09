@@ -134,7 +134,7 @@ def edit_property_owner(request, id):
             messages.success(request, 'Property owner updated successfully.')
             return redirect('View_property_owner')
         else:
-            messages.error(request, 'Error updating property owner. Please check the form.')
+            
             print(user_form.errors)
             print(property_form.errors)
             return render(request, 'Superadmin/Pro_edit_Property.html', {'user_form': user_form, 'property_form': property_form})
