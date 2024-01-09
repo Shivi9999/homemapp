@@ -55,27 +55,13 @@
 										<form method="post" enctype="multipart/form-data" action="{% url 'save_question_answer' %}" class="row">
 											{% csrf_token %}
 											<div class="form-group col-sm-6">
-												<div class="dropdown user-selects">
-													<label for="id_title">Hotel</label>
-													<button class="btn btn-default text-left form-control dropdown-toggle" type="button" data-toggle="dropdown">
-														<span class="dropdown-text"> Select Options</span>
-														<span class="caret"></span>
-													</button>
-													<ul class="dropdown-menu">
-														<li><a href="#"><label><input type="checkbox" class="selectall" /><span class="select-text"> Select</span> All</label></a></li>
-														<li class="divider"></li>
-														{% for user in question_form.hotel.field.queryset %}
-															<li>
-																<a href="#">
-																	<label>
-																		<input id="id_hotel" name='hotel' type="checkbox" class="option justone" value="{{ user.id }}"/>
-																		{{ user.property_name }}
-																	</label>
-																</a>
-															</li>
-														{% endfor %}
-													</ul>
-												</div>
+												<label for="id_hotel">Hotel</label>
+												<select id="id_hotel" name="hotel" class="form-control">
+													<option value="" selected disabled>Select Hotel</option>
+													{% for user in question_form.hotel.field.queryset %}
+														<option value="{{ user.id }}">{{ user.property_name }}</option>
+													{% endfor %}
+												</select>
 											</div>
 										
 											<div class="form-group col-sm-6">
@@ -132,10 +118,8 @@
 		<script>
 			$(document).ready(function () {
 				$("#id_hotel").change(function () {
-					var selectedHotelIds = $("input[name='hotel']:checked").map(function () {
-						return this.value;
-					}).get();
-		
+					var selectedHotelIds = [$("#id_hotel").val()];
+			
 					$.ajax({
 						url: '/get_rooms1/',
 						type: 'POST',
@@ -147,7 +131,7 @@
 						success: function (data) {
 							var roomDropdown = $("#id_room");
 							roomDropdown.empty();
-		
+			
 							$.each(data.rooms, function (index, room) {
 								roomDropdown.append('<option value="' + room.id + '">' + room.room_number + '</option>');
 							});
@@ -158,42 +142,9 @@
 					});
 				});
 			});
+			
 		</script>
-		<script>
-			$('body').on("click", ".dropdown-menu", function (e) {
-				$(this).parent().is(".open") && e.stopPropagation();
-			});
-			
-			$('.selectall').click(function() {
-				if ($(this).is(':checked')) {
-					$('.option').prop('checked', true);
-					var total = $('input[name="options[]"]:checked').length;
-					$(".dropdown-text").html('(' + total + ') Selected');
-					$(".select-text").html(' Deselect');
-				} else {
-					$('.option').prop('checked', false);
-					$(".dropdown-text").html('(0) Selected');
-					$(".select-text").html(' Select');
-				}
-			});
-			
-			$("input[type='checkbox'].justone").change(function(){
-				var a = $("input[type='checkbox'].justone");
-				if(a.length == a.filter(":checked").length){
-					$('.selectall').prop('checked', true);
-					$(".select-text").html(' Deselect');
-				}
-				else {
-					$('.selectall').prop('checked', false);
-					$(".select-text").html(' Select');
-				}
-			  var total = $('input[name="options[]"]:checked').length;
-			  $(".dropdown-text").html('(' + total + ') Selected');
-			});
 		
-		
-		
-			</script>
 		<!-- jQuery -->
         <script src="{%static 'assets/js/jquery-3.6.0.min.js'%}"></script>
 		

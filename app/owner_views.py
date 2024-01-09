@@ -169,7 +169,19 @@ def delete_room(request,id):
 
     return JsonResponse({'msg': True})
 
+@login_required(login_url='login_owner')
+def get_rooms(request):
+    if request.method == 'POST':
+        try:
+            selected_hotel_ids = request.POST.getlist('hotel_ids[]')
+            rooms = Add_Room.objects.filter(flat_name_id__in=selected_hotel_ids)
 
+            rooms_data = [{'id': room.id, 'room_number': room.room_number} for room in rooms]
+            return JsonResponse({'rooms': rooms_data})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 @login_required(login_url='login_owner')
 def add_user_management(request):
@@ -346,19 +358,7 @@ def delete_items(request, id):
     
     return JsonResponse({'msg': True})
 
-@login_required(login_url='login_owner')
-def get_rooms(request):
-    if request.method == 'POST':
-        try:
-            selected_hotel_ids = request.POST.getlist('hotel_ids[]')
-            rooms = Add_Room.objects.filter(flat_name_id__in=selected_hotel_ids)
 
-            rooms_data = [{'id': room.id, 'room_number': room.room_number} for room in rooms]
-            return JsonResponse({'rooms': rooms_data})
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
-
-    return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 
 @login_required(login_url='login_owner')

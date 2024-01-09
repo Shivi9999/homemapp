@@ -42,13 +42,11 @@ class QuestionForm(forms.ModelForm):
         fields = ['hotel','room','question', 'answer']
 
         widgets = {
+            'hotel': forms.Select(attrs={'class': 'form-control','required': False}),
             'question': forms.TextInput(attrs={'class': 'form-control','required': False}),
             'answer': forms.TextInput(attrs={'class': 'form-control','required': False}),
         }
-    hotel = forms.ModelMultipleChoiceField(
-        queryset=Add_hotel.objects.all(),
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox-list','required': True}),
-    )
+    
     room = forms.ModelMultipleChoiceField(
         queryset=Add_Room.objects.all(),
         widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox-list','required': True}),
@@ -150,8 +148,10 @@ class Add_userform(forms.ModelForm):
         # Filter hotel_name choices based on the logged-in user
         self.fields['hotel_name'].queryset = Add_hotel.objects.filter(user=user)
 
-        # Filter room_number choices based on the logged-in user
-        self.fields['room_number'].queryset = Add_Room.objects.filter(flat_name__user=user)
+        # Initially load the room numbers based on the first hotel in the queryset
+        if self.fields['hotel_name'].queryset.exists():
+            initial_hotel = self.fields['hotel_name'].queryset.first()
+            self.fields['room_number'].queryset = Add_Room.objects.filter(flat_name=initial_hotel)
 
 class AddPropertyForm(forms.ModelForm):
     class Meta:
